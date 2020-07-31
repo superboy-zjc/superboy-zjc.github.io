@@ -315,14 +315,21 @@
 <p>fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</p>
 <p>加此条配置目的是告诉php-fpm管理进程php脚本的名字。</p>
 </blockquote>
+<hr>
 <blockquote>
 <p><strong>PREFIX/conf/nginx.conf</strong></p>
-<p> 66         location ~ \.php$ {<br> 67             root           html;<br> 68             fastcgi_pass   127.0.0.1:9000;<br> 69             fastcgi_index  index.php;<br> 70             fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;<br> 71             include        fastcgi_params;<br> 72         }</p>
+<p>66         location ~ \.php$ {</p>
+<p>67             root           html;</p>
+<p>68             fastcgi_pass   127.0.0.1:9000;</p>
+<p>69             fastcgi_index  index.php;</p>
+<p>70             fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;</p>
+<p>71             include        fastcgi_params;</p>
+<p>72         }</p>
 </blockquote>
 <p>方法2、</p>
 <blockquote>
 <p><strong>PREFIX/conf/nginx.conf</strong></p>
-<p> 66         location ~ \.php$ {<br> 67             root           html;<br> 68             fastcgi_pass   127.0.0.1:9000;<br> 69             fastcgi_index  index.php;<br> 70             include        fastcgi_conf;<br> 71         }</p>
+<p>66         location ~ \.php$ {<br>67             root           html;<br>68             fastcgi_pass   127.0.0.1:9000;<br>69             fastcgi_index  index.php;<br>70             include        fastcgi_conf;<br>71         }</p>
 <p>使用fastcgi_conf的话，配置文件里已经存在了<code>fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</code></p>
 </blockquote>
 <h3 id="五、LAMP的PHP和LNMP的PHP有什么不同？"><a href="#五、LAMP的PHP和LNMP的PHP有什么不同？" class="headerlink" title="五、LAMP的PHP和LNMP的PHP有什么不同？"></a>五、LAMP的PHP和LNMP的PHP有什么不同？</h3><p>LAMP中PHP是Apache的一个模块；而在LNMP中PHP独立存在，PHPCgi由PHP-FPM管理，PHP-FPM拥有自己的端口专门处理PHP解析。</p>
