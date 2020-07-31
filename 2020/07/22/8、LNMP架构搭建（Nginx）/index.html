@@ -1,0 +1,653 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>8、LNMP架构搭建(Nginx) | 2h0nG&#39;s Hacker Blog</title>
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="Love is friendship fell into love">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="8、LNMP架构搭建(Nginx)"/>
+    <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="2h0nG&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">2h0nG&#39;s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">2h0nG</p>
+                        <p class="desc">不断学习中/人品极佳/不太好接近</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Linux系统安全/">
+                    Linux系统安全 <span class="right">12 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/代码审计安全/">
+                    代码审计安全 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Linux系统安全/">Linux系统安全</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>8、LNMP架构搭建(Nginx)</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2020-07-22T06:13:27.000Z"><a href="/2020/07/22/8%E3%80%81LNMP%E6%9E%B6%E6%9E%84%E6%90%AD%E5%BB%BA%EF%BC%88Nginx%EF%BC%89/">2020-07-22</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Linux系统安全/" class="chip pink lighten-1">Linux系统安全</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#LNMP%E6%9E%B6%E6%9E%84%E6%90%AD%E5%BB%BA%EF%BC%88Nginx%EF%BC%89"><span class="section table-of-contents-text">LNMP架构搭建（Nginx）</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81Nginx%E7%9A%84%E4%BC%98%E7%82%B9"><span class="section table-of-contents-text">一、Nginx的优点</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81Nginx%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="section table-of-contents-text">二、Nginx环境的搭建</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="section table-of-contents-text">三、Nginx服务器配置文件介绍</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81%E6%BA%90%E7%A0%81%E5%8C%85%E5%AE%89%E8%A3%85PHP%E5%B9%B6%E4%BD%BFNginx%E5%8F%AF%E4%BB%A5%E8%A7%A3%E6%9E%90PHP"><span class="section table-of-contents-text">四、源码包安装PHP并使Nginx可以解析PHP</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%94%E3%80%81LAMP%E7%9A%84PHP%E5%92%8CLNMP%E7%9A%84PHP%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="section table-of-contents-text">五、LAMP的PHP和LNMP的PHP有什么不同？</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AD%E3%80%81LNMP%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="section table-of-contents-text">六、LNMP的缺点</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="LNMP架构搭建（Nginx）"><a href="#LNMP架构搭建（Nginx）" class="headerlink" title="LNMP架构搭建（Nginx）"></a>LNMP架构搭建（Nginx）</h2><h3 id="一、Nginx的优点"><a href="#一、Nginx的优点" class="headerlink" title="一、Nginx的优点"></a>一、Nginx的优点</h3><p>1、处理高并发性更好</p>
+<p>2、系统资源利用率比较高，损耗率很低，稳定(C语言开发)</p>
+<p>3、Nginx是异步IO模型，一个进程对应多个连接；Apache是同步IO模型，一个进程对应一个连接。</p>
+<p>4、处理静态网页的能力更好</p>
+<h3 id="二、Nginx环境的搭建"><a href="#二、Nginx环境的搭建" class="headerlink" title="二、Nginx环境的搭建"></a>二、Nginx环境的搭建</h3><p><u>1、安装Nginx环境，首先需要安装Nginx的运行库/开发环境软件包。</u></p>
+<p><strong>开发环境软件包什么样：</strong>后缀带”-devel”的软件包。</p>
+<p><strong>安装Nginx的开发环境/运行库</strong>：<code>yum install pcre-devel</code>、<code>yum install zlib-devel</code>(在安装系统时选中了开发环境，因此该软件包已安装完毕)</p>
+<p><u>2、源码包的方式安装Nginx服务器</u>：</p>
+<p><strong>源码包老套路，检查编译环境并指定安装路径、程序用户和组，各子目录生成Makefile文件：</strong><code> ./configure --prefix=/usr/local/nginx --with-file-aio（） --with-http_gzip_static_module --with-http_flv_module --with-http_ssl_module --user=nginx --group=nginx --with-http_stub_status_module</code></p>
+<p><strong>编译和安装</strong>：<code>make</code>、<code>make install</code></p>
+<p><u>3、创建Nginx的进程/程序用户，使Nginx程序单独由该用户管理，以保证Nginx服务的安全性</u>：<code>useradd -M -s /sbin/nologin nginx</code>(不要家目录，不可登录)</p>
+<p>4、<u>nginx的prefix工作目录下开启nginx服务</u>：<code>./nginx</code></p>
+<blockquote>
+<p><code>./nginx -?</code>    #查看nginx帮助</p>
+<p><code>./nginx -s </code>    #给nginx进程发信号 stop 停止服务</p>
+</blockquote>
+<h3 id="三、Nginx服务器配置文件介绍"><a href="#三、Nginx服务器配置文件介绍" class="headerlink" title="三、Nginx服务器配置文件介绍"></a>三、Nginx服务器配置文件介绍</h3><blockquote>
+<p>Nginx主配置文件：PREFIX/conf/nginx.conf</p>
+<p>1-10行全局配置、11-14行I/O事件配置、17行以后全是http配置</p>
+</blockquote>
+<p>第3行左右： <code>worker_processes 1;</code>        #Nginx服务使用的CPU核心数</p>
+<p>第13行左右：<code>worker_connections 1024;</code>        #每个进程处理的最大连接数</p>
+<p>35行左右：<code>listen 80</code>        #监听端口<br>36行左右：<code>server_name localhost</code>        #服务IP地址</p>
+<p>43行左右：<code>location / &#123; root html; index index.html index.htm;&#125;</code>    #定义Nginx网页根目录和网页主页索引值</p>
+<h3 id="四、源码包安装PHP并使Nginx可以解析PHP"><a href="#四、源码包安装PHP并使Nginx可以解析PHP" class="headerlink" title="四、源码包安装PHP并使Nginx可以解析PHP"></a>四、源码包安装PHP并使Nginx可以解析PHP</h3><blockquote>
+<p><strong>Nginx默认不支持PHP解析</strong></p>
+</blockquote>
+<p><strong>1、</strong>PHP的依赖开发环境/运行库：<code>libxml2-devel</code>、<code>libjpeg-devel</code>、<code>libpng-devel</code></p>
+<p><strong>2、</strong>压缩源码包</p>
+<p><strong>3、</strong><code> ./configure --prefix=/usr/local/php5 --with-gd --with-zlib --with-config-file-path=/usr/local/php5 --enable-mbstring --enable-fpm --with-jpeg-dir=/usr/lib</code></p>
+<blockquote>
+<p>–with-gd：支持php处理图形的扩展库GD库</p>
+<p>–with-zlib：支持提供数据压缩用的函式库zlib库</p>
+<p>-with-config-file-path=/usr/local/php5：指定自己的php.ini路径</p>
+<p> –enable-mbstring ：mbstring扩展库用于处理多字节字符串（有点像unicode补丁）</p>
+<p>–enable-fpm：开启php-fpm（PHP FastCGI Process Manager）模块，PHP FastCGI 进程管理器，用于管理PHP 进程池的软件，用于接受web服务器的请求。</p>
+<p>–with-jpeg-dir=/usr/lib：设置libjpeg库的安装路径（支持jpeg图片格式）</p>
+</blockquote>
+<p><strong>4、</strong>编译安装：<code>make</code>、<code>make install</code></p>
+<p><strong>5、</strong>先修改php配置文件(PREFIX/etc/php-fpm.conf)的default后缀（默认有后缀）；并将源码路径中的php.ini-development主配置文件拷贝一份到PREFIX/etc/php.ini（默认没有这个主配置文件）</p>
+<p><strong>6、</strong>执行Prefix/sbin/php-fpm从而管理fastcgi（PHP）程序，开启后9000端口也随之开启。</p>
+<p><strong>7、</strong>配置nginx服务器，使其支持PHP脚本并且指定FastiCGI管理服务的IP和端口</p>
+<p>方法1、</p>
+<blockquote>
+<p><strong>PREFIX/conf/fastcgi_params</strong></p>
+<p>fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</p>
+<p>加此条配置目的是告诉php-fpm管理进程php脚本的名字。</p>
+</blockquote>
+<blockquote>
+<p><strong>PREFIX/conf/nginx.conf</strong></p>
+<p> 66         location ~ \.php$ {<br> 67             root           html;<br> 68             fastcgi_pass   127.0.0.1:9000;<br> 69             fastcgi_index  index.php;<br> 70             fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;<br> 71             include        fastcgi_params;<br> 72         }</p>
+</blockquote>
+<p>方法2、</p>
+<blockquote>
+<p><strong>PREFIX/conf/nginx.conf</strong></p>
+<p> 66         location ~ \.php$ {<br> 67             root           html;<br> 68             fastcgi_pass   127.0.0.1:9000;<br> 69             fastcgi_index  index.php;<br> 70             include        fastcgi_conf;<br> 71         }</p>
+<p>使用fastcgi_conf的话，配置文件里已经存在了<code>fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</code></p>
+</blockquote>
+<h3 id="五、LAMP的PHP和LNMP的PHP有什么不同？"><a href="#五、LAMP的PHP和LNMP的PHP有什么不同？" class="headerlink" title="五、LAMP的PHP和LNMP的PHP有什么不同？"></a>五、LAMP的PHP和LNMP的PHP有什么不同？</h3><p>LAMP中PHP是Apache的一个模块；而在LNMP中PHP独立存在，PHPCgi由PHP-FPM管理，PHP-FPM拥有自己的端口专门处理PHP解析。</p>
+<blockquote>
+<p>引自：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/donghui521/p/10334776.html">https://www.cnblogs.com/donghui521/p/10334776.html</a></p>
+<p>目前主流的nginx+php的运行原理如下：<br>1、nginx的worker进程直接管理每一个请求到nginx的网络请求。<br>2、对于php而言，由于在整个网络请求的过程中php是一个cgi程序的角色，所以采用名为php-fpm的进程管理程序来对这些被请求的php程序进行管理。php-fpm程序也如同nginx一样，需要监听端口，并且有master和worker进程。worker进程直接管理每一个php进程。<br>3、关于fastcgi：fastcgi是一种进程管理器，管理cgi进程。市面上有多种实现了fastcgi功能的进程管理器，php-fpm就是其中的一种。再提一点，php-fpm作为一种fast-cgi进程管理服务，会监听端口，一般默认监听9000端口，并且是监听本机，也就是只接收来自本机的端口请求，所以我们通常输入命令 netstat -nlpt|grep php-fpm 会得到：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcp    0   0 127.0.0.1:9000       0.0.0.0:*          LISTEN   1057&#x2F;php-fpm</span><br></pre></td></tr></table></figure>
+
+<p>这里的127.0.0.1:9000 就是监听本机9000端口的意思。<br>4、关于fastcgi的配置文件，目前fastcgi的配置文件一般放在nginx.conf同级目录下，配置文件形式，一般有两种：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fastcgi.conf  和 fastcgi_params。不同的nginx版本会有不同的配置文件，这两个配置文件有一个非常重要的区别：fastcgi_parames文件中缺少下列配置：</span><br><span class="line">fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以打开<code>fastcgi_params</code>文件加上上述行，也可以在要使用配置的地方动态添加。使得该配置生效。<br>5、当需要处理php请求时，nginx的worker进程会将请求移交给php-fpm的worker进程进行处理，也就是最开头所说的nginx调用了php，其实严格得讲是nginx间接调用php。 </p>
+</blockquote>
+<h3 id="六、LNMP的缺点"><a href="#六、LNMP的缺点" class="headerlink" title="六、LNMP的缺点"></a>六、LNMP的缺点</h3><p>PHP-FPM的负载能力有限，如果访问量特别大的话，PHP-FPM容易陷入僵死状态，浏览器显示：502 bad gateway错误。</p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/22/9%E3%80%81Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%8ENginx%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" rel="next" title="9、Tomcat服务器搭建与Nginx负载均衡">
+    上一篇：9、Tomcat服务器搭建与Nginx负载均衡
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/07/21/7%E3%80%81LAMP%E6%9E%B6%E6%9E%84%E6%90%AD%E5%BB%BA/" rel="next" title="7、LAMP架构搭建">
+    下一篇：7、LAMP架构搭建
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a target="_blank" rel="noopener" href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

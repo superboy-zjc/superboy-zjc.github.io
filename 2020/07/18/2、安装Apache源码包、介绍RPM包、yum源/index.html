@@ -1,0 +1,611 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>2、安装Apache源码包与介绍RPM包 | 2h0nG&#39;s Hacker Blog</title>
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="Love is friendship fell into love">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="2、安装Apache源码包与介绍RPM包"/>
+    <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="2h0nG&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">2h0nG&#39;s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">2h0nG</p>
+                        <p class="desc">不断学习中/人品极佳/不太好接近</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Linux系统安全/">
+                    Linux系统安全 <span class="right">12 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/代码审计安全/">
+                    代码审计安全 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Linux系统安全/">Linux系统安全</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>2、安装Apache源码包与介绍RPM包</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2020-07-18T02:13:00.000Z"><a href="/2020/07/18/2%E3%80%81%E5%AE%89%E8%A3%85Apache%E6%BA%90%E7%A0%81%E5%8C%85%E3%80%81%E4%BB%8B%E7%BB%8DRPM%E5%8C%85%E3%80%81yum%E6%BA%90/">2020-07-18</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Linux系统安全/" class="chip pink lighten-1">Linux系统安全</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E5%AE%89%E8%A3%85Apache%E6%BA%90%E7%A0%81%E5%8C%85%E4%B8%8E%E4%BB%8B%E7%BB%8DRPM%E5%8C%85"><span class="section table-of-contents-text">安装Apache源码包与介绍RPM包</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81Centos6%E5%AE%89%E8%A3%85Apache%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="section table-of-contents-text">一、Centos6安装Apache的步骤</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81%E7%AB%AF%E5%8F%A3%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="section table-of-contents-text">二、端口相关命令</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81%E4%B8%8D%E5%90%8CLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%8B%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85"><span class="section table-of-contents-text">三、不同Linux操作系统下的安装包</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81%E6%BA%90%E7%A0%81%E5%8C%85%E4%B8%8ERPM%E5%8C%85%E7%9A%84%E4%B8%8D%E5%90%8C"><span class="section table-of-contents-text">四、源码包与RPM包的不同</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%94%E3%80%81Yum%E6%BA%90%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="section table-of-contents-text">五、Yum源安装软件</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AAyum%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%8C%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8yum%E8%87%AA%E5%8A%A8%E7%9A%84%E5%AE%89%E8%A3%85%E5%85%89%E7%9B%98%E4%B8%AD%E7%9A%84RPM%E5%8C%85%E5%B9%B6%E5%A4%84%E7%90%86%E7%9B%B8%E5%85%B3%E4%BE%9D%E8%B5%96"><span class="section table-of-contents-text">1、自己写一个yum配置文件，可以使用yum自动的安装光盘中的RPM包并处理相关依赖</span></a></li></ol></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="安装Apache源码包与介绍RPM包"><a href="#安装Apache源码包与介绍RPM包" class="headerlink" title="安装Apache源码包与介绍RPM包"></a>安装Apache源码包与介绍RPM包</h2><h3 id="一、Centos6安装Apache的步骤"><a href="#一、Centos6安装Apache的步骤" class="headerlink" title="一、Centos6安装Apache的步骤"></a>一、Centos6安装Apache的步骤</h3><p>1、将源码压缩包移动到/usr/src 或者 /usr/share下</p>
+<p>2、查看INSTALL文档，编译安装三步骤：./configuration –prefix=安装目录（可缺省，缺省就是/usr/local/apache2）；make；make install</p>
+<p>3、去源码路径的bin下apachectl start即可开启Apache的http服务（关闭就是stop）</p>
+<p><strong>源码包Apache的主页</strong>：在安装路径中的htdocs文件夹中。</p>
+<p><strong>修改Apache的端口号：</strong>1)源码包：$PREFIX/conf/http.conf 2)封装包：/etc/httpd/conf/http.conf; 然后重启</p>
+<h3 id="二、端口相关命令"><a href="#二、端口相关命令" class="headerlink" title="二、端口相关命令"></a>二、端口相关命令</h3><p><code>ss -an</code>：比 netstat 好用的socket统计信息，iproute2 包附带的另一个工具，允许你查询 socket 的有关统计信息</p>
+<p>干掉占用端口的进程:<code>netstat -tnlp | grep 80 ; kill PID</code></p>
+<h3 id="三、不同Linux操作系统下的安装包"><a href="#三、不同Linux操作系统下的安装包" class="headerlink" title="三、不同Linux操作系统下的安装包"></a>三、不同Linux操作系统下的安装包</h3><p><strong>Debian</strong>: deb；<strong>Red Ha</strong>t: rpm,</p>
+<p><strong>RPM包的命名格式</strong>：<code>名字 版本号 编辑次数 系统版本(EL6 == RED HAT6) 系统架构（noarch == 所有cpu架构可用）</code></p>
+<p><strong>查看所有已安装的rpm包</strong>：<code>rpm -qa (query all)</code> </p>
+<p><strong>查看rpm包安装的软件文件列表</strong>:<code>rpm -ql rpm包</code></p>
+<p><strong>查看rpm包的详细信息</strong>：<code>rpm -qpi  rpm包(query package information)</code></p>
+<p><strong>查看rpm的文件列表与安装路径</strong>：<code>rpm-qpl rpm包(list)</code></p>
+<p><strong>安装rpm包</strong>：<code>rpm -ivh rpm包（install verify hash安装时列出标记）</code></p>
+<p><strong>卸载rpm包安装的</strong>：<code>rpm -e 软件名</code>（软件之间会有依赖关系，需要按照依赖逐个rpm -e）</p>
+<p><strong>yum软件安装的各种文件都在哪？</strong>：分布在各个地方，不在一个目录，比如配置文件在/etc,执行文件在/usr/bin,/usr/sbin/, 库文件在/usr/lib, 等等</p>
+<h3 id="四、源码包与RPM包的不同"><a href="#四、源码包与RPM包的不同" class="headerlink" title="四、源码包与RPM包的不同"></a>四、源码包与RPM包的不同</h3><p><strong>源码包</strong>：由厂商开源发布，安装时可定制安装路径，整个软件所有产生的文件都集中在一个文件夹里，方便删除和移动。</p>
+<p><strong>RPM包</strong>：由厂商封装好，操作系统提供RPM包管理支持，安装路径固定，且分散（比如配置文件在/etc，可执行文件在/bin），不可以详细的定制安装路径，但是方便管理，只需要使用rpm命令工具即可进行管理操作，无需手动管理。</p>
+<h3 id="五、Yum源安装软件"><a href="#五、Yum源安装软件" class="headerlink" title="五、Yum源安装软件"></a>五、Yum源安装软件</h3><p>Yum源工具本身就是为了使安装与卸载等操作简单化，原理上是根据配置文件中的依赖关系列表来自动化处理依赖关系。</p>
+<h4 id="1、自己写一个yum配置文件，可以使用yum自动的安装光盘中的RPM包并处理相关依赖"><a href="#1、自己写一个yum配置文件，可以使用yum自动的安装光盘中的RPM包并处理相关依赖" class="headerlink" title="1、自己写一个yum配置文件，可以使用yum自动的安装光盘中的RPM包并处理相关依赖"></a>1、自己写一个yum配置文件，可以使用yum自动的安装光盘中的RPM包并处理相关依赖</h4><p><strong>yum配置文件路径</strong>：/etc/yum.repo.d</p>
+<p>1）首先将yum.repo.d下的所有配置文件备份到一个bak文件夹中</p>
+<p>2）新建一个文件dvd.repo，并且编辑它</p>
+<p>3）内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[dvdrom] #标签</span><br><span class="line">name=&quot;yum dvd rom&quot; #描述</span><br><span class="line">baseurl=file:///media/CentOS_6.9_Final #依赖关系列表位置</span><br><span class="line">gpgcheck=0 #是否进行密钥对检查，如需检查，下一行需要写公钥文件位置gpgkey=file:///XXXX（由于公钥是权威的Centos的公钥，而私钥无人知道，因此很保密、权威）</span><br></pre></td></tr></table></figure>
+
+<p>依赖关系列表就存储在光盘中的repodata中，以xml的形式存在。 这些xml应该不仅描述了软件的依赖，还描述了软件的安装地址。（否则如何在不联网的情况下自动安装了DVD1中的rpm）</p>
+<p><strong>yum安装软件</strong>：<code>yum install 软件名</code></p>
+<p><strong>yum卸载软件</strong>：<code>yum remove 软件名</code></p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/19/3%E3%80%81Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E4%B8%8E%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/" rel="next" title="3、Linux用户管理与权限相关">
+    上一篇：3、Linux用户管理与权限相关
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/07/17/1%E3%80%81%E9%83%A8%E7%BD%B2Centos%E4%BB%A5%E5%8F%8ALinux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%9F%A5%E8%AF%86-1/" rel="next" title="1、部署Centos以及Linux基本命令与知识">
+    下一篇：1、部署Centos以及Linux基本命令与知识
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a target="_blank" rel="noopener" href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
