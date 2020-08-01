@@ -7,7 +7,7 @@
 
     
 
-    <title>代码审计安全 | 2h0nG&#39;s Hacker Blog</title>
+    <title>2、IP地址及相关网络地址概念详解 | 2h0nG&#39;s Hacker Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="2、IP地址及相关网络地址概念详解"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -225,30 +225,116 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/数据通信安全/">数据通信安全</a>
+
 
         
-            <a class="breadcrumb" href="/tags/代码审计安全/">代码审计安全</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>2、IP地址及相关网络地址概念详解</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2020-05-30T15:30:36.000Z"><a href="/2020/05/30/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/5.123-IP%E5%9C%B0%E5%9D%80%E7%9B%B8%E5%85%B3%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E6%A6%82%E5%BF%B5%E8%AF%A6%E8%A7%A3/">2020-05-30</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2020/07/27/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/" class="collection-item grey-text text-darken-1">
-                <time datetime="2020-07-27T01:25:03.000Z">2020-07-27</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                1、部署实验WAMP环境——PHPStudy
-            </a>
+            <a href="/tags/数据通信安全/" class="chip pink lighten-1">数据通信安全</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#IP%E5%9C%B0%E5%9D%80%E7%9B%B8%E5%85%B3%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E6%A6%82%E5%BF%B5%E8%AF%A6%E8%A7%A3"><span class="section table-of-contents-text">IP地址相关网络地址概念详解</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81IP%E5%9C%B0%E5%9D%80%E5%AE%9A%E4%B9%89"><span class="section table-of-contents-text">一、IP地址定义</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81%E5%AE%9A%E4%B9%89"><span class="section table-of-contents-text">二、子网掩码定义</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%AE%9E%E9%AA%8C"><span class="section table-of-contents-text">实验</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E6%A8%A1%E6%8B%9F%E4%B8%A4%E5%8F%B0%E4%B8%BB%E6%9C%BA%E8%BF%9E%E6%8E%A5%E5%88%B0%E4%B8%80%E5%8F%B0%E4%BA%A4%E6%8D%A2%E6%9C%BA%E4%B8%AD%E3%80%82"><span class="section table-of-contents-text">1、虚拟机中模拟两台主机连接到一台交换机中。</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81%E7%BB%99%E4%B8%A4%E5%8F%B0%E4%B8%BB%E6%9C%BA%E8%AE%BE%E7%BD%AEIP%E5%9C%B0%E5%9D%80%E4%B8%8E%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81"><span class="section table-of-contents-text">2、给两台主机设置IP地址与子网掩码</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3%E3%80%81%E6%B5%8B%E8%AF%95%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E8%BF%9E%E9%80%9A"><span class="section table-of-contents-text">3、测试是否可以连通</span></a></li></ol></li></ol></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB"><span class="section table-of-contents-text">三、IP地址分类</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81%E8%B7%AF%E7%94%B1%E5%99%A8%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="section table-of-contents-text">四、路由器与交换机</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E4%BA%94%E3%80%81%E7%BD%91%E5%85%B3"><span class="section table-of-contents-text">五、网关</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E5%85%AD%E3%80%81DNS%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="section table-of-contents-text">六、DNS域名解析服务器</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E4%B8%83%E3%80%81%E7%BD%91%E7%BB%9C%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4"><span class="section table-of-contents-text">七、网络测试命令</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#1%E3%80%81%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8BIP%E5%9C%B0%E5%9D%80"><span class="section table-of-contents-text">1、如何查看IP地址</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2%E3%80%81ping%E5%91%BD%E4%BB%A4"><span class="section table-of-contents-text">2、ping命令</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#3%E3%80%81%E6%89%8B%E5%B7%A5%E8%A7%A3%E6%9E%90%E5%9F%9F%E5%90%8D"><span class="section table-of-contents-text">3、手工解析域名</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#4%E3%80%81%E6%89%AB%E6%8F%8F%E6%9C%AC%E5%9C%B0%E4%B8%BB%E6%9C%BA%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3"><span class="section table-of-contents-text">4、扫描本地主机开放端口</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h1 id="IP地址相关网络地址概念详解"><a href="#IP地址相关网络地址概念详解" class="headerlink" title="IP地址相关网络地址概念详解"></a>IP地址相关网络地址概念详解</h1><h2 id="一、IP地址定义"><a href="#一、IP地址定义" class="headerlink" title="一、IP地址定义"></a>一、IP地址定义</h2><p>IP地址实质上就是32位二进制组成的，32位二进制分为四个段，每8位为一段。四段IP地址又分为网络位、主机位。</p>
+<h2 id="二、子网掩码定义"><a href="#二、子网掩码定义" class="headerlink" title="二、子网掩码定义"></a>二、子网掩码定义</h2><p>子网掩码：subnet mask（SM）确定IP地址的网络位。一个IP地址<strong>必须</strong>配一个子网掩码。</p>
+<p>255.0.0.0 / 255.255.0.0 / 255.255.255.0 / 255.255.255.255</p>
+<p>255为网络位，0为主机位。</p>
+<p>局域网通信规则：主机IP在同一网段中才能通信。</p>
+<hr>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a><strong>实验</strong></h3><h4 id="1、虚拟机中模拟两台主机连接到一台交换机中。"><a href="#1、虚拟机中模拟两台主机连接到一台交换机中。" class="headerlink" title="1、虚拟机中模拟两台主机连接到一台交换机中。"></a>1、虚拟机中模拟两台主机连接到一台交换机中。</h4><p>虚拟机设置中，网络连接方式改为虚拟连接，两台虚拟机选择同一个虚拟连接的连接口，就相当于将两台电脑的网线连接到了同一台交换机上。</p>
+<h4 id="2、给两台主机设置IP地址与子网掩码"><a href="#2、给两台主机设置IP地址与子网掩码" class="headerlink" title="2、给两台主机设置IP地址与子网掩码"></a>2、给两台主机设置IP地址与子网掩码</h4><p>设置为同一网段，不同主机号。</p>
+<h4 id="3、测试是否可以连通"><a href="#3、测试是否可以连通" class="headerlink" title="3、测试是否可以连通"></a>3、测试是否可以连通</h4><p>使用<code>ping</code>命令测试连通。</p>
+<hr>
+<h1 id="三、IP地址分类"><a href="#三、IP地址分类" class="headerlink" title="三、IP地址分类"></a>三、IP地址分类</h1><p>国际标准化组织ISO规定IP地址的分类以第一个段分辨。</p>
+<p>A类：1-126                <strong>默认</strong>子网掩码：255.0.0.0</p>
+<p>​    A类中10.0.0.0 - 10.255.255.255是私有地址。</p>
+<p>B类：128-191            <strong>默认</strong>子网掩码：255.255.0.0</p>
+<p>​    B类中172.16.0.0 - 172.31.255.255是私有地址。</p>
+<p>C类：192-223            默认子网掩码：255.255.255.0 </p>
+<p>​    C类中192.168.0.0 - 192.168.255.255是私有地址。</p>
+<p>D类：224-239            组播地址</p>
+<p>E类：240-254             科研使用</p>
+<p>127开头的IP为回环地址、255开头的IP为子网掩码，<strong>主机位全为255的IP为广播地址。</strong>0开头的后面讲，<strong>主机位全为0的是网段标识符。</strong></p>
+<p><strong>全局广播地址</strong>：255.255.255.255； <strong>无IP地址主机</strong>：0.0.0.0</p>
+<h1 id="四、路由器与交换机"><a href="#四、路由器与交换机" class="headerlink" title="四、路由器与交换机"></a>四、路由器与交换机</h1><p>家用路由器是路由器和交换机的结合产品，并且配备了DHCP服务器。一般路由器提供多个 LAN口和一个WAN口。其实WAN口就是路由器口，用于连接互联网；LAN口是交换机口，用于连接局域网。</p>
+<p><strong>路由器</strong>：用于与不同网段通信。</p>
+<p><strong>交换机</strong>：组建局域网，使同网段的主机相互通信。</p>
+<h1 id="五、网关"><a href="#五、网关" class="headerlink" title="五、网关"></a>五、网关</h1><p>主机通过IP地址发送数据包时，会通过自己的子网掩码、IP地址和对方的IP地址判断，对方是不是和我是同一个网段。如果不是的话，就需要将数据包发送给网关，请求与其他网段进行通信。</p>
+<p><strong>网关</strong>：路由器内网端口就是网关，网关通常为1或者254，需要工程师配置。</p>
+<h1 id="六、DNS域名解析服务器"><a href="#六、DNS域名解析服务器" class="headerlink" title="六、DNS域名解析服务器"></a>六、DNS域名解析服务器</h1><p>如果DNS不配置的话也可以上网，但是只能用IP地址。如果配置了DNS服务器，就可以通过域名来访问某一服务。</p>
+<p>某地区某运营商的的DNS服务器IP可以通过百度搜索到。</p>
+<h1 id="七、网络测试命令"><a href="#七、网络测试命令" class="headerlink" title="七、网络测试命令"></a>七、网络测试命令</h1><h2 id="1、如何查看IP地址"><a href="#1、如何查看IP地址" class="headerlink" title="1、如何查看IP地址"></a>1、如何查看IP地址</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipconfig -all 查看网卡IP地址详细信息</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、ping命令"><a href="#2、ping命令" class="headerlink" title="2、ping命令"></a>2、ping命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-l  length包大小 最大65500左右 64KB左右</span><br><span class="line"></span><br><span class="line">-t 无限发</span><br><span class="line"></span><br><span class="line">-n number指定发数据包的数量</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3、手工解析域名"><a href="#3、手工解析域名" class="headerlink" title="3、手工解析域名"></a>3、手工解析域名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup：查询域名为IP地址，？通过DNS服务器?</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4、扫描本地主机开放端口"><a href="#4、扫描本地主机开放端口" class="headerlink" title="4、扫描本地主机开放端口"></a>4、扫描本地主机开放端口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -an</span><br></pre></td></tr></table></figure>
+
+
+                
+<p class="pink-link-context">
+    <a href="/2020/05/31/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/5.4-%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/" rel="next" title="1、Windows远程管理">
+    上一篇：1、Windows远程管理
+  </a>
+</p>
+
+
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

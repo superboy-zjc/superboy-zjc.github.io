@@ -7,7 +7,7 @@
 
     
 
-    <title>代码审计安全 | 2h0nG&#39;s Hacker Blog</title>
+    <title>7、LAMP架构搭建 | 2h0nG&#39;s Hacker Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="7、LAMP架构搭建"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -225,30 +225,107 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Linux系统安全/">Linux系统安全</a>
+
 
         
-            <a class="breadcrumb" href="/tags/代码审计安全/">代码审计安全</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>7、LAMP架构搭建</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2020-07-21T06:37:14.000Z"><a href="/2020/07/21/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/7%E3%80%81LAMP%E6%9E%B6%E6%9E%84%E6%90%AD%E5%BB%BA/">2020-07-21</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2020/07/27/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/" class="collection-item grey-text text-darken-1">
-                <time datetime="2020-07-27T01:25:03.000Z">2020-07-27</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                1、部署实验WAMP环境——PHPStudy
-            </a>
+            <a href="/tags/Linux系统安全/" class="chip pink lighten-1">Linux系统安全</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#LAMP%E6%9E%B6%E6%9E%84%E6%90%AD%E5%BB%BA"><span class="section table-of-contents-text">LAMP架构搭建</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFLAMP%E6%9E%B6%E6%9E%84"><span class="section table-of-contents-text">一、什么是LAMP架构</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81%E9%83%A8%E7%BD%B2Mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="section table-of-contents-text">二、部署Mysql服务端</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81%E9%83%A8%E7%BD%B2PHP%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83"><span class="section table-of-contents-text">三、部署PHP语言环境</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81PHP%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90"><span class="section table-of-contents-text">四、PHP配置文件分析</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%94%E3%80%81PHP%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="section table-of-contents-text">五、PHP程序的工作流程</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AD%E3%80%81PHPMyAdmin%E6%95%B0%E6%8D%AE%E5%BA%93WEB%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BD%AF%E4%BB%B6"><span class="section table-of-contents-text">六、PHPMyAdmin数据库WEB客户端软件</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="LAMP架构搭建"><a href="#LAMP架构搭建" class="headerlink" title="LAMP架构搭建"></a>LAMP架构搭建</h2><h3 id="一、什么是LAMP架构"><a href="#一、什么是LAMP架构" class="headerlink" title="一、什么是LAMP架构"></a>一、什么是LAMP架构</h3><p>LAMP架构就是Linux、Apache、Mysql、Php结合起来的运行环境。LAMP是比较流行的Web服务架构。</p>
+<h3 id="二、部署Mysql服务端"><a href="#二、部署Mysql服务端" class="headerlink" title="二、部署Mysql服务端"></a>二、部署Mysql服务端</h3><p>1、yum源安装：<code>yum install -y mysql-server</code></p>
+<p>2、启动Mysql服务：<code>service mysqld start</code></p>
+<p>3、第一次修改root密码：<code>mysqladmin -u root password &quot;密码&quot;</code></p>
+<p>4、第n次(n&gt;1)修改root密码：<code>mysqladmin -u root -p password &quot;新密码&quot;</code>,然后提示输入旧密码</p>
+<p>5、登录数据库：<code>mysql -u root -p</code></p>
+<h3 id="三、部署PHP语言环境"><a href="#三、部署PHP语言环境" class="headerlink" title="三、部署PHP语言环境"></a>三、部署PHP语言环境</h3><p>1、yum源安装：<code>yum install -y php</code></p>
+<p>2、yum源安装PHPmysql驱动库：<code>yum install -y php-mysql/php-mbstring</code></p>
+<p>3、php-mbstring在第二盘Centos光盘中，安全性考虑先卸载，再安装新的光盘：<code>umount /dev/cdrom</code>，换好光盘后再挂载光盘<code>mount /dev/cdrom /media</code></p>
+<blockquote>
+<p>因为手动挂载光盘到/media，yum配置以前的文件路径是/media/CentosXXX所以要将配置改为/media。而且这里要注意，光盘2中没有依赖文件列表，因此只能单纯安装某个依赖包，无法自动处理依赖，解决方法是挂载光盘1利用光盘1中的依赖文件列表先创建一个cache。然后光盘2就可以在cache中找到依赖文件列表处理依赖了。</p>
+</blockquote>
+<h3 id="四、PHP配置文件分析"><a href="#四、PHP配置文件分析" class="headerlink" title="四、PHP配置文件分析"></a>四、PHP配置文件分析</h3><blockquote>
+<p>/etc/php.ini</p>
+</blockquote>
+<p>229行左右 ：<code>short_open_tag = On</code>        #开启PHP短标签模式，不需要&lt;?php，只需要&lt;?即可。</p>
+<blockquote>
+<p>配置好后需要重启Apache，测试一个致命的“裸体”函数：<code>&lt;? phpinfo(); ?&gt;</code></p>
+<p>PHP必须依靠Web服务器才能工作，在Apache中PHP只是一个网页程序</p>
+</blockquote>
+<h3 id="五、PHP程序的工作流程"><a href="#五、PHP程序的工作流程" class="headerlink" title="五、PHP程序的工作流程"></a>五、PHP程序的工作流程</h3><p>1、WEB浏览器请求一个url操作。</p>
+<p>2、如果是静态网页，那么Web服务器只需要正常返回HTML页面即可。</p>
+<p>3、如果是PHP页面(XXX.php)，那么Web服务器会委托系统中的<strong>PHP预处理器</strong>(Preprocessor)将请求的php文件解释为HTML静态页面返回给WEB浏览器。</p>
+<p>​    这个将PHP文件解释为HTML页面的过程，由PHP解释器进行，期间可能会有一些数据库的增删改查等操作，将数据库中的数据拼接到HTML页面后返回给WEB浏览器，这就是动态网页。</p>
+<h3 id="六、PHPMyAdmin数据库WEB客户端软件"><a href="#六、PHPMyAdmin数据库WEB客户端软件" class="headerlink" title="六、PHPMyAdmin数据库WEB客户端软件"></a>六、PHPMyAdmin数据库WEB客户端软件</h3><p>一款基于PHP开发的数据库客户端Web管理页面，直接解压到<code>/var/www/html</code>下直接访问进行管理。</p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/22/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/8%E3%80%81LNMP%E6%9E%B6%E6%9E%84%E6%90%AD%E5%BB%BA%EF%BC%88Nginx%EF%BC%89/" rel="next" title="8、LNMP架构搭建(Nginx)">
+    上一篇：8、LNMP架构搭建(Nginx)
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/07/21/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/6%E3%80%81Apache%E7%BD%91%E9%A1%B5%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E6%9E%B6%E6%9E%84/" rel="next" title="6、Apache网页服务器安全架构">
+    下一篇：6、Apache网页服务器安全架构
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

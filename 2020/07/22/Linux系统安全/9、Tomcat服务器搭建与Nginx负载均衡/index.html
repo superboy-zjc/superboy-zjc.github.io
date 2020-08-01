@@ -7,7 +7,7 @@
 
     
 
-    <title>代码审计安全 | 2h0nG&#39;s Hacker Blog</title>
+    <title>9、Tomcat服务器搭建与Nginx负载均衡 | 2h0nG&#39;s Hacker Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="9、Tomcat服务器搭建与Nginx负载均衡"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -225,30 +225,113 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Linux系统安全/">Linux系统安全</a>
+
 
         
-            <a class="breadcrumb" href="/tags/代码审计安全/">代码审计安全</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>9、Tomcat服务器搭建与Nginx负载均衡</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2020-07-22T10:01:35.000Z"><a href="/2020/07/22/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/9%E3%80%81Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%8ENginx%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">2020-07-22</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2020/07/27/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/" class="collection-item grey-text text-darken-1">
-                <time datetime="2020-07-27T01:25:03.000Z">2020-07-27</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                1、部署实验WAMP环境——PHPStudy
-            </a>
+            <a href="/tags/Linux系统安全/" class="chip pink lighten-1">Linux系统安全</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%8ENginx%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="section table-of-contents-text">Tomcat服务器搭建与Nginx负载均衡</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81Tomcat%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="section table-of-contents-text">一、Tomcat的使用场景</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81%E9%83%A8%E7%BD%B2Tomcat-Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8ETomcat%E7%89%B9%E7%82%B9"><span class="section table-of-contents-text">二、部署Tomcat Web服务器与Tomcat特点</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81Tomcat-Nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="section table-of-contents-text">三、Tomcat+Nginx实现负载均衡</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="section table-of-contents-text">四、正向代理服务器和反向代理服务器</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="Tomcat服务器搭建与Nginx负载均衡"><a href="#Tomcat服务器搭建与Nginx负载均衡" class="headerlink" title="Tomcat服务器搭建与Nginx负载均衡"></a>Tomcat服务器搭建与Nginx负载均衡</h2><h3 id="一、Tomcat的使用场景"><a href="#一、Tomcat的使用场景" class="headerlink" title="一、Tomcat的使用场景"></a>一、Tomcat的使用场景</h3><p>Tomcat是Apache 软件基金会（Apache Software Foundation）的Jakarta 项目中的一个核心项目，由于有了Sun 的参与和支持，最新的Servlet 和JSP 规范总是能在Tomcat 中得到体现，因此主要用于运行JSP 页面和Servlet，功能没有Apache和Nginx功能全面，性能也不及它俩。</p>
+<h3 id="二、部署Tomcat-Web服务器与Tomcat特点"><a href="#二、部署Tomcat-Web服务器与Tomcat特点" class="headerlink" title="二、部署Tomcat Web服务器与Tomcat特点"></a>二、部署Tomcat Web服务器与Tomcat特点</h3><blockquote>
+<p>实验用例是Tomcat免安装版，Tomcat依赖JDK环境，因此如果没有JDK需要安装。</p>
+</blockquote>
+<p>1、解压Tomcat免安装版的压缩包</p>
+<p>2、分析一下网页资源的目录在Webapps</p>
+<blockquote>
+<p>Webapps/ROOT        #默认主页所在的目录</p>
+</blockquote>
+<p>3、开启Tomcat服务 <code>bin/startup.sh</code>，Tomcat的默认端口是8080</p>
+<h3 id="三、Tomcat-Nginx实现负载均衡"><a href="#三、Tomcat-Nginx实现负载均衡" class="headerlink" title="三、Tomcat+Nginx实现负载均衡"></a>三、Tomcat+Nginx实现负载均衡</h3><p><strong>权重</strong>：负载均衡机制通过服务器权重的设置来分配服务器的资源使用。</p>
+<blockquote>
+<p>实验环境：一台Centos6虚拟机部署1个Nginx、2个tomcat服务器</p>
+</blockquote>
+<p><strong>1、将三个服务器在一个机器中部署：</strong></p>
+<p>​    要想在1台虚拟机部署三个Web服务器首先要考虑的就是端口占用问题，Nginx默认80、Tomcat默认8080，因此只需要将其中一个Tomcat端口改为8081即可。</p>
+<p>​    Tomcat服务器配置端口比传统服务器复杂，通过PREFIX/conf/server.xml中对各个标签头port的修改即可。也许不需要 -&gt;（并且需要在第二个tomcat服务器的start.sh和stop.sh中加入<code>export CATALINA_HOME=第二个Tomcat的PREFIX目录路径</code>、<code>export CATALINA_BASE=第二个Tomcat的PREFIX目录路径</code>即可）。</p>
+<p><strong>2、Nginx配置文件中配置负载均衡</strong></p>
+<p>在http{}中加入负载均衡集群配置：</p>
+<blockquote>
+<p>upstream 负载均衡配置块名(tomcat_server) {</p>
+<p>​    server 服务器IP:端口 weight=权值;    #配置负载均衡集群中的服务器地址并赋予权重</p>
+<p>​    server 服务器IP:端口 weight=权值;    #同上</p>
+<p>}</p>
+</blockquote>
+<p>在location / {}中加入代理配置：</p>
+<blockquote>
+<p>proxy_pass http://负载均衡配置块名；    #每当访问nginx的/下的网页都会触发该代理</p>
+</blockquote>
+<h3 id="四、正向代理服务器和反向代理服务器"><a href="#四、正向代理服务器和反向代理服务器" class="headerlink" title="四、正向代理服务器和反向代理服务器"></a>四、正向代理服务器和反向代理服务器</h3><p>1、反向代理服务器：类似于Nginx负载均衡，用户在向服务器请求服务时，对于用户来说不清楚真正为其服务的是哪个服务器，则用户所请求的服务器类型就称为反向代理服务器。（用户已知，服务器未知）</p>
+<p>2、正向代理服务器：用户通过VPN等代理服务器去请求某个服务器，用户请求哪个，为其服务的就是哪个服务器，这种情况为其服务的服务器称为正向代理服务器。（用户是未知，服务器已知）</p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/23/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/10%E3%80%81iptables%E2%80%94%E2%80%94Filter%E8%A1%A8/" rel="next" title="10、iptables——Filter表">
+    上一篇：10、iptables——Filter表
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/07/22/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/8%E3%80%81LNMP%E6%9E%B6%E6%9E%84%E6%90%AD%E5%BB%BA%EF%BC%88Nginx%EF%BC%89/" rel="next" title="8、LNMP架构搭建(Nginx)">
+    下一篇：8、LNMP架构搭建(Nginx)
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

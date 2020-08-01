@@ -7,7 +7,7 @@
 
     
 
-    <title>代码审计安全 | 2h0nG&#39;s Hacker Blog</title>
+    <title>3、NTFS磁盘权限 | 2h0nG&#39;s Hacker Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="3、NTFS磁盘权限"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -225,30 +225,107 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/数据通信安全/">数据通信安全</a>
+
 
         
-            <a class="breadcrumb" href="/tags/代码审计安全/">代码审计安全</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>3、NTFS磁盘权限</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2020-05-31T09:38:29.000Z"><a href="/2020/05/31/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/6NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/">2020-05-31</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2020/07/27/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/" class="collection-item grey-text text-darken-1">
-                <time datetime="2020-07-27T01:25:03.000Z">2020-07-27</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                1、部署实验WAMP环境——PHPStudy
-            </a>
+            <a href="/tags/数据通信安全/" class="chip pink lighten-1">数据通信安全</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#NTFS%E6%9D%83%E9%99%90"><span class="section table-of-contents-text">NTFS权限</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="section table-of-contents-text">一、文件系统</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81NTFS%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="section table-of-contents-text">二、NTFS文件系统权限管理</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88SMB-Server-Messages-Block%EF%BC%89"><span class="section table-of-contents-text">文件共享服务器（SMB Server Messages Block）</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A6%82%E8%BF%B0"><span class="section table-of-contents-text">一、共享服务器概述</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%AD%E7%9A%84%E5%85%B1%E4%BA%AB%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="section table-of-contents-text">二、共享服务器中的共享权限管理</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h1 id="NTFS权限"><a href="#NTFS权限" class="headerlink" title="NTFS权限"></a>NTFS权限</h1><h2 id="一、文件系统"><a href="#一、文件系统" class="headerlink" title="一、文件系统"></a>一、文件系统</h2><p>文件系统：外部存储设备在操作系统中组织文件的方法。</p>
+<p>Windows常见的文件系统：<strong>NTFS</strong>、FAT。</p>
+<p>Linux常见的文件系统：EXT。</p>
+<p><strong>NTFS</strong>：支持单个文件大于4个G、可以设置访问权限、优点很多。</p>
+<p><strong>FAT32</strong>：适合小存储的硬盘。</p>
+<h2 id="二、NTFS文件系统权限管理"><a href="#二、NTFS文件系统权限管理" class="headerlink" title="二、NTFS文件系统权限管理"></a>二、NTFS文件系统权限管理</h2><p>​                                                                                                                                                                                                                                                <strong>权限选项</strong>：修改包括了删除；完全控制包括一个特殊的权限。</p>
+<p><strong>权限的继承</strong>：默认情况下子文件夹下的所有文件都继承于父文件夹的权限。如果要特殊修改，需要修改取消继承关系（最好选择复制权限状态）。</p>
+<p><strong>权限的累加</strong>：当一个文件权限设置中某一个用户存在多个组中，则这个用户的权限为所有存在组权限的累加状态。</p>
+<p><strong>管理员的特殊权限</strong>：修改文件权限所有者，使管理员获得文件所有权。</p>
+<hr>
+<h1 id="文件共享服务器（SMB-Server-Messages-Block）"><a href="#文件共享服务器（SMB-Server-Messages-Block）" class="headerlink" title="文件共享服务器（SMB Server Messages Block）"></a>文件共享服务器（SMB Server Messages Block）</h1><h2 id="一、共享服务器概述"><a href="#一、共享服务器概述" class="headerlink" title="一、共享服务器概述"></a>一、共享服务器概述</h2><p>Windows系统文件共享服务端口始终默认开启：445（smb/samba）。（验证445端口是否开启服务不建议用<code>netstat -an</code>，建议用net share ）</p>
+<p>换句话说，其实每一台Windows系统的电脑都默认是一个文件共享服务器。<strong>并且默认C与D盘都被隐藏共享了！</strong></p>
+<h2 id="二、共享服务器中的共享权限管理"><a href="#二、共享服务器中的共享权限管理" class="headerlink" title="二、共享服务器中的共享权限管理"></a>二、共享服务器中的共享权限管理</h2><p><strong>设置共享文件夹与权限</strong>：右键文件夹设置共享文件夹开启，并且设置权限。</p>
+<p><strong>远程访问共享文件夹的权限</strong>：远程访问服务器时，对文件的访问权限取用户的共享文件夹权限与NTFS文件夹权限的交集。（换句话说权限需双重验证）</p>
+<p><strong>访问共享文件服务器</strong>： 连续两个\ 代表网络文件路径，对于客户机来说文件名为共享文件夹服务器设置共享文件夹时设置的共享名。</p>
+<p><strong>隐藏共享文件夹</strong>：在共享名后加 $ 符号，共享服务器中该文件夹就会隐藏，只能通过网络路径+共享名$才能打开。</p>
+<p><strong>共享文件夹相关命令</strong></p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">net</span> share             #列出共享列表</span><br><span class="line"><span class="built_in">net</span> share 共享名 /<span class="built_in">del</span> #删除共享</span><br></pre></td></tr></table></figure>
+
+<p><strong>关闭默认的系统分区隐藏共享</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1、打开注册表：</span><br><span class="line">运行-》regedit（打开注册表编辑器）</span><br><span class="line">注册表编辑器：存储在系统中被安装软件的相关注册信息。</span><br><span class="line">2、定位共享注册表位置：</span><br><span class="line">HKEY_Local_MACINE\System\CurrentControlSet\Services\LanmanServer\parameters 在右侧区域右键新建一个REG_DWORD类型的AutoShareServer键，值为0</span><br></pre></td></tr></table></figure>
+
+<p><strong>关闭文件共享服务445(smb/samba)端口</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、打开service.msc找到Server停止并禁用它。</span><br><span class="line">2、仅使用于win7以上系统和win2008以上系统：配置高级安全防火墙-入站规则，增加入站规则阻止端口445的访问。</span><br></pre></td></tr></table></figure>
+
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/17/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2Centos%E4%BB%A5%E5%8F%8ALinux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%9F%A5%E8%AF%86-1/" rel="next" title="1、部署Centos以及Linux基本命令与知识">
+    上一篇：1、部署Centos以及Linux基本命令与知识
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/05/31/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/5.4-%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/" rel="next" title="1、Windows远程管理">
+    下一篇：1、Windows远程管理
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

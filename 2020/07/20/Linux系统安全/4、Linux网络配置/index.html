@@ -7,7 +7,7 @@
 
     
 
-    <title>代码审计安全 | 2h0nG&#39;s Hacker Blog</title>
+    <title>4、Linux网络配置 | 2h0nG&#39;s Hacker Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="4、Linux网络配置"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -225,30 +225,122 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Linux系统安全/">Linux系统安全</a>
+
 
         
-            <a class="breadcrumb" href="/tags/代码审计安全/">代码审计安全</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>4、Linux网络配置</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2020-07-20T02:00:47.000Z"><a href="/2020/07/20/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/4%E3%80%81Linux%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/">2020-07-20</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2020/07/27/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/" class="collection-item grey-text text-darken-1">
-                <time datetime="2020-07-27T01:25:03.000Z">2020-07-27</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                1、部署实验WAMP环境——PHPStudy
-            </a>
+            <a href="/tags/Linux系统安全/" class="chip pink lighten-1">Linux系统安全</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Linux%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="section table-of-contents-text">Linux网络配置</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81Linux%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%EF%BC%88%E5%A4%A7%E9%83%A8%E5%88%86%E4%B8%B4%E6%97%B6%EF%BC%89"><span class="section table-of-contents-text">一、Linux网络配置（大部分临时）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81Linux%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%EF%BC%88%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%96%B9%E5%BC%8F%E6%B0%B8%E4%B9%85%EF%BC%89"><span class="section table-of-contents-text">二、Linux网络配置（配置文件方式永久）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E9%AA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8Centos%E4%BD%9C%E4%B8%BA%E8%B7%AF%E7%94%B1%E5%99%A8%E8%BF%9E%E9%80%9A%E4%B8%A4%E4%B8%AA%E7%BD%91%E6%AE%B5%E7%9A%84%E4%B8%BB%E6%9C%BA"><span class="section table-of-contents-text">三、实验：使用Centos作为路由器连通两个网段的主机</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="Linux网络配置"><a href="#Linux网络配置" class="headerlink" title="Linux网络配置"></a>Linux网络配置</h2><h3 id="一、Linux网络配置（大部分临时）"><a href="#一、Linux网络配置（大部分临时）" class="headerlink" title="一、Linux网络配置（大部分临时）"></a>一、Linux网络配置（大部分临时）</h3><p><u>1、查看网络配置状态信息</u>：<code>ip addr</code>； </p>
+<blockquote>
+<p>lo 回环测试地址， ehX有线网卡， wlpXX 无线网卡</p>
+</blockquote>
+<p><u>2、临时关闭NetworkManager服务</u>：<code>service NetworkManager stop</code></p>
+<p>设置345level下关闭该服务：<code>chkconfig --level 345 NetworkManager off</code></p>
+<blockquote>
+<p>NetworkManager是Centos中一个帮助linux用户自动配置、管理网络的守护进程服务程序，桌面右上角的图形化网络管理工具就是它。</p>
+<p>Linux的7个level运行级别</p>
+<p>0    关机</p>
+<p>1    单用户模式，root用户（windows 安全模式）</p>
+<p>2    多用户，没有NFS（Network File System ）</p>
+<p>3    完全的多用户模式（正常系统开机模式），控制台界面</p>
+<p>4    没有用到，保留位</p>
+<p>5    Xserver，GUI图形化界面（我目前看到的所有都是这个级别。。）</p>
+<p>6    重启</p>
+</blockquote>
+<p><u>3、配置网络地址IP</u></p>
+<p>配置网卡网络地址：<code>ip addr add  IP地址/子网掩码 dev 网卡名</code></p>
+<p>删除网卡上的网络地址配置：<code>ip addr del IP地址/子网掩码 dev 网卡名</code></p>
+<p><u>4、配置网关/路由</u></p>
+<p>配置网卡的网关/默认路由：<code>ip route add default via 192.168.2.254  dev eth0</code></p>
+<p>查看网卡的路由状态：<code>ip route</code></p>
+<blockquote>
+<p>在学习数通安全时，我们把路由器和计算机看做相同ISO层的设备，就是因为他们拥有相同的能力。因此计算机也可以看作路由器，具有路由功能，所以也可以配置路由，相当于电脑的网关。</p>
+</blockquote>
+<p><u>5、DNS服务器配置文件</u>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;etc&#x2F;resolv.conf在其中配置一条 nameserver 202.106.0.20（北京的DNS服务器）</span><br></pre></td></tr></table></figure>
+
+<p><u>6、开启网卡：</u><code>ip link set eth0 up</code>/<code>ifdown 网卡</code>/<code>ifup 网卡</code></p>
+<h3 id="二、Linux网络配置（配置文件方式永久）"><a href="#二、Linux网络配置（配置文件方式永久）" class="headerlink" title="二、Linux网络配置（配置文件方式永久）"></a>二、Linux网络配置（配置文件方式永久）</h3><p>配置文件：/etc/sysconfig/network-scripts/ifcfg-ethX</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">DEVICE&#x3D;eth0            #网卡名</span><br><span class="line">TYPE&#x3D;Ethernet        #网络类型，以太网</span><br><span class="line">ONBOOT&#x3D;yes            #是否由network服务管理此配置文件</span><br><span class="line">BOOTPROTO&#x3D;static    #静态获取&#x2F;dhcp</span><br><span class="line">IPADDR&#x3D;192.168.2.183    #IP地址</span><br><span class="line">NETMASK&#x3D;255.255.255.0    #子网掩码</span><br><span class="line">#NM_CONTROLLED&#x3D;yes    #是否由NetworkManager服务管理此配置文件</span><br><span class="line">#HWADDR&#x3D;XXXXXXXXX    #MAC地址</span><br><span class="line">GATEWAY&#x3D;192.168.2.254    #网关地址</span><br><span class="line">DNS1&#x3D;114.114.114.114    #配置DNS地址</span><br><span class="line">DNS2&#x3D;XXX                #备用DNS地址</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、实验：使用Centos作为路由器连通两个网段的主机"><a href="#三、实验：使用Centos作为路由器连通两个网段的主机" class="headerlink" title="三、实验：使用Centos作为路由器连通两个网段的主机"></a>三、实验：使用Centos作为路由器连通两个网段的主机</h3><blockquote>
+<p>1、Win7主机网络internet-01，IP：192.168.1.1， 网关:192.168.1.254</p>
+<p>​    Centos作为路由器eth0位于internet-01，IP：192.168.1.254，eth1位于internet-02，IP：100.1.1.1</p>
+<p>Windows2003作为服务器位于internet-02，IP：100.1.1.2，网关：100.1.1.1</p>
+<p><strong>开启数据包转发功能：/etc/sysctl.conf    net.ipv4.ip_forwarding=1</strong></p>
+<p>关闭防火墙，SElinux。</p>
+</blockquote>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/20/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/5%E3%80%81%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%90%AD%E5%BB%BA/" rel="next" title="5、日志服务器的搭建">
+    上一篇：5、日志服务器的搭建
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/07/19/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/3%E3%80%81Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E4%B8%8E%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/" rel="next" title="3、Linux用户管理与权限相关">
+    下一篇：3、Linux用户管理与权限相关
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

@@ -7,7 +7,7 @@
 
     
 
-    <title>代码审计安全 | 2h0nG&#39;s Hacker Blog</title>
+    <title>1、部署实验WAMP环境——PHPStudy | 2h0nG&#39;s Hacker Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="1、部署实验WAMP环境——PHPStudy"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -225,30 +225,113 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/代码审计安全/">代码审计安全</a>
+
 
         
-            <a class="breadcrumb" href="/tags/代码审计安全/">代码审计安全</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>1、部署实验WAMP环境——PHPStudy</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2020-07-27T01:25:03.000Z"><a href="/2020/07/27/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/">2020-07-27</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2020/07/27/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/" class="collection-item grey-text text-darken-1">
-                <time datetime="2020-07-27T01:25:03.000Z">2020-07-27</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                1、部署实验WAMP环境——PHPStudy
-            </a>
+            <a href="/tags/代码审计安全/" class="chip pink lighten-1">代码审计安全</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy"><span class="section table-of-contents-text">部署实验WAMP环境——PHPStudy</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81Windows2008%E9%83%A8%E7%BD%B2%E7%BB%8F%E5%85%B8Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E6%9E%84WAMP"><span class="section table-of-contents-text">一、Windows2008部署经典Web服务器架构WAMP</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81Apache%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%AE%E5%BD%95%E5%88%86%E6%9E%90"><span class="section table-of-contents-text">二、Apache服务器目录分析</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81Web%E6%A0%B9%E7%9B%AE%E5%BD%95%E5%88%86%E6%9E%90"><span class="section table-of-contents-text">1、Web根目录分析</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81Apache%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90"><span class="section table-of-contents-text">2、Apache配置文件分析</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3%E3%80%81Apache%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6"><span class="section table-of-contents-text">3、Apache日志文件</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81Mysql%E6%9C%8D%E5%8A%A1%E7%9B%AE%E5%BD%95%E5%88%86%E6%9E%90"><span class="section table-of-contents-text">三、Mysql服务目录分析</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81Mysql%E5%90%AF%E5%8A%A8%E5%91%BD%E4%BB%A4"><span class="section table-of-contents-text">1、Mysql启动命令</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81Mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="section table-of-contents-text">2、Mysql配置文件</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81PHP%E7%9B%AE%E5%BD%95%E5%88%86%E6%9E%90"><span class="section table-of-contents-text">四、PHP目录分析</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81PHP%E6%8E%A2%E9%92%88%EF%BC%9Aphpinfo"><span class="section table-of-contents-text">1、PHP探针：phpinfo()</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81PHP%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="section table-of-contents-text">2、PHP配置文件</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3%E3%80%81PHP%E5%90%AF%E5%8A%A8%E8%B7%AF%E5%BE%84"><span class="section table-of-contents-text">3、PHP启动路径</span></a></li></ol></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="部署实验WAMP环境——PHPStudy"><a href="#部署实验WAMP环境——PHPStudy" class="headerlink" title="部署实验WAMP环境——PHPStudy"></a>部署实验WAMP环境——PHPStudy</h2><h3 id="一、Windows2008部署经典Web服务器架构WAMP"><a href="#一、Windows2008部署经典Web服务器架构WAMP" class="headerlink" title="一、Windows2008部署经典Web服务器架构WAMP"></a>一、Windows2008部署经典Web服务器架构WAMP</h3><blockquote>
+<p>使用环境部署框架软件：<strong>PHPStudy</strong>2016版本 （集成环境</p>
+</blockquote>
+<p>1、安装PhpStudy，安装后发现Apache服务无法开启，原因是缺少VC9运行库，安装X86的VC9运行库后成功开启Apache、PHP服务。访问<code>127.0.0.1</code>本地web服务，发现PHPStudy探针，说明环境搭建完成。</p>
+<p>2、使用PHPStudy探针网页下方自带的mysql客户端尝试连接本地Mysql服务，用户名密码都是root。</p>
+<h3 id="二、Apache服务器目录分析"><a href="#二、Apache服务器目录分析" class="headerlink" title="二、Apache服务器目录分析"></a>二、Apache服务器目录分析</h3><h4 id="1、Web根目录分析"><a href="#1、Web根目录分析" class="headerlink" title="1、Web根目录分析"></a>1、Web根目录分析</h4><blockquote>
+<p>phpStudy\WWW</p>
+</blockquote>
+<p>1）探针网页：l.php</p>
+<p>2）PHPinfo页面：phpinfo.php</p>
+<p>3）phpmyadmin页面：基于php的MysqlWeb客户端</p>
+<h4 id="2、Apache配置文件分析"><a href="#2、Apache配置文件分析" class="headerlink" title="2、Apache配置文件分析"></a>2、Apache配置文件分析</h4><blockquote>
+<p>phpStudy/Apache/httpd.conf</p>
+</blockquote>
+<p>分析Apache配置文件httpd.conf，<code>Document root</code>是网站主页的文件夹路径</p>
+<h3 id="3、Apache日志文件"><a href="#3、Apache日志文件" class="headerlink" title="3、Apache日志文件"></a>3、Apache日志文件</h3><blockquote>
+<p>phpStudy/Apache/logs/</p>
+</blockquote>
+<h3 id="三、Mysql服务目录分析"><a href="#三、Mysql服务目录分析" class="headerlink" title="三、Mysql服务目录分析"></a>三、Mysql服务目录分析</h3><h4 id="1、Mysql启动命令"><a href="#1、Mysql启动命令" class="headerlink" title="1、Mysql启动命令"></a>1、Mysql启动命令</h4><blockquote>
+<p>phpStudy/MySQL/bin #将此目录加入环境变量，方便命令行控制</p>
+</blockquote>
+<h4 id="2、Mysql配置文件"><a href="#2、Mysql配置文件" class="headerlink" title="2、Mysql配置文件"></a>2、Mysql配置文件</h4><blockquote>
+<p>phpStudy/MySQL/my.ini</p>
+</blockquote>
+<h3 id="四、PHP目录分析"><a href="#四、PHP目录分析" class="headerlink" title="四、PHP目录分析"></a>四、PHP目录分析</h3><h4 id="1、PHP探针：phpinfo"><a href="#1、PHP探针：phpinfo" class="headerlink" title="1、PHP探针：phpinfo()"></a>1、PHP探针：<code>phpinfo()</code></h4><h4 id="2、PHP配置文件"><a href="#2、PHP配置文件" class="headerlink" title="2、PHP配置文件"></a>2、PHP配置文件</h4><blockquote>
+<p>phpStudy/php/php你的版本/php.ini</p>
+</blockquote>
+<p>分析PHP文件夹，需要注意PHPStudy软件上提示的PHP版本，去对应版本的PHP问价夹中的php.ini配置文件进行配置</p>
+<h4 id="3、PHP启动路径"><a href="#3、PHP启动路径" class="headerlink" title="3、PHP启动路径"></a>3、PHP启动路径</h4><blockquote>
+<p>phpStudy/php/php你的版本    #将此目录加入环境变量，方便命令行控制</p>
+</blockquote>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/31/Leetcode%E9%A2%98%E8%A7%A3/61%E3%80%81%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/" rel="next" title="61-旋转链表">
+    上一篇：61-旋转链表
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/07/26/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/12%E3%80%81Shell%E8%84%9A%E6%9C%AC/" rel="next" title="12、Shell脚本">
+    下一篇：12、Shell脚本
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

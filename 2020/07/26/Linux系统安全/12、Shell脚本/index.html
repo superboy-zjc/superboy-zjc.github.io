@@ -7,7 +7,7 @@
 
     
 
-    <title>分类目录 | 2h0nG&#39;s Hacker Blog</title>
+    <title>12、Shell脚本 | 2h0nG&#39;s Hacker Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="分类目录"/>
+    <meta property="og:title" content="12、Shell脚本"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -230,6 +230,10 @@
         <span class="breadcrumb">当前位置（分类目录）</span>
         
             
+    
+    
+    <a class="breadcrumb" href="/categories/Linux系统安全/">Linux系统安全</a>
+
 
         
 
@@ -245,12 +249,12 @@
             <div class="article-title">
                 
     
-        <h1>分类目录</h1>
+        <h1>12、Shell脚本</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2020-07-31T10:30:40.119Z"><a href="/tags/index.html">2020-07-31</a></time>
+            <time class="pink-link-context" datetime="2020-07-26T08:27:06.000Z"><a href="/2020/07/26/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/12%E3%80%81Shell%E8%84%9A%E6%9C%AC/">2020-07-26</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -258,16 +262,112 @@
 </span>
 
             
+    <div class="tags-row">
+        
+            <a href="/tags/Linux系统安全/" class="chip pink lighten-1">Linux系统安全</a>
+        
+    </div>
+
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Shell%E8%84%9A%E6%9C%AC"><span class="section table-of-contents-text">Shell脚本</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E8%84%9A%E6%9C%AC%EF%BC%9F"><span class="section table-of-contents-text">一、什么是脚本？</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81shell%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E6%A0%BC%E5%BC%8F"><span class="section table-of-contents-text">二、shell脚本编写格式</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81shell%E7%9A%84%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC"><span class="section table-of-contents-text">三、shell的变量赋值</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81shell%E7%9A%84if%E5%88%A4%E6%96%AD%E8%AF%AD%E5%8F%A5"><span class="section table-of-contents-text">四、shell的if判断语句</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%94%E3%80%81shell%E7%9A%84for%E5%BE%AA%E7%8E%AF"><span class="section table-of-contents-text">五、shell的for循环</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AD%E3%80%81shell%E7%9A%84while%E5%BE%AA%E7%8E%AF"><span class="section table-of-contents-text">六、shell的while循环</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%83%E3%80%81shell%E7%9A%84case%E8%AF%AD%E5%8F%A5"><span class="section table-of-contents-text">七、shell的case语句</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AB%E3%80%81shell%E5%87%BD%E6%95%B0"><span class="section table-of-contents-text">八、shell函数</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B9%9D%E3%80%81%E5%AE%9E%E9%AA%8C%EF%BC%9A%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAnginx%E6%9C%8D%E5%8A%A1%E8%84%9A%E6%9C%AC%EF%BC%8C%E5%B9%B6%E4%BA%A4%E7%94%B1chkconfig%E7%AE%A1%E7%90%86%E4%B8%94%E5%AE%9E%E7%8E%B0%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF%E5%8A%A8"><span class="section table-of-contents-text">九、实验：编写一个nginx服务脚本，并交由chkconfig管理且实现开机自启动</span></a></li></ol></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                
-                
+                <h2 id="Shell脚本"><a href="#Shell脚本" class="headerlink" title="Shell脚本"></a>Shell脚本</h2><h3 id="一、什么是脚本？"><a href="#一、什么是脚本？" class="headerlink" title="一、什么是脚本？"></a>一、什么是脚本？</h3><p>与.bat批处理文件是一种类型的文件。脚本编程语言一般是一种解释性的语言。脚本语言主要用于简化计算机相关人员对于一些反复性操作的重复执行，将这些反复性操作的代码写到一个文件中，每次只需要运行这个文件就可以减少很多的工作量。</p>
+<h3 id="二、shell脚本编写格式"><a href="#二、shell脚本编写格式" class="headerlink" title="二、shell脚本编写格式"></a>二、shell脚本编写格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1：#!&#x2F;bin&#x2F;bash    #声明该脚本使用的命令解释器</span><br><span class="line">2：#filename:文件名    </span><br><span class="line">3：#脚本注释</span><br><span class="line">4：by athors ...</span><br></pre></td></tr></table></figure>
 
+<h3 id="三、shell的变量赋值"><a href="#三、shell的变量赋值" class="headerlink" title="三、shell的变量赋值"></a>三、shell的变量赋值</h3><p>从标准输入接受变量复制：<code>read -p &quot;提示语句&quot; 变量名</code></p>
+<h3 id="四、shell的if判断语句"><a href="#四、shell的if判断语句" class="headerlink" title="四、shell的if判断语句"></a>四、shell的if判断语句</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if condition1        #&#96;表达式&#96;可做condition，shell中0为真，非0为假</span><br><span class="line">then</span><br><span class="line">    command1</span><br><span class="line">elif condition2 </span><br><span class="line">then </span><br><span class="line">    command2</span><br><span class="line">else</span><br><span class="line">    commandN</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>大于：<code>-gt</code>、小于：<code>-lt</code>、等于：<code>-eq</code></p>
+<h3 id="五、shell的for循环"><a href="#五、shell的for循环" class="headerlink" title="五、shell的for循环"></a>五、shell的for循环</h3><p>for循环根据<u>取值列表</u>循环。</p>
+<p>生成取值列表：<code>&#123;1..100&#125;</code>    #生成1-100的取值列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for var in item1 item2 ... itemN(取值列表)</span><br><span class="line">do</span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line">    ...</span><br><span class="line">    commandN</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="六、shell的while循环"><a href="#六、shell的while循环" class="headerlink" title="六、shell的while循环"></a>六、shell的while循环</h3><p>while循环根据条件进行循环</p>
+<p>echo字体颜色设置：<code>echo -e &quot;\e[1;33;41m 字符串 \e[0m&quot;</code></p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. \e 转义起始符，定义一个转义序列， 可以使用 \033代替</span><br><span class="line">2. [ 表示开始定义颜色</span><br><span class="line">3. 1表示高亮，33表示字体颜色为黄色，45表示背景色为红色</span><br><span class="line">4. “test content” 属于文字内容</span><br><span class="line">5. m 转义终止符，表示颜色定义完毕</span><br><span class="line">6. 再次使用 \e[ ，表示再次开启颜色定义，0表示使用默认的颜色，m表示颜色定义结束，所以 \e[0m 的作用是恢复之前的配色方案</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字体颜色：30——37</span><br><span class="line"></span><br><span class="line">默认&#x3D;0，黑色&#x3D;30，红色&#x3D;31，绿色&#x3D;32，黄色&#x3D;33，蓝色&#x3D;34，紫色&#x3D;35，天蓝色&#x3D;36，白色&#x3D;3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">字背景颜色：40——47</span><br><span class="line"></span><br><span class="line">默认&#x3D;0，黑色&#x3D;40，红色&#x3D;41，绿色&#x3D;42，黄色&#x3D;43，蓝色&#x3D;44，紫色&#x3D;45，天蓝色&#x3D;46，白色&#x3D;47</span><br></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while condition</span><br><span class="line">do</span><br><span class="line">    command</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="七、shell的case语句"><a href="#七、shell的case语句" class="headerlink" title="七、shell的case语句"></a>七、shell的case语句</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">case 值 in</span><br><span class="line">模式1)</span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line">    command3</span><br><span class="line">    ;;</span><br><span class="line">模式2）</span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line">    command3</span><br><span class="line">    ;;</span><br><span class="line">*)</span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line">    command3</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<h3 id="八、shell函数"><a href="#八、shell函数" class="headerlink" title="八、shell函数"></a>八、shell函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[ function ] funname [()]</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    action;</span><br><span class="line"></span><br><span class="line">    [return int;]</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>1、可以带function fun() 定义，也可以直接fun() 定义,不带任何参数。</li>
+<li>2、参数返回，可以显示加：return 返回，如果不加，将以最后一条命令运行结果，作为返回值。 return后跟数值n(0-255）</li>
+<li>3、函数返回值在调用该函数后通过 $? 来获得。</li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">参数处理</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$#</td>
+<td align="left">传递到脚本或函数的参数个数</td>
+</tr>
+<tr>
+<td align="left">$*</td>
+<td align="left">以一个单字符串显示所有向脚本传递的参数</td>
+</tr>
+<tr>
+<td align="left">$$</td>
+<td align="left">脚本运行的当前进程ID号</td>
+</tr>
+<tr>
+<td align="left">$!</td>
+<td align="left">后台运行的最后一个进程的ID号</td>
+</tr>
+<tr>
+<td align="left">$@</td>
+<td align="left">与$*相同，但是使用时加引号，并在引号中返回每个参数。</td>
+</tr>
+<tr>
+<td align="left">$-</td>
+<td align="left">显示Shell使用的当前选项，与set命令功能相同。</td>
+</tr>
+<tr>
+<td align="left">$?</td>
+<td align="left">显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注意，$10 不能获取第十个参数，获取第十个参数需要${10}。当n&gt;=10时，需要使用${n}来获取参数。 </p>
+</blockquote>
+<h3 id="九、实验：编写一个nginx服务脚本，并交由chkconfig管理且实现开机自启动"><a href="#九、实验：编写一个nginx服务脚本，并交由chkconfig管理且实现开机自启动" class="headerlink" title="九、实验：编写一个nginx服务脚本，并交由chkconfig管理且实现开机自启动"></a>九、实验：编写一个nginx服务脚本，并交由chkconfig管理且实现开机自启动</h3><p>1、在/etc/rc.d/init.d下编写一个nginxd服务脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#filename: nginxd</span></span><br><span class="line"><span class="comment">#pwd: /etc/rc.d/init.d</span></span><br><span class="line"><span class="comment">#chkconfig: - 66 66        如果需要被chkconfig管理，必须加此注释</span></span><br><span class="line">nginx=/usr/<span class="built_in">local</span>/nginx/sbin/nginx</span><br><span class="line"><span class="function"><span class="title">start</span></span>() &#123;</span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;nginx starting... [ \e[32mOK\e[0m ]&quot;</span></span><br><span class="line">    <span class="variable">$nginx</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">stop</span></span>() &#123;</span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;ngnix stoping... [ \e[32mOK\e[0m ]&quot;</span></span><br><span class="line">    <span class="variable">$nginx</span> -s stop</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">reload</span></span>() &#123;</span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;ngnix stoping... [ \e[32mOK\e[0m ]&quot;</span></span><br><span class="line">    <span class="variable">$nginx</span> -s reload</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">status</span></span>() &#123;</span><br><span class="line">    <span class="keyword">if</span> `ss -ntpl | grep nginx &amp;&gt; /dev/null`</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> -e <span class="string">&quot;ngnix starting... [ \e[32mstarting\e[0m ]&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> -e <span class="string">&quot;ngnix is stoped... [ \e[31mstoped\e[0m ]&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">start)</span><br><span class="line">    start</span><br><span class="line">    ;;</span><br><span class="line">stop)</span><br><span class="line">    stop</span><br><span class="line">    ;;</span><br><span class="line">status)</span><br><span class="line">    status</span><br><span class="line">    ;;</span><br><span class="line">reload)</span><br><span class="line">    reload</span><br><span class="line">    ;;</span><br><span class="line">*)</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;Usage <span class="variable">$0</span> &#123;start|stop|reload|status&#125;&quot;</span></span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+
+<p>2、测试chkconfig是否可以管理此脚本：<code>chkconfig --list nginxd</code></p>
+<p>3、将该脚本加入到chkconfig管理列表：<code>chkconfig --add nginxd</code></p>
+<p>4、设置该脚本在level5级，也就是系统以图形化界面运行启动时，开启此脚本：<code>chkconfig --level 5 nginxd on</code></p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/27/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/" rel="next" title="1、部署实验WAMP环境——PHPStudy">
+    上一篇：1、部署实验WAMP环境——PHPStudy
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/07/26/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/11%E3%80%81iptables%E2%80%94%E2%80%94NAT%E8%A1%A8/" rel="next" title="11、iptables——NAT表">
+    下一篇：11、iptables——NAT表
+  </a>
+</p>
 
 
             </div>

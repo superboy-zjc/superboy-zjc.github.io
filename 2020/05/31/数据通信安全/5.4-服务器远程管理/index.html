@@ -7,7 +7,7 @@
 
     
 
-    <title>代码审计安全 | 2h0nG&#39;s Hacker Blog</title>
+    <title>1、Windows远程管理 | 2h0nG&#39;s Hacker Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="1、Windows远程管理"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -225,30 +225,89 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/数据通信安全/">数据通信安全</a>
+
 
         
-            <a class="breadcrumb" href="/tags/代码审计安全/">代码审计安全</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>1、Windows远程管理</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2020-05-31T08:48:15.000Z"><a href="/2020/05/31/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/5.4-%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/">2020-05-31</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2020/07/27/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/" class="collection-item grey-text text-darken-1">
-                <time datetime="2020-07-27T01:25:03.000Z">2020-07-27</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                1、部署实验WAMP环境——PHPStudy
-            </a>
+            <a href="/tags/数据通信安全/" class="chip pink lighten-1">数据通信安全</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Windows%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="section table-of-contents-text">Windows远程管理</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86%E7%B1%BB%E5%9E%8B"><span class="section table-of-contents-text">一、远程管理类型</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%9AXp%E6%8E%A7%E5%88%B6win2003"><span class="section table-of-contents-text">实验：Xp控制win2003</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h1 id="Windows远程管理"><a href="#Windows远程管理" class="headerlink" title="Windows远程管理"></a>Windows远程管理</h1><h2 id="一、远程管理类型"><a href="#一、远程管理类型" class="headerlink" title="一、远程管理类型"></a>一、远程管理类型</h2><p>Windows远程管理类型有两种：</p>
+<p>1、图形化界面方式(远程桌面 RDP:remote desktop protocol)：mstsc</p>
+<p>2、命令行方式：telnet</p>
+<p>远程桌面端口3389 (RDP, remote desktop protocol)</p>
+<p>telnet端口23 (telnet)</p>
+<h2 id="实验：Xp控制win2003"><a href="#实验：Xp控制win2003" class="headerlink" title="实验：Xp控制win2003"></a>实验：Xp控制win2003</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">一、mstc</span><br><span class="line"></span><br><span class="line">在开始前需要在我的电脑-》属性-》远程中开启允许远程控制。</span><br><span class="line">服务器受控制不影响本机器的使用；个人系统受控制会强制登出（个人系统只允许一个人访问）</span><br><span class="line"></span><br><span class="line">二、telnet</span><br><span class="line"></span><br><span class="line">首先在计算机管理-》服务-》开启Telnet服务。（运行 services.msc）启动类型**自动**意味着每次开机自动开启此服务。</span><br><span class="line">其他各种服务：workstation上网服务、installer安装软件服务、firewall防火墙、time自动更新互联网时间......</span><br></pre></td></tr></table></figure>
+
+
+                
+<p class="pink-link-context">
+    <a href="/2020/05/31/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/6NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="next" title="3、NTFS磁盘权限">
+    上一篇：3、NTFS磁盘权限
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/05/30/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/5.123-IP%E5%9C%B0%E5%9D%80%E7%9B%B8%E5%85%B3%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E6%A6%82%E5%BF%B5%E8%AF%A6%E8%A7%A3/" rel="next" title="2、IP地址及相关网络地址概念详解">
+    下一篇：2、IP地址及相关网络地址概念详解
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

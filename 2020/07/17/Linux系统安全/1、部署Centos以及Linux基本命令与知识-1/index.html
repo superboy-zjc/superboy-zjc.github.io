@@ -7,7 +7,7 @@
 
     
 
-    <title>代码审计安全 | 2h0nG&#39;s Hacker Blog</title>
+    <title>1、部署Centos以及Linux基本命令与知识 | 2h0nG&#39;s Hacker Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="1、部署Centos以及Linux基本命令与知识"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -225,30 +225,149 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Linux系统安全/">Linux系统安全</a>
+
 
         
-            <a class="breadcrumb" href="/tags/代码审计安全/">代码审计安全</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>1、部署Centos以及Linux基本命令与知识</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2020-07-17T02:00:25.000Z"><a href="/2020/07/17/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2Centos%E4%BB%A5%E5%8F%8ALinux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%9F%A5%E8%AF%86-1/">2020-07-17</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2020/07/27/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/" class="collection-item grey-text text-darken-1">
-                <time datetime="2020-07-27T01:25:03.000Z">2020-07-27</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                1、部署实验WAMP环境——PHPStudy
-            </a>
+            <a href="/tags/Linux系统安全/" class="chip pink lighten-1">Linux系统安全</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E9%83%A8%E7%BD%B2Centos"><span class="section table-of-contents-text">部署Centos</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E9%83%A8%E7%BD%B2Centos6-9%E7%B3%BB%E7%BB%9F"><span class="section table-of-contents-text">一、部署Centos6.9系统</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81%E7%B3%BB%E7%BB%9F%E5%88%9D%E5%A7%8B%E6%93%8D%E4%BD%9C"><span class="section table-of-contents-text">二、系统初始操作</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E7%8A%B6%E6%80%81"><span class="section table-of-contents-text">三、查看系统基本状态</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81Linux%E6%A0%B9%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="section table-of-contents-text">四、Linux根目录结构</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%94%E3%80%81%E5%9F%BA%E6%9C%AC%E7%9A%84Linux%E5%91%BD%E4%BB%A4%E4%B8%8E%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="section table-of-contents-text">五、基本的Linux命令与快捷键</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AD%E3%80%81Linux%E6%96%87%E4%BB%B6%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="section table-of-contents-text">六、Linux文件的类型</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%83%E3%80%81Vim%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4"><span class="section table-of-contents-text">七、Vim快捷命令</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="部署Centos"><a href="#部署Centos" class="headerlink" title="部署Centos"></a>部署Centos</h2><h3 id="一、部署Centos6-9系统"><a href="#一、部署Centos6-9系统" class="headerlink" title="一、部署Centos6.9系统"></a>一、部署Centos6.9系统</h3><blockquote>
+<p>部署Centos6.9系统</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1、安装且升级一个已存在的操作系统</span><br><span class="line"></span><br><span class="line">2、用基本图形驱动安装系统</span><br><span class="line"></span><br><span class="line">3、安装救援系统</span><br><span class="line"></span><br><span class="line">4、从本地驱动启动</span><br><span class="line"></span><br><span class="line">5、内存检测</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">跳过光盘检查</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">取消UTC时间</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">选择适用所有空件，并选中查看并修改系统分区</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">选择现在自定义，自定义安装系统服务软件</span><br><span class="line">桌面 -&gt; 除了kde桌面其余全部打钩，并且将开发里面的所有选项打钩</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kdump用不用都可</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="二、系统初始操作"><a href="#二、系统初始操作" class="headerlink" title="二、系统初始操作"></a>二、系统初始操作</h3><p>1、关闭防火墙：<code>setup</code>图形化操作界面。查看防火墙的规则状态：<code>iptables -nL</code></p>
+<p>2、关闭SElinux：/etc/selinux/config 配置文件中的SELINUX=disabled</p>
+<h3 id="三、查看系统基本状态"><a href="#三、查看系统基本状态" class="headerlink" title="三、查看系统基本状态"></a>三、查看系统基本状态</h3><p><strong>查看硬盘大小</strong>：<code>fdisk -l</code></p>
+<p><strong>硬盘相关知识：</strong>Linux中挂载的SATA硬盘是SD开头，/dev/sda表示第一块硬盘、/dev/sdb表示第二块以此类推(Linux2.X以后所有硬盘都是sd开头了（以前还有HDA IDE接口的第一块硬盘）?) /dev/sda1就表示第一块硬盘的第一个分区，以此类推。</p>
+<p><strong>查看内存信息</strong>：<code>cat /proc/meminfo</code></p>
+<p><strong>查看cpu信息</strong> :<code>cat /proc/cpuinfo</code></p>
+<h3 id="四、Linux根目录结构"><a href="#四、Linux根目录结构" class="headerlink" title="四、Linux根目录结构"></a>四、Linux根目录结构</h3><p>Linux系统文件组织形式采用FHS文件系统层次化标准</p>
+<blockquote>
+<p>鸟哥的Linux私房菜(顶顶的)：<a target="_blank" rel="noopener" href="http://linux.vbird.org/linux_basic/0210filepermission.php#dir">http://linux.vbird.org/linux_basic/0210filepermission.php#dir</a></p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UsUbZV"><img src="https://s1.ax1x.com/2020/07/17/UsUbZV.png" alt="UsUbZV.png"></a></p>
+<p>除FHS标准以外，Linux增设的目录。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UsN9p9"><img src="https://s1.ax1x.com/2020/07/17/UsN9p9.png" alt="UsN9p9.png"></a></p>
+<p>重点在于：/proc 和 /sys 其实是虚拟文件系统，不占用硬盘空间，只占用内存空间。另外/usr不是”user”而是unix software resource。</p>
+<h3 id="五、基本的Linux命令与快捷键"><a href="#五、基本的Linux命令与快捷键" class="headerlink" title="五、基本的Linux命令与快捷键"></a>五、基本的Linux命令与快捷键</h3><p><code>ls -a</code> List files显示所有文件（包括隐藏文件）</p>
+<p><code>Ctrl+l</code>清屏、<code>Ctrl+c</code>打断目前命令</p>
+<p><code>help</code>，除man手册以外Linux自带的帮助命令。</p>
+<p><code>du</code>查看文件所占磁盘大小，以块大小为单位！默认1个块block是4KB，也就是4096字节。</p>
+<p><strong>复制与转换一个文件</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if&#x3D;输入文件 of&#x3D;输出文件 bs&#x3D;单位 count&#x3D;多少个单位</span><br></pre></td></tr></table></figure>
+
+<p><strong>压缩文件</strong>：<code>gzip 文件名， bzip2 文件名</code>（不保留源文件），<code>gzip/bzip -c 文件名 &gt; *.gz/bz2</code>，（保留原文件，-c是将压缩结果输出）</p>
+<p><strong>解压文件</strong>：<code>gunzip 压缩包/gzip -d 压缩包；bunzip2 压缩包/bzip2 -d 压缩包</code> (不保留原文件)，``gzip/bzip -dc 压缩包 &gt; 新文件名`（保留原文件）</p>
+<p><strong>查看压缩文件</strong>：<code>zcat/bzcat *.gz/*.bz2</code></p>
+<p><strong>查看系统开启的端口状态：</strong><code>ss -an</code></p>
+<p><strong>查看系统进程占用的端口状态：</strong><code>netstat -t(TCP)nlp（进程号与程序名称）</code></p>
+<p><strong>tar工具对目录进行打包和压缩</strong>：</p>
+<blockquote>
+<p><strong>tar [主选项+辅选项] [文件1] [文件2] [目录1] [目录2] [……]</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">主选项：（每次只能使用一个）</span><br><span class="line">c 创建一个新归档文件（小c）</span><br><span class="line">x 从归档文件中提取文件出来 #主选项x会自动识别归档文件压缩的格式，并进行解压</span><br><span class="line">t 列出归档文件的内容</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">辅选项：（每次可以使用多个）</span><br><span class="line">z 通过gzip的支持进行压缩&#x2F;解压，一般格式为*.tar.gz</span><br><span class="line">j 通过bzip2的支持进行压缩&#x2F;解压，一般格式为*.tar.bz2</span><br><span class="line">v 归档或解包过程中显示被打包的文件</span><br><span class="line">C 只在解压时，若要在特定目录解压,使用它（大C）</span><br><span class="line">P 对绝对路径的文件或目录进行操作(默认tar用相对路径)</span><br><span class="line">f 输出结果到文件，必须选该项</span><br></pre></td></tr></table></figure>
+
+
+</blockquote>
+<h3 id="六、Linux文件的类型"><a href="#六、Linux文件的类型" class="headerlink" title="六、Linux文件的类型"></a>六、Linux文件的类型</h3><p>1、 <strong>-</strong> ：常规文件regular file， 纯文字文件，二进制文件，数据格式文件。</p>
+<p>2、<strong>d</strong>：目录directory。</p>
+<p>3、<strong>l</strong>：链接文件link。硬链接，inode相同，都指向硬盘里同一个存储数据。软连接，inode不同，指向的是另外一个inode。</p>
+<p>4、<strong>b</strong>:块设备文件block，这种设备可以随意在不同的区域读写，如硬盘、软盘等，如/dev/sda。</p>
+<p>5、<strong>c</strong>：字符设备文件character，字符设备文件必须一次性读取数据，如键盘、鼠标等。</p>
+<p>6、<strong>s</strong>：数据接口文件sockets，通常用于网络传输，例如/dev/tcp/XXXX</p>
+<p>7、<strong>p</strong>：管道文件FIFO。</p>
+<h3 id="七、Vim快捷命令"><a href="#七、Vim快捷命令" class="headerlink" title="七、Vim快捷命令"></a>七、Vim快捷命令</h3><p>删除行：<code>数字+dd</code>删除光标以及下面的n行，默认是1行</p>
+<p>复制当前行：<code>yy</code></p>
+<p>复制到光标上一行：<code>P</code></p>
+<p>移到文件首：<code>gg</code>，移到文件末：<code>G</code>，移动到第n行：<code>nG</code></p>
+<p>移动到行首：<code>数字0/Home键/^</code>，移动到行尾：<code>End/$</code></p>
+<p>匹配上一个匹配字：<code>N</code></p>
+<p>命令模式下<code>ZZ</code>相当于<code>wq</code>无需输入<code>:</code>即可保存退出</p>
+<p>替换字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#96;s&#x2F;被替代&#x2F;替代的字符串&#96; （只替换光标当前行的第一个匹配的字符串）</span><br><span class="line">&#96;s&#x2F;被替代&#x2F;替代的字符串&#x2F;g&#96; （只替换光标当前行所有匹配的字符串）</span><br><span class="line">&#96;n1,n2 s&#x2F;被替代&#x2F;替代的字符串&#x2F;g&#96; （替换n1到n2行所有匹配的字符串）</span><br><span class="line">&#96;% s&#x2F;被替代&#x2F;替代的字符串&#x2F;g&#96; （替换当前页所有匹配的字符串）</span><br></pre></td></tr></table></figure>
+
+<p>另存为当前文件（备份）:<code>w /路径/文件名（可绝对可相对）</code></p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/18/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/2%E3%80%81%E5%AE%89%E8%A3%85Apache%E6%BA%90%E7%A0%81%E5%8C%85%E3%80%81%E4%BB%8B%E7%BB%8DRPM%E5%8C%85%E3%80%81yum%E6%BA%90/" rel="next" title="2、安装Apache源码包与介绍RPM包">
+    上一篇：2、安装Apache源码包与介绍RPM包
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/05/31/%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/6NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="next" title="3、NTFS磁盘权限">
+    下一篇：3、NTFS磁盘权限
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

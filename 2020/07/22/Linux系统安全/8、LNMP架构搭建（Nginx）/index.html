@@ -7,7 +7,7 @@
 
     
 
-    <title>代码审计安全 | 2h0nG&#39;s Hacker Blog</title>
+    <title>8、LNMP架构搭建(Nginx) | 2h0nG&#39;s Hacker Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="8、LNMP架构搭建(Nginx)"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -225,30 +225,159 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Linux系统安全/">Linux系统安全</a>
+
 
         
-            <a class="breadcrumb" href="/tags/代码审计安全/">代码审计安全</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>8、LNMP架构搭建(Nginx)</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2020-07-22T06:13:27.000Z"><a href="/2020/07/22/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/8%E3%80%81LNMP%E6%9E%B6%E6%9E%84%E6%90%AD%E5%BB%BA%EF%BC%88Nginx%EF%BC%89/">2020-07-22</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2020/07/27/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/" class="collection-item grey-text text-darken-1">
-                <time datetime="2020-07-27T01:25:03.000Z">2020-07-27</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                1、部署实验WAMP环境——PHPStudy
-            </a>
+            <a href="/tags/Linux系统安全/" class="chip pink lighten-1">Linux系统安全</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#LNMP%E6%9E%B6%E6%9E%84%E6%90%AD%E5%BB%BA%EF%BC%88Nginx%EF%BC%89"><span class="section table-of-contents-text">LNMP架构搭建（Nginx）</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81Nginx%E7%9A%84%E4%BC%98%E7%82%B9"><span class="section table-of-contents-text">一、Nginx的优点</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81Nginx%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA"><span class="section table-of-contents-text">二、Nginx环境的搭建</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="section table-of-contents-text">三、Nginx服务器配置文件介绍</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81%E6%BA%90%E7%A0%81%E5%8C%85%E5%AE%89%E8%A3%85PHP%E5%B9%B6%E4%BD%BFNginx%E5%8F%AF%E4%BB%A5%E8%A7%A3%E6%9E%90PHP"><span class="section table-of-contents-text">四、源码包安装PHP并使Nginx可以解析PHP</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%94%E3%80%81LAMP%E7%9A%84PHP%E5%92%8CLNMP%E7%9A%84PHP%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="section table-of-contents-text">五、LAMP的PHP和LNMP的PHP有什么不同？</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AD%E3%80%81LNMP%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="section table-of-contents-text">六、LNMP的缺点</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="LNMP架构搭建（Nginx）"><a href="#LNMP架构搭建（Nginx）" class="headerlink" title="LNMP架构搭建（Nginx）"></a>LNMP架构搭建（Nginx）</h2><h3 id="一、Nginx的优点"><a href="#一、Nginx的优点" class="headerlink" title="一、Nginx的优点"></a>一、Nginx的优点</h3><p>1、处理高并发性更好</p>
+<p>2、系统资源利用率比较高，损耗率很低，稳定(C语言开发)</p>
+<p>3、Nginx是异步IO模型，一个进程对应多个连接；Apache是同步IO模型，一个进程对应一个连接。</p>
+<p>4、处理静态网页的能力更好</p>
+<h3 id="二、Nginx环境的搭建"><a href="#二、Nginx环境的搭建" class="headerlink" title="二、Nginx环境的搭建"></a>二、Nginx环境的搭建</h3><p><u>1、安装Nginx环境，首先需要安装Nginx的运行库/开发环境软件包。</u></p>
+<p><strong>开发环境软件包什么样：</strong>后缀带”-devel”的软件包。</p>
+<p><strong>安装Nginx的开发环境/运行库</strong>：<code>yum install pcre-devel</code>、<code>yum install zlib-devel</code>(在安装系统时选中了开发环境，因此该软件包已安装完毕)</p>
+<p><u>2、源码包的方式安装Nginx服务器</u>：</p>
+<p><strong>源码包老套路，检查编译环境并指定安装路径、程序用户和组，各子目录生成Makefile文件：</strong><code> ./configure --prefix=/usr/local/nginx --with-file-aio（） --with-http_gzip_static_module --with-http_flv_module --with-http_ssl_module --user=nginx --group=nginx --with-http_stub_status_module</code></p>
+<p><strong>编译和安装</strong>：<code>make</code>、<code>make install</code></p>
+<p><u>3、创建Nginx的进程/程序用户，使Nginx程序单独由该用户管理，以保证Nginx服务的安全性</u>：<code>useradd -M -s /sbin/nologin nginx</code>(不要家目录，不可登录)</p>
+<p>4、<u>nginx的prefix工作目录下开启nginx服务</u>：<code>./nginx</code></p>
+<blockquote>
+<p><code>./nginx -?</code>    #查看nginx帮助</p>
+<p><code>./nginx -s </code>    #给nginx进程发信号 stop 停止服务</p>
+</blockquote>
+<h3 id="三、Nginx服务器配置文件介绍"><a href="#三、Nginx服务器配置文件介绍" class="headerlink" title="三、Nginx服务器配置文件介绍"></a>三、Nginx服务器配置文件介绍</h3><blockquote>
+<p>Nginx主配置文件：PREFIX/conf/nginx.conf</p>
+<p>1-10行全局配置、11-14行I/O事件配置、17行以后全是http配置</p>
+</blockquote>
+<p>第3行左右： <code>worker_processes 1;</code>        #Nginx服务使用的CPU核心数</p>
+<p>第13行左右：<code>worker_connections 1024;</code>        #每个进程处理的最大连接数</p>
+<p>35行左右：<code>listen 80</code>        #监听端口<br>36行左右：<code>server_name localhost</code>        #服务IP地址</p>
+<p>43行左右：<code>location / &#123; root html; index index.html index.htm;&#125;</code>    #定义Nginx网页根目录和网页主页索引值</p>
+<h3 id="四、源码包安装PHP并使Nginx可以解析PHP"><a href="#四、源码包安装PHP并使Nginx可以解析PHP" class="headerlink" title="四、源码包安装PHP并使Nginx可以解析PHP"></a>四、源码包安装PHP并使Nginx可以解析PHP</h3><blockquote>
+<p><strong>Nginx默认不支持PHP解析</strong></p>
+</blockquote>
+<p><strong>1、</strong>PHP的依赖开发环境/运行库：<code>libxml2-devel</code>、<code>libjpeg-devel</code>、<code>libpng-devel</code></p>
+<p><strong>2、</strong>压缩源码包</p>
+<p><strong>3、</strong><code> ./configure --prefix=/usr/local/php5 --with-gd --with-zlib --with-config-file-path=/usr/local/php5 --enable-mbstring --enable-fpm --with-jpeg-dir=/usr/lib</code></p>
+<blockquote>
+<p>–with-gd：支持php处理图形的扩展库GD库</p>
+<p>–with-zlib：支持提供数据压缩用的函式库zlib库</p>
+<p>-with-config-file-path=/usr/local/php5：指定自己的php.ini路径</p>
+<p> –enable-mbstring ：mbstring扩展库用于处理多字节字符串（有点像unicode补丁）</p>
+<p>–enable-fpm：开启php-fpm（PHP FastCGI Process Manager）模块，PHP FastCGI 进程管理器，用于管理PHP 进程池的软件，用于接受web服务器的请求。</p>
+<p>–with-jpeg-dir=/usr/lib：设置libjpeg库的安装路径（支持jpeg图片格式）</p>
+</blockquote>
+<p><strong>4、</strong>编译安装：<code>make</code>、<code>make install</code></p>
+<p><strong>5、</strong>先修改php配置文件(PREFIX/etc/php-fpm.conf)的default后缀（默认有后缀）；并将源码路径中的php.ini-development主配置文件拷贝一份到PREFIX/etc/php.ini（默认没有这个主配置文件）</p>
+<p><strong>6、</strong>执行Prefix/sbin/php-fpm从而管理fastcgi（PHP）程序，开启后9000端口也随之开启。</p>
+<p><strong>7、</strong>配置nginx服务器，使其支持PHP脚本并且指定FastiCGI管理服务的IP和端口</p>
+<p>方法1、</p>
+<blockquote>
+<p><strong>PREFIX/conf/fastcgi_params</strong></p>
+<p>fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</p>
+<p>加此条配置目的是告诉php-fpm管理进程php脚本的名字。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>PREFIX/conf/nginx.conf</strong></p>
+<p>66         location ~ \.php$ {</p>
+<p>67             root           html;</p>
+<p>68             fastcgi_pass   127.0.0.1:9000;</p>
+<p>69             fastcgi_index  index.php;</p>
+<p>70             fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;</p>
+<p>71             include        fastcgi_params;</p>
+<p>72         }</p>
+</blockquote>
+<p>方法2、</p>
+<blockquote>
+<p><strong>PREFIX/conf/nginx.conf</strong></p>
+<p>66         location ~ \.php$ {<br>67             root           html;<br>68             fastcgi_pass   127.0.0.1:9000;<br>69             fastcgi_index  index.php;<br>70             include        fastcgi_conf;<br>71         }</p>
+<p>使用fastcgi_conf的话，配置文件里已经存在了<code>fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</code></p>
+</blockquote>
+<h3 id="五、LAMP的PHP和LNMP的PHP有什么不同？"><a href="#五、LAMP的PHP和LNMP的PHP有什么不同？" class="headerlink" title="五、LAMP的PHP和LNMP的PHP有什么不同？"></a>五、LAMP的PHP和LNMP的PHP有什么不同？</h3><p>LAMP中PHP是Apache的一个模块；而在LNMP中PHP独立存在，PHPCgi由PHP-FPM管理，PHP-FPM拥有自己的端口专门处理PHP解析。</p>
+<blockquote>
+<p>引自：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/donghui521/p/10334776.html">https://www.cnblogs.com/donghui521/p/10334776.html</a></p>
+<p>目前主流的nginx+php的运行原理如下：<br>1、nginx的worker进程直接管理每一个请求到nginx的网络请求。<br>2、对于php而言，由于在整个网络请求的过程中php是一个cgi程序的角色，所以采用名为php-fpm的进程管理程序来对这些被请求的php程序进行管理。php-fpm程序也如同nginx一样，需要监听端口，并且有master和worker进程。worker进程直接管理每一个php进程。<br>3、关于fastcgi：fastcgi是一种进程管理器，管理cgi进程。市面上有多种实现了fastcgi功能的进程管理器，php-fpm就是其中的一种。再提一点，php-fpm作为一种fast-cgi进程管理服务，会监听端口，一般默认监听9000端口，并且是监听本机，也就是只接收来自本机的端口请求，所以我们通常输入命令 netstat -nlpt|grep php-fpm 会得到：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcp    0   0 127.0.0.1:9000       0.0.0.0:*          LISTEN   1057&#x2F;php-fpm</span><br></pre></td></tr></table></figure>
+
+<p>这里的127.0.0.1:9000 就是监听本机9000端口的意思。<br>4、关于fastcgi的配置文件，目前fastcgi的配置文件一般放在nginx.conf同级目录下，配置文件形式，一般有两种：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fastcgi.conf  和 fastcgi_params。不同的nginx版本会有不同的配置文件，这两个配置文件有一个非常重要的区别：fastcgi_parames文件中缺少下列配置：</span><br><span class="line">fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以打开<code>fastcgi_params</code>文件加上上述行，也可以在要使用配置的地方动态添加。使得该配置生效。<br>5、当需要处理php请求时，nginx的worker进程会将请求移交给php-fpm的worker进程进行处理，也就是最开头所说的nginx调用了php，其实严格得讲是nginx间接调用php。 </p>
+</blockquote>
+<h3 id="六、LNMP的缺点"><a href="#六、LNMP的缺点" class="headerlink" title="六、LNMP的缺点"></a>六、LNMP的缺点</h3><p>PHP-FPM的负载能力有限，如果访问量特别大的话，PHP-FPM容易陷入僵死状态，浏览器显示：502 bad gateway错误。</p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/22/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/9%E3%80%81Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%8ENginx%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" rel="next" title="9、Tomcat服务器搭建与Nginx负载均衡">
+    上一篇：9、Tomcat服务器搭建与Nginx负载均衡
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/07/21/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/7%E3%80%81LAMP%E6%9E%B6%E6%9E%84%E6%90%AD%E5%BB%BA/" rel="next" title="7、LAMP架构搭建">
+    下一篇：7、LAMP架构搭建
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

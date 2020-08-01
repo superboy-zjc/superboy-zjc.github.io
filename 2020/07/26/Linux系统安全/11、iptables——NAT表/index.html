@@ -7,7 +7,7 @@
 
     
 
-    <title>代码审计安全 | 2h0nG&#39;s Hacker Blog</title>
+    <title>11、iptables——NAT表 | 2h0nG&#39;s Hacker Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="11、iptables——NAT表"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -225,30 +225,105 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Linux系统安全/">Linux系统安全</a>
+
 
         
-            <a class="breadcrumb" href="/tags/代码审计安全/">代码审计安全</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>11、iptables——NAT表</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2020-07-26T01:12:26.000Z"><a href="/2020/07/26/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/11%E3%80%81iptables%E2%80%94%E2%80%94NAT%E8%A1%A8/">2020-07-26</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2020/07/27/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/" class="collection-item grey-text text-darken-1">
-                <time datetime="2020-07-27T01:25:03.000Z">2020-07-27</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                1、部署实验WAMP环境——PHPStudy
-            </a>
+            <a href="/tags/Linux系统安全/" class="chip pink lighten-1">Linux系统安全</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#iptables%E2%80%94%E2%80%94NAT%E8%A1%A8"><span class="section table-of-contents-text">iptables——NAT表</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81NAT%E8%A1%A8"><span class="section table-of-contents-text">一、NAT表</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="section table-of-contents-text">二、实验环境</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81iptables%E2%80%94%E2%80%94NAT%E8%A1%A8%E7%9A%84%E8%A7%84%E5%88%99%E7%BC%96%E5%86%99"><span class="section table-of-contents-text">三、iptables——NAT表的规则编写</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81NAT%E8%A1%A8%E7%9A%84%E4%B8%89%E4%B8%AA%E9%93%BE"><span class="section table-of-contents-text">1、NAT表的三个链</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81SNAT%E6%BA%90%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E7%9A%84%E8%A7%84%E5%88%99%E7%BC%96%E5%86%99"><span class="section table-of-contents-text">2、SNAT源地址转换的规则编写</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3%E3%80%81DNAT%E7%9B%AE%E6%A0%87%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E7%9A%84%E8%A7%84%E5%88%99%E7%BC%96%E5%86%99"><span class="section table-of-contents-text">3、DNAT目标地址转换的规则编写</span></a></li></ol></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="iptables——NAT表"><a href="#iptables——NAT表" class="headerlink" title="iptables——NAT表"></a>iptables——NAT表</h2><h3 id="一、NAT表"><a href="#一、NAT表" class="headerlink" title="一、NAT表"></a>一、NAT表</h3><p>Network Address Translation：解决了Ipv4网络地址不够的问题，一个局域网或多个局域网公用一个公网地址的网络地址转换技术。</p>
+<h3 id="二、实验环境"><a href="#二、实验环境" class="headerlink" title="二、实验环境"></a>二、实验环境</h3><blockquote>
+<p>为了模拟互联网外网主机不写网关。</p>
+</blockquote>
+<p>SNAT环境：</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/apGXnK"><img src="https://s1.ax1x.com/2020/07/26/apGXnK.png" alt="apGXnK.png"></a></p>
+<p>DNAT环境：</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/apdzrR"><img src="https://s1.ax1x.com/2020/07/26/apdzrR.png" alt="apdzrR.png"></a></p>
+<h3 id="三、iptables——NAT表的规则编写"><a href="#三、iptables——NAT表的规则编写" class="headerlink" title="三、iptables——NAT表的规则编写"></a>三、iptables——NAT表的规则编写</h3><blockquote>
+<p>路由后源地址转换、路由前目标地址转换</p>
+</blockquote>
+<h4 id="1、NAT表的三个链"><a href="#1、NAT表的三个链" class="headerlink" title="1、NAT表的三个链"></a>1、NAT表的三个链</h4><p>1）PREROUTING链：路由前位置的规则</p>
+<p>2）POSTROUTING链：路由后位置的规则</p>
+<p>3）OUTPUT链：出站位置规则</p>
+<h4 id="2、SNAT源地址转换的规则编写"><a href="#2、SNAT源地址转换的规则编写" class="headerlink" title="2、SNAT源地址转换的规则编写"></a>2、SNAT源地址转换的规则编写</h4><p><u>1、POSTROUTING链配置SNAT：</u></p>
+<p>1）手动配置转换的外网地址： <code>iptables -t nat -I/A（原表空的so都行） POSTROUTING -p tcp -o eth1（外网端口） -s 192.168.1.0/24（Ip或者网段都行） -j SNAT(源地址转换) --to-source 外网地址(也可以是一个范围) </code></p>
+<p>2）动态获得转换的外网地址： <code>iptables -t nat -I/A（原表空的so都行） POSTROUTING -p tcp -o eth1（外网端口） -s 192.168.1.0/24（Ip或者网段都行） -j MASQUERADE （一律按照外网端口动态获得的IP地址转换）</code>    </p>
+<p><u>2、需要注意Filter表中的FORWARD规则是否允许数据转发：</u></p>
+<p>清除掉FORWARD的规则使其允许所有转发：<code>iptables -t filter -F FORWARD</code></p>
+<h4 id="3、DNAT目标地址转换的规则编写"><a href="#3、DNAT目标地址转换的规则编写" class="headerlink" title="3、DNAT目标地址转换的规则编写"></a>3、DNAT目标地址转换的规则编写</h4><p><u>1、PREROUTING链配置DNAT：</u></p>
+<p><code>iptables -t nat -A/-I PREROUTING -i ethX（外网端口）-d 外网映射地址 -p tcp（协议） --dport 外网映射端口 -j DNAT --to-destination 内网地址:端口</code></p>
+<p><u>2、需要注意Filter表中的FORWARD规则是否允许数据转发：</u>因为目标地址转换完毕后，源地址和目标地址都和路由的主机无关，所以要检查Filter的FORWARD规则了。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/aprstx"><img src="https://s1.ax1x.com/2020/07/26/aprstx.png" alt="aprstx.png"></a></p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/26/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/12%E3%80%81Shell%E8%84%9A%E6%9C%AC/" rel="next" title="12、Shell脚本">
+    上一篇：12、Shell脚本
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/07/23/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/10%E3%80%81iptables%E2%80%94%E2%80%94Filter%E8%A1%A8/" rel="next" title="10、iptables——Filter表">
+    下一篇：10、iptables——Filter表
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

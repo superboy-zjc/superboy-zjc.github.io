@@ -7,7 +7,7 @@
 
     
 
-    <title>代码审计安全 | 2h0nG&#39;s Hacker Blog</title>
+    <title>61-旋转链表 | 2h0nG&#39;s Hacker Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="61-旋转链表"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -225,30 +225,82 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Leetcode题解/">Leetcode题解</a>
+
 
         
-            <a class="breadcrumb" href="/tags/代码审计安全/">代码审计安全</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>61-旋转链表</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2020-07-31T13:04:00.000Z"><a href="/2020/07/31/Leetcode%E9%A2%98%E8%A7%A3/61%E3%80%81%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/">2020-07-31</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2020/07/27/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/" class="collection-item grey-text text-darken-1">
-                <time datetime="2020-07-27T01:25:03.000Z">2020-07-27</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                1、部署实验WAMP环境——PHPStudy
-            </a>
+            <a href="/tags/Leetcode题解/" class="chip pink lighten-1">Leetcode题解</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#61%E3%80%81%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8"><span class="section table-of-contents-text">61、旋转链表</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A"><span class="section table-of-contents-text">题目：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E9%A2%98%E8%A7%A3%EF%BC%9A"><span class="section table-of-contents-text">题解：</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="61、旋转链表"><a href="#61、旋转链表" class="headerlink" title="61、旋转链表"></a>61、旋转链表</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/a1V4KO"><img src="https://s1.ax1x.com/2020/07/31/a1V4KO.png" alt="a1V4KO.png"></a></p>
+<h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>此题比较简单，思路也比较明确。本来我的思路是直接遍历到 n - k%n -1 的位置将next复制一份后指向None，然后用复制的继续遍历到屁股指向head。</p>
+<p>但看了题解发现，先遍历一般把屁股指向头形成环形 并顺便把链表长度计算一下，然后再到 n - k%n -1 的位置把next当新的头并将next指向None，也可以。</p>
+<p>最终选择官方题解的方法，其实没什么区别，先连头后连头罢了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rotateRight</span>(<span class="params">self, head: ListNode, k: int</span>) -&gt; ListNode:</span></span><br><span class="line">        <span class="keyword">if</span> k == <span class="number">0</span> <span class="keyword">or</span> head == <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        n = <span class="number">1</span></span><br><span class="line">        old_tail = head</span><br><span class="line">        <span class="keyword">while</span> old_tail.next:</span><br><span class="line">            old_tail = old_tail.next</span><br><span class="line">            n += <span class="number">1</span></span><br><span class="line">        old_tail.next = head</span><br><span class="line">        new_tail = head</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n - k % n - <span class="number">1</span>):</span><br><span class="line">            new_tail = new_tail.next</span><br><span class="line">        new_head=new_tail.next</span><br><span class="line">        new_tail.next = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">return</span> new_head</span><br></pre></td></tr></table></figure>
+
+
+                
+
+
+<p class="pink-link-context">
+    <a href="/2020/07/27/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/" rel="next" title="1、部署实验WAMP环境——PHPStudy">
+    下一篇：1、部署实验WAMP环境——PHPStudy
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>

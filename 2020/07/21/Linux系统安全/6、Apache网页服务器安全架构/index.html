@@ -7,7 +7,7 @@
 
     
 
-    <title>代码审计安全 | 2h0nG&#39;s Hacker Blog</title>
+    <title>6、Apache网页服务器安全架构 | 2h0nG&#39;s Hacker Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="6、Apache网页服务器安全架构"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -225,30 +225,115 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Linux系统安全/">Linux系统安全</a>
+
 
         
-            <a class="breadcrumb" href="/tags/代码审计安全/">代码审计安全</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>6、Apache网页服务器安全架构</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2020-07-21T02:22:09.000Z"><a href="/2020/07/21/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/6%E3%80%81Apache%E7%BD%91%E9%A1%B5%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E6%9E%B6%E6%9E%84/">2020-07-21</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2020/07/27/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/" class="collection-item grey-text text-darken-1">
-                <time datetime="2020-07-27T01:25:03.000Z">2020-07-27</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                1、部署实验WAMP环境——PHPStudy
-            </a>
+            <a href="/tags/Linux系统安全/" class="chip pink lighten-1">Linux系统安全</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Apache%E7%BD%91%E9%A1%B5%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E6%9E%B6%E6%9E%84"><span class="section table-of-contents-text">Apache网页服务器安全架构</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFLAMP%E6%9E%B6%E6%9E%84"><span class="section table-of-contents-text">一、什么是LAMP架构</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81Web%E6%9C%8D%E5%8A%A1%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="section table-of-contents-text">二、Web服务工作原理</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81Apache%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%9F%BA%E6%9C%AC%E5%88%86%E6%9E%90"><span class="section table-of-contents-text">三、Apache配置文件基本分析</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81Apache%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA"><span class="section table-of-contents-text">四、Apache服务器安全加固</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="Apache网页服务器安全架构"><a href="#Apache网页服务器安全架构" class="headerlink" title="Apache网页服务器安全架构"></a>Apache网页服务器安全架构</h2><h3 id="一、什么是LAMP架构"><a href="#一、什么是LAMP架构" class="headerlink" title="一、什么是LAMP架构"></a>一、什么是LAMP架构</h3><p>LAMP架构就是Linux、Apache、Mysql、Php结合起来的运行环境。LAMP是比较流行的Web服务架构。</p>
+<h3 id="二、Web服务工作原理"><a href="#二、Web服务工作原理" class="headerlink" title="二、Web服务工作原理"></a>二、Web服务工作原理</h3><p>1、用户在浏览器中执行一个请求操作</p>
+<p>2、浏览器与网页服务器进程建立TCP连接</p>
+<p>3、浏览器将请求操作按照Http协议打包为数据包发送到网页服务器</p>
+<p>4、服务器进程对接受到的Http数据包解析，生成对应的响应Http数据包</p>
+<p>5、将响应Http数据包发送给客户端浏览器</p>
+<p>6、客户端浏览器对获得的应答Http数据包进行处理，显示等。</p>
+<h3 id="三、Apache配置文件基本分析"><a href="#三、Apache配置文件基本分析" class="headerlink" title="三、Apache配置文件基本分析"></a>三、Apache配置文件基本分析</h3><p>57行左右：<code>ServerRoot &quot;/etc/httpd&quot;</code>    #Apach配置根路径</p>
+<p>65行左右：<code>PidFIle run/httpd.pid</code>        #Apach服务的根进程号（相对配置根路径的相对路径）</p>
+<p>136行左右：<code>Listen 80</code>        #Apache监听端口</p>
+<p>150行后：<code>LoadModule XXXXX</code>        #Apache加载的一系列功能模块</p>
+<p>221行左右：<code>Include conf.d/*.conf</code>        #导入的配置文件</p>
+<p>242行左右：<code>User apache</code>        #配置Apache的进程用户</p>
+<p>243行左右：<code>Group apache</code>        #配置Apache的进程组</p>
+<p>292行左右：<code>DocumentRoot &quot;/var/www/html&quot;</code>        #Web网页的根目录</p>
+<p>317-346行左右：<code>&lt;Directory &quot;/var/www/html&quot;&gt; XXXX &lt;/Directory&gt; </code>        #针对Web网页根目录的配置信息</p>
+<h3 id="四、Apache服务器安全加固"><a href="#四、Apache服务器安全加固" class="headerlink" title="四、Apache服务器安全加固"></a>四、Apache服务器安全加固</h3><p><code>&lt;Directory &quot;/var/www/html&quot;&gt;</code></p>
+<p><u>331行左右</u>：<code>Options FollowSymLinks</code>        #<strong>关闭目录共享功能</strong></p>
+<p><u>343行左右</u>：<code>Order allow,deny</code>        #<strong>访问控制</strong>匹配列表中允许项，如果匹配不到全拒绝，下面写访问控制列表</p>
+<blockquote>
+<p>343行左右：<code>Order deny,allow</code>        #访问控制匹配列表中拒绝项，如果匹配不到全允许，下面写访问控制列表</p>
+</blockquote>
+<p><u>344行左右</u>：<code>Allow/Deny from all|host|env=[!]env-variable [host|env=[!]env-variable] ...</code>        #<strong>访问控制</strong>列表</p>
+<blockquote>
+<p>例子：拒绝整个网段 Deny from 192.168.1.</p>
+</blockquote>
+<p><u>345行左右</u>：<strong>设置主页通过认证的方式访问</strong></p>
+<p>​    <code>authtype basic</code>    #认证类型<br>​    <code>authname &quot;随便&quot;</code>    #认证名称，会出现在认证提示语中<br>​    <code>authuserfile apache认证用户列表</code>    #specify认证用户的列表</p>
+<blockquote>
+<p>通过 <code>htppasswd -c 认证用户列表存放路径 认证用户列表名</code>来创建认证用户列表，通知注意对认证用户列表进行撤权，<code>chown apache </code>并且<code>chmod 400</code></p>
+</blockquote>
+<p>​    <code>require valid-user</code>    #允许此列表访问 </p>
+<p><code>&lt;/Directory&gt; </code>        </p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/21/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/7%E3%80%81LAMP%E6%9E%B6%E6%9E%84%E6%90%AD%E5%BB%BA/" rel="next" title="7、LAMP架构搭建">
+    上一篇：7、LAMP架构搭建
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/07/20/Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/5%E3%80%81%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%90%AD%E5%BB%BA/" rel="next" title="5、日志服务器的搭建">
+    下一篇：5、日志服务器的搭建
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
 
 
 </div>
