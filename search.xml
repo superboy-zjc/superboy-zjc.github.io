@@ -279,6 +279,131 @@
     
     
     <entry>
+      <title>74-搜索二维矩阵</title>
+      <link href="/2020/08/13/Leetcode/74%E3%80%81%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5/"/>
+      <url>/2020/08/13/Leetcode/74%E3%80%81%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5/</url>
+      
+        <content type="html"><![CDATA[<h2 id="74、搜索二维矩阵"><a href="#74、搜索二维矩阵" class="headerlink" title="74、搜索二维矩阵"></a>74、搜索二维矩阵</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p><a href="https://imgchr.com/i/d9nI1J"><img src="https://s1.ax1x.com/2020/08/13/d9nI1J.png" alt="d9nI1J.png"></a></p><p>矩阵想象成一个一行的矩阵，然后二分查找即可。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">searchMatrix</span>(<span class="params">self, matrix: List[List[int]], target: int</span>) -&gt; bool:</span></span><br><span class="line">        n = len(matrix)</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        m = len(matrix[<span class="number">0</span>])</span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = m * n - <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">            index = (right + left) // <span class="number">2</span></span><br><span class="line">            row = index // m</span><br><span class="line">            col = index % m</span><br><span class="line">            <span class="keyword">if</span> matrix[row][col] &gt; target:</span><br><span class="line">                right = index - <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> matrix[row][col] &lt; target:</span><br><span class="line">                left = index + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>133-克隆图</title>
+      <link href="/2020/08/12/Leetcode/133%E3%80%81%E5%85%8B%E9%9A%86%E5%9B%BE/"/>
+      <url>/2020/08/12/Leetcode/133%E3%80%81%E5%85%8B%E9%9A%86%E5%9B%BE/</url>
+      
+        <content type="html"><![CDATA[<h2 id="133、克隆图"><a href="#133、克隆图" class="headerlink" title="133、克隆图"></a>133、克隆图</h2><p><a href="https://leetcode-cn.com/problems/clone-graph/">https://leetcode-cn.com/problems/clone-graph/</a></p><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/axAofP"><img src="https://s1.ax1x.com/2020/08/12/axAofP.png" alt="axAofP.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>所谓深度克隆图，就是对图中每一个节点都new出来，而不是引用。因此就需要DFS深度遍历，此题节点对象中的neighbors是邻接矩阵，对于无向图来说，1——2相连，那么矩阵[0]中有2，矩阵[1]中有1，相当于两个点互相有向指向，因此需要处理重复遍历的问题。所以使用了字典（类似于hashmap），主键是node对象，值是深克隆的node_copy，递归遍历，将第一个点的所有邻居都递归遍历一边后，完成深克隆。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"># Definition for a Node.</span></span><br><span class="line"><span class="string">class Node:</span></span><br><span class="line"><span class="string">    def __init__(self, val = 0, neighbors = []):</span></span><br><span class="line"><span class="string">        self.val = val</span></span><br><span class="line"><span class="string">        self.neighbors = neighbors</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cloneGraph</span>(<span class="params">self, node: <span class="string">&#x27;Node&#x27;</span></span>) -&gt; &#x27;Node&#x27;:</span></span><br><span class="line">        map_ = &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">node</span>):</span></span><br><span class="line">            <span class="keyword">if</span> node <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">if</span> node <span class="keyword">in</span> map_:</span><br><span class="line">                <span class="keyword">return</span> map_[node]</span><br><span class="line">            clone = Node(node.val, [])</span><br><span class="line">            map_[node] = clone</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> node.neighbors:</span><br><span class="line">                clone.neighbors.append(dfs(i))</span><br><span class="line">            <span class="keyword">return</span> clone</span><br><span class="line">        <span class="keyword">return</span> dfs(node)    </span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>73-矩阵置零</title>
+      <link href="/2020/08/08/Leetcode/73%E3%80%81%E7%9F%A9%E9%98%B5%E7%BD%AE%E9%9B%B6/"/>
+      <url>/2020/08/08/Leetcode/73%E3%80%81%E7%9F%A9%E9%98%B5%E7%BD%AE%E9%9B%B6/</url>
+      
+        <content type="html"><![CDATA[<h2 id="73、矩阵置零"><a href="#73、矩阵置零" class="headerlink" title="73、矩阵置零"></a>73、矩阵置零</h2><p><a href="https://leetcode-cn.com/problems/set-matrix-zeroes/">https://leetcode-cn.com/problems/set-matrix-zeroes/</a></p><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/axZSMT"><img src="https://s1.ax1x.com/2020/08/12/axZSMT.png" alt="axZSMT.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>此题主要考点是如何减少空间复杂度，原地将矩阵该置零的位置置零。思路是先判断第一列和第一行是否有零，用两个布尔变量来记录这一结果。然后遍历除第一行和第一列的整个矩阵，一旦发现零，就在第一行和第一列的对应位置上置零。这样记录完毕后，再次遍历一边，只要发现对应位置上的第一行或第一列有0，则说明此点的行和列应被清零。最后，根据两个布尔变量，判断第一行和第一列是否需要清零即可。</p><p>Leetcode解题大佬真滴牛，学习了学习了。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setZeroes</span>(<span class="params">self, matrix: List[List[int]]</span>) -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify matrix in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        row0_flag = <span class="literal">False</span></span><br><span class="line">        col0_flag = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(matrix)):</span><br><span class="line">            <span class="keyword">if</span> matrix[i][<span class="number">0</span>] == <span class="number">0</span>:</span><br><span class="line">                col0_flag = <span class="literal">True</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(matrix[<span class="number">0</span>])):</span><br><span class="line">            <span class="keyword">if</span> matrix[<span class="number">0</span>][i] == <span class="number">0</span>:</span><br><span class="line">                row0_flag = <span class="literal">True</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(matrix)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, len(matrix[<span class="number">0</span>])):</span><br><span class="line">                <span class="keyword">if</span> matrix[i][j] == <span class="number">0</span>:</span><br><span class="line">                    matrix[i][<span class="number">0</span>] = matrix[<span class="number">0</span>][j] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(matrix)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, len(matrix[<span class="number">0</span>])):</span><br><span class="line">                <span class="keyword">if</span> matrix[i][<span class="number">0</span>] == <span class="number">0</span> <span class="keyword">or</span> matrix[<span class="number">0</span>][j] == <span class="number">0</span>:</span><br><span class="line">                    matrix[i][j] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> row0_flag == <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(matrix[<span class="number">0</span>])):</span><br><span class="line">                matrix[<span class="number">0</span>][i] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> col0_flag == <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(matrix)):</span><br><span class="line">                matrix[i][<span class="number">0</span>] = <span class="number">0</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>71-最小路径和</title>
+      <link href="/2020/08/08/Leetcode/71%E3%80%81%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/"/>
+      <url>/2020/08/08/Leetcode/71%E3%80%81%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/</url>
+      
+        <content type="html"><![CDATA[<h2 id="71、简化路径"><a href="#71、简化路径" class="headerlink" title="71、简化路径"></a>71、简化路径</h2><p><a href="https://leetcode-cn.com/problems/simplify-path/">https://leetcode-cn.com/problems/simplify-path/</a></p><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/a5mPGn"><img src="https://s1.ax1x.com/2020/08/08/a5mPGn.png" alt="a5mPGn.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>以’/‘为标记分割字符串，双//会出现空，.和..分别代表当前路径和上层路径，分开处理即可。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">simplifyPath</span>(<span class="params">self, path: str</span>) -&gt; str:</span></span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> path.split(<span class="string">&#x27;/&#x27;</span>):</span><br><span class="line">            <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> [<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;..&#x27;</span>]:</span><br><span class="line">                stack.append(i)</span><br><span class="line">            <span class="keyword">elif</span> i == <span class="string">&#x27;..&#x27;</span> <span class="keyword">and</span> stack:</span><br><span class="line">                stack.pop()</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;/&#x27;</span> + <span class="string">&#x27;/&#x27;</span>.join(stack)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>64-最小路径和</title>
+      <link href="/2020/08/07/Leetcode/64%E3%80%81%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/"/>
+      <url>/2020/08/07/Leetcode/64%E3%80%81%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</url>
+      
+        <content type="html"><![CDATA[<h2 id="64、最小路径和"><a href="#64、最小路径和" class="headerlink" title="64、最小路径和"></a>64、最小路径和</h2><p><a href="https://leetcode-cn.com/problems/minimum-path-sum/">https://leetcode-cn.com/problems/minimum-path-sum/</a></p><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/aho1hV"><img src="https://s1.ax1x.com/2020/08/07/aho1hV.png" alt="aho1hV.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>此题和63、62相同类型，动态规划，把一个大问题分解成相互独立的若干个小问题。把求起点到终点的最短路径，分解为到终点(i，j)的最短距离Q(i，j)= min（Q(i-1，j)，Q(i，j-1)）+ Q(i，j)，因为只能向右走或者向左走！</p><p>所以我们可以进行第0行和第0列的初始化，因为<u>机器人只能向右或者向下走</u>，所以到达第0行，和第0列每个点的最小路径和一定是固定的。比如说第0行，要想到达第0行的任一元素，就必须从该元素的左边走过去；第0列也同样，必须从该元素的上面下来。</p><p>进行初始化后，我们就可以遍历所有点，进行Q(i，j)= min（Q(i-1，j)，Q(i，j-1)）+ Q(i，j)的计算，最后得到最小路径和。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minPathSum</span>(<span class="params">self, grid: List[List[int]]</span>) -&gt; int:</span></span><br><span class="line">        n = len(grid)</span><br><span class="line">        m = len(grid[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> i != <span class="number">0</span>:</span><br><span class="line">                grid[i][<span class="number">0</span>] += grid[i<span class="number">-1</span>][<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</span><br><span class="line">            <span class="keyword">if</span> i != <span class="number">0</span>:</span><br><span class="line">                grid[<span class="number">0</span>][i] += grid[<span class="number">0</span>][i<span class="number">-1</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, m):</span><br><span class="line">                grid[i][j] += min(grid[i<span class="number">-1</span>][j], grid[i][j<span class="number">-1</span>])</span><br><span class="line">        <span class="keyword">return</span> grid[n<span class="number">-1</span>][m<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>1、python基础</title>
       <link href="/2020/08/07/%E9%98%B6%E6%AE%B5%E4%BA%94%E3%80%81Python/Python/"/>
       <url>/2020/08/07/%E9%98%B6%E6%AE%B5%E4%BA%94%E3%80%81Python/Python/</url>
@@ -296,6 +421,31 @@
         <tags>
             
             <tag> Python学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>63-不同路径</title>
+      <link href="/2020/08/06/Leetcode/63%E3%80%81%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/"/>
+      <url>/2020/08/06/Leetcode/63%E3%80%81%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84/</url>
+      
+        <content type="html"><![CDATA[<h2 id="63、不同路径"><a href="#63、不同路径" class="headerlink" title="63、不同路径"></a>63、不同路径</h2><p><a href="https://leetcode-cn.com/problems/unique-paths-ii/">https://leetcode-cn.com/problems/unique-paths-ii/</a></p><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/aRFWJe"><img src="https://s1.ax1x.com/2020/08/06/aRFWJe.png" alt="aRFWJe.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>一道动态规划题，要想知道走到终点（i，j）的路径Z（i，j）有多少条，我们只需要知道Z（i-1，j）和Z（i，j-1）的到达路径数，相加即可。</p><p>因为此题的特点，我们可以获得一波初始值，并且从起点开始递推计算到重点。因为<u>机器人只能向右或者向下走</u>，所以第0行，和第0列的路径数一定是固定的。比如说第0行，要想到达第0行的任一元素，就必须从该元素的左边走过去；第0列也同样，必须从该元素的上面下来。因此，我们便获得了第0行和第0列所有位置的路径数，然后循环遍历整个二位数组，判断当前坐标是否有障碍物，如果有则到达该路径数Z（X，X）为0，如果没有则Z（X，X）=Z（i-1，j）+Z（i，j-1），这样便得到了最终的路径数。</p><p><strong>坑点：</strong>此题在开始时初始化第0行和第0列元素时，一定要注意，比如从左向右遍历第0行时，如果一旦发现障碍物，那右边的元素一定都为0，因为必须从左经过，但左边已经被堵住了；第0列的初始化同理，这里我报错了好多次，因为脑子笨只能自己画图来找问题。没办法，终归是菜。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">uniquePathsWithObstacles</span>(<span class="params">self, obstacleGrid: List[List[int]]</span>) -&gt; int:</span></span><br><span class="line">        <span class="keyword">if</span> obstacleGrid[<span class="number">0</span>][<span class="number">0</span>] == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        m = len(obstacleGrid[<span class="number">0</span>])</span><br><span class="line">        n = len(obstacleGrid)</span><br><span class="line">        res = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(m)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</span><br><span class="line">            <span class="keyword">if</span> obstacleGrid[<span class="number">0</span>][i] == <span class="number">0</span>:</span><br><span class="line">                res[<span class="number">0</span>][i] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> obstacleGrid[i][<span class="number">0</span>] == <span class="number">0</span>:</span><br><span class="line">                res[i][<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, m):</span><br><span class="line">                <span class="keyword">if</span> obstacleGrid[i][j] == <span class="number">0</span>:</span><br><span class="line">                    res[i][j] = res[i<span class="number">-1</span>][j] + res[i][j<span class="number">-1</span>]</span><br><span class="line">        <span class="keyword">return</span> res[n<span class="number">-1</span>][m<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
             
         </tags>
       
@@ -504,6 +654,31 @@
     
     
     <entry>
+      <title>62-动态规划</title>
+      <link href="/2020/08/01/Leetcode/62%E3%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <url>/2020/08/01/Leetcode/62%E3%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</url>
+      
+        <content type="html"><![CDATA[<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p><a href="https://leetcode-cn.com/problems/unique-paths/">https://leetcode-cn.com/problems/unique-paths/</a></p><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/aGsHcd"><img src="https://s1.ax1x.com/2020/08/01/aGsHcd.png" alt="aGsHcd.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>题目重点是：1、机器人只能向右或向下走；2、机器人一定在左上角，目标一定在右上角。因此，机器人一定要走m+n-2步，并且必须向下走n-1步、向右走m-1步。将问题可转换为排列组合问题。</p><p><a href="https://imgchr.com/i/aGggPK"><img src="https://s1.ax1x.com/2020/08/01/aGggPK.png" alt="aGggPK.png"></a></p><p>根据公式，即可完成，(n-m)!代入本题的值，化简等于(m-1)!</p><p><a href="https://imgchr.com/i/aGyluR"><img src="https://s1.ax1x.com/2020/08/01/aGyluR.png" alt="aGyluR.png"></a></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">uniquePaths</span>(<span class="params">self, m: int, n: int</span>) -&gt; int:</span></span><br><span class="line">        <span class="keyword">return</span> int(math.factorial(n+m<span class="number">-2</span>)/(math.factorial(n<span class="number">-1</span>)*math.factorial(m<span class="number">-1</span>)))</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>8、PHP-Mysqli</title>
       <link href="/2020/08/01/%E9%98%B6%E6%AE%B5%E4%B8%89%E3%80%81%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/8%E3%80%81PHP-Mysqli/"/>
       <url>/2020/08/01/%E9%98%B6%E6%AE%B5%E4%B8%89%E3%80%81%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/8%E3%80%81PHP-Mysqli/</url>
@@ -554,6 +729,81 @@
     
     
     <entry>
+      <title>61-旋转链表</title>
+      <link href="/2020/07/31/Leetcode/61%E3%80%81%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/"/>
+      <url>/2020/07/31/Leetcode/61%E3%80%81%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/</url>
+      
+        <content type="html"><![CDATA[<h2 id="61、旋转链表"><a href="#61、旋转链表" class="headerlink" title="61、旋转链表"></a>61、旋转链表</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/a1V4KO"><img src="https://s1.ax1x.com/2020/07/31/a1V4KO.png" alt="a1V4KO.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>此题比较简单，思路也比较明确。本来我的思路是直接遍历到 n - k%n -1 的位置将next复制一份后指向None，然后用复制的继续遍历到屁股指向head。</p><p>但看了题解发现，先遍历一般把屁股指向头形成环形 并顺便把链表长度计算一下，然后再到 n - k%n -1 的位置把next当新的头并将next指向None，也可以。</p><p>最终选择官方题解的方法，其实没什么区别，先连头后连头罢了。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rotateRight</span>(<span class="params">self, head: ListNode, k: int</span>) -&gt; ListNode:</span></span><br><span class="line">        <span class="keyword">if</span> k == <span class="number">0</span> <span class="keyword">or</span> head == <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        n = <span class="number">1</span></span><br><span class="line">        old_tail = head</span><br><span class="line">        <span class="keyword">while</span> old_tail.next:</span><br><span class="line">            old_tail = old_tail.next</span><br><span class="line">            n += <span class="number">1</span></span><br><span class="line">        old_tail.next = head</span><br><span class="line">        new_tail = head</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n - k % n - <span class="number">1</span>):</span><br><span class="line">            new_tail = new_tail.next</span><br><span class="line">        new_head=new_tail.next</span><br><span class="line">        new_tail.next = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">return</span> new_head</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>60-第k个排列</title>
+      <link href="/2020/07/30/Leetcode/60%E3%80%81%E7%AC%ACk%E4%B8%AA%E6%8E%92%E5%88%97/"/>
+      <url>/2020/07/30/Leetcode/60%E3%80%81%E7%AC%ACk%E4%B8%AA%E6%8E%92%E5%88%97/</url>
+      
+        <content type="html"><![CDATA[<h2 id="60、第k个排列"><a href="#60、第k个排列" class="headerlink" title="60、第k个排列"></a>60、第k个排列</h2><p><a href="https://leetcode-cn.com/problems/permutation-sequence/">https://leetcode-cn.com/problems/permutation-sequence/</a></p><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/aMZG9K"><img src="https://s1.ax1x.com/2020/07/30/aMZG9K.png" alt="aMZG9K.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>思路就是找规律，发现第n位的数字与n-1的全排列数有关系。下面的题解与我思路一致，但我没能将过程叙述出来，向大佬低头。</p><blockquote><p>假设n=5,k=35,<br>n为5的全排列就是首位为1-5的如下排列的所有<br>1_,,,2,,,3,,,4,,,5,,,每个各有24个排列，组成12345的全排列<br>由于k=35&lt;48,也就是说第35个肯定在首位为2的全排列里边,所以第一个取2。<br>接下来就是考虑剩下1345这四个数的全排列里边取第k=35-24=11个，<br>1,,3,,4,,5,,每个各有6个排列，组成1345的全排列，<br>由于k=11&lt;12,也就是说第11个肯定在首位为3的全排列里边，所以第二个数取3<br>接下来就是考虑剩下145这三个数的全排列里边取第k=11-6=5个，<br>1,4,5,_每个各有2个排列，组成145的全排列<br>由于k=5&lt;6,也就是说第5个肯定在首位为5的全排列里边，所以第三个数取5<br>接下来就是考虑剩下14这两个数的排列里边取第k=5-4=1个<br>1_4_每个各有1个排列，组成14的排列，<br>由于k=1,所以第四个数取1<br>最后加上剩下的最后一个4，结果就是23514<br>结束。</p><p>作者：xiao-xu-10<br>链接：<a href="https://leetcode-cn.com/problems/permutation-sequence/solution/zhe-ti-ru-guo-di-gui-jiu-zuo-fu-za-liao-qi-shi-shi/">https://leetcode-cn.com/problems/permutation-sequence/solution/zhe-ti-ru-guo-di-gui-jiu-zuo-fu-za-liao-qi-shi-shi/</a></p></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getPermutation</span>(<span class="params">self, n: int, k: int</span>) -&gt; str:</span></span><br><span class="line">        num = []</span><br><span class="line">        res = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">            num.append(i)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            count = math.factorial(n - (i + <span class="number">1</span>))</span><br><span class="line">            index = (k - <span class="number">1</span>) // count</span><br><span class="line">            res += str(num[index])</span><br><span class="line">            num.remove(num[index])</span><br><span class="line">            k = k - count * index</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>56-合并区间</title>
+      <link href="/2020/07/30/Leetcode/56%E3%80%81%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/"/>
+      <url>/2020/07/30/Leetcode/56%E3%80%81%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/</url>
+      
+        <content type="html"><![CDATA[<h2 id="56、合并区间"><a href="#56、合并区间" class="headerlink" title="56、合并区间"></a>56、合并区间</h2><p><a href="https://leetcode-cn.com/problems/merge-intervals/">https://leetcode-cn.com/problems/merge-intervals/</a></p><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/aKT17q"><img src="https://s1.ax1x.com/2020/07/30/aKT17q.png" alt="aKT17q.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>此题思路比较简单，先将所有区间升序排序，排序的依据是每一个区间的左区间元素。</p><p>排序过后，直接遍历判断即可，第一个区间直接加入res，之后每次都判断当前的区间左区间元素是否小于上一个区间的右区间元素；</p><p>如果是，则判断当前区间的右区间元素是否大于res最后一个区间的右区间元素，如果大于，就说明范围可合并，将res的最后一个区间的右区间元素换成当前区间的右区间元素。</p><p>否则，直接将当前区间加入res。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">self, intervals: List[List[int]]</span>) -&gt; List[List[int]]:</span></span><br><span class="line">        intervals.sort(key=<span class="keyword">lambda</span> num:num[<span class="number">0</span>])</span><br><span class="line">        res=[]</span><br><span class="line">        <span class="keyword">for</span> list <span class="keyword">in</span> intervals:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> res <span class="keyword">or</span> res[<span class="number">-1</span>][<span class="number">1</span>] &lt; list[<span class="number">0</span>]:</span><br><span class="line">                res.append(list)</span><br><span class="line">            <span class="keyword">elif</span> res[<span class="number">-1</span>][<span class="number">1</span>] &lt; list[<span class="number">1</span>]:</span><br><span class="line">                res[<span class="number">-1</span>][<span class="number">1</span>] = list[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">return</span> res       </span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>6、PHP</title>
       <link href="/2020/07/30/%E9%98%B6%E6%AE%B5%E4%B8%89%E3%80%81%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/6%E3%80%81PHP/"/>
       <url>/2020/07/30/%E9%98%B6%E6%AE%B5%E4%B8%89%E3%80%81%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/6%E3%80%81PHP/</url>
@@ -571,6 +821,31 @@
         <tags>
             
             <tag> 代码审计安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>55-跳跃游戏</title>
+      <link href="/2020/07/29/Leetcode/55%E3%80%81%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/"/>
+      <url>/2020/07/29/Leetcode/55%E3%80%81%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/</url>
+      
+        <content type="html"><![CDATA[<h2 id="55、跳跃游戏"><a href="#55、跳跃游戏" class="headerlink" title="55、跳跃游戏"></a>55、跳跃游戏</h2><p><a href="https://leetcode-cn.com/problems/jump-game/">https://leetcode-cn.com/problems/jump-game/</a></p><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/amr5qA"><img src="https://s1.ax1x.com/2020/07/29/amr5qA.png" alt="amr5qA.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>给大佬跪了，如此简洁的解法！</p><blockquote><p><strong>解题思路：</strong><br>如果某一个作为 <strong>起跳点</strong> 的格子可以跳跃的距离是 3，那么表示后面 3 个格子都可以作为 <strong>起跳点</strong>。<br>可以对每一个能作为 <strong>起跳点</strong> 的格子都尝试跳一次，把 <strong>能跳到最远的距离</strong> 不断更新。<br>如果可以一直跳到最后，就成功了。</p><p>作者：ikaruga<br>链接：<a href="https://leetcode-cn.com/problems/jump-game/solution/55-by-ikaruga/">https://leetcode-cn.com/problems/jump-game/solution/55-by-ikaruga/</a></p></blockquote><p>此题解法总结起来就两个判断：</p><p>1、判断当前位置是否可达（也就是比较之前获得的最远可达位置是否大于当前位置），如果不可达说明已经走到头了，失败！</p><p>2、判断当前位置可达的最远位置是否大于上个位置获得的可达最远位置（刷新当前最远可达位置），如果大于那就说明我们的可达最远位置该更新了！</p><p>最后，顺利的走到了终点，跳出循环，奥力给。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canJump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> max_location = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> cur_location = <span class="number">0</span>; cur_location &lt; nums.<span class="built_in">size</span>(); cur_location++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (cur_location &gt; max_location) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            max_location = <span class="built_in">max</span>(max_location, cur_location + nums[cur_location]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
             
         </tags>
       
@@ -629,6 +904,56 @@
     
     
     <entry>
+      <title>50-Pow(x，n)</title>
+      <link href="/2020/07/28/Leetcode/50%E3%80%81Pow(x%EF%BC%8Cn)/"/>
+      <url>/2020/07/28/Leetcode/50%E3%80%81Pow(x%EF%BC%8Cn)/</url>
+      
+        <content type="html"><![CDATA[<h2 id="50、Pow-x，n"><a href="#50、Pow-x，n" class="headerlink" title="50、Pow(x，n)"></a>50、Pow(x，n)</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/aVnRG4"><img src="https://s1.ax1x.com/2020/07/28/aVnRG4.png" alt="aVnRG4.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><blockquote><p>分治法本质刨析 （暂时并未看懂）：</p><p><a href="https://leetcode-cn.com/problems/powx-n/solution/50-powx-n-kuai-su-mi-qing-xi-tu-jie-by-jyd/">https://leetcode-cn.com/problems/powx-n/solution/50-powx-n-kuai-su-mi-qing-xi-tu-jie-by-jyd/</a> </p></blockquote><p>​    快速幂解法，当计算比如 pow(2, 16)时，最笨的方法是2<em>15次2，如果使用快速幂解法的思想，就是：2\</em>2 = 2^2、2^2 * 2^2 = 2^4 、2^4 * 2^4 = 2^8、2^8 * 2^8 = 2^16。快速幂解法只需要4次运算即可得出结果。将时间复杂度降低至从 O(n)降到 O(logn) </p><p>​    上述例子是n是偶数时，如果n是奇数时最少的运算次数就需要从x^n往前推。x^n 的n如果是偶数： x^n = x^(2/n) * x^(2/n)；如果n是奇数：x^n = x^(2/n) * x^(2/n) * x。直到推到n等于0时结束。这种解法大佬们称其为分治法，使用递归实现。</p><p>​    这里有个小坑就是题目规定n是32位有符号整数，为了处理n是负数的情况，我在myPow中判断了一下n的正负，如果为负只需要将幂结果取个倒数即可。但测试中有一个n为INT_MIN的用例，-INT_MIN = INT_MAX + 1，因此超出了int的范围，所以需要使用一个长整型long long类型来存储，这样就可以容纳INT_MAX+1的数值了。</p><blockquote><p>快速幂分治解法，从结果递归逆推，暂未学透。</p></blockquote><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">myPow</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> N = n;</span><br><span class="line">        <span class="keyword">return</span> N &gt;= <span class="number">0</span> ? fenzhi(x, N) : <span class="number">1.0</span> / fenzhi(x, -N);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">fenzhi</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">long</span> <span class="keyword">long</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1.0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">double</span> y = fenzhi(x, n/<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> n % <span class="number">2</span> == <span class="number">0</span> ? y * y : y * y * x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>49-字母异位词分组</title>
+      <link href="/2020/07/28/Leetcode/49%E3%80%81%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84/"/>
+      <url>/2020/07/28/Leetcode/49%E3%80%81%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D%E5%88%86%E7%BB%84/</url>
+      
+        <content type="html"><![CDATA[<h2 id="49、字母异位词分组"><a href="#49、字母异位词分组" class="headerlink" title="49、字母异位词分组"></a>49、字母异位词分组</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p><a href="https://imgchr.com/i/aEvbe1"><img src="https://s1.ax1x.com/2020/07/28/aEvbe1.png" alt="aEvbe1.png"></a></p><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>方法1（未编写）：利用质数的性质，将26个字母转换为26个不同的质数，然后分别对每个字符串转换为字符串内每个字母转换的质数相乘的积，因此所有积相同的字符串就是异位词，最后将所有字符串进行hash存储即可，主键是乘积，值是字符串，最后得到的每个map中的字符串数组即是分组结果。</p><p>方法2（编写的答案）：将所有字符串按照字母升序排序，所有异位词必然会相同，然后同理对所有字符串进行Hash存储即可，主键为排序后的字符串，值为排序前字符串，最后得到的每个map中的字符串数组即是分组结果。</p><blockquote><p>1、字母转质数，字符串转质数积，哈希即可；</p><p>2、字符串排序，异位词必相等，哈希即可；</p></blockquote><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; <span class="title">groupAnagrams</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; strs)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; res;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; m;</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">string</span>&amp; s : strs) &#123;</span><br><span class="line">            <span class="built_in">string</span> tmp=s;</span><br><span class="line">            sort(tmp.<span class="built_in">begin</span>(), tmp.<span class="built_in">end</span>());</span><br><span class="line">            m[tmp].push_back(s);</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; r : m) &#123;</span><br><span class="line">            res.push_back(r.second);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>3、HTML</title>
       <link href="/2020/07/28/%E9%98%B6%E6%AE%B5%E4%B8%89%E3%80%81%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/3%E3%80%81HTML%E8%AF%AD%E8%A8%80/"/>
       <url>/2020/07/28/%E9%98%B6%E6%AE%B5%E4%B8%89%E3%80%81%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/3%E3%80%81HTML%E8%AF%AD%E8%A8%80/</url>
@@ -646,6 +971,31 @@
         <tags>
             
             <tag> 代码审计安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>48-旋转图像</title>
+      <link href="/2020/07/27/Leetcode/48%E3%80%81%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/"/>
+      <url>/2020/07/27/Leetcode/48%E3%80%81%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/</url>
+      
+        <content type="html"><![CDATA[<h2 id="48、旋转图像"><a href="#48、旋转图像" class="headerlink" title="48、旋转图像"></a>48、旋转图像</h2><p><a href="https://leetcode-cn.com/problems/rotate-image/">https://leetcode-cn.com/problems/rotate-image/</a></p><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/aFGvJU"><img src="https://s1.ax1x.com/2020/07/27/aFGvJU.png" alt="aFGvJU.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>方法1：找规律（我一开始的思路就是这样，但是这个规律挺难找我没找出来）</p><p>即:任意一个<code>(i,j) , (j, n-i-1), (n-i-1, n-j-1), (n -j-1, i)</code>就是这四个索引号上的数相邻依次交换.</p><p>方法2：先数组沿着行中间上下翻折一次，然后沿着正对角线再翻转一次，所得结果即是旋转后的数组（真的顶）</p><p><a href="https://imgchr.com/i/aFJ26J"><img src="https://s1.ax1x.com/2020/07/27/aFJ26J.png" alt="aFJ26J.png"></a></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#方法2</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rotate</span>(<span class="params">self, matrix: List[List[int]]</span>) -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify matrix in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        n=len(matrix)</span><br><span class="line">        matrix[:] = matrix[::<span class="number">-1</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>, n):</span><br><span class="line">                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
             
         </tags>
       
@@ -779,6 +1129,56 @@
     
     
     <entry>
+      <title>47-全排列 II</title>
+      <link href="/2020/07/22/Leetcode/47%E3%80%81%E5%85%A8%E6%8E%92%E5%88%97II/"/>
+      <url>/2020/07/22/Leetcode/47%E3%80%81%E5%85%A8%E6%8E%92%E5%88%97II/</url>
+      
+        <content type="html"><![CDATA[<h2 id="47、全排列-II"><a href="#47、全排列-II" class="headerlink" title="47、全排列 II"></a>47、全排列 II</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/UbBplT"><img src="https://s1.ax1x.com/2020/07/22/UbBplT.png" alt="UbBplT.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>此题在<a href="C:\Users\18265\Desktop\Leetcode\46、全排列.md">46、全排列</a>的基础上，使数组有重复项，并要求排列结果不能重复。分析便知此题是在<a href="C:\Users\18265\Desktop\Leetcode\46、全排列.md">46、全排列</a>的DFS递归回溯的基础上再加上一个典型的排序去重。</p><p>去重的方式就是对数组排序后，在递归中的每一层循环迭代都判断nums[i]是否与nums[i-1]相等（前提是i不是当前层循环的第一位）并且used[i-1]是否为false，如果相等，且used[i-1]为false（如果为true说明已经加入tmp_list，那么nums[i-1]属于上一层的元素了，只有同层元素相邻相等才会产生重复），则直接continue即可，因为必然与nums[i-1]迭代得出的排列结果相同（因为同层且剩下的元素相等）。</p><blockquote><p>DFS递归回溯，排序后，同层相邻相同且未加入到tmp_list中则continue去重。</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; permuteUnique(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">int</span> length = nums.length;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;Integer&gt; tmp_list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">boolean</span>[] used = <span class="keyword">new</span> <span class="keyword">boolean</span>[length];</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        bfs(<span class="number">0</span>, nums, used, tmp_list, res, length);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> depth, <span class="keyword">int</span>[] nums, <span class="keyword">boolean</span>[] used, List&lt;Integer&gt; list, List&lt;List&lt;Integer&gt;&gt; res, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (depth == length) &#123;</span><br><span class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;Integer&gt;(list));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(i != <span class="number">0</span> &amp;&amp; nums[i] == nums[i-<span class="number">1</span>] &amp;&amp; !used[i-<span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">                <span class="keyword">if</span>(used[i] == <span class="keyword">false</span>) &#123;</span><br><span class="line">                    used[i] = <span class="keyword">true</span>;</span><br><span class="line">                    list.add(nums[i]);</span><br><span class="line">                    bfs(depth + <span class="number">1</span>, nums, used, list, res, length);</span><br><span class="line">                    list.remove(list.size() - <span class="number">1</span>);</span><br><span class="line">                    used[i] = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>46-全排列</title>
+      <link href="/2020/07/22/Leetcode/46%E3%80%81%E5%85%A8%E6%8E%92%E5%88%97/"/>
+      <url>/2020/07/22/Leetcode/46%E3%80%81%E5%85%A8%E6%8E%92%E5%88%97/</url>
+      
+        <content type="html"><![CDATA[<h2 id="46、全排列"><a href="#46、全排列" class="headerlink" title="46、全排列"></a>46、全排列</h2><p><a href="https://leetcode-cn.com/problems/permutations/">https://leetcode-cn.com/problems/permutations/</a></p><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/UbtFPO"><img src="https://s1.ax1x.com/2020/07/22/UbtFPO.png" alt="UbtFPO.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>和<a href="C:\Users\18265\Desktop\Leetcode\39、组合总和.md">39、组合总和类似</a>，这道题是一个最经典的BFS回溯做法，通过深度遍历以及回溯，找到所有的排列方式。</p><p><a href="https://imgchr.com/i/UbNimn"><img src="https://s1.ax1x.com/2020/07/22/UbNimn.png" alt="UbNimn.png"></a></p><blockquote><p>经典DFS递归回溯，无需多言</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; permute(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">        <span class="keyword">int</span> length = nums.length;</span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span> (length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;Integer&gt; tmp_list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">boolean</span>[] used = <span class="keyword">new</span> <span class="keyword">boolean</span>[length];</span><br><span class="line">        bfs(<span class="number">0</span>, nums, used, tmp_list, res, length);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> depth, <span class="keyword">int</span>[] nums, <span class="keyword">boolean</span>[] used, List&lt;Integer&gt; list, List&lt;List&lt;Integer&gt;&gt; res, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (depth == length) &#123;</span><br><span class="line">            res.add(<span class="keyword">new</span> ArrayList&lt;Integer&gt;(list));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span>(used[i] == <span class="keyword">false</span>) &#123;</span><br><span class="line">                    used[i] = <span class="keyword">true</span>;</span><br><span class="line">                    list.add(nums[i]);</span><br><span class="line">                    bfs(depth + <span class="number">1</span>, nums, used, list, res, length);</span><br><span class="line">                    list.remove(list.size() - <span class="number">1</span>);</span><br><span class="line">                    used[i] = <span class="keyword">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>9、Tomcat服务器搭建与Nginx负载均衡</title>
       <link href="/2020/07/22/%E9%98%B6%E6%AE%B5%E4%BA%8C%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/9%E3%80%81Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%8ENginx%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/"/>
       <url>/2020/07/22/%E9%98%B6%E6%AE%B5%E4%BA%8C%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/9%E3%80%81Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%8ENginx%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</url>
@@ -821,6 +1221,56 @@
         <tags>
             
             <tag> Linux系统安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>43-字符串相乘</title>
+      <link href="/2020/07/21/Leetcode/43.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%B9%98/"/>
+      <url>/2020/07/21/Leetcode/43.%20%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%B9%98/</url>
+      
+        <content type="html"><![CDATA[<h2 id="43、字符串相乘"><a href="#43、字符串相乘" class="headerlink" title="43、字符串相乘"></a>43、字符串相乘</h2><h3 id="题目-grey-question-："><a href="#题目-grey-question-：" class="headerlink" title="题目:grey_question:："></a>题目:grey_question:：</h3><p><a href="https://imgchr.com/i/UTG3tJ"><img src="https://s1.ax1x.com/2020/07/21/UTG3tJ.png" alt="UTG3tJ.png"></a></p><h3 id="题解-ballot-box-with-check-："><a href="#题解-ballot-box-with-check-：" class="headerlink" title="题解:ballot_box_with_check:："></a>题解:ballot_box_with_check:：</h3><p>和<a href="C:\Users\18265\Desktop\Leetcode\415、字符串相加.md">字符串相加</a>相同采用竖式运算思想，分析乘法的竖式运算和加法的竖式运算整体框架不变，都采用双指针，重点在于num1和num2需要选择num1循环一次和num2循环num1次。每当一个num1的元素循环相乘num2的元素后得出一个字符串结果后，左移一位（右边补个0）与上一个结果进行累加。这个累加过程和<a href="C:\Users\18265\Desktop\Leetcode\415、字符串相加.md">字符串相加</a>相同。</p><blockquote><p>竖式运算思想，双指针，左移补0累加得结果</p></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">multiply</span>(<span class="params">self, num1: str, num2: str</span>) -&gt; str:</span></span><br><span class="line">        <span class="keyword">if</span> int(num1) == <span class="number">0</span> <span class="keyword">or</span> int(num2) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;0&quot;</span></span><br><span class="line">        i, carry = len(num1) - <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">        res = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment">#num1循环一次，逐个与所有num2相乘</span></span><br><span class="line">        <span class="keyword">while</span> i &gt;= <span class="number">0</span>:</span><br><span class="line">            carry = <span class="number">0</span></span><br><span class="line">            str1 = <span class="string">&quot;&quot;</span></span><br><span class="line">            j = len(num2) - <span class="number">1</span></span><br><span class="line">            <span class="comment">#num2循环num1次</span></span><br><span class="line">            <span class="keyword">while</span> j &gt;= <span class="number">0</span>:</span><br><span class="line">                tmp = int(num1[i]) * int(num2[j]) + carry</span><br><span class="line">                carry = tmp // <span class="number">10</span></span><br><span class="line">                <span class="comment">#拼接出此层的相乘结果</span></span><br><span class="line">                str1 = str(tmp % <span class="number">10</span>) + str1</span><br><span class="line">                j = j - <span class="number">1</span></span><br><span class="line">            str1 = str(carry) + str1 <span class="keyword">if</span> carry !=<span class="number">0</span> <span class="keyword">else</span> str1</span><br><span class="line">            <span class="comment">#得出结果后根据循环层数补0（左移）</span></span><br><span class="line">            <span class="keyword">for</span> pp <span class="keyword">in</span> range(len(num1) - <span class="number">1</span> - i):</span><br><span class="line">                str1 = str1 + <span class="string">&quot;0&quot;</span></span><br><span class="line">            <span class="comment">#逐层结果累加</span></span><br><span class="line">            res = self.addStrings(res, str1)</span><br><span class="line">            i = i - <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    <span class="comment">#字符串相加</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">addStrings</span>(<span class="params">self, num1: str, num2: str</span>):</span></span><br><span class="line">        res = <span class="string">&quot;&quot;</span></span><br><span class="line">        i, j, carry = len(num1) - <span class="number">1</span>, len(num2) - <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &gt;= <span class="number">0</span> <span class="keyword">or</span> j &gt;= <span class="number">0</span>:</span><br><span class="line">            n1 = int(num1[i]) <span class="keyword">if</span> i &gt;= <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            n2 = int(num2[j]) <span class="keyword">if</span> j &gt;= <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            tmp = n1 + n2 + carry</span><br><span class="line">            carry = tmp // <span class="number">10</span></span><br><span class="line">            res = str(tmp % <span class="number">10</span>) + res</span><br><span class="line">            i, j = i - <span class="number">1</span>, j - <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;1&quot;</span> + res <span class="keyword">if</span> carry == <span class="number">1</span> <span class="keyword">else</span> res</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>415-字符串相加</title>
+      <link href="/2020/07/21/Leetcode/415%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%8A%A0/"/>
+      <url>/2020/07/21/Leetcode/415%E3%80%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%8A%A0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="415、字符串相加"><a href="#415、字符串相加" class="headerlink" title="415、字符串相加"></a>415、字符串相加</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://leetcode-cn.com/problems/add-strings/">https://leetcode-cn.com/problems/add-strings/</a></p><p><a href="https://imgchr.com/i/UofL60"><img src="https://s1.ax1x.com/2020/07/21/UofL60.png" alt="UofL60.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>此题关键是如何处理长整数的存储，使用字符串转数字的方法直接处理肯定会溢出，因为题目规定字符串numX长度&lt;=5100，这种大数无法直接存储，所以要求返回字符串。因此需要在不断计算的过程中，一位一位的加入字符串数组。</p><p>计算的方式就是模拟人脑计算的方式，从尾巴开始双指针计算，并记录进位。比较简单。重点就在于字符转换和拼接，对于python来说很方便。</p><blockquote><p>重点处理过长大数，模拟人脑双指针运算，字符串拼接</p></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">addStrings</span>(<span class="params">self, num1: str, num2: str</span>) -&gt; str:</span></span><br><span class="line">        res = <span class="string">&quot;&quot;</span></span><br><span class="line">        i, j, carry = len(num1) - <span class="number">1</span>, len(num2) - <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &gt;= <span class="number">0</span> <span class="keyword">or</span> j &gt;= <span class="number">0</span>:</span><br><span class="line">            n1 = int(num1[i]) <span class="keyword">if</span> i &gt;= <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            n2 = int(num2[j]) <span class="keyword">if</span> j &gt;= <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">            tmp = n1 + n2 + carry</span><br><span class="line">            carry = tmp // <span class="number">10</span></span><br><span class="line">            res = str(tmp % <span class="number">10</span>) + res</span><br><span class="line">            i, j = i - <span class="number">1</span>, j - <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;1&quot;</span> + res <span class="keyword">if</span> carry == <span class="number">1</span> <span class="keyword">else</span> res</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
             
         </tags>
       
@@ -879,6 +1329,56 @@
     
     
     <entry>
+      <title>40-组合总和 ||</title>
+      <link href="/2020/07/20/Leetcode/40%E3%80%81%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/"/>
+      <url>/2020/07/20/Leetcode/40%E3%80%81%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/</url>
+      
+        <content type="html"><![CDATA[<h2 id="40、组合总和"><a href="#40、组合总和" class="headerlink" title="40、组合总和 ||"></a>40、组合总和 ||</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/U44N6K"><img src="https://s1.ax1x.com/2020/07/20/U44N6K.png" alt="U44N6K.png"></a></p><p>此题与<a href="C:\Users\18265\Desktop\Leetcode\39.组合总和.md">39、组合总和</a>是相同的题型，都要求得出的组合不能有重复的。唯一的不同是。39题数组元素不能重复，但组合中可以重复选择数组元素；而本题数组元素有重复，且组合中不能重复选择数组元素。</p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>如何去重：1、既然本题是数组元素中有重复项，并且最后回溯出的组合不能有重复，因此肯定要对数组进行排序，以及在判断中如若发现当前迭代项与上一个迭代项相同，则跳过此次迭代。（有点类似于<a href="C:\Users\18265\Desktop\Leetcode\15、三数之和&18、四数之和.md">15、三数之和</a>中去重的方法，排序、判断相邻项是否相同）2、每一层回溯迭代时，起点都为上一层递归传入的数组元素之后。</p><p>剩下得出组合的方式和39题相同，使用了<strong>回溯法</strong>，回溯树根为target，每个分支target都会减掉1个数组元素，直到target==0（满足）或者小于0（不满足）。回溯树的每一层迭代时的起点都是上一层递归传入的数组元素之后，这也是避免重复的方式之一。</p><blockquote><p>排序判断前后去重！每层回溯迭代时起点为上层传入点之后去重！获得组合的方法是回溯！根是target！递归减元素！直到零或负。</p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; combinationSum2(<span class="keyword">int</span>[] candidates, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">if</span> (candidates.length == <span class="number">0</span> || target &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">        Arrays.sort(candidates);</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        bfs(candidates, target, <span class="number">0</span>, list);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bfs</span><span class="params">(<span class="keyword">int</span>[] candidates, <span class="keyword">int</span> target, <span class="keyword">int</span> start, List&lt;Integer&gt; list)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (target == <span class="number">0</span>) &#123;</span><br><span class="line">            result.add(<span class="keyword">new</span> ArrayList&lt;Integer&gt;(list));</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (target &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt; candidates.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(i &gt; start &amp;&amp; candidates[i] == candidates[i - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            list.add(candidates[i]);</span><br><span class="line">            bfs(candidates, target - candidates[i], i + <span class="number">1</span>, list);</span><br><span class="line">            list.remove(list.size() - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>39-组合总和</title>
+      <link href="/2020/07/20/Leetcode/39%E3%80%81%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/"/>
+      <url>/2020/07/20/Leetcode/39%E3%80%81%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C/</url>
+      
+        <content type="html"><![CDATA[<h2 id="39、组合总和"><a href="#39、组合总和" class="headerlink" title="39、组合总和"></a>39、组合总和</h2><p><a href="https://leetcode-cn.com/problems/combination-sum/">https://leetcode-cn.com/problems/combination-sum/</a></p><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/U4rU9e"><img src="https://s1.ax1x.com/2020/07/20/U4rU9e.png" alt="U4rU9e.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>此题要求给定数组中，任意组合数组元素的和等于target，返回所有符合条件的组合。并且数组元素可以重复的使用，但是最后得出的组合中不能有重复的。</p><p>首先，要想得出所有符合条件的组合，就要用的经典的回溯模型。</p><p><a href="https://imgchr.com/i/U4sl8g"><img src="https://s1.ax1x.com/2020/07/20/U4sl8g.png" alt="U4sl8g.png"></a></p><p><a href="https://imgchr.com/i/U4sJrn"><img src="https://s1.ax1x.com/2020/07/20/U4sJrn.png" alt="U4sJrn.png"></a></p><p>去重复的关键在于，每层递归都不会使用上一层递归使用过的数组元素。</p><blockquote><p>递归回溯减元素得组合，去重关键不要走老路。</p><p>AC题解：<a href="https://leetcode-cn.com/problems/combination-sum/solution/fei-chang-xiang-xi-de-di-gui-hui-su-tao-lu-by-re-2/">https://leetcode-cn.com/problems/combination-sum/solution/fei-chang-xiang-xi-de-di-gui-hui-su-tao-lu-by-re-2/</a></p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; combinationSum(<span class="keyword">int</span>[] candidates, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="keyword">if</span> (candidates.length == <span class="number">0</span> || target &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        bfs(candidates, target, list, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bfs</span><span class="params">(<span class="keyword">int</span>[] candidates, <span class="keyword">int</span> target, List&lt;Integer&gt; list, <span class="keyword">int</span> start)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(target == <span class="number">0</span>) &#123;</span><br><span class="line">            result.add(<span class="keyword">new</span> ArrayList&lt;&gt;(list)); <span class="comment">//坑点，加入的list要new一个出来。否则一直在玩一个，最后给玩没了</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (target &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//i从start开始不使用上一层递归使用过的数组元素</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt; candidates.length; i++) &#123;</span><br><span class="line">            list.add(candidates[i]);<span class="comment">//做选择</span></span><br><span class="line">            bfs(candidates, target - candidates[i], list, i);</span><br><span class="line">            list.remove(list.size() - <span class="number">1</span>);<span class="comment">//撤销选择</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>5、日志服务器的搭建</title>
       <link href="/2020/07/20/%E9%98%B6%E6%AE%B5%E4%BA%8C%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/5%E3%80%81%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%90%AD%E5%BB%BA/"/>
       <url>/2020/07/20/%E9%98%B6%E6%AE%B5%E4%BA%8C%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/5%E3%80%81%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%90%AD%E5%BB%BA/</url>
@@ -921,6 +1421,31 @@
         <tags>
             
             <tag> Linux系统安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>33-搜索旋转排序数组</title>
+      <link href="/2020/07/19/Leetcode/33%E3%80%81%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84/"/>
+      <url>/2020/07/19/Leetcode/33%E3%80%81%E6%90%9C%E7%B4%A2%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84/</url>
+      
+        <content type="html"><![CDATA[<h2 id="33、搜索旋转排序数组"><a href="#33、搜索旋转排序数组" class="headerlink" title="33、搜索旋转排序数组"></a>33、搜索旋转排序数组</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array/">https://leetcode-cn.com/problems/search-in-rotated-sorted-array/</a></p><p><a href="https://imgchr.com/i/UfAyod"><img src="https://s1.ax1x.com/2020/07/19/UfAyod.png" alt="UfAyod.png"></a></p><p>旋转排序数组，即将一个升序的数组一部分调转到一边。此题要求在一个旋转排序数组中寻找target的索引值，并且要求时间复杂度是O(logn)，很明显要进行二分法查询。此题与普通的二分法查询不同在于是旋转排序数组，但其实经过分析，得出旋转数组的特性：在一个旋转数组中，一个区间[i,j]，如果nums[i] &lt;= nums[j]，一定说明[i,j]是连续递增的。</p><p>因此，编码逻辑为：</p><p>初始l = 0， r = n - 1，mid = (l + r) / 2；</p><p>若 <code>target == nums[mid]</code>，直接返回</p><p>如果<code>nums[l] &lt;= nums[mid]</code> ，且<code>nums[l] &lt;= target &lt; nums[mid]</code>，则target就在此时的左半部分r=mid-1，否则target在右半部分l=mid+1。</p><p>如果<code>nums[mid]&lt;=nums[r]</code>，且<code>nums[mid] &lt; target &lt;= nums[right]</code>,则target就在此时的右半部分l=mid+1，否则target在左半部分r=mid-1。</p><blockquote><p>一个特别的二分查找，编码中的判断尽量减少类似mid-1的语句，一些特殊的输入案例会直接导致堆栈溢出。例如nums[mid-1] &gt;= target替换为nums[mid]&gt;target</p></blockquote><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>] == target ? <span class="number">0</span> : <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] == target)</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            <span class="keyword">if</span>(nums[l] &lt;= nums[mid]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[l] &lt;= target &amp;&amp; nums[mid] &gt; target) &#123;</span><br><span class="line">                    r = mid - <span class="number">1</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    l = mid + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(nums[mid] &lt; target &amp;&amp; nums[r] &gt;= target) &#123;</span><br><span class="line">                    l = mid + <span class="number">1</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    r = mid - <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
             
         </tags>
       
@@ -979,6 +1504,31 @@
     
     
     <entry>
+      <title>31-下一个排列</title>
+      <link href="/2020/07/17/Leetcode/31%E3%80%81%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97/"/>
+      <url>/2020/07/17/Leetcode/31%E3%80%81%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97/</url>
+      
+        <content type="html"><![CDATA[<h2 id="31、下一个排列"><a href="#31、下一个排列" class="headerlink" title="31、下一个排列"></a>31、下一个排列</h2><p><a href="https://leetcode-cn.com/problems/next-permutation/">https://leetcode-cn.com/problems/next-permutation/</a></p><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://imgchr.com/i/U652nI"><img src="https://s1.ax1x.com/2020/07/17/U652nI.png" alt="U652nI.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>此题乍一看非常的难理解，通过评论区翻译后得知，题目输入提供了一个数组，每个数组元素都是一个0-9的数字，这一个数组组成的数字序列可以一个数值。题目的要求就是调整数字序列来让这个数值是<strong>下一个</strong>更大的数值；如果这个数字序列是降序排序的，很明显已经是最大的数值了，就要求把序列改成最小的序列（很明显就是reverse即可）</p><p>由数字全降序为最大数值我们可知，一旦这个数字序列不是降序，必然有下一个序列组成更大的数值。那么就可以用指针A从右向左遍历直到遍历到非降序的事件发生，也就是nums[A] &lt; nums[A+1]。此时，再从A右侧的数字序列中选择一个“nums[A]下一个更大的数值”与nums[A]进行swap，然后对右侧的降序序列reverse为升序即可。</p><p><a href="https://imgchr.com/i/U65Gp4"><img src="https://s1.ax1x.com/2020/07/17/U65Gp4.png" alt="U65Gp4.png"></a></p><blockquote><p>全降序直接reverse；非全降序找到右向左遍历的”升序值”与右侧较大于“升序值”的数swap后再reverse”升序值”右部分序列即是”更大的数值”。</p></blockquote><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">nextPermutation</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (i = n<span class="number">-2</span>; i &gt;= <span class="number">0</span>; i-- ) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i+<span class="number">1</span>] &gt; nums[i]) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> j;</span><br><span class="line">            <span class="keyword">for</span> (j = n<span class="number">-1</span>; j &gt;= i+<span class="number">1</span>; j--) &#123;</span><br><span class="line">                <span class="keyword">if</span> (nums[j] &gt; nums[i]) &#123;</span><br><span class="line">                    swap(nums[j], nums[i]);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> l = i+<span class="number">1</span>, r = n<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">                swap(nums[l], nums[r]);</span><br><span class="line">                l++;</span><br><span class="line">                r--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">           </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> l = <span class="number">0</span>, r = n<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">                swap(nums[l], nums[r]);</span><br><span class="line">                l++;</span><br><span class="line">                r--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>1、部署Centos以及Linux基本命令与知识</title>
       <link href="/2020/07/17/%E9%98%B6%E6%AE%B5%E4%BA%8C%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2Centos%E4%BB%A5%E5%8F%8ALinux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%9F%A5%E8%AF%86-1/"/>
       <url>/2020/07/17/%E9%98%B6%E6%AE%B5%E4%BA%8C%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2Centos%E4%BB%A5%E5%8F%8ALinux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4%E4%B8%8E%E7%9F%A5%E8%AF%86-1/</url>
@@ -996,6 +1546,56 @@
         <tags>
             
             <tag> Linux系统安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>15-三数之和/18-四数之和</title>
+      <link href="/2020/07/16/Leetcode/15%E3%80%81%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C&amp;18%E3%80%81%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C/"/>
+      <url>/2020/07/16/Leetcode/15%E3%80%81%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C&amp;18%E3%80%81%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+      
+        <content type="html"><![CDATA[<h2 id="15、三数之和-18、四数之和"><a href="#15、三数之和-18、四数之和" class="headerlink" title="15、三数之和/18、四数之和"></a>15、三数之和/18、四数之和</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://leetcode-cn.com/problems/3sum/">https://leetcode-cn.com/problems/3sum/</a></p><p><a href="https://imgchr.com/i/Uri4k4"><img src="https://s1.ax1x.com/2020/07/16/Uri4k4.png" alt="Uri4k4.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>​    本题看懂题目后，第一反应就是三层循环遍历得出三元组的解。但必然会超时，并且还有一些小坑。比如，要求得出的三元组满足a+b+c=0且不能重复。如果是三层循环得出解后，再进行去重，相当于在O(N3)的时间复杂度上雪上加霜。</p><p>​    首先考虑如何去重，就是将nums数组从小到大排序，然后每一层循环都判断一次当前nums[i]值是否等于上一次循环的值nums[i-1]，如果是直接跳过此次循环即可，但仅仅这样时间复杂度没有降下去。只能通过简化循环来降低时间复杂度。</p><p>​    降低时间复杂度的方法：由于数组是从小到大排序，在不断的循环过程中每一层循环的数值都在增大，且条件要求是a+b+c=0，a+b越大，c就得越小才能满足条件，就可以使用类似双指针的方法，来将第二层和第三层循环简化为一层循环。在确定第一层循环a的值后，把b和c作为双指针来进行移动，b正常按照循环判断，c的指针则用while循环左移直到满足a+b+c&lt;=0的条件。</p><p>​    这样，第二层和第三层只需要走一趟就可以结束，成功将O(N3)简化到O(N2)。排序的时间复杂度是O(NlogN)，在渐进意义下小于前者，因此算法的总时间复杂度为 O(N^2)<em>O</em>(<em>N</em>2)。</p><blockquote><p>总结：排序判断去重，找规律双指针降低时间复杂度。18、四数之和只需再加一层循环即可。</p></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">threeSum</span>(<span class="params">self, nums: List[int]</span>) -&gt; List[List[int]]:</span></span><br><span class="line">        result = list()</span><br><span class="line">        n = len(nums)</span><br><span class="line">        nums.sort();</span><br><span class="line">        <span class="keyword">for</span> first <span class="keyword">in</span> range(n<span class="number">-2</span>):</span><br><span class="line">            <span class="keyword">if</span> first != <span class="number">0</span> <span class="keyword">and</span> nums[first] == nums[first<span class="number">-1</span>]:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            third = n - <span class="number">1</span></span><br><span class="line">            <span class="keyword">for</span> second <span class="keyword">in</span> range(first + <span class="number">1</span>,third):</span><br><span class="line">                <span class="keyword">if</span> second != first + <span class="number">1</span> <span class="keyword">and</span> nums[second] == nums[second<span class="number">-1</span>]:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">while</span> nums[first] + nums[second] + nums[third] &gt; <span class="number">0</span> <span class="keyword">and</span> third &gt; second:</span><br><span class="line">                    third-=<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> third == second:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">if</span> nums[first] + nums[second] + nums[third] == <span class="number">0</span>:</span><br><span class="line">                    result.append([nums[first],nums[second],nums[third]])</span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>785-判断二分图</title>
+      <link href="/2020/07/16/Leetcode/785%E3%80%81%E5%88%A4%E6%96%AD%E4%BA%8C%E5%88%86%E5%9B%BE/"/>
+      <url>/2020/07/16/Leetcode/785%E3%80%81%E5%88%A4%E6%96%AD%E4%BA%8C%E5%88%86%E5%9B%BE/</url>
+      
+        <content type="html"><![CDATA[<h2 id="785、判断二分图"><a href="#785、判断二分图" class="headerlink" title="785、判断二分图"></a>785、判断二分图</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p><a href="https://leetcode-cn.com/problems/is-graph-bipartite/">https://leetcode-cn.com/problems/is-graph-bipartite/</a></p><p><a href="https://imgchr.com/i/UDBX34"><img src="https://s1.ax1x.com/2020/07/16/UDBX34.png" alt="UDBX34.png"></a></p><h3 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h3><p>此题重点在于分析题目，到底如何才算一个二分图。根据题目分析，一个图的所有节点分成两个集合A和B，且途中每一条边的两个节点必须一个来自A一个来自B。说白了，<u>就是图中任意两条边必须要属于不同的集合</u>。在code中节点属于不同的集合使用颜色来表示。那么就可以遍历图中所有的节点，并将其着色A，然后再将该节点所有相邻的节点进行着色B，在遍历的过程中一旦发现相邻节点已着色并且着色是A（相邻颜色相同），那么就说明不满足二分图的条件。直接结束遍历，返回false。</p><p>题目提供了邻接表，邻接表每一行的元素恰好代表着”行号点”所有相邻的点。因此，利用邻接表即可进行遍历，本题使用的是深度遍历方法。</p><blockquote><p><strong>注意：</strong>由于题目没有说图是连通图，所以非连通图一次是遍历不完的，因此需要对每一个节点都执行一次遍历。</p></blockquote><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> <span class="keyword">const</span> RED = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> <span class="keyword">const</span> GREEN = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">int</span> UNCOLORED = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">bool</span> result; </span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; color;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">bfs</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> flag, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//着色</span></span><br><span class="line">        color[n] = flag;</span><br><span class="line">        <span class="keyword">int</span> unflag = (flag == RED ? GREEN : RED);<span class="comment">//得到相反的颜色</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> go : graph[n]) &#123;</span><br><span class="line">            <span class="keyword">if</span>(color[go] == UNCOLORED) &#123;</span><br><span class="line">                bfs(go, unflag, graph);</span><br><span class="line">                <span class="keyword">if</span>(!result) &#123;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (color[go] != unflag) &#123;</span><br><span class="line">                result = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isBipartite</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph)</span> </span>&#123;</span><br><span class="line">        color.assign(graph.<span class="built_in">size</span>(), UNCOLORED);</span><br><span class="line">        result = <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">//每一个点都遍历着色，以处理非连通图的情况</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; (i &lt; graph.<span class="built_in">size</span>()) &amp;&amp; result; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(color[i] == UNCOLORED) &#123;</span><br><span class="line">                bfs(i, RED, graph);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Leetcode题解 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Leetcode题解 </tag>
             
         </tags>
       
