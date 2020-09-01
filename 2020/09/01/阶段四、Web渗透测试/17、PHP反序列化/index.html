@@ -204,7 +204,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/CTF笔记/">
-                    CTF笔记 <span class="right">2 篇</span></a>
+                    CTF笔记 <span class="right">4 篇</span></a>
                 </a>
             </li>
 
@@ -299,8 +299,11 @@
 
 
             <div class="entry pink-link-context">
-                <h2 id="PHP反序列化漏洞"><a href="#PHP反序列化漏洞" class="headerlink" title="PHP反序列化漏洞"></a>PHP反序列化漏洞</h2><h3 id="一、PHP反序列化漏洞原理"><a href="#一、PHP反序列化漏洞原理" class="headerlink" title="一、PHP反序列化漏洞原理"></a>一、PHP反序列化漏洞原理</h3><p>PHP反序列化漏洞：执行unserialize()时，先会调用__wakeup()。</p>
-<p>当序列化字符串中属性值个数大于属性个数，就会导致反序列化异常，从而跳过__wakeup()。</p>
+                <h2 id="PHP反序列化漏洞"><a href="#PHP反序列化漏洞" class="headerlink" title="PHP反序列化漏洞"></a>PHP反序列化漏洞</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/youyoui/p/8610068.html">https://www.cnblogs.com/youyoui/p/8610068.html</a></p>
+</blockquote>
+<h3 id="一、PHP反序列化漏洞原理"><a href="#一、PHP反序列化漏洞原理" class="headerlink" title="一、PHP反序列化漏洞原理"></a>一、PHP反序列化漏洞原理</h3><p>PHP反序列化漏洞：CVE-2016-7124，PHP5 &lt; 5.6.25， PHP7 &lt; 7.0.10 的版本存在wakeup的漏洞，执行unserialize()时，先会调用__wakeup()。</p>
+<p>当序列化字符串中属性值个数大于属性个数，就会导致反序列化异常，从而跳过__wakeup()函数的执行。</p>
 <h3 id="二、反序列化的例子与格式"><a href="#二、反序列化的例子与格式" class="headerlink" title="二、反序列化的例子与格式"></a>二、反序列化的例子与格式</h3><h3 id="序列化格式"><a href="#序列化格式" class="headerlink" title="序列化格式"></a>序列化格式</h3><p>在PHP中，序列化用于存储或传递 PHP 的值的过程中，同时不丢失其类型和结构。</p>
 <p>序列化函数原型如下：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> serialize ( mixed $value )</span><br></pre></td></tr></table></figure>
@@ -309,7 +312,7 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CC</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $data;</span><br><span class="line">    <span class="keyword">private</span> $pass;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params">$data, $pass</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;data = $data;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;pass = $pass;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$number = <span class="number">34</span>;</span><br><span class="line">$str = <span class="string">&#x27;uusama&#x27;</span>;</span><br><span class="line">$bool = <span class="literal">true</span>;</span><br><span class="line">$null = <span class="literal">NULL</span>;</span><br><span class="line">$arr_int = <span class="keyword">array</span>(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">$arr = <span class="keyword">array</span>(<span class="string">&#x27;a&#x27;</span> =&gt; <span class="number">1</span>, <span class="string">&#x27;b&#x27;</span> =&gt; <span class="number">2</span>);</span><br><span class="line">$cc = <span class="keyword">new</span> CC(<span class="string">&#x27;uu&#x27;</span>, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">var_dump(serialize($number));</span><br><span class="line">var_dump(serialize($str));</span><br><span class="line">var_dump(serialize($bool));</span><br><span class="line">var_dump(serialize($null));</span><br><span class="line">var_dump(serialize($arr_int));</span><br><span class="line">var_dump(serialize($arr));</span><br><span class="line">var_dump(serialize($cc));</span><br></pre></td></tr></table></figure>
 
 <p>输出结果为：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span>(<span class="number">5</span>) <span class="string">&quot;i:34;&quot;</span></span><br><span class="line"><span class="keyword">string</span>(<span class="number">13</span>) <span class="string">&quot;s:6:&quot;</span>uusama<span class="string">&quot;;&quot;</span></span><br><span class="line"><span class="keyword">string</span>(<span class="number">4</span>) <span class="string">&quot;b:1;&quot;</span></span><br><span class="line"><span class="keyword">string</span>(<span class="number">2</span>) <span class="string">&quot;N;&quot;</span></span><br><span class="line"><span class="keyword">string</span>(<span class="number">22</span>) <span class="string">&quot;a:2:&#123;i:0;i:1;i:1;i:2;&#125;&quot;</span> </span><br><span class="line"><span class="keyword">string</span>(<span class="number">30</span>) <span class="string">&quot;a:2:&#123;s:1:&quot;</span>a<span class="string">&quot;;i:1;s:1:&quot;</span><span class="string">b&quot;;i:2;&#125;&quot;</span></span><br><span class="line"><span class="keyword">string</span>(<span class="number">52</span>) <span class="string">&quot;O:2:&quot;</span>CC<span class="string">&quot;:2:&#123;s:4:&quot;</span>data<span class="string">&quot;;s:2:&quot;</span>uu<span class="string">&quot;;s:8:&quot;</span> CC pass<span class="string">&quot;;b:1;&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span>(<span class="number">5</span>) <span class="string">&quot;i:34;&quot;</span></span><br><span class="line"><span class="keyword">string</span>(<span class="number">13</span>) <span class="string">&quot;s:6:&quot;</span>uusama<span class="string">&quot;;&quot;</span></span><br><span class="line"><span class="keyword">string</span>(<span class="number">4</span>) <span class="string">&quot;b:1;&quot;</span></span><br><span class="line"><span class="keyword">string</span>(<span class="number">2</span>) <span class="string">&quot;N;&quot;</span></span><br><span class="line"><span class="keyword">string</span>(<span class="number">22</span>) <span class="string">&quot;a:2:&#123;i:0;i:1;i:1;i:2;&#125;&quot;</span> </span><br><span class="line"><span class="keyword">string</span>(<span class="number">30</span>) <span class="string">&quot;a:2:&#123;s:1:&quot;</span>a<span class="string">&quot;;i:1;s:1:&quot;</span><span class="string">b&quot;;i:2;&#125;&quot;</span></span><br><span class="line"><span class="keyword">string</span>(<span class="number">52</span>) <span class="string">&quot;O:2:&quot;</span>CC<span class="string">&quot;:2:&#123;s:4:&quot;</span>data<span class="string">&quot;;s:2:&quot;</span>uu<span class="string">&quot;;s:8:&quot;</span> CC pass<span class="string">&quot;;b:1;&#125;&quot;</span>    <span class="comment">#注意private、protect属性序列化之后的字符串开头结尾各有一个空白字符（即%00）</span></span><br></pre></td></tr></table></figure>
 
 <p>所以序列化对于不同类型得到的字符串格式为：</p>
 <ul>
@@ -322,6 +325,12 @@
 </ul>
 
                 
+<p class="pink-link-context">
+    <a href="/2020/09/01/CTF%E7%AC%94%E8%AE%B0/XCTF%E8%AE%AD%E7%BB%83write%20up/" rel="next" title="XCTF训练write up">
+    上一篇：XCTF训练write up
+  </a>
+</p>
+
 
 
 <p class="pink-link-context">
