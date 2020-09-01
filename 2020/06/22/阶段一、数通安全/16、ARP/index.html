@@ -1,0 +1,673 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>16、ARP协议 | 2h0nG&#39;s Hacker Blog</title>
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="Love is friendship fell into love">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="16、ARP协议"/>
+    <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="2h0nG&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">2h0nG&#39;s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">2h0nG</p>
+                        <p class="desc">不断学习中/人品极佳/不太好接近</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/数据通信安全/">
+                    数据通信安全 <span class="right">30 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/代码审计安全/">
+                    代码审计安全 <span class="right">8 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Linux系统安全/">
+                    Linux系统安全 <span class="right">12 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Web渗透测试/">
+                    Web渗透测试 <span class="right">17 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/CTF笔记/">
+                    CTF笔记 <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Python学习/">
+                    Python学习 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/数据通信安全/">数据通信安全</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>16、ARP协议</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2020-06-22T07:47:37.000Z"><a href="/2020/06/22/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/16%E3%80%81ARP/">2020-06-22</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/数据通信安全/" class="chip pink lighten-1">数据通信安全</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#16%E3%80%81ARP%E5%8D%8F%E8%AE%AE"><span class="section table-of-contents-text">16、ARP协议</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%89%8D%E8%A8%80"><span class="section table-of-contents-text">前言</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E5%B9%BF%E6%92%AD"><span class="section table-of-contents-text">一、广播</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81ARP%E5%8D%8F%E8%AE%AE%E6%A6%82%E8%BF%B0"><span class="section table-of-contents-text">二、ARP协议概述</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E9%9C%80%E8%A6%81ARP%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8C%85%E5%8F%91%E9%80%81%E6%83%85%E6%99%AF%EF%BC%9A%E4%B8%8D%E6%B8%85%E6%A5%9A%E7%9B%AE%E6%A0%87IP%E5%9C%B0%E5%9D%80%E7%9A%84MAC%E5%9C%B0%E5%9D%80"><span class="section table-of-contents-text">需要ARP协议的数据包发送情景：不清楚目标IP地址的MAC地址</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E6%83%85%E6%99%AF2%EF%BC%9A%E4%B8%8D%E6%B8%85%E6%A5%9A%E7%9B%AE%E6%A0%87IP%E5%9C%B0%E5%9D%80%E7%9A%84MAC%E5%9C%B0%E5%9D%80%EF%BC%8C%E5%B9%B6%E4%B8%94%E5%AF%B9%E6%96%B9%E6%98%AF%E4%B8%8D%E5%90%8C%E7%BD%91%E6%AE%B5"><span class="section table-of-contents-text">情景2：不清楚目标IP地址的MAC地址，并且对方是不同网段</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81ARP%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="section table-of-contents-text">三、ARP工作原理</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="section table-of-contents-text">四、面试题</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%94%E3%80%81ARP%E6%96%AD%E7%BD%91%E6%94%BB%E5%87%BB%E5%AE%9E%E9%AA%8C"><span class="section table-of-contents-text">五、ARP断网攻击实验</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AD%E3%80%81ARP%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB%E5%AE%9E%E9%AA%8C"><span class="section table-of-contents-text">六、ARP中间人攻击实验</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%83%E3%80%81%E6%8A%93%E5%8C%85%E5%AE%9E%E9%AA%8C"><span class="section table-of-contents-text">七、抓包实验</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AB%E3%80%81%E5%A6%82%E4%BD%95%E9%98%B2%E5%BE%A1ARP%E6%94%BB%E5%87%BB"><span class="section table-of-contents-text">八、如何防御ARP攻击</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81ARP%E5%8F%8C%E5%90%91%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A"><span class="section table-of-contents-text">1、ARP双向静态绑定</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81-%E5%AE%89%E8%A3%85ARP%E9%98%B2%E7%81%AB%E5%A2%99"><span class="section table-of-contents-text">2、 安装ARP防火墙</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3%E3%80%81%E5%9C%A8%E4%BC%81%E4%B8%9A%E7%BA%A7%E4%BA%A4%E6%8D%A2%E6%9C%BA%E4%B8%8A%E5%90%AF%E7%94%A8DAI%E6%8A%80%E6%9C%AF"><span class="section table-of-contents-text">3、在企业级交换机上启用DAI技术</span></a></li></ol></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="16、ARP协议"><a href="#16、ARP协议" class="headerlink" title="16、ARP协议"></a>16、ARP协议</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p><strong>网络层协议</strong>：ICMP、IP、ARP</p>
+<p><strong>查看ARP表</strong>：<code>arp -a</code>、<strong>删除ARP表</strong>：<code>arp -d</code></p>
+<h3 id="一、广播"><a href="#一、广播" class="headerlink" title="一、广播"></a>一、广播</h3><p><strong>MAC广播地址（二层广播地址）</strong>：FF-FF-FF-FF-FF-FF（6字节的MAC地址）</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/N6XzXq"><img src="https://s1.ax1x.com/2020/06/27/N6XzXq.png" alt="N6XzXq.png"></a></p>
+<p><strong>IP广播地址</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">本网段的广播IP地址（例如本网段为192.168.1.0）：192.168.1.255</span><br><span class="line">全局广播地址：255.255.255.255</span><br></pre></td></tr></table></figure>
+
+<p><strong>广播域</strong>：可以听到同一个广播的PC集合，称为一个广播域。<u>路由器是广播的终点</u>，<u>交换机遇到广播会无条件的转发</u>。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/N6j9BV"><img src="https://s1.ax1x.com/2020/06/27/N6j9BV.png" alt="N6j9BV.png"></a></p>
+<h3 id="二、ARP协议概述"><a href="#二、ARP协议概述" class="headerlink" title="二、ARP协议概述"></a>二、ARP协议概述</h3><h4 id="需要ARP协议的数据包发送情景：不清楚目标IP地址的MAC地址"><a href="#需要ARP协议的数据包发送情景：不清楚目标IP地址的MAC地址" class="headerlink" title="需要ARP协议的数据包发送情景：不清楚目标IP地址的MAC地址"></a>需要ARP协议的数据包发送情景：不清楚目标IP地址的MAC地址</h4><p>三层的IP报文到二层的数据链路层进行下一步MAC地址封装时，发现自己不知道目标IP地址的MAC地址是多少，这时，<u>会将自己只差目标MAC地址的数据帧缓存起来</u>，然后去求助ARP协议 通过目标IP地址来获得MAC地址。<u>网络层会生成一个ARP请求报文帮助询问目标MAC地址</u>，请求报文的内容是介绍自己的IP和MAC询问目标IP的MAC，<u>请求报文在二层数据链路层进行封装时，将目标MAC地址填充为MAC广播地址，通过广播发送去询问</u><u>，等待目标IP的主机以单播的形式返回一个ARP应答报文</u>，<u>源主机收到这个报文后会先将询问到的目标MAC地址缓存到自己主机内存中的ARP缓存表中，然后填充之前缓存的缺少目标MAC地址的数据帧</u>，成功向目标IP发送。</p>
+<h4 id="情景2：不清楚目标IP地址的MAC地址，并且对方是不同网段"><a href="#情景2：不清楚目标IP地址的MAC地址，并且对方是不同网段" class="headerlink" title="情景2：不清楚目标IP地址的MAC地址，并且对方是不同网段"></a>情景2：不清楚目标IP地址的MAC地址，并且对方是不同网段</h4><p>此时，目标MAC地址应该<u>填写网关的MAC地址</u>，把数据帧发到网关，网关自然就会查询路由表转发数据帧。因此，如果ARP缓存中没有网关的地址，则会发送一个网络层的ARP请求广播包询问网关的MAC地址，最终得到网关单播回应ARP响应包。最后把网关的MAC地址放到我们前面数据帧的目标MAC地址字段。</p>
+<p>网关收到这个数据帧后，首先查看帧头目标MAC地址是不是我，然后查看帧头中的类型是0800还是0806，如果是0806会丢弃，因为ARP协议是内网协议不路由，如果发现是0800IP协议，则会脱掉二层然后把数据帧送到路由器内部，进行路由表查验，寻找下一跳地址，并将数据帧送到下一跳端口位置。如果此时路由器ARP缓存表中没有下一跳IP地址的MAC地址，则会缓存此帧，向该网段发送ARP请求广播包，得到下一跳IP的单播ARP响应包后，缓存ARP地址表，然后重新封装帧头的MAC地址，注意源MAC地址写路由器发出端口的MAC地址，目标MAC地址要刚获得的下一跳IP地址MAC地址，然后发送该数据包到下一跳。以此类推，直到下一跳位置就是目标网段，同样经历以上过程发出。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/NzSWUe"><img src="https://s1.ax1x.com/2020/07/04/NzSWUe.png" alt="NzSWUe.png"></a></p>
+<h3 id="三、ARP工作原理"><a href="#三、ARP工作原理" class="headerlink" title="三、ARP工作原理"></a>三、ARP工作原理</h3><p>ARP工作原理分两个步骤：</p>
+<p>1）发送ARP广播报文：内容是：我的IP是XXX，我的MAC是XXX，谁的IP是XXX，你的MAC地址是啥？？</p>
+<p>2）回应ARP单播报文。</p>
+<blockquote>
+<p>===================================</p>
+<p>pc与其他PC通信，ARP原理: </p>
+<p>1）首先判断目标IP与自己是否在同一网段</p>
+<p>2）如果在同一网段，且ARP缓存表内无此IP，则直接发送ARP广播请求报文询问目标IP地址的MAC </p>
+<p>3）如果不在同一网段，且ARP缓存表内无此IP，则发送ARP广播请求报文询问网关的MAC</p>
+<p>===================================</p>
+</blockquote>
+<h3 id="四、面试题"><a href="#四、面试题" class="headerlink" title="四、面试题"></a>四、面试题</h3><p>1）ARP协议工作在哪一层？ 答：网络层</p>
+<p>2）ARP协议是干什么的？ 答：已知IP地址，解析MAC地址。</p>
+<p>3）可以描述一下ARP的工作原理吗？ 答：见三、。</p>
+<p>4）ARP漏洞在哪里，为什么可以通过ARP漏洞进行攻击？答：ARP收到单播应答数据包时没有身份验证，因此很容易被ARP欺骗。<strong>1、断网攻击</strong>：受到虚假的不存在的MAC地址，后果可能会中断正常的通信。<strong>2、中间人攻击</strong>：通信双方收到中间人的MAC地址的ARP响应单播，中间人截取信息后，再转发给正确的对方。</p>
+<h3 id="五、ARP断网攻击实验"><a href="#五、ARP断网攻击实验" class="headerlink" title="五、ARP断网攻击实验"></a>五、ARP断网攻击实验</h3><p>目标：断网攻击</p>
+<p>实验环境：实验环境：中间人攻击方win2003 、 受攻击方任意</p>
+<p>使用软件： 网络执法官v3.56</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">打开长角牛网络监控机 -》 添加监控范围 -》确定开始扫描 -》 对准攻击目标右键手工管理  -》 选择禁止与所有主机连接，除我的IP外，该网段所有IP欺骗到攻击目标ARP表中（-》 禁止与关键主机进行TCP&#x2F;IP连接 -》 第1组 -》 关键主机组设置 -》 第1组中加入想欺骗攻击目标ARP表中的一些IP地址）</span><br></pre></td></tr></table></figure>
+
+<h3 id="六、ARP中间人攻击实验"><a href="#六、ARP中间人攻击实验" class="headerlink" title="六、ARP中间人攻击实验"></a>六、ARP中间人攻击实验</h3><p>目标：实现窃取telnet和ftp密码</p>
+<p>使用软件：cain</p>
+<p>实验环境：中间人攻击方win2003 、 telnet/ftp服务器win2003 、 普通用户win7</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1、配置内网环境，win7：192.168.1.1、 win2003中间人：192.168.1.2、 telnet&#x2F;ftp服务器：192.168.1.3</span><br><span class="line">2、搭建telnet&#x2F;ftp服务器：</span><br><span class="line">计算机-》管理-》服务-》telnet启动； </span><br><span class="line">驱动硬盘-》安装服务组件-》应用服务器组件-》IIS服务器-》ftp服务器 -》新建一个ftp文件夹 -》在IIS中创建一个FTP站点 -》关闭匿名链接 -》 关闭默认站点 -》 创建一个ftp用户 </span><br><span class="line">3、使用arp -a命令，查看正确的MAC地址情况。</span><br><span class="line">4、开启攻击：攻击机器中安装cain软件 -》 打开cain -》 菜单栏第二个Sniffer -》 选择网卡 -》然后再点击start Sniffer凹进去了 -》 选择Sniffer页面 -》 点击菜单栏中的加号，设置攻击目标的范围 -》 设置rangeIP范围，开始扫描 -》 点击下边的页面APR -》点击空白表格处，再次点击加号，添加攻击目标，左边是目标1、右边是目标2，也就是作为中间人监听欺骗的两方 -》 点击菜单栏第三个生化按钮开始攻击 -》 开始攻击后，再被攻击主机中查看ARP表会发现出现两个相同的MAC地址却不同IP的表项（这也是诊断中间人攻击的方法）</span><br><span class="line">5、演示如果通过攻击获得用户之间的敏感信息：使用用户访问ftp服务器 -》 攻击方点击下边菜单栏的Passwords，可以选择很多应用协议的敏感信息抓取记录，这里选择ftp -》可以查看到抓取到了用户刚才登陆ftp服务器时输入的密码</span><br><span class="line">6、telnet密码泄露方式原理同上 -》 选择telnet协议的信息获取分类 -》 右键view查看截取的敏感信息 -》 记事本设置换行 -》 可以看到password 和 命令等，因为记事本默认编码问题有点乱码。看到addmmiinniissttrraattoorr的双倍重复是因为TCP协议的双重确认机制</span><br><span class="line">7、停止攻击的方法：点击stop apr（菜单栏第三个按钮）</span><br></pre></td></tr></table></figure>
+
+<h3 id="七、抓包实验"><a href="#七、抓包实验" class="headerlink" title="七、抓包实验"></a>七、抓包实验</h3><p>目标：抓取telnet有密码的报文、arp广播请求报文、arp单播应答报文</p>
+<p>使用软件：科来网络分析系统</p>
+<p>实验环境：win7x64抓包机器、win2003</p>
+<p>解决杂乱的数据包显示：实时分析 -》 本地网卡 -》 全面分析 -》 数据包 -》过滤 -》 填写网络协议</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">安装科来 -》 打开软件选择实时分析 -》 选择网卡 -》 全面分析 -》 开始 -》 选择数据包功能页面 -》 删除win7的ARP表，然后ping win2003 -》分析数据包可以看到，10个包，2个ARP协议包请求和响应，5个ping来回ICMP包 -》 分析ARP广播数据包，帧头帧尾，ARP请求协议包。 -》 分析telnet数据包，找出明文口令</span><br></pre></td></tr></table></figure>
+
+<h3 id="八、如何防御ARP攻击"><a href="#八、如何防御ARP攻击" class="headerlink" title="八、如何防御ARP攻击"></a>八、如何防御ARP攻击</h3><h4 id="1、ARP双向静态绑定"><a href="#1、ARP双向静态绑定" class="headerlink" title="1、ARP双向静态绑定"></a>1、ARP双向静态绑定</h4><p>两主机静态绑定对方的IP和MAC地址到ARP表中，因为静态绑定优先级大于动态绑定，所以ARP欺骗所获得的动态绑定信息不会生效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PC： arp -s 网关的IP 网关的MAC地址</span><br><span class="line">cisco路由器： conf t; arp 员工IP 员工MAC arpa</span><br></pre></td></tr></table></figure>
+
+<p>缺点：工作量太大！必须要双向绑定。</p>
+<p>建议：用在公司的主要服务器上！</p>
+<h4 id="2、-安装ARP防火墙"><a href="#2、-安装ARP防火墙" class="headerlink" title="2、 安装ARP防火墙"></a>2、 安装ARP防火墙</h4><p><strong>ARP防火墙原理（以暴制暴）</strong>：如果是保护断网攻击，首先自动静态绑定网关的ARP记录。如果攻击方将目标转移到欺骗路由器，一旦遭受路由器ARP攻击，ARP防火墙发现断网，则会像攻击方的手段一样，向路由器高频率发送ARP应答单播数据包，以覆盖路由器上错误的ARP记录。</p>
+<p>缺点：增加网络负担！成功率也并不是100%。</p>
+<p>360中的ARP防火墙一般默认不开启，在需要的时候手动开启。</p>
+<h4 id="3、在企业级交换机上启用DAI技术"><a href="#3、在企业级交换机上启用DAI技术" class="headerlink" title="3、在企业级交换机上启用DAI技术"></a>3、在企业级交换机上启用DAI技术</h4><blockquote>
+<p><strong>通过交换机查DHCP Snooping表的方式，核对ARP协议包源IP和MAC的信息是否正确。从源头防护ARP欺骗！</strong></p>
+</blockquote>
+<p><strong>DHCP Snooping技术</strong>：DHCP Snooping是DHCP（Dynamic Host Configuration Protocol）的一种安全特性，监听DHCP ACK、NAK、Offer报文，用于保证DHCP客户端从合法的DHCP服务器获取IP地址。使用DHCP Snooping技术，连接到此路由器的主机<u>必须自动获取IP地址</u>，如果手动则交换机接收不到DHCP ACK、NAK、Offer报文，则会down掉该接口。在企业级交换机上，支持此技术，该技术在交换机中维护一个<u>DHCP Snooping信息表</u>，表中包含了交换机所有端口上主机的IP和MAC地址。获得这些信息的前提是主机与DHCP服务器进行联系，请求IP分配的服务。企业级交换机上的Snooping技术会<u>捕捉该端口上主机请求<strong>DHCP</strong>服务过程</u>中Discovery数据包带有的MAC地址和ACK数据包带有的IP地址记录到Snooping信息表中。</p>
+<p><strong>DAI（Dynamic ARP Inspection）</strong>动态ARP检测：DAI 以 DHCP Snooping绑定表为基础，同时开启ARP check功能。ARP check会检测每个端口发出的网络层协议是否是ARP协议，如果是则检测ARP包中发送方的IP地址与MAC地址与DHCP Snooping表中的记录是否匹配。如果匹配则通过，如果不匹配则有两种选择：丢弃或直接down掉该端口，并记录日志。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UpdVMD"><img src="https://s1.ax1x.com/2020/07/05/UpdVMD.png" alt="UpdVMD.png"></a></p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/05/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/17%E3%80%81ICMP%E5%8D%8F%E8%AE%AE/" rel="next" title="ICMP协议">
+    上一篇：ICMP协议
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/06/20/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/15%E3%80%81IP%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90%E4%B8%8E%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1/" rel="next" title="15、IP协议分析与静态路由">
+    下一篇：15、IP协议分析与静态路由
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a target="_blank" rel="noopener" href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

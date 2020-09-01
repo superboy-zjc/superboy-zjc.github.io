@@ -1,0 +1,699 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>防火墙原理及部署方式 | 2h0nG&#39;s Hacker Blog</title>
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="Love is friendship fell into love">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="防火墙原理及部署方式"/>
+    <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="2h0nG&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">2h0nG&#39;s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">2h0nG</p>
+                        <p class="desc">不断学习中/人品极佳/不太好接近</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/数据通信安全/">
+                    数据通信安全 <span class="right">30 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/代码审计安全/">
+                    代码审计安全 <span class="right">8 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Linux系统安全/">
+                    Linux系统安全 <span class="right">12 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Web渗透测试/">
+                    Web渗透测试 <span class="right">17 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/CTF笔记/">
+                    CTF笔记 <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Python学习/">
+                    Python学习 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/数据通信安全/">数据通信安全</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>防火墙原理及部署方式</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2020-07-14T00:49:44.000Z"><a href="/2020/07/14/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/28%E3%80%81%E9%98%B2%E7%81%AB%E5%A2%99%E5%8E%9F%E7%90%86%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F/">2020-07-14</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/数据通信安全/" class="chip pink lighten-1">数据通信安全</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E5%8E%9F%E7%90%86%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F"><span class="section table-of-contents-text">防火墙原理及部署方式</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E6%A6%82%E8%BF%B0"><span class="section table-of-contents-text">一、防火墙的概述</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81%E9%98%B2%E7%81%AB%E5%A2%99%E5%AE%9A%E4%B9%89"><span class="section table-of-contents-text">1、防火墙定义</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E9%98%B2%E6%8A%A4%E4%BD%9C%E7%94%A8"><span class="section table-of-contents-text">2、防火墙的防护作用</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3%E3%80%81%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD"><span class="section table-of-contents-text">3、防火墙的基本功能</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#4%E3%80%81%E5%B8%B8%E8%A7%81%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E4%BA%A7%E5%93%81"><span class="section table-of-contents-text">4、常见的防火墙产品</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%8C%BA%E5%9F%9F%E9%9A%94%E7%A6%BB"><span class="section table-of-contents-text">二、防火墙的区域隔离</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%8C%BA%E5%9F%9F%E6%A6%82%E5%BF%B5"><span class="section table-of-contents-text">1、防火墙的区域概念</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81%E5%8C%BA%E5%9F%9F%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="section table-of-contents-text">2、区域间通信</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3%E3%80%81%E5%A6%82%E4%BD%95%E5%86%99%E7%AD%96%E7%95%A5"><span class="section table-of-contents-text">3、如何写策略</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#4%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E7%BD%AEDMZ%E5%8C%BA%E5%9F%9F"><span class="section table-of-contents-text">4、为什么设置DMZ区域</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%8E%86%E5%8F%B2%E5%8F%91%E5%B1%95%E5%92%8C%E5%88%86%E7%B1%BB"><span class="section table-of-contents-text">三、防火墙的历史发展和分类</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81%E5%8C%85%E8%BF%87%E6%BB%A4%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%88%E6%97%A9%E6%9C%9F%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%89"><span class="section table-of-contents-text">1、包过滤防火墙（早期的防火墙）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81%E4%BB%A3%E7%90%86%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%88%E6%97%A9%E6%9C%9F%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%89"><span class="section table-of-contents-text">2、代理防火墙（早期的防火墙）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3%E3%80%81%E7%8A%B6%E6%80%81%E6%A3%80%E6%B5%8B%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%88%E7%9B%AE%E5%89%8D%E4%B8%BB%E6%B5%81%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%89"><span class="section table-of-contents-text">3、状态检测防火墙（目前主流防火墙）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#4%E3%80%81%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%88DPI%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%89%EF%BC%88%E7%9B%AE%E5%89%8D%E4%B8%BB%E6%B5%81%E9%98%B2%E7%81%AB%E5%A2%99%EF%BC%89"><span class="section table-of-contents-text">4、高级应用防火墙（DPI防火墙）（目前主流防火墙）</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%E4%B8%8E%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F%E5%92%8C%E4%BD%8D%E7%BD%AE"><span class="section table-of-contents-text">四、防火墙的工作模式与部署方式和位置</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%BC%8F"><span class="section table-of-contents-text">1、路由模式</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81%E9%80%8F%E6%98%8E%E6%A8%A1%E5%BC%8F%EF%BC%88%E9%98%B2%E7%81%AB%E5%A2%99%E4%BA%8C%E5%B1%82%E7%AB%AF%E5%8F%A3%EF%BC%89"><span class="section table-of-contents-text">2、透明模式（防火墙二层端口）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3%E3%80%81%E6%B7%B7%E6%9D%82%E6%A8%A1%E5%BC%8F"><span class="section table-of-contents-text">3、混杂模式</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%94%E3%80%81%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B"><span class="section table-of-contents-text">五、防火墙的基本部署流程</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E5%AE%9E%E9%AA%8C1%E3%80%81%E5%85%A5%E9%97%A8%E5%A4%A9%E8%9E%8D%E4%BF%A1%E5%AE%89%E5%85%A8%E7%BD%91%E5%85%B3TopGate%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C"><span class="section table-of-contents-text">实验1、入门天融信安全网关TopGate系统实验</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E5%AE%9E%E9%AA%8C2%E3%80%81%E9%83%A8%E7%BD%B2%E9%98%B2%E7%81%AB%E5%A2%99%E5%AE%9E%E7%8E%B0%E5%8C%BA%E5%9F%9F%E9%9A%94%E7%A6%BB"><span class="section table-of-contents-text">实验2、部署防火墙实现区域隔离</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E5%AE%9E%E9%AA%8C3%E3%80%81%E5%9C%A8%E5%AE%9E%E9%AA%8C2%E5%9F%BA%E7%A1%80%E4%B8%8A%E9%85%8D%E7%BD%AE%E6%BA%90%E8%BD%AC%E6%8D%A2SNAT-PAT"><span class="section table-of-contents-text">实验3、在实验2基础上配置源转换SNAT(PAT)</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E5%AE%9E%E9%AA%8C4%E3%80%81%E5%9C%A8%E5%AE%9E%E9%AA%8C3%E5%9F%BA%E7%A1%80%E4%B8%8ADMI%E5%8C%BA%E5%9F%9F%E9%83%A8%E7%BD%B2http%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E9%85%8D%E7%BD%AEDNAT%EF%BC%89"><span class="section table-of-contents-text">实验4、在实验3基础上DMI区域部署http服务器（配置DNAT）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E5%AE%9E%E9%AA%8C5%E3%80%81%E5%9C%A8%E5%AE%9E%E9%AA%8C4%E5%9F%BA%E7%A1%80%E4%B8%8A"><span class="section table-of-contents-text">实验5、在实验4基础上</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AD%E3%80%81%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84HA"><span class="section table-of-contents-text">六、防火墙的HA</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%83%E3%80%81%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BE%A4%E9%9B%86%EF%BC%88%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%89"><span class="section table-of-contents-text">七、服务器群集（负载均衡）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B9%9D%E3%80%81%E4%BD%9C%E4%B8%9A"><span class="section table-of-contents-text">九、作业</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="防火墙原理及部署方式"><a href="#防火墙原理及部署方式" class="headerlink" title="防火墙原理及部署方式"></a>防火墙原理及部署方式</h2><h3 id="一、防火墙的概述"><a href="#一、防火墙的概述" class="headerlink" title="一、防火墙的概述"></a>一、防火墙的概述</h3><h4 id="1、防火墙定义"><a href="#1、防火墙定义" class="headerlink" title="1、防火墙定义"></a>1、防火墙定义</h4><p>防火墙是一款具备防护功能的网络设备。</p>
+<h4 id="2、防火墙的防护作用"><a href="#2、防火墙的防护作用" class="headerlink" title="2、防火墙的防护作用"></a>2、防火墙的防护作用</h4><p>作用：网络隔离/隔离区域</p>
+<p>隔离网络：将需要保护的网络与不可信任的网络隔离。对内部信息进行安全防护。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/Ut2nZ8"><img src="https://s1.ax1x.com/2020/07/14/Ut2nZ8.png" alt="Ut2nZ8.png"></a></p>
+<h4 id="3、防火墙的基本功能"><a href="#3、防火墙的基本功能" class="headerlink" title="3、防火墙的基本功能"></a>3、防火墙的基本功能</h4><p>1）网络隔离</p>
+<p>2）攻击防护（DOS攻击）</p>
+<p>3）日志记录</p>
+<p>4）路由器、交换机的功能</p>
+<p>5）冗余设计（可支持备用防火墙）</p>
+<p>6）访问控制列表ACL</p>
+<p>7）VPN功能、NAT功能（源转换==PAT、目标转换==端口映射）（路由器的活它都有）</p>
+<h4 id="4、常见的防火墙产品"><a href="#4、常见的防火墙产品" class="headerlink" title="4、常见的防火墙产品"></a>4、常见的防火墙产品</h4><blockquote>
+<p>华为、思科、锐捷、天融信、启明星辰、奇安信、深信服（上网行为做的棒）。</p>
+</blockquote>
+<p>思科：防火墙编号为ASA 55XX</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UtRUXt"><img src="https://s1.ax1x.com/2020/07/14/UtRUXt.png" alt="UtRUXt.png"></a></p>
+<p>天融信：NGFW4000</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UtRDAS"><img src="https://s1.ax1x.com/2020/07/14/UtRDAS.png" alt="UtRDAS.png"></a></p>
+<h3 id="二、防火墙的区域隔离"><a href="#二、防火墙的区域隔离" class="headerlink" title="二、防火墙的区域隔离"></a>二、防火墙的区域隔离</h3><h4 id="1、防火墙的区域概念"><a href="#1、防火墙的区域概念" class="headerlink" title="1、防火墙的区域概念"></a>1、防火墙的区域概念</h4><p>一般防火墙将网络分为3个区域：</p>
+<p>1）内部区域 / 信任区域：Trust / Inside</p>
+<p>2）DMZ区域 / 隔离区：也称为停火区。</p>
+<p>3）外部区域 / 非信任区域：Untrust / Outside</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UtWW2d"><img src="https://s1.ax1x.com/2020/07/14/UtWW2d.png" alt="UtWW2d.png"></a></p>
+<h4 id="2、区域间通信"><a href="#2、区域间通信" class="headerlink" title="2、区域间通信"></a>2、区域间通信</h4><p>默认情况下，区域间通信是完全被屏蔽的，<strong>区域间需要写<u>策略</u>才能放行数据</strong>，而且要设置放行方向。</p>
+<h4 id="3、如何写策略"><a href="#3、如何写策略" class="headerlink" title="3、如何写策略"></a>3、如何写策略</h4><p>经常会使用到的策略：</p>
+<p>1、Inside – to – Outside：全部放行。</p>
+<p>2、Inside – to – DMZ：全部放行。</p>
+<p>3、DMZ – to –Outside：全部放行。</p>
+<blockquote>
+<p>防火墙是智能的，防火墙会判断通过防火墙的数据是主动访问还是回包，如果是主动访问就要查看策略是否允许，如果是回包会智能通过。</p>
+</blockquote>
+<h4 id="4、为什么设置DMZ区域"><a href="#4、为什么设置DMZ区域" class="headerlink" title="4、为什么设置DMZ区域"></a>4、为什么设置DMZ区域</h4><p>当公司有需要对外发布服务器的时候，将服务器放置到DMZ区域、并写放行策略：outside – to – DMZ，一旦DMZ区域被敌人攻破，由于DMZ区域为隔离区域，不会进一步殃及破坏inside区域，所以设置DMZ区域是在公司需要对外发布服务器的同时保护了Inside内部区域。</p>
+<h3 id="三、防火墙的历史发展和分类"><a href="#三、防火墙的历史发展和分类" class="headerlink" title="三、防火墙的历史发展和分类"></a>三、防火墙的历史发展和分类</h3><h4 id="1、包过滤防火墙（早期的防火墙）"><a href="#1、包过滤防火墙（早期的防火墙）" class="headerlink" title="1、包过滤防火墙（早期的防火墙）"></a>1、包过滤防火墙（早期的防火墙）</h4><p>包过滤防火墙：只能基于IP与端口号对数据进行过滤、不能对应用层数据做过滤，因此<strong>也称其为网络层防火墙</strong>。而且不够智能，外网回来的包，不能识别是回包还是主动发的包。</p>
+<h4 id="2、代理防火墙（早期的防火墙）"><a href="#2、代理防火墙（早期的防火墙）" class="headerlink" title="2、代理防火墙（早期的防火墙）"></a>2、代理防火墙（早期的防火墙）</h4><p>特点：可以基于应用层对数据过滤，所谓代理很麻烦，大大降低网络通信效率。</p>
+<h4 id="3、状态检测防火墙（目前主流防火墙）"><a href="#3、状态检测防火墙（目前主流防火墙）" class="headerlink" title="3、状态检测防火墙（目前主流防火墙）"></a>3、状态检测防火墙（目前主流防火墙）</h4><p>特点：主流防火墙，智能检测回包机制。每通过一个防火墙的策略，就生成一个状态记录，再有相同的策略经过时，直接看状态记录吻不吻合，吻合直接按照状态记录走，就不看路由表、策略表、NAT表、ARP缓存等了；智能检测回包同理，也是查看状态记录表是否与此数据包相匹配的记录，判断是否为回包，如果是，直接按照状态记录送进去。（早期状态检测防火墙依然不能检测应用层数据）</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UtH6aR"><img src="https://s1.ax1x.com/2020/07/14/UtH6aR.png" alt="UtH6aR.png"></a></p>
+<p><u>状态检测防火墙数据处理流程图：</u></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UtOESP"><img src="https://s1.ax1x.com/2020/07/14/UtOESP.png" alt="UtOESP.png"></a></p>
+<h4 id="4、高级应用防火墙（DPI防火墙）（目前主流防火墙）"><a href="#4、高级应用防火墙（DPI防火墙）（目前主流防火墙）" class="headerlink" title="4、高级应用防火墙（DPI防火墙）（目前主流防火墙）"></a>4、高级应用防火墙（DPI防火墙）（目前主流防火墙）</h4><p>高级应用防火墙 == Deep Packet Inspection，DPI防火墙</p>
+<p>在<strong>3、状态检测防火墙</strong>的基础上，增加了应用层数据检测模块，可以检测应用层数据！</p>
+<p><u>未来的发展方向，目前的DPI防火墙还不高效。</u></p>
+<h3 id="四、防火墙的工作模式与部署方式和位置"><a href="#四、防火墙的工作模式与部署方式和位置" class="headerlink" title="四、防火墙的工作模式与部署方式和位置"></a>四、防火墙的工作模式与部署方式和位置</h3><h4 id="1、路由模式"><a href="#1、路由模式" class="headerlink" title="1、路由模式"></a>1、路由模式</h4><p>路由模式的防火墙端口一般设置为三层端口，防火墙工作在三层路由器模式，路由模式防火墙可以改变网络结构（因为它的端口是三层端口）。</p>
+<p>一般路由模式的防火墙部署在公司外网总出口。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UNDaSP"><img src="https://s1.ax1x.com/2020/07/14/UNDaSP.png" alt="UNDaSP.png"></a></p>
+<h4 id="2、透明模式（防火墙二层端口）"><a href="#2、透明模式（防火墙二层端口）" class="headerlink" title="2、透明模式（防火墙二层端口）"></a>2、透明模式（防火墙二层端口）</h4><p>透明模式防火墙的端口设置为二层端口，防火墙工作在二层模式。透明模式不会改变网络拓扑结构。</p>
+<p>一般透明模式的防火墙部署在公司内网的链路上，来保护整个内部，或者局部的设备。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UNyoTg"><img src="https://s1.ax1x.com/2020/07/14/UNyoTg.png" alt="UNyoTg.png"></a></p>
+<h4 id="3、混杂模式"><a href="#3、混杂模式" class="headerlink" title="3、混杂模式"></a>3、混杂模式</h4><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UNqblV"><img src="https://s1.ax1x.com/2020/07/14/UNqblV.png" alt="UNqblV.png"></a></p>
+<h3 id="五、防火墙的基本部署流程"><a href="#五、防火墙的基本部署流程" class="headerlink" title="五、防火墙的基本部署流程"></a>五、防火墙的基本部署流程</h3><h4 id="实验1、入门天融信安全网关TopGate系统实验"><a href="#实验1、入门天融信安全网关TopGate系统实验" class="headerlink" title="实验1、入门天融信安全网关TopGate系统实验"></a>实验1、入门天融信安全网关TopGate系统实验</h4><blockquote>
+<p>实验环境：TopGate2操作系统</p>
+<p><strong>账号密码：superman talent</strong></p>
+</blockquote>
+<p>安全网关具有WEB配置界面：<a target="_blank" rel="noopener" href="https://192.168.1.254:8080/">https://192.168.1.254:8080</a></p>
+<p>防火墙的全系产品一般厂家出厂默认给eth0端口配置好192.168.1.254/24的IP了，同时防火墙操作系统默认开启了443https端口，并将WEB伪装为8080端口发布。工程师想使用WEB配置防火墙只需要将PC插入eth0端口，然后配置PC的IP与安全网关在同一网段，访问WEB配置的页面即可进行WEB配置。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UN3T29"><img src="https://s1.ax1x.com/2020/07/14/UN3T29.png" alt="UN3T29.png"></a></p>
+<h4 id="实验2、部署防火墙实现区域隔离"><a href="#实验2、部署防火墙实现区域隔离" class="headerlink" title="实验2、部署防火墙实现区域隔离"></a>实验2、部署防火墙实现区域隔离</h4><blockquote>
+<p>此实验eth0接口上用两个机器是因为天融信的安全网关TopGate要使用高版本浏览器，XP不行，老师顺势讲了真实机开启虚拟网卡和虚拟机连接到同一个网络的操作（真实机不能两块网卡都配网关[有待考证]），我使用的是VirtualBox无虚拟网卡，因此eth0直接使用Win7相连。</p>
+<p>实验环境：VirtualBOX虚拟机，Win7(internet01)、Win2003两台(internet02-3)、TopGate防火墙一台且开启三块网卡(eth0-internet01、eth1-internet02、eth2-internet03)。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UUeesS"><img src="https://s1.ax1x.com/2020/07/14/UUeesS.png" alt="UUeesS.png"></a></p>
+<p>1、准备好实验环境后，Win7首先配置好IP、网关，直接连接防火墙的Web配置网页 <a target="_blank" rel="noopener" href="https://192.168.1.254:8080/">https://192.168.1.254:8080</a> 进行防火墙配置。</p>
+<p>2、创建区域，并将端口加入响应区域：资源管理 -》 区域 -》 编辑默认的区域 -》改个名inside，访问权限改成禁止（表示默认禁止访问，需要走策略），成员就是eth0不用改 -》依次添加两个区域DMZ、outside，绑定网卡属性分别为是eth1、eth2。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UU6Hw8"><img src="https://s1.ax1x.com/2020/07/14/UU6Hw8.png" alt="UU6Hw8.png"></a></p>
+<p>3、配置防火墙端口的IP地址：网络管理 -》 接口 -》 编辑接口 -》 配置路由端口 -》添加、确定 。</p>
+<p>4、正常来说应该写路由了，但本实验所有直连网络已足够。</p>
+<p>5、编写策略（in-out、dmz-out、in-dmz放行）：防火墙 -》 访问控制 -》添加策略 -》 选择区域，端口任意</p>
+<p>6、尝试区域间的通信，验证策略是否成功部署。</p>
+<h4 id="实验3、在实验2基础上配置源转换SNAT-PAT"><a href="#实验3、在实验2基础上配置源转换SNAT-PAT" class="headerlink" title="实验3、在实验2基础上配置源转换SNAT(PAT)"></a>实验3、在实验2基础上配置源转换SNAT(PAT)</h4><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UaGy7t"><img src="https://s1.ax1x.com/2020/07/14/UaGy7t.png" alt="UaGy7t.png"></a></p>
+<p>防火墙 -》 地址转换 -》 添加转换 -》 源转换、其他-选择区域</p>
+<h4 id="实验4、在实验3基础上DMI区域部署http服务器（配置DNAT）"><a href="#实验4、在实验3基础上DMI区域部署http服务器（配置DNAT）" class="headerlink" title="实验4、在实验3基础上DMI区域部署http服务器（配置DNAT）"></a>实验4、在实验3基础上DMI区域部署http服务器（配置DNAT）</h4><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UaJsv4"><img src="https://s1.ax1x.com/2020/07/14/UaJsv4.png" alt="UaJsv4.png"></a></p>
+<p>资源管理 -》 地址  -》 添加主机 ，给防火墙 -》 地址转换中的目标转换的目标IP使用（无法输入IP，只能选择地址）。</p>
+<h4 id="实验5、在实验4基础上"><a href="#实验5、在实验4基础上" class="headerlink" title="实验5、在实验4基础上"></a>实验5、在实验4基础上</h4><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UdiY40"><img src="https://s1.ax1x.com/2020/07/15/UdiY40.png" alt="UdiY40.png"></a></p>
+<p>1、创建内容安全策略：内容过滤 -》 HTTP过滤 -》 URL过滤 -》设置名字 -》 编辑即可； 内容过滤 -》 设置名字 -》 编辑即可；</p>
+<p>2、设置内容安全策略：防火墙 -》 访问控制 -》 编辑策略 -》内容安全策略 -》 </p>
+<h3 id="六、防火墙的HA"><a href="#六、防火墙的HA" class="headerlink" title="六、防火墙的HA"></a>六、防火墙的HA</h3><p><strong>High Available，HA</strong>：高可用性，对设备进行备份操作，并能在第一台出现故障，备份马上就能启用。</p>
+<p>1、配置两个防火墙间心跳线的端口IP时，选择不同步此地址。</p>
+<p>2、两个防火墙都设置：高可用性 -》 高可用性 -》设置心跳地址、热备组、监听接口设置eth0、eth2 -》 启用</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UBBxQs"><img src="https://s1.ax1x.com/2020/07/16/UBBxQs.png" alt="UBBxQs.png"></a></p>
+<h3 id="七、服务器群集（负载均衡）"><a href="#七、服务器群集（负载均衡）" class="headerlink" title="七、服务器群集（负载均衡）"></a>七、服务器群集（负载均衡）</h3><p><strong>服务器群集</strong>：提高可靠性，不间断为用户提供web服务，而用户也只需要记住一个IP或域名即可！</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UBVDRs"><img src="https://s1.ax1x.com/2020/07/16/UBVDRs.png" alt="UBVDRs.png"></a></p>
+<p>1、资源管理给两个服务器设置地址</p>
+<p>2、高可用性 -》 服务器负载均衡 -》添加服务器 -》 然后将两个服务器添加均衡组，参数设置轮流时间</p>
+<h3 id="九、作业"><a href="#九、作业" class="headerlink" title="九、作业"></a>九、作业</h3><p><strong>对TCP报文抓包分析</strong></p>
+<p>要求：客户机telnet服务器，并抓包整个过程，且截图TCP三次握手整个过程、4次断开整个过程！并截图关键点，如SYN=1  FIN=1等</p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/16/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/29%E3%80%81IDSIPS/" rel="next" title="IDS/IPS">
+    上一篇：IDS/IPS
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/07/13/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/27%E3%80%81TCP%E4%B8%8EUDP%E5%8D%8F%E8%AE%AE/" rel="next" title="TCP与UDP协议">
+    下一篇：TCP与UDP协议
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a target="_blank" rel="noopener" href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

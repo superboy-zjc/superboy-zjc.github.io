@@ -1,0 +1,789 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>2、Http协议 | 2h0nG&#39;s Hacker Blog</title>
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="Love is friendship fell into love">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="2、Http协议"/>
+    <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="2h0nG&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">2h0nG&#39;s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">2h0nG</p>
+                        <p class="desc">不断学习中/人品极佳/不太好接近</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/数据通信安全/">
+                    数据通信安全 <span class="right">30 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/代码审计安全/">
+                    代码审计安全 <span class="right">8 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Linux系统安全/">
+                    Linux系统安全 <span class="right">12 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Web渗透测试/">
+                    Web渗透测试 <span class="right">17 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/CTF笔记/">
+                    CTF笔记 <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Python学习/">
+                    Python学习 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/代码审计安全/">代码审计安全</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>2、Http协议</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2020-07-27T08:56:59.000Z"><a href="/2020/07/27/%E9%98%B6%E6%AE%B5%E4%B8%89%E3%80%81%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/2%E3%80%81Http%E5%8D%8F%E8%AE%AE/">2020-07-27</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/代码审计安全/" class="chip pink lighten-1">代码审计安全</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Http%E5%8D%8F%E8%AE%AE"><span class="section table-of-contents-text">Http协议</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFHttp%E5%8D%8F%E8%AE%AE"><span class="section table-of-contents-text">一、什么是Http协议</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81Http%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%89%B9%E7%82%B9"><span class="section table-of-contents-text">二、Http协议的特点</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81URL"><span class="section table-of-contents-text">三、URL</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81URL%EF%BC%9A-%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E5%AE%9A%E4%BD%8D%E5%99%A8-Uniform-Resource-Locators"><span class="section table-of-contents-text">1、URL： 统一资源定位器(Uniform Resource Locators)</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81Http%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="section table-of-contents-text">四、Http请求报文</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%94%E3%80%81Http%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="section table-of-contents-text">五、Http响应报文</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AD%E3%80%81Http%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87%E5%AD%97%E6%AE%B5Content-type%E8%AF%A6%E8%A7%A3"><span class="section table-of-contents-text">六、Http响应报文字段Content-type详解</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%83%E3%80%81Http%E5%B8%B8%E8%A7%81%E7%9A%84%E7%8A%B6%E6%80%81%E7%A0%81"><span class="section table-of-contents-text">七、Http常见的状态码</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AB%E3%80%81%E5%AE%9E%E9%AA%8C%EF%BC%9A%E5%88%A9%E7%94%A8Cmd%E7%9A%84telnet%E6%9E%84%E9%80%A0%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87%EF%BC%8C%E5%90%91%E7%99%BE%E5%BA%A6%E5%8F%91%E9%80%81get%E8%AF%B7%E6%B1%82"><span class="section table-of-contents-text">八、实验：利用Cmd的telnet构造请求报文，向百度发送get请求</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B9%9D%E3%80%81HTTP%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81"><span class="section table-of-contents-text">九、HTTP请求走私</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81%E4%BA%A7%E7%94%9F%E5%8E%9F%E5%9B%A0"><span class="section table-of-contents-text">1、产生原因</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81%E5%9B%9B%E7%A7%8D%E5%B8%B8%E8%A7%81%E8%B5%B0%E7%A7%81%E8%AF%B7%E6%B1%82"><span class="section table-of-contents-text">2、四种常见走私请求</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#CL%E4%B8%8D%E4%B8%BA0%E7%9A%84GET%E8%AF%B7%E6%B1%82"><span class="section table-of-contents-text">CL不为0的GET请求</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#CL-CL"><span class="section table-of-contents-text">CL-CL</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#CL-TE"><span class="section table-of-contents-text">CL-TE</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#TE-CL"><span class="section table-of-contents-text">TE-CL</span></a></li></ol></li></ol></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="Http协议"><a href="#Http协议" class="headerlink" title="Http协议"></a>Http协议</h2><p><a target="_blank" rel="noopener" href="https://labuladong.gitbook.io/algo/labuladong-he-ta-de-peng-you-men/30-zhang-tu-jie-http-chang-jian-mian-shi-ti#05-http-1-1http-2-http3-yan-bian">https://labuladong.gitbook.io/algo/labuladong-he-ta-de-peng-you-men/30-zhang-tu-jie-http-chang-jian-mian-shi-ti#05-http-1-1http-2-http3-yan-bian</a></p>
+<h3 id="一、什么是Http协议"><a href="#一、什么是Http协议" class="headerlink" title="一、什么是Http协议"></a>一、什么是Http协议</h3><p>超文本传输协议（英文：<strong>H</strong>yper<strong>T</strong>ext <strong>T</strong>ransfer <strong>P</strong>rotocol，缩写：HTTP）HTTP 是一个在计算机世界里专门在「两点」之间「传输」文字、图片、音频、视频等「超文本」数据的「约定和规范」。</p>
+<p><u>目前应用最广泛的Http协议是Http1.1</u></p>
+<h3 id="二、Http协议的特点"><a href="#二、Http协议的特点" class="headerlink" title="二、Http协议的特点"></a>二、Http协议的特点</h3><p><strong>1、简单快速</strong>：向服务器发出请求，只需要提供请求方法和请求路径。请求方法常用的有GET、HEAD、POST。</p>
+<p>​    HTTP 基本的报文格式就是 <code>header + body</code>，头部信息也是 <code>key-value</code> 简单文本的形式，<strong>易于理解</strong>，降低了学习和使用的门槛。</p>
+<p><strong>2、灵活</strong>：Http协议支持传输任何类型的数据对象。数据对象类型由Content-Type标记。</p>
+<p><strong>3、无连接</strong>：无连接的含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。采用这种方式可以节省传输时间。</p>
+<p><strong>4、无状态</strong>：Http协议是无状态协议，无状态是指Http协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重新来过。</p>
+<blockquote>
+<p>无状态的<strong>好处</strong>，因为服务器不会去记忆 HTTP 的状态，所以不需要额外的资源来记录状态信息，这能减轻服务器的负担，能够把更多的 CPU 和内存用来对外提供服务。</p>
+<p>无状态的<strong>坏处</strong>，既然服务器没有记忆能力，它在完成有关联性的操作时会非常麻烦。</p>
+<p>例如登录-&gt;添加购物车-&gt;下单-&gt;结算-&gt;支付，这系列操作都要知道用户的身份才行。但服务器不知道这些请求是有关联的，每次都要问一遍身份信息。    </p>
+<p>对于无状态的问题，解法方案有很多种，其中比较简单的方式用 <strong>Cookie</strong> 技术。</p>
+<p><code>Cookie</code> 通过在请求和响应报文中写入 Cookie 信息来控制客户端的状态。</p>
+</blockquote>
+<p><strong>5、长连接：</strong>早期 HTTP/1.0 性能上的一个很大的问题，那就是每发起一个请求，都要新建一次 TCP 连接（三次握手），而且是串行请求，做了无谓的 TCP 连接建立和断开，增加了通信开销。</p>
+<p>​    为了解决上述 TCP 连接问题，HTTP/1.1 提出了<strong>长连接</strong>的通信方式，也叫持久连接。这种方式的好处在于减少了 TCP 连接的重复建立和断开所造成的额外开销，减轻了服务器端的负载。</p>
+<p>​    持久连接的特点是，只要任意一端没有明确提出断开连接，则保持 TCP 连接状态。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/akfnHI"><img src="https://s1.ax1x.com/2020/07/28/akfnHI.png" alt="akfnHI.png"></a></p>
+<p><strong>6、管道网络传输：</strong>HTTP/1.1 采用了长连接的方式，这使得管道（pipeline）网络传输成为了可能。即可在同一个 TCP 连接里面，客户端可以发起多个请求，只要第一个请求发出去了，不必等其回来，就可以发第二个请求出去，可以<strong>减少整体的响应时间。</strong></p>
+<p>​    举例来说，客户端需要请求两个资源。以前的做法是，在同一个TCP连接里面，先发送 A 请求，然后等待服务器做出回应，收到后再发出 B 请求。管道机制则是允许浏览器同时发出 A 请求和 B 请求。但是服务器还是按照<strong>顺序</strong>，先回应 A 请求，完成后再回应 B 请求。要是前面的回应特别慢，后面就会有许多请求排队等着。这称为「队头堵塞」。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/akfQ4f"><img src="https://s1.ax1x.com/2020/07/28/akfQ4f.png" alt="akfQ4f.png"></a></p>
+<h3 id="三、URL"><a href="#三、URL" class="headerlink" title="三、URL"></a>三、URL</h3><h4 id="1、URL：-统一资源定位器-Uniform-Resource-Locators"><a href="#1、URL：-统一资源定位器-Uniform-Resource-Locators" class="headerlink" title="1、URL： 统一资源定位器(Uniform Resource Locators)"></a>1、URL： 统一资源定位器(Uniform Resource Locators)</h4><p>HTTP使用统一资源标识符（Uniform Resource Identifiers, URI）来传输数据和建立连接，URL是一种特殊类型的URI。</p>
+<p>1）URL格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheme:&#x2F;&#x2F;host.domain:port&#x2F;path&#x2F;filename?args#锚</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>scheme - 定义因特网服务的类型。最常见的类型是 http(https/ftp/file)</li>
+<li>host - 定义域主机（http 的默认主机是 www）</li>
+<li>domain - 定义因特网域名，比如 runoob.com （host-domain可以是IP地址）</li>
+<li>:port - 定义主机上的端口号（http 的默认端口号是 80）</li>
+<li>path - 定义服务器上的路径（如果省略，则文档必须位于网站的根目录中）。</li>
+<li>filename - 定义文档/资源的名称</li>
+<li>args - 传入文档的参数</li>
+<li>锚部分：从#到最后，定位页面</li>
+</ul>
+</blockquote>
+<p>2）URL的字符编码：URL中只能用ASCII字符集，非ASCII字符集要经过编码，并且每字节编码前都要加%。（google浏览器显示URL中的汉字不会转换，但IE浏览器会转换为utf-8）。另外，URL 不能包含空格。URL 编码通常使用 + 来替换空格。</p>
+<h3 id="四、Http请求报文"><a href="#四、Http请求报文" class="headerlink" title="四、Http请求报文"></a>四、Http请求报文</h3><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/akDpJs"><img src="https://s1.ax1x.com/2020/07/28/akDpJs.png" alt="akDpJs.png"></a></p>
+<p>请求方法：Http1.1中定义9种方法：GET、POST、HEAD、OPTIONS、PUT、PATCH、DELETE、TRACE 、CONNECT </p>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">GET</td>
+<td align="left">请求指定的页面信息，并返回实体主体。（get url最长1024）</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">HEAD</td>
+<td align="left">类似于 GET 请求，只不过返回的响应中没有具体的内容，用于获取报头</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">POST</td>
+<td align="left">向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST 请求可能会导致新的资源的建立和/或已有资源的修改。</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">PUT</td>
+<td align="left">从客户端向服务器传送的数据取代指定的文档的内容。</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">DELETE</td>
+<td align="left">请求服务器删除 Request-URI 所标识的资源。</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">CONNECT</td>
+<td align="left">HTTP/1.1 协议中预留给能够将连接改为管道方式的代理服务器。</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">OPTIONS</td>
+<td align="left">返回服务器针对特定资源所支持的HTTP请求方法。也可以利用向Web服务器发送’*’的请求来测试服务器的功能性，允许客户端查看服务器的性能。</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">TRACE</td>
+<td align="left">回显服务器收到的请求，主要用于测试或诊断。</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left">PATCH</td>
+<td align="left">是对 PUT 方法的补充，用来对已知资源进行局部更新 。</td>
+</tr>
+</tbody></table>
+<p>虽然 HTTP 的请求方式有 8 种，但是我们在实际应用中常用的也就是 <strong>get</strong> 和 <strong>post</strong>，其他请求方式也都可以通过这两种方式间接的来实现。</p>
+</blockquote>
+<p>头部字段：</p>
+<blockquote>
+<p>Host：客户端发送请求时，用来指定服务器的域名。有了 <code>Host</code> 字段，就可以将请求发往「同一台」服务器上的不同网站。</p>
+<p>User-Agent字段：用户使用的客户端的一些必要信息，如操作系统、浏览器以及版本、浏览器渲染引擎等。</p>
+<p>X-forwarded-for：代表请求端的IP有多个，中间逗号隔开。</p>
+<p>Client-IP：同上</p>
+<p>Referer字段：该请求报文从哪个URL地址发送。</p>
+<p>Connection 字段：<code>Connection</code> 字段最常用于客户端要求服务器使用 TCP 持久连接，以便其他请求复用。HTTP/1.1 版本的默认连接都是持久连接，但为了兼容老版本的 HTTP，需要指定 <code>Connection</code> 首部字段的值为 <code>Keep-Alive</code>。一个可以复用的 TCP 连接就建立了，直到客户端或服务器主动关闭连接。但是，这不是标准字段。</p>
+<p>Accept字段：客户端请求的时候，可以使用 <code>Accept</code> 字段声明自己可以接受哪些数据格式。</p>
+<p>Accept-Encoding字段：客户端在请求时，用 <code>Accept-Encoding</code> 字段说明自己可以接受哪些压缩方法。</p>
+<p>Cookie字段：缓存数据。用户身份会话令牌，用于服务器标识客户端身份。</p>
+<p>Content-Type：上传文件的MIME类型。</p>
+<p>Destination：目标资源位置</p>
+</blockquote>
+<h3 id="五、Http响应报文"><a href="#五、Http响应报文" class="headerlink" title="五、Http响应报文"></a>五、Http响应报文</h3><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/akyvXq"><img src="https://s1.ax1x.com/2020/07/28/akyvXq.png" alt="akyvXq.png"></a></p>
+<p>头部字段：</p>
+<blockquote>
+<p>Server 字段：服务器类型。</p>
+<p>Content-Length 字段：服务器在返回数据时，会有 <code>Content-Length</code> 字段，表明本次回应的数据长度。</p>
+<p>Connection 字段：<code>Connection</code> 字段最常用于客户端要求服务器使用 TCP 持久连接，以便其他请求复用。HTTP/1.1 版本的默认连接都是持久连接，但为了兼容老版本的 HTTP，需要指定 <code>Connection</code> 首部字段的值为 <code>Keep-Alive</code>。一个可以复用的 TCP 连接就建立了，直到客户端或服务器主动关闭连接。但是，这不是标准字段。</p>
+<p>Content-Type 字段：<code>Content-Type</code> 字段用于服务器回应时，告诉客户端，本次数据是什么格式。</p>
+<p>Content-Encoding 字段：<code>Content-Encoding</code> 字段说明数据的压缩方法。表示服务器返回的数据使用了什么压缩格式</p>
+<p>Keep-Alive字段：表明保持连接状态的时间等信息。</p>
+<p>Set-Cookie字段：服务器返回缓存在客户端中的Cookie</p>
+<p>Location：标识客户应该去哪提取文档</p>
+</blockquote>
+<h3 id="六、Http响应报文字段Content-type详解"><a href="#六、Http响应报文字段Content-type详解" class="headerlink" title="六、Http响应报文字段Content-type详解"></a>六、Http响应报文字段Content-type详解</h3><p>Content-Type（内容类型），一般是指网页中存在的 Content-Type，用于定义网络文件的类型和网页的编码，决定浏览器将以什么形式、什么编码读取这个文件，这就是经常看到一些 PHP 网页点击的结果却是下载一个文件或一张图片的原因。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Type</span>: text/html; charset=utf-8</span><br><span class="line"><span class="attribute">Content-Type</span>: multipart/form-data; boundary=something</span><br></pre></td></tr></table></figure>
+
+<p>常见的媒体格式类型如下：</p>
+<ul>
+<li>text/html ： HTML格式</li>
+<li>text/plain ：纯文本格式</li>
+<li>text/xml ： XML格式</li>
+<li>image/gif ：gif图片格式</li>
+<li>image/jpeg ：jpg图片格式</li>
+<li>image/png：png图片格式</li>
+</ul>
+<p>以application开头的媒体格式类型：</p>
+<ul>
+<li>application/xhtml+xml ：XHTML格式</li>
+<li>application/xml： XML数据格式</li>
+<li>application/atom+xml ：Atom XML聚合格式</li>
+<li>application/json： JSON数据格式</li>
+<li>application/pdf：pdf格式</li>
+<li>application/msword ： Word文档格式</li>
+<li>application/octet-stream ： 二进制流数据（如常见的文件下载）</li>
+<li>application/x-www-form-urlencoded ： <form encType=””>中默认的encType，form表单数据被编码为key/value格式发送到服务器（表单默认的提交数据的格式）</li>
+</ul>
+<p>另外一种常见的媒体格式是上传文件之时使用的：</p>
+<ul>
+<li>multipart/form-data ： 需要在表单中进行文件上传时，就需要使用该格式</li>
+</ul>
+<h3 id="七、Http常见的状态码"><a href="#七、Http常见的状态码" class="headerlink" title="七、Http常见的状态码"></a>七、Http常见的状态码</h3><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/aiHc7j"><img src="https://s1.ax1x.com/2020/07/27/aiHc7j.png" alt="aiHc7j.png"></a></p>
+<p><img src="C:\Users\18265\AppData\Roaming\Typora\typora-user-images\image-20200820162112400.png" alt="image-20200820162112400"></p>
+<h3 id="八、实验：利用Cmd的telnet构造请求报文，向百度发送get请求"><a href="#八、实验：利用Cmd的telnet构造请求报文，向百度发送get请求" class="headerlink" title="八、实验：利用Cmd的telnet构造请求报文，向百度发送get请求"></a>八、实验：利用Cmd的telnet构造请求报文，向百度发送get请求</h3><p>1、<code>telnet www.baidu.com 80</code></p>
+<p>2、按下<code>Ctrl + ]</code></p>
+<p>3、回车</p>
+<p>4、输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;index.html HTTP&#x2F;1.1</span><br><span class="line">Host:www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<p>5、成功获得http响应报文</p>
+<h3 id="九、HTTP请求走私"><a href="#九、HTTP请求走私" class="headerlink" title="九、HTTP请求走私"></a>九、HTTP请求走私</h3><p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/6631">https://xz.aliyun.com/t/6631</a></p>
+<h4 id="1、产生原因"><a href="#1、产生原因" class="headerlink" title="1、产生原因"></a>1、<strong>产生原因</strong></h4><p>为了提升用户的浏览速度，提高使用体验，减轻服务器的负担，很多网站都用了CDN加速服务，最简单的加速服务，就是在源站的前面加上一个具有缓存功能的反向代理服务器，用户在请求某些静态资源时，直接从代理服务器中就可以获取到，不用再从源站所在服务器获取。这就有了一个很典型的拓扑结构<br> <a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191024193343-221e0d56-f652-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191024193343-221e0d56-f652-1.jpg" alt="img"></a><br> 反向代理服务器与后端的源站服务器之间，会重用TCP链接，因为代理服务器与后端的源站服务器的IP地址是相对固定，不同用户的请求通过代理服务器与源站服务器建立链接，所以就顺理成章了</p>
+<p>但是由于两者服务器的实现方式不同，如果用户提交模糊的请求可能代理服务器认为这是一个HTTP请求，然后将其转发给了后端的源站服务器，但源站服务器经过解析处理后，只认为其中的一部分为正常请求，剩下的那一部分就是走私的请求了，这就是HTTP走私请求的由来。</p>
+<p>HTTP请求走私漏洞的原因是由于HTTP规范提供了两种不同方式来指定请求的结束位置，它们是<code>Content-Length</code>标头和<code>Transfer-Encoding</code>标头，<code>Content-Length</code>标头简单明了，它以字节为单位指定消息内容体的长度，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">POST &#x2F; HTTP&#x2F;1.1</span><br><span class="line">Host: ac6f1ff11e5c7d4e806912d000080058.web-security-academy.net</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; WOW64; rv:48.0) Gecko&#x2F;20100101 Firefox&#x2F;48.0</span><br><span class="line">Accept: text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,*&#x2F;*;q&#x3D;0.8</span><br><span class="line">Accept-Language: en-US,en;q&#x3D;0.5</span><br><span class="line">Cookie: session&#x3D;5n2xRNXtAYM9teOEn3jSkEDDabLe0Qv8</span><br><span class="line">Content-Length: 35</span><br><span class="line">a&#x3D;11</span><br></pre></td></tr></table></figure>
+
+<p><code>Transfer-Encoding</code>标头用于指定消息体使用分块编码（Chunked  Encode），也就是说消息报文由一个或多个数据块组成，每个数据块大小以字节为单位（十六进制表示）  衡量，后跟换行符，然后是块内容，最重要的是：整个消息体以大小为0的块结束，也就是说解析遇到0数据块就结束。如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">POST &#x2F; HTTP&#x2F;1.1</span><br><span class="line">Host: ac6f1ff11e5c7d4e806912d000080058.web-security-academy.net</span><br><span class="line">Content-Type: application&#x2F;x-www-form-urlencoded</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">b</span><br><span class="line"></span><br><span class="line">a&#x3D;11</span><br><span class="line"></span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p>其实理解起来真的很简单，相当于我发送请求，包含<code>Content-Length</code>，前端服务器解析后没有问题发送给后端服务器，但是我在请求时后面还包含了<code>Transfer-Encoding</code>，这样后端服务器进行解析便可执行我写在下面的一些命令，这样便可以绕过前端的waf。</p>
+<h4 id="2、四种常见走私请求"><a href="#2、四种常见走私请求" class="headerlink" title="2、四种常见走私请求"></a>2、<strong>四种常见走私请求</strong></h4><h5 id="CL不为0的GET请求"><a href="#CL不为0的GET请求" class="headerlink" title="CL不为0的GET请求"></a><strong>CL不为0的GET请求</strong></h5><p>假设前端代理服务器允许GET请求携带请求体，而后端服务器不允许GET请求携带请求体，它会直接忽略掉GET请求中的<code>Content-Length</code>头，不进行处理。这就有可能导致请求走私。</p>
+<h5 id="CL-CL"><a href="#CL-CL" class="headerlink" title="CL-CL"></a><strong>CL-CL</strong></h5><p>假设中间的代理服务器和后端的源站服务器在收到类似的请求时，都不会返回400错误，但是中间代理服务器按照第一个Content-Length的值对请求进行处理，而后端源站服务器按照第二个Content-Length的值进行处理,这样便有可能引发请求走私。</p>
+<h5 id="CL-TE"><a href="#CL-TE" class="headerlink" title="CL-TE"></a><strong>CL-TE</strong></h5><p>所谓CL-TE，就是当收到存在两个请求头的请求包时，前端代理服务器只处理Content-Length这一请求头，而后端服务器会遵守RFC2616的规定，忽略掉Content-Length，处理Transfer-Encoding这一请求头。</p>
+<h5 id="TE-CL"><a href="#TE-CL" class="headerlink" title="TE-CL"></a><strong>TE-CL</strong></h5><p>所谓TE-CL，就是当收到存在两个请求头的请求包时，前端代理服务器处理Transfer-Encoding这一请求头，而后端服务器处理Content-Length请求头。</p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/28/%E9%98%B6%E6%AE%B5%E4%B8%89%E3%80%81%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/3%E3%80%81HTML%E8%AF%AD%E8%A8%80/" rel="next" title="3、HTML">
+    上一篇：3、HTML
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/07/27/%E9%98%B6%E6%AE%B5%E4%B8%89%E3%80%81%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/1%E3%80%81%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8CWAMP%E7%8E%AF%E5%A2%83%E2%80%94%E2%80%94PHPStudy/" rel="next" title="1、部署实验WAMP环境——PHPStudy">
+    下一篇：1、部署实验WAMP环境——PHPStudy
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a target="_blank" rel="noopener" href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

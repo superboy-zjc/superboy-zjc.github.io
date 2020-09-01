@@ -1,0 +1,688 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>TCP与UDP协议 | 2h0nG&#39;s Hacker Blog</title>
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="Love is friendship fell into love">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="TCP与UDP协议"/>
+    <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="2h0nG&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">2h0nG&#39;s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">2h0nG</p>
+                        <p class="desc">不断学习中/人品极佳/不太好接近</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/数据通信安全/">
+                    数据通信安全 <span class="right">30 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/代码审计安全/">
+                    代码审计安全 <span class="right">8 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Linux系统安全/">
+                    Linux系统安全 <span class="right">12 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Web渗透测试/">
+                    Web渗透测试 <span class="right">17 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/CTF笔记/">
+                    CTF笔记 <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Python学习/">
+                    Python学习 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/数据通信安全/">数据通信安全</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>TCP与UDP协议</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2020-07-13T02:25:45.000Z"><a href="/2020/07/13/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/27%E3%80%81TCP%E4%B8%8EUDP%E5%8D%8F%E8%AE%AE/">2020-07-13</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/数据通信安全/" class="chip pink lighten-1">数据通信安全</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#TCP%E4%B8%8EUDP%E5%8D%8F%E8%AE%AE"><span class="section table-of-contents-text">TCP与UDP协议</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81TCP%E4%B8%8EUDP%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90"><span class="section table-of-contents-text">一、TCP与UDP协议分析</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81TCP%E5%A4%B4%E9%83%A8%E5%88%86%E6%9E%90"><span class="section table-of-contents-text">二、TCP头部分析</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81UDP%E5%8D%8F%E8%AE%AE%E5%88%86%E6%9E%90"><span class="section table-of-contents-text">三、UDP协议分析</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E8%BF%9E%E6%8E%A5"><span class="section table-of-contents-text">四、TCP三次握手连接</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%94%E3%80%81TCP%E5%9B%9B%E6%AC%A1%E6%8F%A1%E6%89%8B%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5"><span class="section table-of-contents-text">五、TCP四次握手断开连接</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AD%E3%80%81%E6%8A%93%E5%8C%85%E5%88%86%E6%9E%90"><span class="section table-of-contents-text">六、抓包分析</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%83%E3%80%81DDOS%E6%94%BB%E5%87%BB"><span class="section table-of-contents-text">七、DDOS攻击</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AB%E3%80%81DDOS%E6%94%BB%E5%87%BB%E5%AE%9E%E9%AA%8C"><span class="section table-of-contents-text">八、DDOS攻击实验</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="TCP与UDP协议"><a href="#TCP与UDP协议" class="headerlink" title="TCP与UDP协议"></a>TCP与UDP协议</h2><h3 id="一、TCP与UDP协议分析"><a href="#一、TCP与UDP协议分析" class="headerlink" title="一、TCP与UDP协议分析"></a>一、TCP与UDP协议分析</h3><p><u><strong>1、</strong>TCP与UDP协议概述</u></p>
+<p>TCP与UDP协议属于ISO第四层传输层协议。</p>
+<p>传输层包括两大协议：TCP和UDP。</p>
+<p><u><strong>2、</strong>TCP和UDP协议的区别</u></p>
+<p>TCP协议：面向连接服务，可靠传输数据、速度慢</p>
+<p>UDP协议：无连接服务，UDP不可靠、速度快</p>
+<p><u><strong>3、</strong>TCP与UDP协议的共同作用</u>：通过源与目标端口号，来完成进程到进程的通信。</p>
+<h3 id="二、TCP头部分析"><a href="#二、TCP头部分析" class="headerlink" title="二、TCP头部分析"></a>二、TCP头部分析</h3><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UJ1D81"><img src="https://s1.ax1x.com/2020/07/13/UJ1D81.png" alt="UJ1D81.png"></a></p>
+<blockquote>
+<p><strong>源端口号：</strong>一般客户机的源端口号都是随机的，且一般都是50000以上！</p>
+<p><strong>目标端口号：</strong>一般服务器上的目标端口号都是固定的，如80、443、23、53。</p>
+<p><strong>端口号范围：</strong>0-65535 0与65535有特殊用途，一般1-65534可用（1-1024区间基本被国际标准组织ISO占用分配给了固定的服务器）。</p>
+<p><strong>序号：</strong>seq随机生成的数据包的编号。</p>
+<p><strong>确认号：</strong>ack确认已完整收到TCP数据包，会回复一个包，确认号为序号+1。如果回复确认号还是为序列号，说明收到的数据包不完整。</p>
+<p><strong>首部长度：</strong>20-60字节。</p>
+<p><strong>保留</strong>：保留待开发。</p>
+<p><strong>六位控制位：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">URG: urgen，紧急位。 1，有紧急数据，需要根据紧急指针将包中紧急数据优先推送。 0，无紧急数据。</span><br><span class="line">ACK: 确认控制位。 1，确认号有效。 0，确认号无效。</span><br><span class="line">PSH: push，推送位。 1，上层有数据。 0，上层无数据。</span><br><span class="line">RST: Reset，重置位。 1，请求非正常断开，强制断开。</span><br><span class="line">SYN: 建立连接位。 1,请求和同意建立连接。只有初始状态建立连接时前两个报文为1。</span><br><span class="line">FIN: 断开连接位。 1,请求断开连接。</span><br></pre></td></tr></table></figure>
+
+<p><strong>窗口大小</strong>：用来做流量控制，限制最大一次可接受的数据量。类似水龙头。</p>
+<p><strong>校验和</strong>：校验整个数据段（五层数据+四层数据）。</p>
+<p><strong>紧急指针：</strong>有紧急数据（紧急位URG为1），需要根据紧急指针将包中紧急数据优先推送。</p>
+</blockquote>
+<h3 id="三、UDP协议分析"><a href="#三、UDP协议分析" class="headerlink" title="三、UDP协议分析"></a>三、UDP协议分析</h3><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UJUsBt"><img src="https://s1.ax1x.com/2020/07/13/UJUsBt.png" alt="UJUsBt.png"></a></p>
+<p>UDP包头长度：8字节。</p>
+<p>UDP长度字段：代表5+4层数据的总长度。</p>
+<p>UDP校验和：校验整个数据段（五层数据+四层数据）。UDP唯一的可靠机制。</p>
+<h3 id="四、TCP三次握手连接"><a href="#四、TCP三次握手连接" class="headerlink" title="四、TCP三次握手连接"></a>四、TCP三次握手连接</h3><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UJDvvD"><img src="https://s1.ax1x.com/2020/07/13/UJDvvD.png" alt="UJDvvD.png"></a></p>
+<p>重点：SYN只有双方前2次握手为1，代表彼此要建立连接。</p>
+<blockquote>
+<p>面试题：为什么TCP可靠？</p>
+<p>答：因为TCP是面向连接服务，同时双方发送的每一个报文都有编号机制与确认重传机制，所以可以保证数据传输的可靠性。同时每个TCP协议的报文发送后，都会开启一个重传计时器，以便数据防止中途丢失而可以重传。</p>
+</blockquote>
+<h3 id="五、TCP四次握手断开连接"><a href="#五、TCP四次握手断开连接" class="headerlink" title="五、TCP四次握手断开连接"></a>五、TCP四次握手断开连接</h3><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UYU0Mj"><img src="https://s1.ax1x.com/2020/07/13/UYU0Mj.png" alt="UYU0Mj.png"></a></p>
+<h3 id="六、抓包分析"><a href="#六、抓包分析" class="headerlink" title="六、抓包分析"></a>六、抓包分析</h3><p>使用Win7下的科来软件抓telnet报文，分析三次握手连接，四次握手断开连接。</p>
+<h3 id="七、DDOS攻击"><a href="#七、DDOS攻击" class="headerlink" title="七、DDOS攻击"></a>七、DDOS攻击</h3><p><u><strong>1、</strong>Denial of Service, DOS拒绝服务攻击。</u>Hacker使用异常手段占满服务资源（带宽、内存、TCP会话、CPU等等），使服务器无法为正常用户提供服务。</p>
+<p>缺点是需要占用攻击者的资源，杀敌一千、自损八百。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UYDTwd"><img src="https://s1.ax1x.com/2020/07/13/UYDTwd.png" alt="UYDTwd.png"></a></p>
+<p><u><strong>2、</strong>Distributed Denial of Service, DDOS分布式拒绝服务攻击</u></p>
+<p>例如：</p>
+<ol>
+<li><p>ICMP Flooding泛洪攻击，上千人同时ping -t l 65500，占满网卡的资源。</p>
+</li>
+<li><p>UDP Flooding泛洪攻击，实现流量攻击/实现cpu内存等资源攻击。</p>
+</li>
+<li><p>TCP SYN Flooding泛洪攻击，占用会话资源，也称为TCP半连接攻击。</p>
+</li>
+</ol>
+<p>​    攻击主要目标是WEB服务器。一般由防火墙做防护，原理就是防火墙收到TCP建立会话的报文后由防火墙返回一个SYN、ACK，如果对方没有回应，就认为这是一个半连接攻击，会进行处理。所以由防火墙过滤掉了这种攻击，不会占用服务器会话端口资源。</p>
+<p>​    但防火墙也会被DDOS击垮。可以寻求运营商帮助抵挡DDOS攻击，在连接到公司外网入口的路由器端口进行抵挡，称为“流量清洗”。</p>
+<p>4）Challenge Collapsar，CC攻击，攻击目标主要也是WEB服务器，属于TCP SYN攻击的升级版本，完成三次握手过程，非半连接。</p>
+<p>5）Smurf flooding：攻击目标是路由器/交换机，防御方法路由器、交换机上的Smurf服务关闭。</p>
+<blockquote>
+<p>泛洪：Flooding</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UY20hj"><img src="https://s1.ax1x.com/2020/07/13/UY20hj.png" alt="UY20hj.png"></a></p>
+<h3 id="八、DDOS攻击实验"><a href="#八、DDOS攻击实验" class="headerlink" title="八、DDOS攻击实验"></a>八、DDOS攻击实验</h3><blockquote>
+<p><strong>本实验必须在虚拟环境中练习！除非有渗透授权，客户要求做压力测试。</strong></p>
+</blockquote>
+<p>实验一、</p>
+<blockquote>
+<p>实验环境：WIN7, dotNetFx40环境(.net framework)，或者WIN10。</p>
+<p>实验软件：WIN7需要安装dotNetFx40搭建环境，然后使用LOIC-1.0.8软件。</p>
+</blockquote>
+<p>LOIC软件支持TCP SYN FLooding、UDP Flooding、CC 攻击。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UYOzGt"><img src="https://s1.ax1x.com/2020/07/13/UYOzGt.png" alt="UYOzGt.png"></a></p>
+<p>实验二、</p>
+<blockquote>
+<p>实验环境：Kali</p>
+<p>实验软件：pentmenu，DOS攻击的Bash脚本，可在github上下载。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/GinjaChris/pentmenu">https://github.com/GinjaChris/pentmenu</a></p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/UtEHQe"><img src="https://s1.ax1x.com/2020/07/13/UtEHQe.png" alt="UtEHQe.png"></a></p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/07/14/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/28%E3%80%81%E9%98%B2%E7%81%AB%E5%A2%99%E5%8E%9F%E7%90%86%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F/" rel="next" title="防火墙原理及部署方式">
+    上一篇：防火墙原理及部署方式
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/07/12/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/26%E3%80%81VPN/" rel="next" title="VPN">
+    下一篇：VPN
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a target="_blank" rel="noopener" href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

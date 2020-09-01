@@ -1,0 +1,926 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>nmap端口扫描技术 | 2h0nG&#39;s Hacker Blog</title>
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="Love is friendship fell into love">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="nmap端口扫描技术"/>
+    <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="2h0nG&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">2h0nG&#39;s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">2h0nG</p>
+                        <p class="desc">不断学习中/人品极佳/不太好接近</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/数据通信安全/">
+                    数据通信安全 <span class="right">30 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/代码审计安全/">
+                    代码审计安全 <span class="right">8 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Linux系统安全/">
+                    Linux系统安全 <span class="right">12 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Web渗透测试/">
+                    Web渗透测试 <span class="right">17 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/CTF笔记/">
+                    CTF笔记 <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Python学习/">
+                    Python学习 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Web渗透测试/">Web渗透测试</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>nmap端口扫描技术</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2020-08-03T07:04:16.000Z"><a href="/2020/08/03/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/2%E3%80%81nmap%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/">2020-08-03</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Web渗透测试/" class="chip pink lighten-1">Web渗透测试</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#nmap%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF"><span class="section table-of-contents-text">nmap端口扫描技术</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81Nmap%E7%9A%84%E6%89%AB%E6%8F%8F%E6%96%B9%E5%BC%8F"><span class="section table-of-contents-text">一、Nmap的扫描方式</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0"><span class="section table-of-contents-text">1、主机发现</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF"><span class="section table-of-contents-text">2、端口扫描技术</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#3%E3%80%81%E5%85%B6%E5%AE%83%E6%8A%80%E6%9C%AF"><span class="section table-of-contents-text">3、其它技术</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81Nmap%E7%9A%84%E7%AB%AF%E5%8F%A3%E7%8A%B6%E6%80%81"><span class="section table-of-contents-text">二、Nmap的端口状态</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81Nmap%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="section table-of-contents-text">三、Nmap常用命令</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81Nmap%E8%84%9A%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="section table-of-contents-text">四、Nmap脚本使用</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E8%84%9A%E6%9C%AC%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0"><span class="section table-of-contents-text">脚本命令参数</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E8%84%9A%E6%9C%AC%E5%88%86%E7%B1%BB"><span class="section table-of-contents-text">脚本分类</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E6%8C%89%E8%84%9A%E6%9C%AC%E5%88%86%E7%B1%BB%E6%89%AB%E6%8F%8F"><span class="section table-of-contents-text">按脚本分类扫描</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E6%8C%89%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F"><span class="section table-of-contents-text">按应用服务扫描</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#vnc%E6%89%AB%E6%8F%8F%EF%BC%9A"><span class="section table-of-contents-text">vnc扫描：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#smb%E6%89%AB%E6%8F%8F%EF%BC%9A"><span class="section table-of-contents-text">smb扫描：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#Mssql%E6%89%AB%E6%8F%8F%EF%BC%9A"><span class="section table-of-contents-text">Mssql扫描：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#Mysql%E6%89%AB%E6%8F%8F%EF%BC%9A"><span class="section table-of-contents-text">Mysql扫描：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#Oracle%E6%89%AB%E6%8F%8F%EF%BC%9A"><span class="section table-of-contents-text">Oracle扫描：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#%E5%85%B6%E4%BB%96%E4%B8%80%E4%BA%9B%E6%AF%94%E8%BE%83%E5%A5%BD%E7%94%A8%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="section table-of-contents-text">其他一些比较好用的脚本</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#%E4%B8%8D%E9%9D%A0%E8%B0%B1%E7%9A%84%E8%84%9A%E6%9C%AC%EF%BC%9A"><span class="section table-of-contents-text">不靠谱的脚本：</span></a></li></ol></li></ol></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="nmap端口扫描技术"><a href="#nmap端口扫描技术" class="headerlink" title="nmap端口扫描技术"></a>nmap端口扫描技术</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.h3c.com/cn/d_201508/888907_30008_0.htm">http://www.h3c.com/cn/d_201508/888907_30008_0.htm</a></p>
+</blockquote>
+<h3 id="一、Nmap的扫描方式"><a href="#一、Nmap的扫描方式" class="headerlink" title="一、Nmap的扫描方式"></a>一、Nmap的扫描方式</h3><blockquote>
+<p>发现目标环境中有哪些资产，联网设备、主机、服务器以及各种服务等。</p>
+</blockquote>
+<h4 id="1、主机发现"><a href="#1、主机发现" class="headerlink" title="1、主机发现"></a>1、主机发现</h4><table>
+<thead>
+<tr>
+<th><strong>扫描方式</strong></th>
+<th><strong>发送报文</strong></th>
+<th><strong>活跃响应</strong></th>
+<th><strong>不活跃响应</strong></th>
+<th><strong>被过滤响应</strong></th>
+<th><strong>备注</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ARP扫描</td>
+<td>ARP请求报文</td>
+<td>ARP响应报文</td>
+<td>超时</td>
+<td>不会被过滤</td>
+<td>精准</td>
+</tr>
+<tr>
+<td>ICMP扫描</td>
+<td>ICMPtype=8 code=0type=13 code=0type=17 code=0</td>
+<td>ICMPtype=0 code=0type=14 code=0type=18 code=0</td>
+<td>超时</td>
+<td>超时</td>
+<td>可能会被防火墙过滤</td>
+</tr>
+<tr>
+<td>端口扫描</td>
+<td>TCP syn</td>
+<td>TCP syn+ack</td>
+<td>超时</td>
+<td>超时或ICMP type=3 code=3或13</td>
+<td>可能会被过滤</td>
+</tr>
+</tbody></table>
+<p>ARP扫描是最精准的扫描方式，并且不会被过滤，因此会被强制有限使用。ICMP扫描是最常见的扫描方式，和ping命令原理一致，但现有很多防火墙和IPS设备会禁用ICMP扫描，使得ICMP主机发现失败。端口扫描技术是另一种发现主机的方式，准确且不容易被防火墙过滤，这种方式被经常使用，端口扫描原理见2.2节。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -nP 目标IP #只进行主机探测，不进行端口扫描</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、端口扫描技术"><a href="#2、端口扫描技术" class="headerlink" title="2、端口扫描技术"></a>2、端口扫描技术</h4><p>端口扫描可以分为TCP端口扫描和UDP端口扫描，由于TCP能够提供更多的协议字段，因此TCP端口扫描更准确，如今的端口扫描技术主要是指TCP端口扫描。</p>
+<p>在TCP端口扫描中，探测报文组合不同flags位，不同的flags在端口开放、端口关闭、防火墙过滤时的响应是不一样的，通过区分不同的响应来检测端口的状态，具体如2所示。（tcp flags有syn、ack、rst、fin、psh、urg共6种置位）</p>
+<blockquote>
+<p>-sV 可获得端口对应服务的版本</p>
+<p>-O 获得操作系统信息</p>
+<p>-oN 保存结果为文本格式</p>
+<p>-oX 保存结果为xml格式</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>扫描方式</strong></th>
+<th><strong>TCP Flag</strong></th>
+<th><strong>开放时响应</strong></th>
+<th><strong>关闭时响应</strong></th>
+<th><strong>过滤时响应</strong></th>
+<th><strong>特征</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-sT，TCP全连接扫描</td>
+<td>报文1：syn报文2：ack</td>
+<td>syn+ack，完成3次握手</td>
+<td>rst+ack</td>
+<td>一般不会被过滤</td>
+<td>精准、费时、可能会被日志记录</td>
+</tr>
+<tr>
+<td>-sS，TCP半连接扫描</td>
+<td>syn</td>
+<td>syn+ack</td>
+<td>rst+ack</td>
+<td>ICMP type=3 code=3、13或超时</td>
+<td>精准、快速、无日志记录，最常见且默认的扫描方式</td>
+</tr>
+<tr>
+<td>-sA，TCP ack扫描</td>
+<td>ack</td>
+<td>rst</td>
+<td>rst</td>
+<td>不准确、只能判断是否加防火墙filtered或unfiltered</td>
+<td></td>
+</tr>
+<tr>
+<td>-sW，TCP window扫描</td>
+<td>ack</td>
+<td>rst，window不为0</td>
+<td>rst，window为0</td>
+<td>不准确、有的情况下window都为0</td>
+<td></td>
+</tr>
+<tr>
+<td>-sM</td>
+<td>fin+ack</td>
+<td>未收到rst</td>
+<td>rst</td>
+<td>不准确</td>
+<td></td>
+</tr>
+<tr>
+<td>-sN</td>
+<td>无置位</td>
+<td>无响应</td>
+<td>rst</td>
+<td>ICMP type=3 code=3或13或超时无响应</td>
+<td>不准确，只能判断closed和open|filtered</td>
+</tr>
+<tr>
+<td>-sF</td>
+<td>fin</td>
+<td>无响应</td>
+<td>rst</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-sX</td>
+<td>fin+psh+urg</td>
+<td>无响应</td>
+<td>rst</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-sU，UDP端口扫描</td>
+<td>不相关</td>
+<td>有UDP响应或无响应</td>
+<td>icmp type=3 code=3</td>
+<td>ICMP type=3 code=1,2,9,10,13</td>
+<td>不准确，通常只能判断closed和open|filtered</td>
+</tr>
+</tbody></table>
+<h4 id="3、其它技术"><a href="#3、其它技术" class="headerlink" title="3、其它技术"></a>3、其它技术</h4><p>Nmap还包括操作系统指纹识别技术、服务识别技术、防火墙绕过技术以及NSE（Nmap Scripting Engine）脚本引擎。</p>
+<h3 id="二、Nmap的端口状态"><a href="#二、Nmap的端口状态" class="headerlink" title="二、Nmap的端口状态"></a>二、Nmap的端口状态</h3><p>nmap对端口进行扫描中，当nmap向目标主机发送报文并根据返回报文从而认定端口的6种状态的含义（注意：这六种状态只是nmap认为的端口状态，例如：有些主机或者防火墙会返回一些不可靠的报文从而妨碍nmap对端口开放问题的确认）。</p>
+<ol>
+<li><p><code>Open</code>：端口处于开放状态，例如：当nmap使用TCP SYN对目标主机某一范围的端口进行扫描时，我们知道 TCP SYN报文是TCP建立连接的第一步，所以，如果目标主机返回SYN+ACK的报文，我们就认为此端口开放了并且使用了TCP服务。</p>
+</li>
+<li><p><code>Closed</code>：端口处于关闭状态。例如：TCP SYN类型的扫描，如果返回RST类型的报文，则端口处于管理状态。这里我们值得注意的是<u>关闭的端口也是可访问的，只是没有上层的服务在监听这个端口</u>，<u>而且，只是在我们扫描的这个时刻为关闭，当我们在另一个时间段进行扫描的时候，这些关闭的端口可能会处于open的状态</u>。</p>
+</li>
+<li><p><code>Filtered（过滤的）</code>：由于<u>报文无法到达指定的端口，nmap不能够决定端口的开放状态</u>，这主要是由于网络或者主机安装了一些防火墙所导致的。当nmap收到icmp报文主机不可达报文（例如：type为3，code为13（communication administratively prohibit）报文）或者目标主机无应答，常常会将目标主机的状态设置为filtered。</p>
+</li>
+<li><p><code>Unfiltered（未被过滤的）</code>：当nmap不能确定端口是否开放的时候所打上的状态，这种状态和filtered的区别在于：<u>unfiltered的端口能被nmap访问，但是nmap根据返回的报文无法确定端口的开放状态，而filtered的端口直接就没就没能够被nmap访问</u>。端口被定义为Unfilterd只会发生在TCP ack扫描类型时当返回RST的报文。而端口被定义为filtered 状态的原因是是报文被防火墙设备，路由器规则，或者防火墙软件拦截，无法送达到端口，这通常表现为发送NMAP的主机收到ICMP报错报文，如：TYPE为3，code为13的报文（通信被认为的禁止 communication administratively prohibited），或者主机通过多次重复发送没有收到任何回应）。</p>
+</li>
+<li><p><code>Open|filtered</code>状态，这种状态主要是nmap无法区别端口处于open状态还是filtered状态。这种状态只会出现在open端口对报文不做回应的扫描类型中，如：udp，ip protocol ，TCP null，fin，和xmas扫描类型。</p>
+</li>
+<li><p><code>Closed|filtered</code>状态，这种状态主要出现在nmap无法区分端口处于closed还是filtered时。此状态只会出现在IP ID idle scan中。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>状态</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>open</td>
+<td>应用程序在该端口接收 TCP 连接或者 UDP 报文</td>
+</tr>
+<tr>
+<td>closed</td>
+<td>关闭的端口对于nmap也是可访问的， 它接收nmap探测报文并作出响应。但没有应用程序在其上监听</td>
+</tr>
+<tr>
+<td>filtered</td>
+<td>由于包过滤阻止探测报文到达端口，nmap无法确定该端口是否开放。过滤可能来自专业的防火墙设备，路由规则 或者主机上的软件防火墙</td>
+</tr>
+<tr>
+<td>unfiltered</td>
+<td>未被过滤状态意味着端口可访问，但是nmap无法确定它是开放还是关闭。 只有用于映射防火墙规则集的 ACK 扫描才会把端口分类到这个状态</td>
+</tr>
+<tr>
+<td>open | filtered</td>
+<td>无法确定端口是开放还是被过滤， 开放的端口不响应就是一个例子。没有响应也可能意味着报文过滤器丢弃了探测报文或者它引发的任何反应。UDP，IP协议，　FIN, Null 等扫描会引起。</td>
+</tr>
+</tbody></table>
+<h3 id="三、Nmap常用命令"><a href="#三、Nmap常用命令" class="headerlink" title="三、Nmap常用命令"></a>三、Nmap常用命令</h3><ul>
+<li><p>格式：<br>nmap [ &lt;扫描类型&gt; …] [ &lt;选项&gt; ] { &lt;扫描目标说明&gt; }</p>
+</li>
+<li><p>常用命令</p>
+<blockquote>
+<p>全面扫描：nmap-T4 -p-（1-65535端口） -A targetip<br>主机发现：nmap-T4 -sn targetip<br>端口扫描：nmap-T4 targetip<br>服务扫描：nmap-T4 -sV targetip<br>操作系统扫描：nmap-T4 -O targetip</p>
+</blockquote>
+</li>
+<li><p>扫描类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-sP  只探测主机在线情况</span><br><span class="line">-sS  SYN扫描（隐身扫描）</span><br><span class="line">-ST  TCP扫描</span><br><span class="line">-sU  UDP扫描</span><br><span class="line">-sV  系统版本检测</span><br><span class="line">-O   操作系统识别</span><br><span class="line">–scanflags  指定TCP标识位（设置URG, ACK, PSH,RST,SYN,FIN位）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>时序选项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-T0  偏执的：非常非常慢，用于IDS逃逸</span><br><span class="line">-T1  猥琐的：相当慢，用于IDS逃逸</span><br><span class="line">-T2  有礼貌的：降低速度以消耗更小的带宽，比默认慢十倍</span><br><span class="line">-T3  普通的：默认，根据目标的反应自动调整时间模式</span><br><span class="line">-T4  野蛮的：假定处在一个很好的网络环境，请求可能会淹没目标</span><br><span class="line">-T5  疯狂的：非常野蛮，很可能会淹没目标端口或是漏掉一些开放端口</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="四、Nmap脚本使用"><a href="#四、Nmap脚本使用" class="headerlink" title="四、Nmap脚本使用"></a>四、Nmap脚本使用</h3><h4 id="脚本命令参数"><a href="#脚本命令参数" class="headerlink" title="脚本命令参数"></a>脚本命令参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-sC          等价于–script&#x3D;default，使用默认类别的脚本进行扫描 可更换其他类别 </span><br><span class="line">–script&#x3D;&lt;Lua scripts&gt;               &lt;Lua scripts&gt;使用某个或某类脚本进行扫描，支持通配符描述</span><br><span class="line">–script-args&#x3D;&lt;n1&#x3D;v1,[n2&#x3D;v2,...]&gt;    为脚本提供默认参数</span><br><span class="line">–script-args-file&#x3D;filename          使用文件来为脚本提供参数</span><br><span class="line">–script-trace                       显示脚本执行过程中发送与接收的数据</span><br><span class="line">–script-updatedb                    更新脚本数据库</span><br><span class="line">–script-help&#x3D;&lt;scripts&gt;              显示脚本的帮助信息，其中&lt;scripts&gt;部分可以逗号分隔的文件或脚本类别</span><br></pre></td></tr></table></figure>
+
+<h4 id="脚本分类"><a href="#脚本分类" class="headerlink" title="脚本分类"></a>脚本分类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">auth          负责处理鉴权证书（绕开鉴权）绕过目标主机得访问控制的脚本</span><br><span class="line">broadcast     在局域网内探查更多服务开启状况，如dhcp&#x2F;dns&#x2F;sqlserver等服务</span><br><span class="line">brute         提供暴力破解方式，针对常见的应用如http&#x2F;snmp等</span><br><span class="line">default       使用-sC或-A选项扫描时候默认的脚本，提供基本脚本扫描能力</span><br><span class="line">discovery     对网络进行更多的信息，如SMB枚举、SNMP查询等</span><br><span class="line">dos           用于进行拒绝服务攻击</span><br><span class="line">exploit       利用已知的漏洞入侵系统</span><br><span class="line">external      利用第三方的数据库或资源，例如进行whois解析</span><br><span class="line">fuzzer        模糊测试的脚本，发送异常的包到目标机，探测出潜在漏洞 intrusive: 入侵性的脚本，此类脚本可能引发对方的IDS&#x2F;IPS的记录或屏蔽</span><br><span class="line">malware       探测目标机是否感染了病毒、开启了后门等信息</span><br><span class="line">safe          此类与intrusive相反，属于安全性脚本</span><br><span class="line">version       负责增强服务与版本扫描（Version Detection）功能的脚本</span><br><span class="line">vuln          负责检查目标机是否有常见的漏洞（Vulnerability），如是否有MS08_067</span><br></pre></td></tr></table></figure>
+
+<h4 id="按脚本分类扫描"><a href="#按脚本分类扫描" class="headerlink" title="按脚本分类扫描"></a>按脚本分类扫描</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 负责处理鉴权证书（绕开鉴权）的脚本,也可以作为检测部分应用弱口令</span><br><span class="line">nmap --script&#x3D;auth 192.168.137.*</span><br><span class="line"></span><br><span class="line"># 提供暴力破解的方式  可对数据库，smb，snmp等进行简单密码的暴力猜解</span><br><span class="line">nmap --script&#x3D;brute 192.168.137.*</span><br><span class="line"></span><br><span class="line"># 默认的脚本扫描，主要是搜集各种应用服务的信息，收集到后，可再针对具体服务进行攻击</span><br><span class="line">nmap --script&#x3D;default 192.168.137.* 或者 nmap -sC 192.168.137.*</span><br><span class="line"></span><br><span class="line"># 检查是否存在常见漏洞</span><br><span class="line">nmap --script&#x3D;vuln 192.168.137.*   </span><br><span class="line"></span><br><span class="line"># 在局域网内探查更多服务开启状况</span><br><span class="line">nmap -n -p445 --script&#x3D;broadcast 192.168.137.4</span><br><span class="line"></span><br><span class="line"># 利用第三方的数据库或资源，例如进行whois解析</span><br><span class="line">nmap --script external 202.103.243.110</span><br></pre></td></tr></table></figure>
+
+<h4 id="按应用服务扫描"><a href="#按应用服务扫描" class="headerlink" title="按应用服务扫描"></a>按应用服务扫描</h4><h5 id="vnc扫描："><a href="#vnc扫描：" class="headerlink" title="vnc扫描："></a>vnc扫描：</h5><ol>
+<li><p>检查vnc bypass</p>
+<blockquote>
+<p>nmap –script=realvnc-auth-bypass 192.168.137.4</p>
+</blockquote>
+</li>
+<li><p>检查vnc认证方式</p>
+<blockquote>
+<p>nmap –script=vnc-auth 192.168.137.4 </p>
+</blockquote>
+</li>
+<li><p>获取vnc信息</p>
+<blockquote>
+<p>nmap –script=vnc-info 192.168.137.4</p>
+</blockquote>
+<h5 id="smb扫描："><a href="#smb扫描：" class="headerlink" title="smb扫描："></a>smb扫描：</h5></li>
+<li><p>smb破解</p>
+<blockquote>
+<p>nmap –script=smb-brute.nse -p445 192.168.137.4 </p>
+</blockquote>
+</li>
+<li><p>smb字典破解</p>
+<blockquote>
+<p>nmap –script=smb-brute.nse –script-args=userdb=/var/passwd,passdb=/var/passwd 192.168.137.4</p>
+</blockquote>
+</li>
+<li><p>smb已知几个严重漏</p>
+<blockquote>
+<p>nmap –script=smb-check-vulns.nse –script-args=unsafe=1 192.168.137.4</p>
+</blockquote>
+</li>
+<li><p>查看共享目录</p>
+<blockquote>
+<p>nmap -p 445 –script smb-ls –script-args ‘share=e$,path=,smbuser=test,smbpass=test’ 192.168.137.4</p>
+</blockquote>
+</li>
+<li><p>smb-psexec: 用登陆凭据作为脚本参数，在目标机器上运行一系列程序（注：需要下载nmap_service）</p>
+<blockquote>
+<p>nmap –script smb-psexec.nse –script-args=smbuser=,smbpass=[,config=] -p445 </p>
+</blockquote>
+</li>
+<li><p>查看会话</p>
+<blockquote>
+<p>nmap -n -p445 –script=smb-enum-sessions.nse –script-args=smbuser=test,smbpass=test 192.168.137.4 </p>
+</blockquote>
+</li>
+<li><p>系统信息</p>
+<blockquote>
+<p>nmap -n -p445 –script=smb-os-discovery.nse –script-args=smbuser=test,smbpass=test 192.168.137.4</p>
+</blockquote>
+<h5 id="Mssql扫描："><a href="#Mssql扫描：" class="headerlink" title="Mssql扫描："></a>Mssql扫描：</h5></li>
+<li><p>猜解mssql用户名和密码</p>
+<blockquote>
+<p>nmap -p1433 –script=ms-sql-brute –script-args=userdb=/var/passwd,passdb=/var/passwd 192.168.137.4</p>
+</blockquote>
+</li>
+<li><p>xp_cmdshell 执行命令</p>
+<blockquote>
+<p>nmap -p 1433 –script ms-sql-xp-cmdshell –script-args  mssql.username=sa,mssql.password=sa,ms-sql-xp-cmdshell.cmd=”net user”  192.168.137.4 </p>
+</blockquote>
+</li>
+<li><p>dumphash值</p>
+<blockquote>
+<p>nmap -p 1433 –script ms-sql-dump-hashes.nse –script-args mssql.username=sa,mssql.password=sa 192.168.137.4</p>
+</blockquote>
+<h5 id="Mysql扫描："><a href="#Mysql扫描：" class="headerlink" title="Mysql扫描："></a>Mysql扫描：</h5></li>
+<li><p>检查mysql空密码</p>
+<blockquote>
+<p>nmap -p 3306 –script=mysql-empty-password.nse 192.168.1.114</p>
+</blockquote>
+</li>
+<li><p>如果没有空密码，则可以使用自带的暴力破解功能尝试破解</p>
+<blockquote>
+<p>nmap -p 3306 –script=mysql-brute.nse 192.168.1.114</p>
+</blockquote>
+</li>
+<li><p>如果知道了用户名与密码，可以枚举数据库中的用户</p>
+<blockquote>
+<p>nmap -p 3306 –script=mysql-users.nse –script-args=mysqluser=root 192.168.1.114</p>
+</blockquote>
+</li>
+<li><p>枚举mysql用户信息</p>
+<blockquote>
+<p>nmap -p 3306 –script=mysql-enum.nse 192.168.1.114</p>
+</blockquote>
+</li>
+<li><p>支持同一应用的所有脚本扫描</p>
+<blockquote>
+<p>nmap –script=mysql-* 192.168.137.4</p>
+</blockquote>
+<h5 id="Oracle扫描："><a href="#Oracle扫描：" class="headerlink" title="Oracle扫描："></a>Oracle扫描：</h5></li>
+<li><p>oracle sid扫描</p>
+<blockquote>
+<p>nmap –script=oracle-sid-brute -p 1521-1560 192.168.137.5 </p>
+</blockquote>
+</li>
+<li><p>oracle弱口令破解</p>
+<blockquote>
+<p>nmap –script oracle-brute -p 1521 –script-args oracle-brute.sid=ORCL,userdb=/var/passwd,passdb=/var/passwd 192.168.137.5</p>
+</blockquote>
+<h5 id="其他一些比较好用的脚本"><a href="#其他一些比较好用的脚本" class="headerlink" title="其他一些比较好用的脚本"></a>其他一些比较好用的脚本</h5><blockquote>
+<p>nmap –script=broadcast-netbios-master-browser 192.168.137.4 <code>发现网关</code><br>nmap -p 873 –script rsync-brute –script-args ‘rsync-brute.module=www’ 192.168.137.4 <code>破解rsync</code><br>nmap –script informix-brute -p 9088 192.168.137.4 <code>informix数据库破解</code><br>nmap -p 5432 –script pgsql-brute 192.168.137.4 <code>pgsql破解</code><br>nmap -sU –script snmp-brute 192.168.137.4 <code>snmp破解</code><br>nmap -sV –script=telnet-brute 192.168.137.4 <code>telnet破解</code><br>nmap –script=http-vuln-cve2010-0738 –script-args ‘http-vuln-cve2010-0738.paths={/path1/,/path2/}’  <code>jboss autopwn</code><br>nmap –script=http-methods.nse 192.168.137.4 <code>检查http方法</code><br>nmap –script http-slowloris –max-parallelism 400 192.168.137.4 <code>dos攻击</code>，对于处理能力较小的站点还挺好用的 ‘half-HTTP’ connections<br>nmap –script=samba-vuln-cve-2012-1182 -p 139 192.168.137.4</p>
+</blockquote>
+<h5 id="不靠谱的脚本："><a href="#不靠谱的脚本：" class="headerlink" title="不靠谱的脚本："></a>不靠谱的脚本：</h5><blockquote>
+<p>vnc-brute 次数多了会禁止连接<br>pcanywhere-brute 同上</p>
+</blockquote>
+</li>
+</ol>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/08/03/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/3%E3%80%81%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF/" rel="next" title="漏洞扫描技术">
+    上一篇：漏洞扫描技术
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/08/03/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/1%E3%80%81%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="next" title="信息收集">
+    下一篇：信息收集
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a target="_blank" rel="noopener" href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
