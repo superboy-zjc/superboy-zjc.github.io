@@ -196,7 +196,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Web渗透测试/">
-                    Web渗透测试 <span class="right">17 篇</span></a>
+                    Web渗透测试 <span class="right">18 篇</span></a>
                 </a>
             </li>
 
@@ -342,7 +342,7 @@
 
 <p>② - 对于后缀的白名单策略，我们只能上传在白名单内的文件后缀名。</p>
 <h4 id="5、文件上传漏洞——00截断"><a href="#5、文件上传漏洞——00截断" class="headerlink" title="5、文件上传漏洞——00截断"></a>5、文件上传漏洞——00截断</h4><blockquote>
-<p><em>php版本</em> &lt; 5.3.4 此漏洞存在</p>
+<p>CVE-2006-7243 php版本 &lt; 5.3.4 此漏洞存在</p>
 </blockquote>
 <p><u>当上传文件的数据包暴露上传文件的路径时</u>，我们可以采用%00截断，将上传文件的路径文件夹名命名为一个php文件，之后采用在文件名后加一个%00截断后面的真实文件名字符串拼接。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">例如：url中暴露了文件保存路径 &#x2F;Pass-11&#x2F;index.php?save_path&#x3D;..&#x2F;upload&#x2F;</span><br><span class="line">服务器后台会对上传的文件进行随机命名，最后进行路径拼接存储文件，..&#x2F;upload&#x2F; + 712371751824.gif</span><br><span class="line">为了使上传的图片文件可以作为php脚本执行，我们可以再文件保存路径处构造一个php文件名充当保存路径，然后加一个%00截断后面的真实文件名，此时，路径拼接就构造成了：..&#x2F;upload&#x2F;test.php%00&#x2F;712371751824.gif。由于PHP是由C语言开发的，字符串的结束标志和C语言一样都是ASCII码为0的空字符，因此字符串类型的文件存储路径遇到%00就会被截断，后面的路径字符串不会被处理，成功的将文件上传为了..&#x2F;upload&#x2F;test.php</span><br></pre></td></tr></table></figure>

