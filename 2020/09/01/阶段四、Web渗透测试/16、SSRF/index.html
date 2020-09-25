@@ -212,7 +212,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Python学习/">
-                    Python学习 <span class="right">1 篇</span></a>
+                    Python学习 <span class="right">2 篇</span></a>
                 </a>
             </li>
 
@@ -319,7 +319,10 @@
 <p>3、腾讯微博应用http:/lshare.xx.x.qq.com SSRF利用点，参数: url<br><a target="_blank" rel="noopener" href="http://share.xx.x.qq.com/index.php?c=share&amp;a=pageinfo&amp;url=http://wuyun.org">http://share.xx.x.qq.com/index.php?c=share&amp;a=pageinfo&amp;url=http://wuyun.org</a><br>请求远程服务器的22端口，直接回显OpenSSH的banner信息</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#Payload</span></span><br><span class="line">[root@localhost wyssrf]<span class="comment"># curl &quot;http//share.xx.x.qq.com/index.php?c=share&amp;a=pageinfo&amp;url=http://fuzz.wuyun.org:22&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#返回</span></span><br><span class="line">&#123;<span class="string">&quot;ret&quot;</span>:0,<span class="string">&quot;data&quot;</span>:&#123;<span class="string">&quot;type&quot;</span>:1,<span class="string">&quot;title&quot;</span>:<span class="string">&quot;SSH-2.0-OpenSSH_5.3.….&quot;</span><span class="string">&quot;&#125;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="四、SSRF漏洞常见场景"><a href="#四、SSRF漏洞常见场景" class="headerlink" title="四、SSRF漏洞常见场景"></a>四、SSRF漏洞常见场景</h3><p>1、通过URL地址加载或下载图片<br><a target="_blank" rel="noopener" href="http://image.xx.com/image.php?image=http://tupian.baidu.com/2.jpg">http://image.xx.com/image.php?image=http://tupian.baidu.com/2.jpg</a><br>图片加载存在于很多的编辑器中，编辑器上传图片处，有的是加载远程图片到服务器内。<br>还有一些采用了加载远程图片的形式，本地文章加载了设定好的远程图片服务器上的图<br>片地址，如果没对加载的参数做限制可能造成SSRF。</p>
+<h3 id="四、SSRF漏洞常见场景"><a href="#四、SSRF漏洞常见场景" class="headerlink" title="四、SSRF漏洞常见场景"></a>四、SSRF漏洞常见场景</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/20407.html">https://www.freebuf.com/articles/web/20407.html</a></p>
+</blockquote>
+<p>1、通过URL地址加载或下载图片<br><a target="_blank" rel="noopener" href="http://image.xx.com/image.php?image=http://tupian.baidu.com/2.jpg">http://image.xx.com/image.php?image=http://tupian.baidu.com/2.jpg</a><br>图片加载存在于很多的编辑器中，编辑器上传图片处，有的是加载远程图片到服务器内。<br>还有一些采用了加载远程图片的形式，本地文章加载了设定好的远程图片服务器上的图片地址，如果没对加载的参数做限制可能造成SSRF。</p>
 
                 
 <p class="pink-link-context">

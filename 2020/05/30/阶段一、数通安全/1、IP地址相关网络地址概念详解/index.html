@@ -212,7 +212,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Python学习/">
-                    Python学习 <span class="right">1 篇</span></a>
+                    Python学习 <span class="right">2 篇</span></a>
                 </a>
             </li>
 
@@ -310,14 +310,14 @@
 <h4 id="3、测试是否可以连通"><a href="#3、测试是否可以连通" class="headerlink" title="3、测试是否可以连通"></a>3、测试是否可以连通</h4><p>使用<code>ping</code>命令测试连通。</p>
 <hr>
 <h1 id="三、IP地址分类"><a href="#三、IP地址分类" class="headerlink" title="三、IP地址分类"></a>三、IP地址分类</h1><p>国际标准化组织ISO规定IP地址的分类以第一个段分辨。</p>
-<p>A类：1-126                <strong>默认</strong>子网掩码：255.0.0.0</p>
+<p>A类：1-126                <strong>默认</strong>子网掩码：255.0.0.0    【0XXXXXXX】</p>
 <p>​    A类中10.0.0.0 - 10.255.255.255是私有地址。</p>
-<p>B类：128-191            <strong>默认</strong>子网掩码：255.255.0.0</p>
+<p>B类：128-191            <strong>默认</strong>子网掩码：255.255.0.0    【10XXXXXX】</p>
 <p>​    B类中172.16.0.0 - 172.31.255.255是私有地址。</p>
-<p>C类：192-223            默认子网掩码：255.255.255.0 </p>
+<p>C类：192-223            默认子网掩码：255.255.255.0     【110XXXXX】</p>
 <p>​    C类中192.168.0.0 - 192.168.255.255是私有地址。</p>
-<p>D类：224-239            组播地址</p>
-<p>E类：240-254             科研使用</p>
+<p>D类：224-239            组播地址    【1110XXXX】</p>
+<p>E类：240-254             科研使用    【11110XXX】</p>
 <p>127开头的IP为回环地址、255开头的IP为子网掩码，<strong>主机位全为255的IP为广播地址。</strong>0开头的后面讲，<strong>主机位全为0的是网段标识符。</strong></p>
 <p><strong>全局广播地址</strong>：255.255.255.255； <strong>无IP地址主机</strong>：0.0.0.0</p>
 <h1 id="四、路由器与交换机"><a href="#四、路由器与交换机" class="headerlink" title="四、路由器与交换机"></a>四、路由器与交换机</h1><p>家用路由器是路由器和交换机的结合产品，并且配备了DHCP服务器。一般路由器提供多个 LAN口和一个WAN口。其实WAN口就是Wide Area Network，用于连接广域网，相当于路由器的端口；LAN口就是Local Area Network，用于连接局域网，相当于交换机的口。</p>

