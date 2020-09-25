@@ -7,7 +7,7 @@
 
     
 
-    <title>2h0nG&#39;s Blog</title>
+    <title>XSS challenge | 2h0nG&#39;s Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="XSS challenge"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -204,7 +204,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/CTF笔记/">
-                    CTF笔记 <span class="right">4 篇</span></a>
+                    CTF笔记 <span class="right">9 篇</span></a>
                 </a>
             </li>
 
@@ -254,6 +254,10 @@
         <span class="breadcrumb">当前位置（分类目录）</span>
         
             
+    
+    
+    <a class="breadcrumb" href="/categories/CTF笔记/">CTF笔记</a>
+
 
         
 
@@ -269,12 +273,12 @@
             <div class="article-title">
                 
     
-        <h1>无题</h1>
+        <h1>XSS challenge</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2020-09-12T07:57:44.894Z"><a href="/2020/09/12/CTF%E7%AC%94%E8%AE%B0/XSS%20challenge/">2020-09-12</a></time>
+            <time class="pink-link-context" datetime="2020-09-12T07:57:44.000Z"><a href="/2020/09/12/CTF%E7%AC%94%E8%AE%B0/XSS%20challenge/">2020-09-12</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -282,6 +286,12 @@
 </span>
 
             
+    <div class="tags-row">
+        
+            <a href="/tags/CTF笔记/" class="chip pink lighten-1">CTF笔记</a>
+        
+    </div>
+
 
             <div class="toc pink-link-context hide-on-med-and-down">
     <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#XSS-challenge"><span class="section table-of-contents-text">XSS challenge</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Level2%E3%80%81"><span class="section table-of-contents-text">Level2、</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Level3%E3%80%81"><span class="section table-of-contents-text">Level3、</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Level4%E3%80%81"><span class="section table-of-contents-text">Level4、</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Level5%E3%80%81"><span class="section table-of-contents-text">Level5、</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Level6%E3%80%81"><span class="section table-of-contents-text">Level6、</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#Level7%E3%80%81"><span class="section table-of-contents-text">Level7、</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Level8%E3%80%81"><span class="section table-of-contents-text">Level8、</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Level9%E3%80%81"><span class="section table-of-contents-text">Level9、</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Level10%E3%80%81"><span class="section table-of-contents-text">Level10、</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Level11%E3%80%81"><span class="section table-of-contents-text">Level11、</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Level12%E3%80%81"><span class="section table-of-contents-text">Level12、</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#Level13%E3%80%81"><span class="section table-of-contents-text">Level13、</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Level14%E3%80%81"><span class="section table-of-contents-text">Level14、</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Level15%E3%80%81"><span class="section table-of-contents-text">Level15、</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Level16%E3%80%81"><span class="section table-of-contents-text">Level16、</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Level17%E3%80%81Level18"><span class="section table-of-contents-text">Level17、Level18</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Level19%E3%80%81Flash-XSS"><span class="section table-of-contents-text">Level19、Flash XSS</span></a></li></ol></li></ol>
@@ -373,16 +383,16 @@
 
                 
 <p class="pink-link-context">
-    <a href="/2020/09/13/CTF%E7%AC%94%E8%AE%B0/BUUCTF%20Write%20Up/" rel="next" title="">
-    上一篇：
+    <a href="/2020/09/13/CTF%E7%AC%94%E8%AE%B0/BUUCTF%20Write%20Up/" rel="next" title="BUUCTF Write Up">
+    上一篇：BUUCTF Write Up
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/2020/09/12/CTF%E7%AC%94%E8%AE%B0/2020%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E5%A4%A7%E8%B5%9B%E2%80%94%E2%80%94WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%BB%83%E4%B9%A0%E9%A2%98WriteUp/" rel="next" title="">
-    下一篇：
+    <a href="/2020/09/12/CTF%E7%AC%94%E8%AE%B0/2020%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E5%A4%A7%E8%B5%9B%E2%80%94%E2%80%94WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%BB%83%E4%B9%A0%E9%A2%98WriteUp/" rel="next" title="2020全国大学生软件测试大赛——WEB安全测试练习题WriteUp">
+    下一篇：2020全国大学生软件测试大赛——WEB安全测试练习题WriteUp
   </a>
 </p>
 
