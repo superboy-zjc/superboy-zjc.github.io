@@ -180,7 +180,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/代码审计安全/">
-                    代码审计安全 <span class="right">8 篇</span></a>
+                    代码审计安全 <span class="right">9 篇</span></a>
                 </a>
             </li>
 
@@ -365,7 +365,11 @@
 
 <p>④注意事项</p>
 <p>​    Windows中创建.htaccess文件时，认为它是一个没有文件名的htaccess格式的文件，我们需要创建一个新文件，将其另存为*.*文件格式的文件，就不会报错。</p>
-<h4 id="7、Web容器解析漏洞"><a href="#7、Web容器解析漏洞" class="headerlink" title="7、Web容器解析漏洞"></a>7、Web容器解析漏洞</h4><h5 id="①Apache解析漏洞（1-x-2-x漏洞）"><a href="#①Apache解析漏洞（1-x-2-x漏洞）" class="headerlink" title="①Apache解析漏洞（1.x 2.x漏洞）"></a>①Apache解析漏洞（1.x 2.x漏洞）</h5><p>其实这属于Apache早期版本的特性，Apache识别文件类型是从右向左，直到识别写在mime.types配置文件中一个它认识的文件名后缀进行解析。因此，有些黑名单通过这个漏洞就可以绕过，payload:<code>hack.php.xxx</code></p>
+<h4 id="7、Web容器解析漏洞"><a href="#7、Web容器解析漏洞" class="headerlink" title="7、Web容器解析漏洞"></a>7、Web容器解析漏洞</h4><blockquote>
+<p>Nginx服务漏洞详解：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/136801555">https://zhuanlan.zhihu.com/p/136801555</a></p>
+<p>Apache中间件漏洞详解：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/125115734">https://zhuanlan.zhihu.com/p/125115734</a></p>
+</blockquote>
+<h5 id="①Apache解析漏洞（1-x-2-x漏洞）"><a href="#①Apache解析漏洞（1-x-2-x漏洞）" class="headerlink" title="①Apache解析漏洞（1.x 2.x漏洞）"></a>①Apache解析漏洞（1.x 2.x漏洞）</h5><p>其实这属于Apache早期版本的特性，Apache识别文件类型是从右向左，直到识别写在mime.types配置文件中一个它认识的文件名后缀进行解析。因此，有些黑名单通过这个漏洞就可以绕过，payload:<code>hack.php.xxx</code></p>
 <h5 id="②IIS6-0解析漏洞"><a href="#②IIS6-0解析漏洞" class="headerlink" title="②IIS6.0解析漏洞"></a>②IIS6.0解析漏洞</h5><p>​    1 - payload：<code>hack.asp;test.jpg</code>；</p>
 <p>​    2 - <code>hack.asp/test.jpg</code>(文件后缀名为asp下的所有文件当作asp执行，此漏洞需要结合上传文件夹来利用)</p>
 <h5 id="③Nginx解析漏洞"><a href="#③Nginx解析漏洞" class="headerlink" title="③Nginx解析漏洞"></a>③Nginx解析漏洞</h5><p>（1）0.8.37以下的版本，可以上传一个不被过滤后缀名的木马，如：shell.jpg，可以通过请求shell.jpg.php来进行正常解析</p>
