@@ -196,7 +196,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Web渗透测试/">
-                    Web渗透测试 <span class="right">20 篇</span></a>
+                    Web渗透测试 <span class="right">23 篇</span></a>
                 </a>
             </li>
 
@@ -204,7 +204,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/CTF笔记/">
-                    CTF笔记 <span class="right">9 篇</span></a>
+                    CTF笔记 <span class="right">11 篇</span></a>
                 </a>
             </li>
 
@@ -327,12 +327,15 @@
 <p>这里测试了一下，其实00截断的主要是，当POST方法上传文件时，filename名中加入了0x00，则存储到$_FILE的name变量中会读取字符串直到这个0x00。另外在一些函数里也会被00截断。</p>
 <p>这道题主要是在URL参数中暴露了存储路径的位置，可以在存储目录上面加一个xm.php%00来组成一个payload，这样在组合存储路径时就会被这个00截断，而保存为xm.php</p>
 <p>12、0x00截断——白名单</p>
-<p>同理上一题，文件保存路径暴露在POST中，截断即可。</p>
+<p>同理上一题，上一题文件路径暴露在GET参数中，此题文件保存路径暴露在POST中，截断即可。</p>
+<p>13、上传图片马，源码采用case语句，判断文件头的二进制值是否正确，属于人工case判断。</p>
+<p>14、getimagesize函数检测图片类型</p>
+<p>15、</p>
 
                 
 <p class="pink-link-context">
-    <a href="/2020/09/23/CTF%E7%AC%94%E8%AE%B0/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFSSR%E4%BB%A3%E7%90%86/" rel="next" title="阿里云服务器命令行开启SSR代理">
-    上一篇：阿里云服务器命令行开启SSR代理
+    <a href="/2020/09/23/CTF%E7%AC%94%E8%AE%B0/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" rel="next" title="SSTI模板注入">
+    上一篇：SSTI模板注入
   </a>
 </p>
 
