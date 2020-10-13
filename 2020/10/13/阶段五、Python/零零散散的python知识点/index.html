@@ -7,7 +7,7 @@
 
     
 
-    <title>2h0nG&#39;s Blog</title>
+    <title>零零散散的python知识点 | 2h0nG&#39;s Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="零零散散的python知识点"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -212,7 +212,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Python学习/">
-                    Python学习 <span class="right">2 篇</span></a>
+                    Python学习 <span class="right">3 篇</span></a>
                 </a>
             </li>
 
@@ -221,6 +221,14 @@
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Leetcode题解/">
                     Leetcode题解 <span class="right">24 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/漏洞复现与分析/">
+                    漏洞复现与分析 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -254,6 +262,10 @@
         <span class="breadcrumb">当前位置（分类目录）</span>
         
             
+    
+    
+    <a class="breadcrumb" href="/categories/Python学习/">Python学习</a>
+
 
         
 
@@ -269,12 +281,12 @@
             <div class="article-title">
                 
     
-        <h1>无题</h1>
+        <h1>零零散散的python知识点</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2020-09-11T13:09:22.816Z"><a href="/2020/09/11/%E9%98%B6%E6%AE%B5%E4%BA%94%E3%80%81Python/PythonFlask/">2020-09-11</a></time>
+            <time class="pink-link-context" datetime="2020-10-13T01:32:57.000Z"><a href="/2020/10/13/%E9%98%B6%E6%AE%B5%E4%BA%94%E3%80%81Python/%E9%9B%B6%E9%9B%B6%E6%95%A3%E6%95%A3%E7%9A%84python%E7%9F%A5%E8%AF%86%E7%82%B9/">2020-10-13</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -282,28 +294,51 @@
 </span>
 
             
+    <div class="tags-row">
+        
+            <a href="/tags/Python学习/" class="chip pink lighten-1">Python学习</a>
+        
+    </div>
+
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#PythonFlask"><span class="section table-of-contents-text">PythonFlask</span></a></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#PythonFlask"><span class="section table-of-contents-text">PythonFlask</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Python-requests"><span class="section table-of-contents-text">Python requests</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#python-re%E6%A8%A1%E5%9D%97"><span class="section table-of-contents-text">python re模块</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E5%BC%80%E5%8F%91%E8%84%9A%E6%9C%AC%E5%BF%85%E5%A4%87%E2%80%94%E2%80%94python%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="section table-of-contents-text">开发脚本必备——python命令行知识点</span></a></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <h2 id="PythonFlask"><a href="#PythonFlask" class="headerlink" title="PythonFlask"></a>PythonFlask</h2><p>一、</p>
-<p>PythonFlask是Python轻便级的开源WEB框架。</p>
+                <h2 id="PythonFlask"><a href="#PythonFlask" class="headerlink" title="PythonFlask"></a>PythonFlask</h2><p>一、PythonFlask是Python轻便级的开源WEB框架。</p>
+<h2 id="Python-requests"><a href="#Python-requests" class="headerlink" title="Python requests"></a>Python requests</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://requests.readthedocs.io/en/master/user/quickstart/">https://requests.readthedocs.io/en/master/user/quickstart/</a></p>
+</blockquote>
+<p>​    Python requests is an elegent and simple HTTP library for Python.</p>
+<p>​    Requests allows you to send HTTP/1.1 requests extrmely easily.There’s no need to manually add query strings to your URLs or to form-encode your POST data.Keep-alive and HTTP connection pooling are 100% automatic, thanks to <a target="_blank" rel="noopener" href="https://github.com/urllib3/urllib3">urllib3</a>?</p>
+<pre><code>### Passing Parameters In URLS</code></pre>
+<p>​    You often want to send some sort of data in the URLS’s query string.Requests allows you to procide these arguments like “<a target="_blank" rel="noopener" href="http://www.xxx.org/get?key=val&quot;.The">www.xxx.org/get?key=val&quot;.The</a> arguments after the question mark as a dictionary of strings as the <code>params</code> keyword argument value at the second option.</p>
+<p>​    As an example, if you wanted to pass <code>key1=value1</code> and <code>key2=value2</code> to <code>www.xxx.org/get</code>, you would use the following code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload = &#123;<span class="string">&quot;key1&quot;</span> : <span class="string">&quot;value1&quot;</span>, <span class="string">&quot;key2&quot;</span> : <span class="string">&quot;value2&quot;</span>&#125;</span><br><span class="line">r = requests.get(<span class="string">&quot;www.xxx.org/get&quot;</span>, params=payload)</span><br></pre></td></tr></table></figure>
+
+<p>POST:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload &#x3D; &#123;&quot;key1&quot; : &quot;value1&quot;, &quot;key2&quot; : &quot;value2&quot;&#125;</span><br><span class="line">r &#x3D; requests.post(&quot;www.xxx.org&#x2F;get&quot;, data&#x3D;payload)</span><br></pre></td></tr></table></figure>
+
+<h2 id="python-re模块"><a href="#python-re模块" class="headerlink" title="python re模块"></a>python re模块</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">re.match(pattern, str)    <span class="comment">#从str首开始匹配patern模式</span></span><br><span class="line">re.search(pattern, str)    <span class="comment">#全文检索pattern模式</span></span><br><span class="line">a = re.search(<span class="string">&#x27;hel(.*)&#x27;</span>, <span class="string">&quot;hello&quot;</span>)</span><br><span class="line">a.group(<span class="number">1</span>)    返回 lo</span><br></pre></td></tr></table></figure>
+
+<h2 id="开发脚本必备——python命令行知识点"><a href="#开发脚本必备——python命令行知识点" class="headerlink" title="开发脚本必备——python命令行知识点"></a>开发脚本必备——python命令行知识点</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.pyimagesearch.com/2018/03/12/python-argparse-command-line-arguments/">https://www.pyimagesearch.com/2018/03/12/python-argparse-command-line-arguments/</a></p>
+</blockquote>
 
                 
 <p class="pink-link-context">
-    <a href="/2020/09/12/%E9%98%B6%E6%AE%B5%E4%BA%94%E3%80%81Python/Python%20requests/" rel="next" title="">
-    上一篇：
+    <a href="/2020/10/13/CTF%E7%AC%94%E8%AE%B0/BUUCTF%20Write%20Up/" rel="next" title="BUUCTF Write Up">
+    上一篇：BUUCTF Write Up
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/2020/09/06/CTF%E7%AC%94%E8%AE%B0/XCTF%E8%AE%AD%E7%BB%83write%20up/" rel="next" title="XCTF训练write up">
-    下一篇：XCTF训练write up
+    <a href="/2020/10/08/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%90%84%E7%A7%8D%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E5%8D%8F%E8%AE%AE/" rel="next" title="各种奇奇怪怪的协议">
+    下一篇：各种奇奇怪怪的协议
   </a>
 </p>
 
