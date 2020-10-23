@@ -204,7 +204,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/CTF笔记/">
-                    CTF笔记 <span class="right">11 篇</span></a>
+                    CTF笔记 <span class="right">13 篇</span></a>
                 </a>
             </li>
 
@@ -312,6 +312,7 @@
 </blockquote>
 <blockquote>
 <p>BlackHat2020 议题分析之「When TLS Hacks You」使用DNS ReBinding实现的SSRF攻击（TLS中交互使用的session作为payload）<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/GT3Wlu_2-Ycf_nhWz_z9Vw">https://mp.weixin.qq.com/s/GT3Wlu_2-Ycf_nhWz_z9Vw</a></p>
+<p>西湖论剑WriteUp：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/76vkNpZa2Bl4lPFXBHZlxA">https://mp.weixin.qq.com/s/76vkNpZa2Bl4lPFXBHZlxA</a></p>
 </blockquote>
 <p>通过伪造DNS解析地址，第一次访问 <a target="_blank" rel="noopener" href="https://www.hacker.com:8888/">https://www.hacker.com:8888</a> 我们搭建的hack网站，其中https服务返回的session设置为我们要使用的payload，8888端口是我们希望攻击的本地服务端口（比如 redis、SMTP等）。并且该网页设置了一个60后自动js调用 <a target="_blank" rel="noopener" href="https://www.hacker.com:8888/">https://www.hacker.com:8888</a> 下的资源。而60秒后本地DNS缓存过期，会重新询问DNS服务器<a target="_blank" rel="noopener" href="http://www.hacker.com的ip地址,第二次访问时,dns/">www.hacker.com的IP地址，第二次访问时，dns</a> rebinding到127.0.0.1，此时带着payload session访问了 <a target="_blank" rel="noopener" href="https://127.0.0.1:8888/">https://127.0.0.1:8888</a> ，可以形成攻击。这里满足了同源策略，但其实本质上IP不同，这算是绕过了浏览器的同源策略，实现了攻击。</p>
 

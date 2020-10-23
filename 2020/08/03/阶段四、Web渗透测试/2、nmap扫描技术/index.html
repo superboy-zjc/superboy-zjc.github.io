@@ -204,7 +204,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/CTF笔记/">
-                    CTF笔记 <span class="right">11 篇</span></a>
+                    CTF笔记 <span class="right">13 篇</span></a>
                 </a>
             </li>
 
@@ -333,7 +333,7 @@
 <td>精准</td>
 </tr>
 <tr>
-<td>ICMP扫描</td>
+<td>-sP，ICMP扫描</td>
 <td>ICMPtype=8 code=0type=13 code=0type=17 code=0</td>
 <td>ICMPtype=0 code=0type=14 code=0type=18 code=0</td>
 <td>超时</td>
@@ -404,7 +404,7 @@
 <td></td>
 </tr>
 <tr>
-<td>-sM</td>
+<td>-sM,TCP maimon扫描</td>
 <td>fin+ack</td>
 <td>未收到rst</td>
 <td>rst</td>
@@ -412,7 +412,7 @@
 <td></td>
 </tr>
 <tr>
-<td>-sN</td>
+<td>-sN隐蔽扫描</td>
 <td>无置位</td>
 <td>无响应</td>
 <td>rst</td>
@@ -420,7 +420,7 @@
 <td>不准确，只能判断closed和open|filtered</td>
 </tr>
 <tr>
-<td>-sF</td>
+<td>-sF隐蔽扫描</td>
 <td>fin</td>
 <td>无响应</td>
 <td>rst</td>
@@ -428,7 +428,7 @@
 <td></td>
 </tr>
 <tr>
-<td>-sX</td>
+<td>-sX隐蔽扫描</td>
 <td>fin+psh+urg</td>
 <td>无响应</td>
 <td>rst</td>
@@ -497,7 +497,7 @@
 </blockquote>
 </li>
 <li><p>扫描类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-sP  只探测主机在线情况</span><br><span class="line">-sS  SYN扫描（隐身扫描）</span><br><span class="line">-ST  TCP扫描</span><br><span class="line">-sU  UDP扫描</span><br><span class="line">-sV  系统版本检测</span><br><span class="line">-O   操作系统识别</span><br><span class="line">–scanflags  指定TCP标识位（设置URG, ACK, PSH,RST,SYN,FIN位）</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-sP  只探测主机在线情况</span><br><span class="line">-sS  SYN扫描（隐身扫描）</span><br><span class="line">-ST  TCP扫描</span><br><span class="line">-sU  UDP扫描</span><br><span class="line">-sV  系统版本检测</span><br><span class="line">-O   操作系统识别</span><br><span class="line">–scanflags  指定TCP标识位（设置URG, ACK, PSH,RST,SYN,FIN位）</span><br><span class="line">-F    只扫描常用的100个端口</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>时序选项</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-T0  偏执的：非常非常慢，用于IDS逃逸</span><br><span class="line">-T1  猥琐的：相当慢，用于IDS逃逸</span><br><span class="line">-T2  有礼貌的：降低速度以消耗更小的带宽，比默认慢十倍</span><br><span class="line">-T3  普通的：默认，根据目标的反应自动调整时间模式</span><br><span class="line">-T4  野蛮的：假定处在一个很好的网络环境，请求可能会淹没目标</span><br><span class="line">-T5  疯狂的：非常野蛮，很可能会淹没目标端口或是漏掉一些开放端口</span><br></pre></td></tr></table></figure>

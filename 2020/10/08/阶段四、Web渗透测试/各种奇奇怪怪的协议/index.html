@@ -204,7 +204,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/CTF笔记/">
-                    CTF笔记 <span class="right">11 篇</span></a>
+                    CTF笔记 <span class="right">13 篇</span></a>
                 </a>
             </li>
 
@@ -302,7 +302,7 @@
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81PHP"><span class="section table-of-contents-text">一、PHP:&#x2F;&#x2F;</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81PHP-input"><span class="section table-of-contents-text">1、PHP:&#x2F;&#x2F;input</span></a></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81PHP"><span class="section table-of-contents-text">一、PHP:&#x2F;&#x2F;</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81PHP-input"><span class="section table-of-contents-text">1、PHP:&#x2F;&#x2F;input</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81PHP-filter"><span class="section table-of-contents-text">2、PHP:&#x2F;&#x2F;filter</span></a></li></ol></li></ol>
 </div>
 
 
@@ -313,6 +313,37 @@
 <p>用法：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> $postdata = file_get_contents(<span class="string">&quot;php://input&quot;</span>); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
+<h4 id="2、PHP-filter"><a href="#2、PHP-filter" class="headerlink" title="2、PHP://filter"></a>2、PHP://filter</h4><p>php://filter 将 流 通过 设置好的过滤器 进行 封装 过滤 的协议。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php:<span class="comment">//filter/&lt;action&gt;=&lt;name&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>例如：使用filter获取网页内容</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $url = <span class="string">&#x27;http://www.phpfamily.cn&#x27;</span>;</span><br><span class="line">    $data = file_get_contents(<span class="string">&#x27;php://filter/resource=&#x27;</span> . $url);</span><br><span class="line">    <span class="keyword">echo</span> $data;  <span class="comment">//输出结果我http://www.phpfamily.cn页面的内容</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>php://filter 的 参数列表</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>read</td>
+<td>读取,该参数可选。可以设定一个或多个过滤器名称，以管道符|分割</td>
+</tr>
+<tr>
+<td>write</td>
+<td>写入,该参数可选。可以设定一个或多个过滤器名称，以管道符</td>
+</tr>
+<tr>
+<td>resource</td>
+<td>这个参数是必须的。它指定了你要筛选过滤的数据流。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>典型的文件包含漏洞。我们可以通过构造含有漏洞的语句，查看想要看的代码： file=php://filter/convert.base64-encode/resource=index.php 。再将得到的base64码解码即可。</p>
+</blockquote>
+<p>read参数值可为</p>
+<p>string.strip_tags： 将数据流中的所有html标签清除<br>string.toupper： 将数据流中的内容转换为大写<br>string.tolower： 将数据流中的内容转换为小写<br>convert.base64-encode： 将数据流中的内容转换为base64编码 convert.base64-decode： 与上面对应解码</p>
 
                 
 <p class="pink-link-context">

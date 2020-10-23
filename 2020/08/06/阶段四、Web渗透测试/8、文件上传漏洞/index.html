@@ -204,7 +204,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/CTF笔记/">
-                    CTF笔记 <span class="right">11 篇</span></a>
+                    CTF笔记 <span class="right">13 篇</span></a>
                 </a>
             </li>
 
@@ -355,11 +355,11 @@
 <p><u>当上传文件的数据包暴露上传文件的路径时</u>，我们可以采用%00截断，将上传文件的路径文件夹名命名为一个php文件，之后采用在文件名后加一个%00截断后面的真实文件名字符串拼接。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">例如：url中暴露了文件保存路径 &#x2F;Pass-11&#x2F;index.php?save_path&#x3D;..&#x2F;upload&#x2F;</span><br><span class="line">服务器后台会对上传的文件进行随机命名，最后进行路径拼接存储文件，..&#x2F;upload&#x2F; + 712371751824.gif</span><br><span class="line">为了使上传的图片文件可以作为php脚本执行，我们可以再文件保存路径处构造一个php文件名充当保存路径，然后加一个%00截断后面的真实文件名，此时，路径拼接就构造成了：..&#x2F;upload&#x2F;test.php%00&#x2F;712371751824.gif。由于PHP是由C语言开发的，字符串的结束标志和C语言一样都是ASCII码为0的空字符，因此字符串类型的文件存储路径遇到%00就会被截断，后面的路径字符串不会被处理，成功的将文件上传为了..&#x2F;upload&#x2F;test.php</span><br></pre></td></tr></table></figure>
 
-<h4 id="6、配置文件上传漏洞——-htaccess文件攻击"><a href="#6、配置文件上传漏洞——-htaccess文件攻击" class="headerlink" title="6、配置文件上传漏洞——.htaccess文件攻击"></a>6、配置文件上传漏洞——.htaccess文件攻击</h4><p>①Apache配置文件设置：</p>
+<h4 id="6、配置文件上传漏洞——-htaccess文件攻击"><a href="#6、配置文件上传漏洞——-htaccess文件攻击" class="headerlink" title="6、配置文件上传漏洞——.htaccess文件攻击"></a>6、配置文件上传漏洞——.htaccess文件攻击</h4><p><strong>①Apache配置文件设置：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory &quot;网页根目录&quot;&gt;下的 AllowOverride All</span><br><span class="line">LoadModule rewrite_module &#x2F;usr&#x2F;lib&#x2F;apache2&#x2F;modules&#x2F;mod_rewrite.so</span><br></pre></td></tr></table></figure>
 
-<p>②漏洞原理：.htaccess文件是Apache的分布式配置文件，它会重写文件所在路径以及该路径下的所有子文件夹的Apache全局配置。</p>
-<p>③攻击案例：</p>
+<p><strong>②漏洞原理</strong>：.htaccess文件是Apache的分布式配置文件，它会重写文件所在路径以及该路径下的所有子文件夹的Apache全局配置。</p>
+<p><strong>③攻击案例：</strong></p>
 <p>​    将.png文件当作PHP文件解析</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AddType application/x-httpd-php .png</span><br><span class="line">AddHandler php5-script .png</span><br></pre></td></tr></table></figure>
 <p>​    将所有文件当作PHP文件解析</p>
@@ -371,8 +371,13 @@
 <p>​    <strong>实践，phpstudy，根据vhost配置文件的分析得出结果</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AddHandler fcgid-script .png</span><br><span class="line">FcgidWrapper &quot;D:&#x2F;phpstudy_pro&#x2F;Extensions&#x2F;php&#x2F;php5.2.17nts&#x2F;php-cgi.exe&quot; .png</span><br></pre></td></tr></table></figure>
 
-<p>④注意事项</p>
+<p><strong>④注意事项</strong></p>
 <p>​    Windows中创建.htaccess文件时，认为它是一个没有文件名的htaccess格式的文件，我们需要创建一个新文件，将其另存为*.*文件格式的文件，就不会报错。</p>
+<p><strong>⑤</strong>LUA脚本上传</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AddHandler lua-script .lua</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">木马详见2020杭州西湖论剑CTF，NewUpload</span><br></pre></td></tr></table></figure>
+
 <h4 id="7、Web容器解析漏洞"><a href="#7、Web容器解析漏洞" class="headerlink" title="7、Web容器解析漏洞"></a>7、Web容器解析漏洞</h4><blockquote>
 <p>Nginx服务漏洞详解：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/136801555">https://zhuanlan.zhihu.com/p/136801555</a></p>
 <p>Apache中间件漏洞详解：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/125115734">https://zhuanlan.zhihu.com/p/125115734</a></p>

