@@ -318,7 +318,7 @@
 </blockquote>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python GitHacker.py http://47.100.46.169:3902/.git/    <span class="comment">#获得源码+.git</span></span><br><span class="line">git <span class="built_in">log</span> --reflog    <span class="comment">#查看历史提交日志</span></span><br><span class="line">git reset --hard ID    <span class="comment">#切换版本到对应历史提交版本，ID为日志中的commit ID</span></span><br><span class="line"><span class="comment">#flag就在对应历史版本中的源码里</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\18265\AppData\Roaming\Typora\typora-user-images\image-20201018124542219.png" alt="image-20201018124542219"></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BEym8I"><img src="https://s1.ax1x.com/2020/10/23/BEym8I.png" alt="BEym8I.png"></a></p>
 <h3 id="知X堂的php教程"><a href="#知X堂的php教程" class="headerlink" title="知X堂的php教程"></a>知X堂的php教程</h3><p>​    这道题首先通过URI资源名和效果判断出后台接口可以任意读文件以及目录遍历，因此可通过其接口得到源码，下一步就是审计源码了。</p>
 <p>​    审计源码，猜测是listdir.php种的ls代码注入，尝试<code>;ls</code>注入，发现没有预期结果，通过Wappalyzer识别服务器架构为Ubuntu操作系统，所以搭建Ubuntu环境测试源码注入情况。</p>
 <p>​    Ubuntu下载apache2后发现无PHP环境，需要下载php与apache2的php模块库</p>
