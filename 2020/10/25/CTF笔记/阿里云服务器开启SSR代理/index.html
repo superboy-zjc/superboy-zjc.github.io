@@ -286,7 +286,7 @@
 
 
             </div>
-            <time class="pink-link-context" datetime="2020-09-23T06:44:37.000Z"><a href="/2020/09/23/CTF%E7%AC%94%E8%AE%B0/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFSSR%E4%BB%A3%E7%90%86/">2020-09-23</a></time>
+            <time class="pink-link-context" datetime="2020-10-24T16:44:37.000Z"><a href="/2020/10/25/CTF%E7%AC%94%E8%AE%B0/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%90%AFSSR%E4%BB%A3%E7%90%86/">2020-10-25</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -313,20 +313,20 @@
 <p>感谢开源项目：<a target="_blank" rel="noopener" href="https://github.com/noahziheng/ssr-helper">https://github.com/noahziheng/ssr-helper</a></p>
 <p>该项目是ShadowosocksR python版本的命令行版本。按照项目教程流程走即可。</p>
 <p>小坑：项目目录下的exec.js里有一个对python环境的检查，是通过shell中能否找到<code>python</code>可执行文件的变量，而阿里云20.3的Ubuntu默认没有名为python的可执行文件，都是python3.8、python2，报了一个<code>You need install python for the script!</code>的错误，在/usr/bin下软链接一个python3.8名为python即可。</p>
+<p>​    常用命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">命令行使用</span><br><span class="line"></span><br><span class="line">现在您已经可以使用SSR Helper了，终端下运行 `ssr` 即可看到欢迎界面</span><br><span class="line">以下仅对常用命令做以介绍，详细的命令列表可运行 `ssr <span class="built_in">help</span>` 查阅</span><br><span class="line"></span><br><span class="line">* `ssr config [path]` : 配置Python Client的路径，**绝对路径**</span><br><span class="line">* `ssr add` : 手动添加服务器，具备友好的界面</span><br><span class="line">* `ssr add [uri]` : 使用SSR URI手动添加服务器到列表</span><br><span class="line">* `ssr connect` : 选择服务器连接并设置为默认服务器，具备友好的界面</span><br><span class="line">* `ssr ls` : 显示服务器信息，具备友好的界面</span><br><span class="line">* `ssr rm` : 从列表删除服务器，具备友好的界面（注：删除后连接不会中断，需运行 `connect` 命令重新连接）</span><br><span class="line">* `ssr edit` : 编辑服务器信息，具备友好的界面</span><br><span class="line">* `ssr <span class="built_in">local</span>` : 编辑SSR本地服务信息，编辑后需要重新连接生效</span><br><span class="line">* `ssr start` : ShadowsocksR Python Client Daemon的 start 命令,启动连接，使用CLI配置的默认服务器</span><br><span class="line">* `ssr restart` : ShadowsocksR Python Client Daemon的 restart 命令，重新启动连接，使用CLI配置的默认服务器</span><br><span class="line">* `ssr stop` : ShadowsocksR Python Client Daemon的 stop 命令，停止服务，使用CLI配置的默认服务器</span><br><span class="line">* `ssr status` : 可查看 ShadowsocksR Python Client Daemon的 运行状态</span><br><span class="line">* `ssr startup` : 设置服务开机自启，仅在Systemd启动的Linux平台下有效</span><br><span class="line">* `ssr unstartup` : 关闭服务开机自启，仅在Systemd启动的Linux平台下有效</span><br><span class="line">* `ssr delay` : 测试服务器的延迟</span><br><span class="line">* `ssr-subscribe add [url]` : 添加新的SSR订阅地址</span><br><span class="line">* `ssr-subscribe ls` : 列出所有SSR订阅地址和他们的当前标号</span><br><span class="line">* `ssr-subscribe rm [label]` : 基于 `ssr-subscribe ls` 打印的标号删除SSR订阅地址</span><br><span class="line">* `ssr-subscribe update` : 从已添加的SSR订阅地址获取服务器sh信息</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>​    开启代理：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> http_proxy=<span class="string">&quot;socks5://127.0.0.1:1080&quot;</span></span><br><span class="line"><span class="built_in">export</span> https_proxy=<span class="string">&quot;socks5://127.0.0.1:1080&quot;</span></span><br></pre></td></tr></table></figure>
+
 <p><img src="C:\Users\18265\AppData\Roaming\Typora\typora-user-images\image-20200923144939187.png" alt="image-20200923144939187"></p>
 
                 
-<p class="pink-link-context">
-    <a href="/2020/09/25/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E8%8E%B7%E5%BE%97%E7%9B%AE%E6%A0%87%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84Banner%E4%BF%A1%E6%81%AF/" rel="next" title="获得目标服务器的Banner信息（转）">
-    上一篇：获得目标服务器的Banner信息（转）
-  </a>
-</p>
-
 
 
 <p class="pink-link-context">
-    <a href="/2020/09/23/CTF%E7%AC%94%E8%AE%B0/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" rel="next" title="SSTI模板注入">
-    下一篇：SSTI模板注入
+    <a href="/2020/10/24/CTF%E7%AC%94%E8%AE%B0/2020%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9FWEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E9%A2%84%E9%80%89%E8%B5%9BWriteUp/" rel="next" title="2020全国大学生WEB安全测试预选赛WriteUp">
+    下一篇：2020全国大学生WEB安全测试预选赛WriteUp
   </a>
 </p>
 
