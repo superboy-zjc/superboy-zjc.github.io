@@ -7,7 +7,7 @@
 
     
 
-    <title>VTP协议（思科私有协议，管理VLAN） | 2h0nG&#39;s Blog</title>
+    <title>2020全国大学生WEB安全测试预选赛WriteUp | 2h0nG&#39;s Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="VTP协议（思科私有协议，管理VLAN）"/>
+    <meta property="og:title" content="2020全国大学生WEB安全测试预选赛WriteUp"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -264,7 +264,7 @@
             
     
     
-    <a class="breadcrumb" href="/categories/数据通信安全/">数据通信安全</a>
+    <a class="breadcrumb" href="/categories/CTF笔记/">CTF笔记</a>
 
 
         
@@ -281,12 +281,12 @@
             <div class="article-title">
                 
     
-        <h1>VTP协议（思科私有协议，管理VLAN）</h1>
+        <h1>2020全国大学生WEB安全测试预选赛WriteUp</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2020-07-07T11:10:03.000Z"><a href="/2020/07/07/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/21%E3%80%81VTP%E5%8D%8F%E8%AE%AE%EF%BC%88%E7%AE%A1%E7%90%86VLAN%EF%BC%89/">2020-07-07</a></time>
+            <time class="pink-link-context" datetime="2020-10-25T15:59:59.000Z"><a href="/2020/10/25/CTF%E7%AC%94%E8%AE%B0/2020%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9FWEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E9%A2%84%E9%80%89%E8%B5%9BWriteUp/">2020-10-25</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -296,38 +296,36 @@
             
     <div class="tags-row">
         
-            <a href="/tags/数据通信安全/" class="chip pink lighten-1">数据通信安全</a>
+            <a href="/tags/CTF笔记/" class="chip pink lighten-1">CTF笔记</a>
         
     </div>
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#VTP%E5%8D%8F%E8%AE%AE%EF%BC%88%E6%80%9D%E7%A7%91%E7%A7%81%E6%9C%89%E5%8D%8F%E8%AE%AE%EF%BC%8C%E7%AE%A1%E7%90%86VLAN%EF%BC%89"><span class="section table-of-contents-text">VTP协议（思科私有协议，管理VLAN）</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E4%BD%9C%E7%94%A8"><span class="section table-of-contents-text">一、作用</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81VTP%E7%9A%84%E6%9E%84%E6%88%90"><span class="section table-of-contents-text">二、VTP的构成</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81VTP%E5%91%BD%E4%BB%A4"><span class="section table-of-contents-text">三、VTP命令</span></a></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2020%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9FWEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E9%A2%84%E9%80%89%E8%B5%9BWriteUp"><span class="section table-of-contents-text">2020全国大学生WEB安全测试预选赛WriteUp</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81%E7%BB%95%E8%BF%87-lt-php-exit-gt"><span class="section table-of-contents-text">一、绕过&lt;php? exit(); ?&gt;</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81%E6%89%BE%E8%89%B2%E5%B7%AE"><span class="section table-of-contents-text">二、找色差</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="section table-of-contents-text">三、文件上传</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81git"><span class="section table-of-contents-text">四、git</span></a></li></ol></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <h2 id="VTP协议（思科私有协议，管理VLAN）"><a href="#VTP协议（思科私有协议，管理VLAN）" class="headerlink" title="VTP协议（思科私有协议，管理VLAN）"></a>VTP协议（思科私有协议，管理VLAN）</h2><h3 id="一、作用"><a href="#一、作用" class="headerlink" title="一、作用"></a>一、作用</h3><p>可以通过一点控制整个网络的VLAN的添加、删除和重命名工作。使用时，<u>需要在交换机上开启VTP技术（默认开启）</u>，并且<u>设置域名</u>。同时<u>交换机之间必须通过trunk相连</u>。交换机<u>默认开启都是VTP服务器模式</u>，这样就可以对整个域的VLAN<u>进行管理了</u>。</p>
-<p><strong>思科的交换机默认开启了VTP</strong></p>
-<h3 id="二、VTP的构成"><a href="#二、VTP的构成" class="headerlink" title="二、VTP的构成"></a>二、VTP的构成</h3><p><strong>VTP构成</strong>：VTP域 = VTP服务器模式（默认）的机器 + 客户机模式的机器</p>
-<p><strong>VTP域</strong>：所有交换机开启VTP，并设置一致的域名即可！且交换机之间必须是经过trunk相连（VTP通告只能通过Trunk传输）。</p>
-<p><strong>VTP通告</strong>：VTP服务器发送给域中客户机的VLAN管理信息。</p>
-<p><strong>VTP域名的自动学习</strong>：当Trunk相连的交换机群中有一个交换机设置了VTP域名，则该交换机会将设置VTP域名的消息作为通告发送，没有VTP域名的交换机会自动学习设置该域名。有了VTP域名的交换机不会再学习，因为它会认定不是同一个域名。</p>
-<h3 id="三、VTP命令"><a href="#三、VTP命令" class="headerlink" title="三、VTP命令"></a>三、VTP命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">en</span><br><span class="line">show vtp status       #查看vtp状态</span><br><span class="line">conf t</span><br><span class="line">vtp domain 自定义域名   #设置VTP域名</span><br></pre></td></tr></table></figure>
+                <h2 id="2020全国大学生WEB安全测试预选赛WriteUp"><a href="#2020全国大学生WEB安全测试预选赛WriteUp" class="headerlink" title="2020全国大学生WEB安全测试预选赛WriteUp"></a>2020全国大学生WEB安全测试预选赛WriteUp</h2><p>​    加油一步一个脚印吧！这次比赛又学习到了很多，慕测的赛事时间相比其它CTF比赛比较紧凑，13：00-17：00有十道WEB题，虽然相比CTF题的难度是简单一些，但我也只做出4道题，怎么说呢，还是很菜，很菜，加油就好。</p>
+<p>​    下面仅简单记录几道题的payload和思路，因为现在是10.25的凌晨0:02。emmm，今天是我的生日，玩的很嗨，请了8个朋友/卓越班同学去吃电台巷火锅，挺好吃的，不知道是因为心情还是真的好吃。再多说几句，喜欢电台巷的红糖糍粑、鲜鸭血和牛蛙。红糖糍粑是现炸的很酥香；鲜鸭血真的很鲜，红红的特别好使；牛蛙是我第一次在牛油锅里涮着吃，很嫩很好吃。不仅还想感叹，自己明年就毕业了，这大概是大学期间最后一个生日了吧，步入了社会就再也没有假期了…突然有些伤感，但是还是要回到正题，说了这么多只是想说今天很晚了，WP就不写那么详细了，简单记录一下印象深刻的思路吧。</p>
+<h3 id="一、绕过-lt-php-exit-gt"><a href="#一、绕过-lt-php-exit-gt" class="headerlink" title="一、绕过&lt;php? exit(); ?&gt;"></a>一、绕过&lt;php? exit(); ?&gt;</h3><p>​    这道题，我搜索相似，模仿的payload，深入原理并没有弄得特别懂，日后一定要好好学习一下php://filter的相关骚操作。另外说一句，这道题搅屎棍很多，因为写入了一句话后，总有人删除别人上传的木马，我就被删了几次，故一怒之下写了一波条件竞争的py脚本，删除上传目录中的所有文件，且写入自己的一句话。emmm，自己成了搅屎棍了。</p>
+<p>​    Payload：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php:<span class="comment">//filter/convert.iconv.UCS-2LE.UCS-2BE| ?&lt;hp pvela$(P_SO[T11)] ;&gt;?/resource=f.php</span></span><br></pre></td></tr></table></figure>
 
+<p>类似解决方法还有很多，参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/a3320315/article/details/105293885">https://blog.csdn.net/a3320315/article/details/105293885</a></p>
+<h3 id="二、找色差"><a href="#二、找色差" class="headerlink" title="二、找色差"></a>二、找色差</h3><p>​    此题核心是加密过的js代码，主要显示内容为一个找色差的游戏，闯关到超过2000次就算成功，写一个js脚本自己玩即可。最后发现console中打印了一串96位的字符串，题目提示md5加密其即是flag，最后成功提交。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> e = <span class="built_in">document</span>.createEvent(<span class="string">&quot;MouseEvents&quot;</span>);</span><br><span class="line">e.initEvent(<span class="string">&quot;click&quot;</span>, <span class="literal">true</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> count=<span class="number">0</span>;count&lt;<span class="number">3000</span>;count++)</span><br><span class="line">&#123;</span><br><span class="line">a=<span class="built_in">document</span>.getElementById(<span class="string">&#x27;box&#x27;</span>);</span><br><span class="line">old = a.getElementsByTagName(<span class="string">&#x27;span&#x27;</span>).length;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;old;i++)</span><br><span class="line">&#123;</span><br><span class="line">a.getElementsByTagName(<span class="string">&#x27;span&#x27;</span>)[i].dispatchEvent(e);</span><br><span class="line">a=<span class="built_in">document</span>.getElementById(<span class="string">&#x27;box&#x27;</span>);</span><br><span class="line">newA = a.getElementsByTagName(<span class="string">&#x27;span&#x27;</span>).length;</span><br><span class="line"><span class="keyword">if</span>(newA != old)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、文件上传"><a href="#三、文件上传" class="headerlink" title="三、文件上传"></a>三、文件上传</h3><p>​    直接.pht绕过即可。</p>
+<h3 id="四、git"><a href="#四、git" class="headerlink" title="四、git"></a>四、git</h3><p>​    GitHacker脚本直接获得源码，然后<code>git log --all</code>发现之前有一个提交版本，<code>git reset --hard commit-id</code>切换版本，查看多了一个flag.php，cat其即可。</p>
 
                 
-<p class="pink-link-context">
-    <a href="/2020/07/08/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/22%E3%80%81%E9%93%BE%E8%B7%AF%E8%81%9A%E5%90%88%E6%8A%80%E6%9C%AF/" rel="next" title="链路聚合技术">
-    上一篇：链路聚合技术
-  </a>
-</p>
-
 
 
 <p class="pink-link-context">
-    <a href="/2020/07/07/%E9%98%B6%E6%AE%B5%E4%B8%80%E3%80%81%E6%95%B0%E9%80%9A%E5%AE%89%E5%85%A8/20%E3%80%81%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5%E4%B8%8EDHCP%E4%B8%AD%E7%BB%A7/" rel="next" title="网络拓扑设计理念与DHCP中继">
-    下一篇：网络拓扑设计理念与DHCP中继
+    <a href="/2020/10/23/CTF%E7%AC%94%E8%AE%B0/CTFer%E4%BB%8E0%E5%88%B01%E7%AC%94%E8%AE%B0/" rel="next" title="CTFer从0到1笔记">
+    下一篇：CTFer从0到1笔记
   </a>
 </p>
 

@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>2020全国大学生WEB安全测试预选赛WriteUp</title>
+      <link href="/2020/10/25/CTF%E7%AC%94%E8%AE%B0/2020%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9FWEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E9%A2%84%E9%80%89%E8%B5%9BWriteUp/"/>
+      <url>/2020/10/25/CTF%E7%AC%94%E8%AE%B0/2020%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9FWEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E9%A2%84%E9%80%89%E8%B5%9BWriteUp/</url>
+      
+        <content type="html"><![CDATA[<h2 id="2020全国大学生WEB安全测试预选赛WriteUp"><a href="#2020全国大学生WEB安全测试预选赛WriteUp" class="headerlink" title="2020全国大学生WEB安全测试预选赛WriteUp"></a>2020全国大学生WEB安全测试预选赛WriteUp</h2><p>​    加油一步一个脚印吧！这次比赛又学习到了很多，慕测的赛事时间相比其它CTF比赛比较紧凑，13：00-17：00有十道WEB题，虽然相比CTF题的难度是简单一些，但我也只做出4道题，怎么说呢，还是很菜，很菜，加油就好。</p><p>​    下面仅简单记录几道题的payload和思路，因为现在是10.25的凌晨0:02。emmm，今天是我的生日，玩的很嗨，请了8个朋友/卓越班同学去吃电台巷火锅，挺好吃的，不知道是因为心情还是真的好吃。再多说几句，喜欢电台巷的红糖糍粑、鲜鸭血和牛蛙。红糖糍粑是现炸的很酥香；鲜鸭血真的很鲜，红红的特别好使；牛蛙是我第一次在牛油锅里涮着吃，很嫩很好吃。不仅还想感叹，自己明年就毕业了，这大概是大学期间最后一个生日了吧，步入了社会就再也没有假期了…突然有些伤感，但是还是要回到正题，说了这么多只是想说今天很晚了，WP就不写那么详细了，简单记录一下印象深刻的思路吧。</p><h3 id="一、绕过-lt-php-exit-gt"><a href="#一、绕过-lt-php-exit-gt" class="headerlink" title="一、绕过&lt;php? exit(); ?&gt;"></a>一、绕过&lt;php? exit(); ?&gt;</h3><p>​    这道题，我搜索相似，模仿的payload，深入原理并没有弄得特别懂，日后一定要好好学习一下php://filter的相关骚操作。另外说一句，这道题搅屎棍很多，因为写入了一句话后，总有人删除别人上传的木马，我就被删了几次，故一怒之下写了一波条件竞争的py脚本，删除上传目录中的所有文件，且写入自己的一句话。emmm，自己成了搅屎棍了。</p><p>​    Payload：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php:<span class="comment">//filter/convert.iconv.UCS-2LE.UCS-2BE| ?&lt;hp pvela$(P_SO[T11)] ;&gt;?/resource=f.php</span></span><br></pre></td></tr></table></figure><p>类似解决方法还有很多，参考博客：<a href="https://blog.csdn.net/a3320315/article/details/105293885">https://blog.csdn.net/a3320315/article/details/105293885</a></p><h3 id="二、找色差"><a href="#二、找色差" class="headerlink" title="二、找色差"></a>二、找色差</h3><p>​    此题核心是加密过的js代码，主要显示内容为一个找色差的游戏，闯关到超过2000次就算成功，写一个js脚本自己玩即可。最后发现console中打印了一串96位的字符串，题目提示md5加密其即是flag，最后成功提交。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> e = <span class="built_in">document</span>.createEvent(<span class="string">&quot;MouseEvents&quot;</span>);</span><br><span class="line">e.initEvent(<span class="string">&quot;click&quot;</span>, <span class="literal">true</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> count=<span class="number">0</span>;count&lt;<span class="number">3000</span>;count++)</span><br><span class="line">&#123;</span><br><span class="line">a=<span class="built_in">document</span>.getElementById(<span class="string">&#x27;box&#x27;</span>);</span><br><span class="line">old = a.getElementsByTagName(<span class="string">&#x27;span&#x27;</span>).length;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;old;i++)</span><br><span class="line">&#123;</span><br><span class="line">a.getElementsByTagName(<span class="string">&#x27;span&#x27;</span>)[i].dispatchEvent(e);</span><br><span class="line">a=<span class="built_in">document</span>.getElementById(<span class="string">&#x27;box&#x27;</span>);</span><br><span class="line">newA = a.getElementsByTagName(<span class="string">&#x27;span&#x27;</span>).length;</span><br><span class="line"><span class="keyword">if</span>(newA != old)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="三、文件上传"><a href="#三、文件上传" class="headerlink" title="三、文件上传"></a>三、文件上传</h3><p>​    直接.pht绕过即可。</p><h3 id="四、git"><a href="#四、git" class="headerlink" title="四、git"></a>四、git</h3><p>​    GitHacker脚本直接获得源码，然后<code>git log --all</code>发现之前有一个提交版本，<code>git reset --hard commit-id</code>切换版本，查看多了一个flag.php，cat其即可。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> CTF笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CTFer从0到1笔记</title>
       <link href="/2020/10/23/CTF%E7%AC%94%E8%AE%B0/CTFer%E4%BB%8E0%E5%88%B01%E7%AC%94%E8%AE%B0/"/>
       <url>/2020/10/23/CTF%E7%AC%94%E8%AE%B0/CTFer%E4%BB%8E0%E5%88%B01%E7%AC%94%E8%AE%B0/</url>
