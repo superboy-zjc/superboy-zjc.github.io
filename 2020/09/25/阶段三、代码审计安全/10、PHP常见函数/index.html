@@ -180,7 +180,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/代码审计安全/">
-                    代码审计安全 <span class="right">9 篇</span></a>
+                    代码审计安全 <span class="right">10 篇</span></a>
                 </a>
             </li>
 
@@ -196,7 +196,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Web渗透测试/">
-                    Web渗透测试 <span class="right">23 篇</span></a>
+                    Web渗透测试 <span class="right">24 篇</span></a>
                 </a>
             </li>
 
@@ -204,7 +204,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/CTF笔记/">
-                    CTF笔记 <span class="right">15 篇</span></a>
+                    CTF笔记 <span class="right">16 篇</span></a>
                 </a>
             </li>
 
@@ -332,6 +332,10 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">implode ( <span class="keyword">string</span> $glue , <span class="keyword">array</span> $pieces ) : <span class="keyword">string</span></span><br><span class="line">implode ( <span class="keyword">array</span> $pieces ) : <span class="keyword">string</span></span><br></pre></td></tr></table></figure>
 
 <p>用 <code>glue</code> 将一维数组的值连接为一个字符串。  </p>
+<p>5、explode — 使用一个字符串分割另一个字符串为数组</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explode ( <span class="keyword">string</span> $delimiter , <span class="keyword">string</span> $string [, <span class="keyword">int</span> $limit ] ) : <span class="keyword">array</span></span><br></pre></td></tr></table></figure>
+
+<p>此函数返回由字符串组成的数组，每个元素都是 <code>string</code> 的一个子串，它们被字符串 <code>delimiter</code> 作为边界点分割出来。</p>
 <h3 id="二、文件相关"><a href="#二、文件相关" class="headerlink" title="二、文件相关"></a>二、文件相关</h3><p>1、fsockopen——打开一个网络连接或者一个Unix套接字连接</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fsockopen ( <span class="keyword">string</span> $hostname [, <span class="keyword">int</span> $port = <span class="number">-1</span> [, <span class="keyword">int</span> &amp;$errno [, <span class="keyword">string</span> &amp;$errstr [, <span class="keyword">float</span> $timeout = ini_get(<span class="string">&quot;default_socket_timeout&quot;</span>) ]]]] ) : resource</span><br></pre></td></tr></table></figure>
 
@@ -375,10 +379,14 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">json_decode ( <span class="keyword">string</span> $json [, <span class="keyword">bool</span> $assoc = <span class="literal">FALSE</span> [, <span class="keyword">int</span> $depth = <span class="number">512</span> [, <span class="keyword">int</span> $options = <span class="number">0</span> ]]] ) : mixed</span><br></pre></td></tr></table></figure>
 
 <p>接受一个 JSON 编码的字符串并且把它转换为 PHP 变量  ，当assoc参数为 <strong><code>TRUE</code></strong> 时，将返回 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.array.php">array</a> 而非 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.object.php">object</a> 。      </p>
-<h3 id="四、数值相关"><a href="#四、数值相关" class="headerlink" title="四、数值相关"></a>四、数值相关</h3><p>intval — 获取变量的整数值</p>
+<h3 id="四、数值相关"><a href="#四、数值相关" class="headerlink" title="四、数值相关"></a>四、数值相关</h3><p>1、intval — 获取变量的整数值</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">intval ( mixed $var [, <span class="keyword">int</span> $base = <span class="number">10</span> ] ) : <span class="keyword">int</span></span><br></pre></td></tr></table></figure>
 
 <p>通过使用指定的进制 <code>base</code> 转换（默认是十进制），返回变量 <code>var</code>     的 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.integer.php">integer</a> 数值。      <strong>intval()</strong> 不能用于 object，否则会产生  <strong><code>E_NOTICE</code></strong> 错误并返回 1。</p>
+<p>2、end — 将数组的内部指针指向最后一个单元</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">end ( <span class="keyword">array</span> &amp;$array ) : mixed</span><br></pre></td></tr></table></figure>
+
+<p><strong>end()</strong> 将 <code>array</code> 的内部指针移动到最后一个单元并返回其值。例如：echo end($array_a);</p>
 <h3 id="五、环境相关"><a href="#五、环境相关" class="headerlink" title="五、环境相关"></a>五、环境相关</h3><blockquote>
 <p>可以配置的选项：<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/ini.list.php">https://www.php.net/manual/zh/ini.list.php</a> </p>
 <p>open_basedir：指定只有某个目录树可以被PHP访问。open_basedir=/tmp/:/proc/:/you_web_path</p>

